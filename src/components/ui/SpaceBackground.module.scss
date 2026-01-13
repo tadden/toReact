@@ -1,0 +1,251 @@
+@use "sass:math";
+@use "sass:string";
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+  }
+  25% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+  75% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0.3;
+  }
+}
+
+.space {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  overflow: hidden;
+  transition: opacity 0.5s ease;
+}
+
+[data-theme="light"] .space {
+  background: radial-gradient(ellipse at bottom, #e0f2fe 0%, #bae6fd 100%);
+}
+
+[data-theme="light"] .starsSmall,
+[data-theme="light"] .starsMedium,
+[data-theme="light"] .starsLarge {
+  opacity: 0.3; /* Make stars fainter in daylight */
+  filter: invert(
+    1
+  ); /* Optional: invert to be dark dots? Or keep white for 'clouds' feel? 
+                         Let's try inverting to make them look like distant dust/particles or just hide them. 
+                         Actually, let's make them dark blue? 
+                         SASS box-shadow is hardcoded white. 
+                         Simpler: Just lower opacity and let them be white sparkles in the sky.
+                      */
+  /* Actually, white stars on light blue might be invisible. 
+       Let's use a filter to darken them if possible, or just accept they are faint.
+       filter: brightness(0); turns them black. */
+  filter: brightness(0);
+  opacity: 0.15;
+}
+
+@function multiple-box-shadow($n) {
+  $value: "#{math.random(2000)}px #{math.random(2000)}px #FFF";
+  @for $i from 2 through $n {
+    $value: "#{$value} , #{math.random(2000)}px #{math.random(2000)}px #FFF";
+  }
+  @return string.unquote($value);
+}
+
+$shadows-small: multiple-box-shadow(150); /* Redcued from 700 */
+$shadows-medium: multiple-box-shadow(40); /* Reduced from 200 */
+$shadows-large: multiple-box-shadow(15); /* Reduced from 100 */
+
+.starsSmall {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow: $shadows-small;
+  animation: animStar 600s linear infinite,
+    twinkle 3s ease-in-out infinite alternate; /* Very slow drift */
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: $shadows-small;
+  }
+}
+
+.starsMedium {
+  width: 2px;
+  height: 2px;
+  background: transparent;
+  box-shadow: $shadows-medium;
+  animation: animStar 900s linear infinite,
+    twinkle 4s ease-in-out infinite alternate;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 2px;
+    height: 2px;
+    background: transparent;
+    box-shadow: $shadows-medium;
+  }
+}
+
+.starsLarge {
+  width: 3px;
+  height: 3px;
+  background: transparent;
+  box-shadow: $shadows-large;
+  animation: animStar 1200s linear infinite,
+    twinkle 5s ease-in-out infinite alternate;
+
+  &:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 3px;
+    height: 3px;
+    background: transparent;
+    box-shadow: $shadows-large;
+  }
+}
+
+@keyframes animStar {
+  from {
+    transform: translateY(
+      -2000px
+    ); /* Start shifted up, allowing :after (at +2000) to be seen */
+  }
+  to {
+    transform: translateY(0px); /* Move down to 0 */
+  }
+}
+
+/* Planet Animations */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(5deg);
+  }
+}
+
+@keyframes orbit {
+  from {
+    transform: rotate(0deg) translateX(50px) rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg) translateX(50px) rotate(-360deg);
+  }
+}
+
+/* Planets Container */
+.planetsContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none; /* Ensure text remains selectable */
+}
+
+/* Individual Planets */
+.planet {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.8; /* Restored to slightly higher for visibility */
+  filter: blur(1px); /* Sharpen slightly */
+  z-index: 1; /* Bring above background gradient */
+}
+
+/* Twinkle Effect on Stars instead of container */
+.starsSmall,
+.starsMedium,
+.starsLarge {
+  animation-name: animStar, twinkle;
+  animation-duration: 50s, 5s;
+  animation-timing-function: linear, ease-in-out;
+  animation-iteration-count: infinite, infinite;
+  animation-direction: normal, alternate;
+}
+
+[data-theme="light"] {
+  .starsSmall,
+  .starsMedium,
+  .starsLarge {
+    animation-name: animStar; /* No twinkle in light mode if simpler */
+  }
+}
+
+.planetOne {
+  width: 100px;
+  height: 100px;
+  top: 10%;
+  left: 5%;
+  background: radial-gradient(circle at 30% 30%, #ff7e5f, #feb47b);
+  box-shadow: 0 0 20px rgba(255, 126, 95, 0.3);
+  animation: float 8s ease-in-out infinite;
+}
+
+.planetTwo {
+  width: 200px;
+  height: 200px;
+  bottom: 15%;
+  right: -50px;
+  background: radial-gradient(circle at 30% 30%, #4facfe, #00f2fe);
+  box-shadow: 0 0 30px rgba(79, 172, 254, 0.3);
+  animation: float 12s ease-in-out infinite reverse;
+  opacity: 0.4; /* Reduced from 0.6 */
+}
+
+.planetThree {
+  width: 60px;
+  height: 60px;
+  top: 40%;
+  right: 20%;
+  background: radial-gradient(circle at 30% 30%, #8ec5fc, #e0c3fc);
+  box-shadow: 0 0 15px rgba(224, 195, 252, 0.3);
+  animation: float 10s ease-in-out infinite;
+  opacity: 0.5; /* Reduced from 0.7 */
+}
+
+/* Ring for Planet Two maybe? */
+.planetTwo::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 300px;
+  height: 60px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg);
+}
+
+/* Light Mode Overlay for Planets (make them subtler or change color) */
+[data-theme="light"] {
+  .planetOne {
+    background: radial-gradient(circle at 30% 30%, #fdbb2d, #22c1c3);
+    opacity: 0.4;
+  }
+  .planetTwo {
+    background: radial-gradient(circle at 30% 30%, #a18cd1, #fbc2eb);
+    opacity: 0.3;
+  }
+}

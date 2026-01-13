@@ -1,0 +1,70 @@
+.loaderContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--color-bg-deep);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeOut 0.5s ease-out 0.8s forwards;
+  pointer-events: none;
+}
+
+.rocketWrapper {
+  position: relative;
+  animation: flyUp 1s ease-in-out forwards;
+  color: white;
+}
+
+.rocket {
+  filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+  transform: rotate(
+    -45deg
+  ); /* Lucide rocket is usually 45deg, let's point it UP */
+}
+
+.exhaust {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 30px;
+  background: linear-gradient(to bottom, #fbbf24, #ef4444, transparent);
+  border-radius: 50%;
+  opacity: 0.8;
+  animation: flicker 0.1s infinite;
+}
+
+@keyframes flyUp {
+  0% {
+    transform: translateY(100vh) scale(1);
+  }
+  50% {
+    transform: translateY(0) scale(1.2);
+  }
+  100% {
+    transform: translateY(-100vh) scale(0.5);
+  }
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes flicker {
+  0% {
+    transform: translateX(-50%) scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(-50%) scale(1.1);
+    opacity: 0.4;
+  }
+}

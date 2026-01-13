@@ -1,0 +1,231 @@
+.container {
+  display: flex;
+  background: var(--color-border);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 500px;
+  margin: 2rem 0;
+  position: relative; /* For safe measure context */
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    height: auto;
+    min-height: 600px;
+  }
+}
+
+.resizer {
+  width: 10px;
+  background: #1e1e1e;
+  cursor: col-resize;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: background 0.2s;
+
+  &:hover,
+  &.active {
+    background: #0ea5e9; /* Highlight color */
+    border-color: #0284c7;
+  }
+
+  /* Optional: visual grip lines */
+  &::after {
+    content: "";
+    display: block;
+    width: 2px;
+    height: 20px;
+    background: #475569;
+    border-radius: 1px;
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.editorSection {
+  background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+  /* Width will be set inline */
+  min-width: 20%;
+  max-width: 80%;
+
+  @media (max-width: 768px) {
+    width: 100% !important;
+  }
+}
+
+.editorHeader {
+  background: #252526;
+  padding: 0.5rem 1rem;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  border-bottom: 1px solid #333;
+}
+
+.editor {
+  flex: 1;
+  width: 100%;
+  padding: 1rem;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: "Consolas", "Monaco", monospace;
+  font-size: 14px;
+  line-height: 1.5;
+  border: none;
+  resize: none;
+  outline: none;
+  white-space: pre-wrap;
+  overflow: auto;
+
+  &::placeholder {
+    color: #6e7681;
+  }
+}
+
+.infoSection {
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.tabs {
+  display: flex;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.tab {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  color: #64748b;
+  border-right: 1px solid #e2e8f0;
+
+  &:hover {
+    background: #e2e8f0;
+  }
+
+  &.active {
+    background: #fff;
+    color: #0f172a;
+    border-bottom: 2px solid var(--color-primary);
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 1.5rem;
+  overflow-y: auto;
+  color: #334155;
+  font-size: 0.95rem;
+  line-height: 1.6;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: #0f172a;
+  }
+
+  code {
+    background: #f1f5f9;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+  }
+}
+
+.footer {
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+}
+
+.resetBtn {
+  background: transparent;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+
+  &:hover {
+    background: #f1f5f9;
+    border-color: #94a3b8;
+  }
+}
+
+.checkBtn {
+  background: #f97316;
+  border: none;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(249, 115, 22, 0.3);
+  transition: all 0.2s;
+
+  &:hover {
+    background: #ea580c;
+  }
+}
+
+.checkItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem;
+  border-radius: 6px;
+
+  &.passed {
+    background: rgba(34, 197, 94, 0.1);
+  }
+
+  &.failed {
+    background: rgba(239, 68, 68, 0.05);
+  }
+}
+
+.browserContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.browserFrame {
+  flex: 1;
+  border: none;
+  background: #fff;
+  width: 100%;
+}
+
+.resultSuccess {
+  border: 1px solid #22c55e;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  background: rgba(34, 197, 94, 0.05);
+}
