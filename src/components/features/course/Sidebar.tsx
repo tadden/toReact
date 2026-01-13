@@ -21,7 +21,7 @@ import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { useCourseView } from "@/lib/context/CourseViewContext";
 
 export function Sidebar({ courseId }: { courseId: string }) {
-  const { setActiveTopic } = useCourseView();
+  const { setActiveTopic, activeTopicId } = useCourseView();
   const { getModuleProgress, isModuleLocked, courses } = useProgress();
   const params = useParams(); // { courseSlug, moduleSlug }
   const searchParams = useSearchParams();
@@ -237,10 +237,15 @@ export function Sidebar({ courseId }: { courseId: string }) {
                             {lesson.topics.map((topic, topicIndex) => {
                               const isFirstOverall =
                                 lessonIndex === 0 && topicIndex === 0;
+
+                              // Use context for instant feedback, fallback to URL
+                              const currentTopic =
+                                activeTopicId || searchParams.get("topic");
+
                               const isTopicActive =
-                                searchParams.get("topic") === topic.id ||
+                                currentTopic === topic.id ||
                                 (isFirstOverall &&
-                                  !searchParams.get("topic") &&
+                                  !currentTopic &&
                                   currentView === "theory" &&
                                   isActive);
 
