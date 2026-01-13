@@ -2098,8 +2098,14 @@ async function main() {
 
   // Create Courses
   for (const courseData of COURSES) {
-    const course = await prisma.course.create({
-      data: {
+    const course = await prisma.course.upsert({
+      where: { slug: courseData.slug },
+      update: {
+        title: courseData.title,
+        description: courseData.description,
+        icon: courseData.icon,
+      },
+      create: {
         slug: courseData.slug,
         title: courseData.title,
         description: courseData.description,
