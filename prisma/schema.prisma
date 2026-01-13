@@ -58,6 +58,7 @@ model Topic {
   moduleId  String
   title     String
   content   String // HTML or Markdown
+  order     Int    @default(0)
   
   module    Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
 }

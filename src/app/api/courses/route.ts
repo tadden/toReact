@@ -13,6 +13,7 @@ export async function GET() {
           title: true,
           videoUrl: true,
           topics: {
+            orderBy: { order: "asc" },
             select: {
               id: true,
               title: true,

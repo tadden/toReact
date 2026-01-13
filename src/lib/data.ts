@@ -8,6 +8,7 @@ export const getCourses = cache(async () => {
         orderBy: { order: "asc" },
         include: {
           topics: {
+            orderBy: { order: "asc" },
             select: { id: true, title: true, content: false }, // Light fetch
           },
         },
@@ -28,6 +29,7 @@ export const getCourseBySlug = cache(async (slug: string) => {
           title: true,
           order: true,
           topics: {
+            orderBy: { order: "asc" },
             select: { id: true, title: true, content: false }, // Light fetch for sidebar
           },
           resources: true,
@@ -57,6 +59,7 @@ export const getCourseWithTargetModule = cache(
             title: true,
             order: true,
             topics: {
+              orderBy: { order: "asc" },
               // We need topics list for sidebar navigation even if not active module?
               // Yes.
               select: { id: true, title: true, content: false },
@@ -75,7 +78,9 @@ export const getCourseWithTargetModule = cache(
         slug: moduleSlug,
       },
       include: {
-        topics: true, // FULL content included here
+        topics: {
+          orderBy: { order: "asc" },
+        }, // FULL content included here
         resources: true,
         homework: true,
       },

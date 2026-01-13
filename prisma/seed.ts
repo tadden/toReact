@@ -156,6 +156,15 @@ async function main() {
                 moduleId: module.id,
                 title: topicData.title,
                 content: topicData.content,
+                order: topicData.order,
+              },
+            });
+          } else {
+            await prisma.topic.update({
+              where: { id: topic.id },
+              data: {
+                content: topicData.content,
+                order: topicData.order,
               },
             });
           }
