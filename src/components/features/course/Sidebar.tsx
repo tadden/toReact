@@ -18,7 +18,10 @@ import {
 } from "lucide-react";
 import { ThemeToggle } from "@/components/ui/ThemeToggle";
 
+import { useCourseView } from "@/lib/context/CourseViewContext";
+
 export function Sidebar({ courseId }: { courseId: string }) {
+  const { setActiveTopic } = useCourseView();
   const { getModuleProgress, isModuleLocked, courses } = useProgress();
   const params = useParams(); // { courseSlug, moduleSlug }
   const searchParams = useSearchParams();
@@ -248,6 +251,10 @@ export function Sidebar({ courseId }: { courseId: string }) {
                                 <Link
                                   key={topic.id}
                                   href={`?view=theory&topic=${topic.id}`}
+                                  onClick={(e) => {
+                                    e.preventDefault();
+                                    setActiveTopic(topic.id);
+                                  }}
                                   className={`${styles.subModuleItem} ${
                                     isTopicActive ? styles.active : ""
                                   }`}

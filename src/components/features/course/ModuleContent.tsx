@@ -57,6 +57,8 @@ const getTitleFromContent = (
   return `Раздел ${index + 1}`;
 };
 
+import { useCourseView } from "@/lib/context/CourseViewContext";
+
 export function ModuleContent({
   course,
   module,
@@ -72,11 +74,16 @@ export function ModuleContent({
   const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { activeTopicId, setActiveTopic } = useCourseView();
 
   const [showCongratulationModal, setShowCongratulationModal] = useState(false);
 
+  // We still use searchParams for 'view' tab, as that's less frequent/critical
   const activeTab = (searchParams.get("view") as TabView) || "theory";
-  const activeTopicId = searchParams.get("topic");
+
+  // Use context for topic ID (instant switching)
+  // Fallback to URL if context is null (init) - though context init handles it
+  const currentTopicId = activeTopicId || searchParams.get("topic");
 
   // Flatten topics from all lessons for sequential navigation
   const allTopics = module.lessons
@@ -89,8 +96,8 @@ export function ModuleContent({
   const [homeworkLink, setHomeworkLink] = useState(progress?.homeworkUrl || "");
 
   // Default to first topic if in theory mode and no topic selected
-  const currentTopic = activeTopicId
-    ? allTopics.find((t) => t.id === activeTopicId)
+  const currentTopic = currentTopicId
+    ? allTopics.find((t) => t.id === currentTopicId)
     : allTopics[0];
 
   const [visiblePageIndex, setVisiblePageIndex] = useState(0);
@@ -457,7 +464,8 @@ export function ModuleContent({
                         );
                         if (currentIndex < allTopics.length - 1) {
                           const nextTopic = allTopics[currentIndex + 1];
-                          router.push(`?view=theory&topic=${nextTopic.id}`);
+                          // Optimized instant navigation
+                          setActiveTopic(nextTopic.id);
                         } else {
                           // It's the last topic
                           if (!nextModuleSlug) {
