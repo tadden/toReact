@@ -189,9 +189,7 @@ export default function Dashboard() {
                   }
 
                   // If in-progress, find first uncompleted topic
-                  const allTopics = targetModule.lessons.flatMap(
-                    (l) => l.topics
-                  );
+                  const allTopics = targetModule.topics || [];
                   const completedSet = new Set(
                     modProgress.completedTopics || []
                   );

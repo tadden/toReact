@@ -70,6 +70,7 @@ export function ModuleContent({
     markTopicCompleted,
     submitHomework,
     saveQuizResult,
+    saveTopicState,
   } = useProgress();
   const { user } = useAuth();
   const router = useRouter();
@@ -85,10 +86,8 @@ export function ModuleContent({
   // Fallback to URL if context is null (init) - though context init handles it
   const currentTopicId = activeTopicId || searchParams.get("topic");
 
-  // Flatten topics from all lessons for sequential navigation
-  const allTopics = module.lessons
-    ? module.lessons.flatMap((l) => l.topics)
-    : [];
+  // Topics are now directly on the module
+  const allTopics = module.topics || [];
 
   const progress = getModuleProgress(course.id, module.id);
 
@@ -99,12 +98,6 @@ export function ModuleContent({
   const currentTopic = currentTopicId
     ? allTopics.find((t) => t.id === currentTopicId)
     : allTopics[0];
-
-  const [visiblePageIndex, setVisiblePageIndex] = useState(0);
-
-  useEffect(() => {
-    setVisiblePageIndex(0);
-  }, [currentTopic?.id]);
 
   // Parse content into pages
   const pages = useMemo(() => {
@@ -148,19 +141,34 @@ export function ModuleContent({
     return result;
   }, [currentTopic?.content]);
 
+  const [visiblePageIndex, setVisiblePageIndex] = useState(0);
+
+  useEffect(() => {
+    if (!currentTopic) return;
+
+    // IF TOPIC COMPLETED: Show all content immediately
+    if (progress?.completedTopics?.includes(currentTopic.id)) {
+      setVisiblePageIndex(pages.length);
+      return;
+    }
+
+    // Restore saved state if available
+    if (progress?.topicStates?.[currentTopic.id] !== undefined) {
+      setVisiblePageIndex(progress.topicStates[currentTopic.id]);
+    } else {
+      setVisiblePageIndex(0);
+    }
+  }, [
+    currentTopic?.id,
+    progress?.topicStates,
+    progress?.completedTopics,
+    pages.length,
+  ]);
+
   // Check if topic is completed to unlock all navigation
   const isTopicCompleted = progress?.completedTopics?.includes(
     currentTopic?.id || ""
   );
-
-  useEffect(() => {
-    // If completed, show all pages
-    if (isTopicCompleted && pages.length > 0) {
-      setVisiblePageIndex(pages.length - 1);
-    } else {
-      setVisiblePageIndex(0);
-    }
-  }, [currentTopic?.id, isTopicCompleted]);
 
   const handleNavClick = (index: number) => {
     const element = document.getElementById(`section-${index}`);
@@ -418,7 +426,18 @@ export function ModuleContent({
                   if (!isLastPage) {
                     return (
                       <button
-                        onClick={() => setVisiblePageIndex((prev) => prev + 1)}
+                        onClick={() => {
+                          const nextIndex = visiblePageIndex + 1;
+                          setVisiblePageIndex(nextIndex);
+                          if (currentTopic) {
+                            saveTopicState(
+                              course.id,
+                              module.id,
+                              currentTopic.id,
+                              nextIndex
+                            );
+                          }
+                        }}
                         disabled={!isQuizPassed}
                         className={styles.ctaButton}
                         style={{

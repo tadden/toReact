@@ -30,6 +30,7 @@ model Course {
   title       String
   description String
   icon        String
+  order       Int      @default(0)
   
   modules     Module[]
 }
@@ -47,28 +48,18 @@ model Module {
   resources   Resource[]
   progress    StudentProgress[]
   homework    Homework?
-  lessons     Lesson[]
-
-  @@unique([courseId, slug])
-}
-
-model Lesson {
-  id        String   @id @default(cuid())
-  moduleId  String
-  title     String
-  order     Int
+  topics      Topic[]
   
-  module    Module   @relation(fields: [moduleId], references: [id], onDelete: Cascade)
-  topics    Topic[]
+  @@unique([courseId, slug])
 }
 
 model Topic {
   id        String @id @default(cuid())
-  lessonId  String
+  moduleId  String
   title     String
   content   String // HTML or Markdown
   
-  lesson    Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  module    Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
 }
 
 model Resource {
@@ -102,6 +93,7 @@ model StudentProgress {
   homeworkUrl    String?
   homeworkStatus String?  // "pending" | "submitted" | "approved" | "rejected"
   adminComments  String?
+  topicStates    String? // JSON string of { topicId: pageIndex }
   updatedAt      DateTime @updatedAt
 
   user           User     @relation(fields: [userId], references: [id], onDelete: Cascade)

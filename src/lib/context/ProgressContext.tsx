@@ -53,6 +53,12 @@ interface ProgressContextType {
     quizId: string,
     result: { selectedOption: number; isCorrect: boolean }
   ) => Promise<void>;
+  saveTopicState: (
+    courseId: string,
+    moduleId: string,
+    topicId: string,
+    pageIndex: number
+  ) => Promise<void>;
   isModuleLocked: (courseId: string, moduleId: string) => boolean;
   getAllProgress: () => Record<string, StudentProgress>;
   getCourseProgress: (courseId: string) => number;
@@ -273,6 +279,26 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const saveTopicState = async (
+    courseId: string,
+    moduleId: string,
+    topicId: string,
+    pageIndex: number
+  ) => {
+    if (!user) return;
+    const current = getModuleProgress(courseId, moduleId);
+    const currentStates = current?.topicStates || {};
+
+    const updatedStates = {
+      ...currentStates,
+      [topicId]: pageIndex,
+    };
+
+    await updateProgress(courseId, moduleId, {
+      topicStates: updatedStates,
+    });
+  };
+
   const getModuleProgress = (courseId: string, moduleId: string) => {
     if (!user) return undefined;
     return progress[`${user.id}-${courseId}-${moduleId}`];
@@ -368,10 +394,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       // Otherwise calculate topic completion
       let moduleTotalTopics = 0;
-      if (module.lessons) {
-        module.lessons.forEach((l) => {
-          moduleTotalTopics += l.topics?.length || 0;
-        });
+      if (module.topics) {
+        moduleTotalTopics = module.topics.length;
       }
 
       if (moduleTotalTopics === 0) {
@@ -414,6 +438,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         approveHomework,
         rejectHomework,
         saveQuizResult,
+        saveTopicState,
         isModuleLocked,
         getAllProgress,
       }}
