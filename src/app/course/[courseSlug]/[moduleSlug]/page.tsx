@@ -1,4 +1,4 @@
-import { getCourseBySlug } from "@/lib/data";
+import { getCourseWithTargetModule } from "@/lib/data";
 import { ModuleContent } from "@/components/features/course/ModuleContent";
 import { notFound } from "next/navigation";
 
@@ -8,7 +8,11 @@ export default async function ModulePage({
   params: Promise<{ courseSlug: string; moduleSlug: string }>;
 }) {
   const { courseSlug, moduleSlug } = await params;
-  const course = await getCourseBySlug(courseSlug);
+  // Use Optimized Fetcher
+  const course = (await getCourseWithTargetModule(
+    courseSlug,
+    moduleSlug
+  )) as any; // Cast to any because we know the shape matches what's needed, even if specific props are missing on inactive modules
   const module = course?.modules.find((m: any) => m.slug === moduleSlug);
 
   if (!course || !module) {

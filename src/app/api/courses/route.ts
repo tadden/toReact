@@ -12,11 +12,24 @@ export async function GET() {
           title: true,
           videoUrl: true,
           lessons: {
-            include: { topics: true },
+            // include: { topics: true }, // OLD: Fetched heavy content
             orderBy: { order: "asc" },
+            select: {
+              id: true,
+              title: true,
+              order: true,
+              topics: {
+                // orderBy: { order: "asc" }, // Topic has no order field
+                select: {
+                  id: true,
+                  title: true,
+                  // content: false // Exclude content!
+                },
+              },
+            },
           },
           resources: true,
-          homework: true, // Use full object if needed, or select fields. Sidebar checks 'homework' existence.
+          homework: true,
           order: true,
         },
       },
