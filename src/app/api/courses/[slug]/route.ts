@@ -15,7 +15,14 @@ export async function GET(
       modules: {
         orderBy: { order: "asc" },
         include: {
-          topics: true,
+          lessons: {
+            include: {
+              topics: true,
+            },
+            orderBy: {
+              order: "asc",
+            },
+          },
           resources: true,
           homework: true,
         },
