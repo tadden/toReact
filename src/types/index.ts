@@ -26,13 +26,6 @@ export interface ModuleTopic {
   content: string; // HTML/Markdown
 }
 
-export interface Lesson {
-  id: string;
-  title: string;
-  order: number;
-  topics: ModuleTopic[];
-}
-
 export interface ModuleHomework {
   description: string;
   repoUrl?: string | null; // Pre-filled if checking
@@ -44,7 +37,7 @@ export interface Module {
   title: string;
   description: string;
   videoUrl?: string | null; // Optional for theory-only modules
-  lessons: Lesson[];
+  topics: ModuleTopic[];
   homework?: ModuleHomework | null;
   resources: ModuleResource[];
   order: number;
@@ -72,6 +65,7 @@ export interface StudentProgress {
   homeworkUrl?: string | null;
   homeworkStatus?: "pending" | "submitted" | "approved" | "rejected";
   adminComments?: string | null;
+  topicStates?: Record<string, number>; // JSON state: { topicId: pageIndex }
   updatedAt: number;
 }
 

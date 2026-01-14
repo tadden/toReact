@@ -209,79 +209,55 @@ export function Sidebar({ courseId }: { courseId: string }) {
                     {(course.slug === "pre-course" ||
                       expandedTheory[module.id] !== false) && (
                       <div className={styles.theoryContent}>
-                        {module.lessons.map((lesson, lessonIndex) => (
-                          <div
-                            key={lesson.id}
-                            style={{ marginBottom: "0.75rem" }}
-                          >
-                            {/* Make Lesson Title Collapsible? User request was just "see lesson name". 
-                                Let's standard static header for now as simpler. 
-                                OR collapsible as previously attempted? 
-                                User asked: "We need to change a bit schema. So each module contain two lessons ... use should see lesson name".
-                                User didn't explicitly ask for collapse this time, just structure. 
-                                I'll do static header.
-                            */}
-                            <div
-                              style={{
-                                fontSize: "0.75rem",
-                                fontWeight: "700",
-                                textTransform: "uppercase",
-                                color: "var(--color-text-dim)",
-                                marginBottom: "0.5rem",
-                                paddingLeft: "1rem",
-                                letterSpacing: "0.05em",
+                        {module.topics.map((topic, topicIndex) => {
+                          // Default select first topic if no topic param
+                          const isFirstOverall = topicIndex === 0;
+
+                          // Use context for instant feedback, fallback to URL
+                          const currentTopic =
+                            activeTopicId || searchParams.get("topic");
+
+                          const isTopicActive =
+                            currentTopic === topic.id ||
+                            (isFirstOverall &&
+                              !currentTopic &&
+                              currentView === "theory" &&
+                              isActive);
+
+                          const isTopicCompleted =
+                            progress?.completedTopics?.includes(topic.id);
+
+                          return (
+                            <Link
+                              key={topic.id}
+                              href={`?view=theory&topic=${topic.id}`}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setActiveTopic(topic.id);
+                                // Push state to URL so back/refresh works
+                                window.history.pushState(
+                                  null,
+                                  "",
+                                  `?view=theory&topic=${topic.id}`
+                                );
                               }}
+                              className={`${styles.subModuleItem} ${
+                                isTopicActive ? styles.active : ""
+                              }`}
                             >
-                              {lesson.title}
-                            </div>
-                            {lesson.topics.map((topic, topicIndex) => {
-                              const isFirstOverall =
-                                lessonIndex === 0 && topicIndex === 0;
-
-                              // Use context for instant feedback, fallback to URL
-                              const currentTopic =
-                                activeTopicId || searchParams.get("topic");
-
-                              const isTopicActive =
-                                currentTopic === topic.id ||
-                                (isFirstOverall &&
-                                  !currentTopic &&
-                                  currentView === "theory" &&
-                                  isActive);
-
-                              const isTopicCompleted =
-                                progress?.completedTopics?.includes(topic.id);
-
-                              return (
-                                <Link
-                                  key={topic.id}
-                                  href={`?view=theory&topic=${topic.id}`}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    setActiveTopic(topic.id);
-                                  }}
-                                  className={`${styles.subModuleItem} ${
-                                    isTopicActive ? styles.active : ""
-                                  }`}
-                                >
-                                  {isTopicCompleted ? (
-                                    <CheckCircle
-                                      size={16}
-                                      color="#4ade80"
-                                      style={{ flexShrink: 0 }}
-                                    />
-                                  ) : (
-                                    <Circle
-                                      size={16}
-                                      style={{ flexShrink: 0 }}
-                                    />
-                                  )}
-                                  {topic.title}
-                                </Link>
-                              );
-                            })}
-                          </div>
-                        ))}
+                              {isTopicCompleted ? (
+                                <CheckCircle
+                                  size={16}
+                                  color="#4ade80"
+                                  style={{ flexShrink: 0 }}
+                                />
+                              ) : (
+                                <Circle size={16} style={{ flexShrink: 0 }} />
+                              )}
+                              {topic.title}
+                            </Link>
+                          );
+                        })}
                       </div>
                     )}
                   </div>

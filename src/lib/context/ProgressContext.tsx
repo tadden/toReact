@@ -53,6 +53,12 @@ interface ProgressContextType {
     quizId: string,
     result: { selectedOption: number; isCorrect: boolean }
   ) => Promise<void>;
+  saveTopicState: (
+    courseId: string,
+    moduleId: string,
+    topicId: string,
+    pageIndex: number
+  ) => Promise<void>;
   isModuleLocked: (courseId: string, moduleId: string) => boolean;
   getAllProgress: () => Record<string, StudentProgress>;
   getCourseProgress: (courseId: string) => number;
@@ -246,8 +252,30 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     const completedTopics = current?.completedTopics || [];
 
     if (!completedTopics.includes(topicId)) {
+      const newCompletedTopics = [...completedTopics, topicId];
+
+      // Check if all topics are completed
+      let isModuleCompleted = false;
+      const course = courses.find(
+        (c) => c.id === courseId || c.slug === courseId
+      );
+      if (course) {
+        const module = course.modules.find(
+          (m) => m.id === moduleId || m.slug === moduleId
+        );
+        if (module && module.topics) {
+          const totalTopics = module.topics.length;
+          // Use Set to ensure uniqueness just in case
+          const uniqueCompleted = new Set(newCompletedTopics);
+          if (uniqueCompleted.size >= totalTopics && totalTopics > 0) {
+            isModuleCompleted = true;
+          }
+        }
+      }
+
       await updateProgress(courseId, moduleId, {
-        completedTopics: [...completedTopics, topicId],
+        completedTopics: newCompletedTopics,
+        ...(isModuleCompleted ? { status: "completed" } : {}),
       });
     }
   };
@@ -270,6 +298,26 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     await updateProgress(courseId, moduleId, {
       quizResults: updatedResults,
+    });
+  };
+
+  const saveTopicState = async (
+    courseId: string,
+    moduleId: string,
+    topicId: string,
+    pageIndex: number
+  ) => {
+    if (!user) return;
+    const current = getModuleProgress(courseId, moduleId);
+    const currentStates = current?.topicStates || {};
+
+    const updatedStates = {
+      ...currentStates,
+      [topicId]: pageIndex,
+    };
+
+    await updateProgress(courseId, moduleId, {
+      topicStates: updatedStates,
     });
   };
 
@@ -368,10 +416,8 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
       // Otherwise calculate topic completion
       let moduleTotalTopics = 0;
-      if (module.lessons) {
-        module.lessons.forEach((l) => {
-          moduleTotalTopics += l.topics?.length || 0;
-        });
+      if (module.topics) {
+        moduleTotalTopics = module.topics.length;
       }
 
       if (moduleTotalTopics === 0) {
@@ -414,6 +460,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         approveHomework,
         rejectHomework,
         saveQuizResult,
+        saveTopicState,
         isModuleLocked,
         getAllProgress,
       }}

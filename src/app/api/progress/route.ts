@@ -21,6 +21,7 @@ export async function POST(request: Request) {
     notes,
     homeworkUrl,
     homeworkStatus,
+    topicStates,
   } = body;
 
   if (!courseId || !moduleId) {
@@ -45,6 +46,7 @@ export async function POST(request: Request) {
           ? JSON.stringify(completedTopics)
           : undefined, // Store as JSON string
         quizResults: quizResults ? JSON.stringify(quizResults) : undefined,
+        topicStates: topicStates ? JSON.stringify(topicStates) : undefined,
         notes,
         homeworkUrl,
         homeworkStatus: homeworkStatus, // Use provided status
@@ -59,6 +61,7 @@ export async function POST(request: Request) {
           ? JSON.stringify(completedTopics)
           : undefined,
         quizResults: quizResults ? JSON.stringify(quizResults) : undefined,
+        topicStates: topicStates ? JSON.stringify(topicStates) : undefined,
         notes,
         homeworkUrl,
         homeworkStatus:
@@ -72,6 +75,7 @@ export async function POST(request: Request) {
         ? JSON.parse(progress.completedTopics)
         : [],
       quizResults: progress.quizResults ? JSON.parse(progress.quizResults) : {},
+      topicStates: progress.topicStates ? JSON.parse(progress.topicStates) : {},
     });
   } catch (error) {
     console.error("API Progress Error:", error);
@@ -100,6 +104,7 @@ export async function GET(request: Request) {
     ...p,
     completedTopics: p.completedTopics ? JSON.parse(p.completedTopics) : [],
     quizResults: p.quizResults ? JSON.parse(p.quizResults) : {},
+    topicStates: p.topicStates ? JSON.parse(p.topicStates) : {},
   }));
 
   return NextResponse.json(parsedProgress);

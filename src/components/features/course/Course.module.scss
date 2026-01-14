@@ -295,14 +295,16 @@
 }
 
 :global(.info-block) {
-  background-color: #ffffff;
-  border-left: 5px solid #3b82f6;
-  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-left: 4px solid #3b82f6;
+  padding: 1.5rem;
   margin: 2rem 0;
-  color: #1e293b;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border-radius: 0 12px 12px 0;
+  color: #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
   p:first-child {
     margin: 0 0 1rem 0;
@@ -311,6 +313,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    color: #60a5fa;
   }
 
   .icon {
@@ -327,7 +330,119 @@
 
     li {
       margin-bottom: 0.5rem;
-      color: inherit;
+      color: #cbd5e1;
     }
   }
+}
+
+:global(.info-note) {
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-left: 4px solid #3b82f6;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  color: #e2e8f0;
+
+  p {
+    margin: 0;
+    color: #e2e8f0;
+  }
+}
+
+:global(.info-highlight) {
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-left: 4px solid #10b981;
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  color: #e2e8f0;
+
+  p {
+    margin: 0;
+  }
+}
+
+:global(.image-container) {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+:global(.img-responsive) {
+  max-width: 100%;
+  height: auto;
+}
+
+:global(.img-rounded) {
+  border-radius: 8px;
+}
+
+:global(.link-accent) {
+  color: #60a5fa;
+  text-decoration: underline;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #93c5fd;
+  }
+}
+
+:global(.list-disc) {
+  margin: 0;
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+:global(.mb-sm) {
+  margin-bottom: 0.5rem !important;
+}
+
+:global(.mt-sm) {
+  margin-top: 0.5rem !important;
+}
+
+:global(.my-md) {
+  margin: 1rem 0 !important;
+}
+
+:global(.mt-lg) {
+  margin-top: 2rem !important;
+}
+
+:global(.font-bold) {
+  font-weight: 700;
+}
+
+:global(.text-lg) {
+  font-size: 1.2rem;
+}
+
+:global(.img-bordered) {
+  border: 1px solid #e2e8f0;
+}
+
+:global(.max-w-600) {
+  max-width: 600px !important;
+}
+
+:global(.aspect-video) {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+:global(.iframe-responsive) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+:global(.w-full) {
+  width: 100% !important;
 }
