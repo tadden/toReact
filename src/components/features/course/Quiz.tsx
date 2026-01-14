@@ -109,15 +109,9 @@ export function Quiz({
       }}
     >
       <h3
-        style={{
-          marginBottom: "1.5rem",
-          fontSize: "1.1rem",
-          fontWeight: "500",
-          color: "var(--color-text-main)",
-        }}
-      >
-        {data.question}
-      </h3>
+        style={{ marginBottom: "1.5rem", fontWeight: 600, fontSize: "1.1rem" }}
+        dangerouslySetInnerHTML={{ __html: data.question }}
+      />
 
       <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         {data.options.map((option, index) => (
@@ -157,19 +151,21 @@ export function Quiz({
               disabled={isSubmitted}
               style={{ display: "none" }}
             />
-            {isSubmitted ? (
-              index === data.correctAnswer ? (
-                <CheckCircle color="#22c55e" size={24} />
-              ) : index === selectedOption ? (
-                <Circle color="#ef4444" size={24} />
+            <div style={{ flexShrink: 0 }}>
+              {isSubmitted ? (
+                index === data.correctAnswer ? (
+                  <CheckCircle color="#22c55e" size={24} />
+                ) : index === selectedOption ? (
+                  <Circle color="#ef4444" size={24} />
+                ) : (
+                  <Circle color="#94a3b8" size={24} />
+                )
+              ) : selectedOption === index ? (
+                <CheckCircle color="var(--color-primary)" size={24} />
               ) : (
-                <Circle color="#94a3b8" size={24} />
-              )
-            ) : selectedOption === index ? (
-              <CheckCircle color="var(--color-primary)" size={24} />
-            ) : (
-              <Circle color="var(--color-text-dim)" size={24} />
-            )}
+                <Circle color="var(--color-text-dim)" size={24} />
+              )}
+            </div>
             <span
               style={{
                 fontSize: "1rem",

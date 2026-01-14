@@ -308,24 +308,21 @@ fruit in pretty much any form.`,
       ];
     },
   },
-  "html-lists": {
-    id: "html-lists",
-    title: "Списки ингредиентов",
+  "html-ordered-list": {
+    id: "html-ordered-list",
+    title: "Список ингредиентов (Нумерованный)",
     description: `
-      <p>На сайте уже есть абзац с общим описанием нужных продуктов, но нужен еще список ингредиентов. Твоя задача добавить под этим абзацем маркированный список <code>&lt;ul&gt;</code>. Вот текст ингредиентов, всего семь штук. Каждый ингредиент должен быть представлен элементом списка - тегом <code>&lt;li&gt;</code></p>
-      
-      <pre style="background: #1e293b; color: #f87171; padding: 1rem; border-radius: 4px;">
-- 2 cups farmer's cheese, homemade
-- 3 large eggs
-- 3 cups all-purpose flour, plus about 1/2 cup more for dredging
-- 3 tablespoons white sugar
-- half teaspoon salt
-- 2-3 tablespoons extra light olive oil for each batch
-- fresh fruit, jam, or sour cream for topping
-      </pre>
-    `,
-    initialCode: `<!-- Recipe page markup -->
-<p>
+      <p>На сайте уже есть абзац с общим описанием нужных продуктов, но нужен еще список ингредиентов. Твоя задача добавить под этим абзацем нумерованный список <code>&lt;ol&gt;</code>. Вот текст ингредиентов, всего семь штук. Каждый ингредиент должен быть представлен элементом списка - тегом <code>&lt;li&gt;</code></p>
+    <ol> 
+      <li>2 cups farmer's cheese</li>
+      <li>3 large eggs</li>
+      <li>3 cups all-purpose flour</li>
+      <li>3 tablespoons white sugar</li>
+      <li>half teaspoon salt</li>
+      <li>2-3 tablespoons olive oil</li>
+      <li>fresh fruit, jam</li>
+    </ol>    `,
+    initialCode: `<p>
   The right choice of cheese is extremely important for this
   dish. Farmer's
   cheese will suit best. Another alternative is using
@@ -335,47 +332,105 @@ fruit in pretty much any form.`,
 </p>`,
     checks: (code: string) => {
       const lowerCode = code.toLowerCase();
-      // Check for <ul>
-      if (!lowerCode.includes("<ul>") || !lowerCode.includes("</ul>")) {
+      // Check for <ol>
+      if (!lowerCode.includes("<ol>") || !lowerCode.includes("</ol>")) {
         return [
           {
-            id: "ul-tag",
-            label: "В коде есть тег <ul>",
+            id: "ol-tag",
+            label: "В коде есть тег <ol>",
+            passed: false,
+          },
+          {
+            id: "position-check",
+            label: "Тег <ol> находится после абзаца с описанием ингредиентов",
+            passed: false,
+          },
+          {
+            id: "li-count",
+            label: "Внутри тега <ol> есть семь тегов <li>",
+            passed: false,
+          },
+          {
+            id: "li-text",
+            label: "Текст внутри тега <li> совпадает с текстом ингредиентов",
             passed: false,
           },
         ];
       }
 
-      // Check position: <ul> after <p>
-      const pIndex = lowerCode.indexOf("</p>");
-      const ulIndex = lowerCode.indexOf("<ul>");
-      const isAfterP = pIndex !== -1 && ulIndex > pIndex;
+      // Check position: <ol> after <p>
+      const pIndex = lowerCode.lastIndexOf("</p>");
+      const olIndex = lowerCode.indexOf("<ol>");
+      const isAfterP = pIndex !== -1 && olIndex > pIndex;
 
-      // Extract content between <ul> and </ul>
-      const ulContentMatch = lowerCode.match(/<ul>([\s\S]*?)<\/ul>/);
-      const ulContent = ulContentMatch ? ulContentMatch[1] : "";
-      const liCount = (ulContent.match(/<li>/g) || []).length;
+      // Extract content between <ol> and </ol>
+      const olContentMatch = lowerCode.match(/<ol>([\s\S]*?)<\/ol>/);
+      const olContent = olContentMatch ? olContentMatch[1] : "";
+      const liCount = (olContent.match(/<li>/g) || []).length;
 
       return [
         {
-          id: "ul-tag",
-          label: "В коде есть тег <ul>",
+          id: "ol-tag",
+          label: "В коде есть тег <ol>",
           passed: true,
         },
         {
           id: "position-check",
-          label: "Тег <ul> находится после абзаца с описанием ингредиентов",
+          label: "Тег <ol> находится после абзаца с описанием ингредиентов",
           passed: isAfterP,
         },
         {
           id: "li-count",
-          label: "Внутри тега <ul> есть семь тегов <li>",
+          label: "Внутри тега <ol> есть семь тегов <li>",
           passed: liCount === 7,
         },
         {
           id: "li-text",
           label: "Текст внутри тега <li> совпадает с текстом ингредиентов",
-          passed: liCount === 7, // Simplifying text check to just count for now
+          passed: liCount === 7, // Simplifying text check
+        },
+      ];
+    },
+  },
+  "html-planet-fatness": {
+    id: "html-planet-fatness",
+    title: "Заголовок и абзацы",
+    description:
+      "Вот текст. Нужно разметить его главным заголовком страницы и двумя абзацами.",
+    initialCode: `Planet Fatness
+
+Мы боремся с жиром, как астронавты с перегрузками.
+
+Вступайте в наши ряды уже сегодня.`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ").trim();
+
+      const hasH1 = /<h1>\s*Planet\s+Fatness\s*<\/h1>/i.test(cleanCode);
+      const pMatches = cleanCode.match(/<p>.*?<\/p>/gi);
+      const hasTwoP = !!(pMatches && pMatches.length === 2);
+
+      const h1Regex = /<h1>\s*Planet\s+Fatness\s*<\/h1>/i;
+      const pRegex = /<p>.*?<\/p>/gi;
+      const h1Index = cleanCode.search(h1Regex);
+      const firstPIndex = cleanCode.search(pRegex);
+      const orderCorrect =
+        h1Index !== -1 && firstPIndex !== -1 && h1Index < firstPIndex;
+
+      return [
+        {
+          id: "h1-check",
+          label: "В коде есть тег <h1> с текстом Planet Fatness",
+          passed: hasH1,
+        },
+        {
+          id: "p-check",
+          label: "В коде есть два тега <p> с соответствующим текстом",
+          passed: hasTwoP,
+        },
+        {
+          id: "order-check",
+          label: "Абзацы находятся после заголовка",
+          passed: orderCorrect,
         },
       ];
     },

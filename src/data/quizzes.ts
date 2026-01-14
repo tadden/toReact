@@ -52,4 +52,85 @@ export const quizzes: Record<string, QuizData> = {
     correctAnswer: 1,
     successMessage: 'Верно! target="_blank" открывает ссылку в новой вкладке.',
   },
+  "html-ol-tag": {
+    id: "html-ol-tag",
+    question:
+      "Выберите ситуацию, когда разработчику целесообразно использовать тег <ol>",
+    options: [
+      "Добавить название конференции на сайт, посвященный определенному событию.",
+      "Добавить описание опыта каждого эксперта, который будет выступать на конференции.",
+      "Добавить пошаговую инструкцию о том, как зарегистрироваться на конференцию.",
+      "Добавить список всех компаний, принимавших участие в организации события.",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Именно так! Пошаговая инструкция требует определенного порядка действий.",
+  },
+  "html-heading-hierarchy": {
+    id: "html-heading-hierarchy",
+    question: `
+      <div style="width: 100%; max-width: 500px; margin: 0 auto 2rem; border-radius: 12px; overflow: hidden;">
+        <img src="/images/quiz/hierarchy-error.png" alt="Heading Hierarchy Error" style="width: 100%; height: auto; display: block;" />
+      </div>
+      Где ошибка на изображении выше? (1 правильный ответ)
+    `,
+    options: [
+      "Ошибка в первой строке. Заголовок <h1> использован только один раз.",
+      "Ошибка во второй строке. Разделы одного уровня должны иметь одинаковые заголовки. Вместо <h3> должен быть <h2>.",
+      "Ошибка в третьей строке. Заголовок <h3> не может использоваться повторно.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Заголовки одного уровня вложенности должны иметь одинаковый ранг (тег).",
+  },
+  "html-structure-quiz": {
+    id: "html-structure-quiz",
+    question: `
+      <h3>Изучи схемы А и B. Одна из них визуализирует структуру макета для сети спортзалов.</h3>
+      <p>Какая из схем (А или B) лучше визуализирует структуру контента на странице?</p>
+      <div class="image-container">
+        <img src="/images/module-2/structure-quiz.png" alt="Сравнение структур" class="img-responsive" />
+      </div>
+    `,
+    options: ["Схема A", "Схема B"],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Тег <main> обозначает основное содержание документа, которое не повторяется на других страницах. Секции <section> логично вкладывать внутрь <main>.",
+  },
+  "html-image-link-quiz": {
+    id: "html-image-link-quiz",
+    question: "Как сделать изображение-ссылку?",
+    options: [
+      "Добавить тег &lt;img&gt; вместо текстового контента тега &lt;a&gt;",
+      "Вложить тег &lt;a&gt; в &lt;img&gt; вместо текстового описания изображения",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! Тег &lt;img&gt; нужно поместить внутрь тега &lt;a&gt;, чтобы изображение стало кликабельным.",
+  },
+  "html-can-include-a-img": {
+    id: "html-can-include-a-img",
+    question: "можно ли вложить тег &lt;a&gt; в тег &lt;img&gt;?",
+    options: ["Да, можно.", "Нет, нельзя.", "Есть нюансы"],
+    correctAnswer: 1,
+    successMessage: "И это абсолютно правильно!",
+  },
+  "html-can-include-a-li": {
+    id: "html-can-include-a-li",
+    question: "можно ли вложить тег &lt;a&gt; в тег &lt;li&gt;?",
+    options: ["Да, можно.", "Нет, нельзя.", "Есть нюансы"],
+    correctAnswer: 0,
+    successMessage: "О, это ты умничка!",
+  },
+  "html-address-tag-quiz": {
+    id: "html-address-tag-quiz",
+    question: "Какую информацию может содержать тег &lt;address&gt;?",
+    options: [
+      "Только описание физического адреса — страну, город, улицу, дом.",
+      "Физический адрес, электронную почту, телефон — любую актуальную контактную информацию.",
+      "Контакты или другую информацию о странице — интеллектуальные права, даты обновления и т.д.",
+    ],
+    correctAnswer: 1,
+    successMessage: "Ты на правильном пути.",
+  },
 };

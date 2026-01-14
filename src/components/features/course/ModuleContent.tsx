@@ -165,6 +165,11 @@ export function ModuleContent({
     pages.length,
   ]);
 
+  // Scroll to top when topic changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "instant" });
+  }, [currentTopic?.id]);
+
   // Check if topic is completed to unlock all navigation
   const isTopicCompleted = progress?.completedTopics?.includes(
     currentTopic?.id || ""
@@ -440,6 +445,19 @@ export function ModuleContent({
                               currentTopic.id,
                               nextIndex
                             );
+
+                            // Scroll to the next section
+                            setTimeout(() => {
+                              const element = document.getElementById(
+                                `section-${nextIndex}`
+                              );
+                              if (element) {
+                                element.scrollIntoView({
+                                  behavior: "smooth",
+                                  block: "start",
+                                });
+                              }
+                            }, 100);
                           }
                         }}
                         disabled={!isQuizPassed}
