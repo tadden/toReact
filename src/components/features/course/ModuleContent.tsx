@@ -259,8 +259,10 @@ export function ModuleContent({
     }
   }, [activeTab, currentTopic]);
 
-  const handleComplete = () => {
-    updateProgress(course.id, module.id, { status: "completed" });
+  const handleComplete = (
+    updates?: Partial<import("@/types").StudentProgress>
+  ) => {
+    updateProgress(course.id, module.id, { status: "completed", ...updates });
     if (nextModuleSlug) {
       router.push(`/course/${course.slug}/${nextModuleSlug}`);
     } else {
@@ -268,7 +270,9 @@ export function ModuleContent({
     }
   };
 
-  const handleNextSection = () => {
+  const handleNextSection = (
+    updates?: Partial<import("@/types").StudentProgress>
+  ) => {
     // Logic to determine next view
     if (module.videoUrl || module.resources.length > 0) {
       router.push(`?view=materials`);
@@ -277,7 +281,7 @@ export function ModuleContent({
     } else {
       // If no materials/homework, mark module complete? or just stay
       // Let's finish module if nothing else
-      handleComplete();
+      handleComplete(updates);
     }
     setShowCongratulationModal(false);
   };
@@ -286,7 +290,7 @@ export function ModuleContent({
     <div>
       <CongratulationModal
         isOpen={showCongratulationModal}
-        onConfirm={handleNextSection}
+        onConfirm={() => handleNextSection()}
       />
       <div className={styles.moduleHeader}>
         <p
@@ -467,11 +471,11 @@ export function ModuleContent({
 
                   return (
                     <button
-                      onClick={() => {
+                      onClick={async () => {
                         if (!isQuizPassed) return;
 
                         // Mark current as complete
-                        markTopicCompleted(
+                        await markTopicCompleted(
                           course.id,
                           module.id,
                           currentTopic.id
@@ -481,6 +485,16 @@ export function ModuleContent({
                         const currentIndex = allTopics.findIndex(
                           (t) => t.id === currentTopic.id
                         );
+
+                        // Calculate "updated" completed topics locally to prevent stale closure issues
+                        // when calling handleNextSection -> handleComplete
+                        const currentCompleted =
+                          progress?.completedTopics || [];
+                        const updatedCompletedTopics =
+                          currentCompleted.includes(currentTopic.id)
+                            ? currentCompleted
+                            : [...currentCompleted, currentTopic.id];
+
                         if (currentIndex < allTopics.length - 1) {
                           const nextTopic = allTopics[currentIndex + 1];
                           // Optimized instant navigation
@@ -491,8 +505,10 @@ export function ModuleContent({
                             // Only show modal if it's the LAST module of the course
                             setShowCongratulationModal(true);
                           } else {
-                            // Otherwise just proceed
-                            handleNextSection();
+                            // Otherwise just proceed, PASSING the updated topics
+                            handleNextSection({
+                              completedTopics: updatedCompletedTopics,
+                            });
                           }
                         }
                       }}

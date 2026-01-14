@@ -36,8 +36,8 @@ export const htmlCssCourse = {
 
 <h3>Как проходить интерактивные лонгриды?</h3>
 
-<div style="background-color: rgba(59, 130, 246, 0.1); border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; border-radius: 4px;">
-  <p style="margin: 0; color: #e2e8f0;">
+<div class="info-note">
+  <p>
     <strong>!</strong> В реальной жизни ты редко учишь теорию просто так. Обычно ты ищешь информацию, чтобы решить проблему или выполнить задачу, верно? Именно так построен этот модуль. Он состоит из серии сценариев решения задач, от самых простых до более сложных.
   </p>
 </div>
@@ -48,7 +48,7 @@ export const htmlCssCourse = {
   <li><strong>Автопроверки</strong> — практика с автоматической проверкой, то есть решение задач в специальной среде программирования.</li>
 </ol>
 
-<p style="font-weight: bold; font-size: 1.2rem; margin-top: 2rem;">Поехали!</p>
+<p class="font-bold text-lg mt-lg">Поехали!</p>
 `,
         },
         {
@@ -66,8 +66,8 @@ export const htmlCssCourse = {
   <li><strong>JavaScript</strong> — позволяет добавлять функциональность и реакцию на действия пользователя. Это уже не просто визуальные эффекты (как изменение цвета при наведении), а полноценная логика работы сайта. Например, обработка заполнения формы регистрации и т.д.</li>
 </ul>
 
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/html-css-js-diagram.png" alt="HTML, CSS, JS Diagram" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/html-css-js-diagram.png" alt="HTML, CSS, JS Diagram" class="img-responsive" />
 </div>
 
 [QUIZ: html-css-js-1]
@@ -78,17 +78,17 @@ export const htmlCssCourse = {
 
 <p><strong>Developer tools</strong> — это встроенная в браузер функциональность, позволяющая получить информацию о коде страницы, стилях, сетевых запросах и многом другом.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> Developer tools можно вызвать следующими способами:</p>
-  <ul style="margin-top: 0.5rem;">
+<div class="info-highlight">
+  <p><strong>!</strong> Developer tools можно вызвать следующими способами:</p>
+  <ul class="list-disc mt-sm">
     <li><strong>Ctrl+Shift+I</strong> для Windows</li>
     <li><strong>Cmd+Opt+I</strong> для macOS</li>
     <li>Нажать правой кнопкой мыши на веб-странице и выбрать пункт меню «Просмотреть код» — последняя опция в выпадающем списке.</li>
   </ul>
 </div>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/module-1/devtools.png" alt="Google Developer Tools" style="max-width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container">
+  <img src="/images/module-1/devtools.png" alt="Google Developer Tools" class="img-responsive img-rounded" />
 </div>
 
 <p>По умолчанию открывается вкладка <code>Elements</code>. Она отображает внутреннюю HTML-структуру документа. При наведении мыши на элемент он будет подсвечен в окне браузера (viewport).</p>
@@ -105,20 +105,20 @@ export const htmlCssCourse = {
 
 <p>Документ, размеченный с помощью HTML, интерпретируется браузером. В результате пользователи видят не исходный код с элементами разметки, а результат обработки этого файла — веб-страницу.</p>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/module-1/html.png" alt="HTML Process Diagram" style="max-width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container">
+  <img src="/images/module-1/html.png" alt="HTML Process Diagram" class="img-responsive img-rounded" />
 </div>
 
-<p>Популярность HTML и использование его в качестве основы веб-страниц привели к необходимости создания, поддержки и развития соответствующих стандартов. Сейчас этим занимается <a href="https://html.spec.whatwg.org/multipage/" target="_blank" style="color: #60a5fa;">рабочая группа Web Hypertext Application Technology Working Group (WHATWG)</a>.</p>
+<p>Популярность HTML и использование его в качестве основы веб-страниц привели к необходимости создания, поддержки и развития соответствующих стандартов. Сейчас этим занимается <a href="https://html.spec.whatwg.org/multipage/" target="_blank" class="link-accent">рабочая группа Web Hypertext Application Technology Working Group (WHATWG)</a>.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> В данный момент вы просматриваете содержимое HTML-документа в вашем браузере. Этот интерактивный лонгрид — страница, размеченная на HTML.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> В данный момент вы просматриваете содержимое HTML-документа в вашем браузере. Этот интерактивный лонгрид — страница, размеченная на HTML.</p>
 </div>
 
 <h3>Посмотрите на скриншот редактора кода</h3>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/module-1/vscode-screenshot.png" alt="VS Code Screenshot" style="max-width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container">
+  <img src="/images/module-1/vscode-screenshot.png" alt="VS Code Screenshot" class="img-responsive img-rounded" />
 </div>
 
 [QUIZ: html-file-example]
@@ -141,8 +141,8 @@ export const htmlCssCourse = {
 
 <p>Открывающий тег указывает на начало элемента, закрывающий — на его окончание. Закрывающий тег образуется путем добавления слеша ( / ) перед именем тега. Между открывающим и закрывающим тегами находится контент тега. Смотри примеры тегов ниже.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> HTML элемент — это абзац, заголовок, список, ссылка и т.д. В HTML-документе элемент состоит из тега и контента тега.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> HTML элемент — это абзац, заголовок, список, ссылка и т.д. В HTML-документе элемент состоит из тега и контента тега.</p>
 </div>
 
 <pre><code class="language-html">&lt;section&gt;Секция&lt;/section&gt;
@@ -158,8 +158,8 @@ export const htmlCssCourse = {
 
 <p>Тег <code>&lt;p&gt;</code> — универсальный контейнер для группировки мелких фразовых элементов, отделения их друг от друга и дальнейшей стилизации. По умолчанию тег абзаца <code>&lt;p&gt;</code> — это блочный элемент, то есть он начинается с новой строки и имеет вертикальные отступы, которые можно будет изменить с помощью CSS.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> В редакторе VSCode в HTML-документе можно набрать код <code>lorem10</code>, после чего нажать клавишу <code>Tab</code>. Это создаст массив текста из 10 слов. Вместо 10 можно установить любое число.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> В редакторе VSCode в HTML-документе можно набрать код <code>lorem10</code>, после чего нажать клавишу <code>Tab</code>. Это создаст массив текста из 10 слов. Вместо 10 можно установить любое число.</p>
 </div>
 
 <pre><code class="language-html">&lt;p&gt;
@@ -194,16 +194,16 @@ export const htmlCssCourse = {
   impedit velit voluptate cum laboriosam quasi.
 &lt;/p&gt;</code></pre>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: bold;"><strong>!</strong> Оформление кода</p>
-  <p style="margin: 0 0 0.5rem 0;">Во фрагменте кода выше ты можешь увидеть несколько примеров корректного его оформления.</p>
-  <p style="margin: 0 0 0.5rem 0;">Но запомни основное:</p>
-  <ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<div class="info-highlight">
+  <p class="mb-sm font-bold"><strong>!</strong> Оформление кода</p>
+  <p class="mb-sm">Во фрагменте кода выше ты можешь увидеть несколько примеров корректного его оформления.</p>
+  <p class="mb-sm">Но запомни основное:</p>
+  <ul class="list-disc">
     <li>каждый тег начинается с новой строки;</li>
     <li>если контент занимает несколько строк, открывающий и закрывающий теги расположены друг под другом (см. абзац);</li>
     <li>если контент занимает одну строку, открывающий и закрывающий теги расположены непосредственно до и после контента (см. заголовок).</li>
   </ul>
-  <p style="margin: 0.5rem 0 0 0;">Это обеспечивает лучшую визуализацию начала и конца тега.</p>
+  <p class="mt-sm">Это обеспечивает лучшую визуализацию начала и конца тега.</p>
 </div>
 [CHALLENGE: html-h1-tag]
 
@@ -216,7 +216,7 @@ export const htmlCssCourse = {
 Комментарии важно оставлять, чтобы в будущем тебе или коллеге было понятно, что это за код.</p>
 
 <p>Комментарии используются для того, чтобы:</p>
-<ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<ul class="list-disc">
   <li>оставить в исходном коде пояснение, заметку;</li>
   <li>визуально разделить код, обозначив, где начинается и заканчивается разметка шапки сайта, подвала, отдельной секции и т.д.;</li>
   <li>закомментировать участок кода, то есть временно скрыть часть HTML-кода, чтобы она не отображалась на странице в браузере.</li>
@@ -249,14 +249,16 @@ export const htmlCssCourse = {
 &lt;input type="text" name="user_name" /&gt;
 &lt;button type="submit"&gt;...&lt;/button&gt;</code></pre>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0 0 0.5rem 0; font-weight: bold;"><strong>!</strong> Полезно!</p>
-  <p style="margin: 0;">Для того, чтобы узнать, какие атрибуты доступны для тега и назначение атрибутов, можно зайти в документацию или справочник, например <a href="https://htmlreference.io" target="_blank" rel="noopener noreferrer">htmlreference.io</a>.</p>
+<div class="info-highlight">
+  <p class="mb-sm font-bold"><strong>!</strong> Полезно!</p>
+  <p>Для того, чтобы узнать, какие атрибуты доступны для тега и назначение атрибутов, можно зайти в документацию или справочник, например <a href="https://htmlreference.io" target="_blank" rel="noopener noreferrer">htmlreference.io</a>.</p>
 </div>
 
 <p>Давай рассмотрим структуру тега с атрибутами на примере тега <code>&lt;a&gt;</code>. Он предназначен для создания ссылок или текста. Кликая по нему, мы переходим на другую страницу, загружаем файл и т.д. Текст ссылки отображается в браузере с подчеркиванием синим шрифтом. При наведении на ссылку курсор мыши меняет вид.</p>
 
-<img src="/images/html-attributes-schema.png" alt="Схема атрибутов HTML тега" style="width: 100%; max-width: 600px; margin: 2rem 0; border: 1px solid #e2e8f0; border-radius: 8px;" />
+<div class="image-container">
+  <img src="/images/html-attributes-schema.png" alt="Схема атрибутов HTML тега" class="img-responsive img-rounded img-bordered max-w-600" />
+</div>
 
 <p>Адрес ссылки задается в обязательном атрибуте <code>href="адрес"</code>, где адрес — это URL, указывающий на страницу, файл или любой другой ресурс.</p>
 
@@ -314,7 +316,7 @@ export const htmlCssCourse = {
 <p><b>Растровая графика (raster, bitmap)</b> — описание графического файла в виде массива с координатами каждого пикселя и описанием цвета этого пикселя. Это как карта цветов с фиксированным размером.</p>
 
 <p>Два формата изображений, которые используются наиболее широко:</p>
-<ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<ul class="list-disc">
   <li><b>JPEG</b> — большие файлы, которые не требуют прозрачного фона или анимации. Этот формат идеален для ярких реалистичных фотографий, поскольку они могут содержать миллионы цветов.</li>
   <li><b>PNG</b> — в отличие от JPEG, подходит для изображений, фон которых должен быть прозрачным или содержать иконки и декоративные элементы. Также этот формат используется для изображений повышенной точности: скриншотов, чертежей, графиков и т.д.</li>
 </ul>
@@ -334,7 +336,7 @@ export const htmlCssCourse = {
 <p>В прошлом шаге мы добавили изображение, и вы могли заметить, что тег <code>&lt;img&gt;</code> синтаксически отличается от всех предыдущих. Тег <code>&lt;img&gt;</code> — одиночный, то есть он не требует одноименного закрывающего тега.</p>
 
 <p>Парные теги:</p>
-<ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<ul class="list-disc">
   <li>состоят из открывающего и закрывающего тегов;</li>
   <li>открывающий и закрывающий теги оборачивают текстовое содержимое;</li>
   <li>позволяют группировать контент по смыслу и содержимому;</li>
@@ -353,7 +355,7 @@ export const htmlCssCourse = {
 &lt;/article&gt;</code></pre>
 
 <p>Одиночные теги:</p>
-<ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<ul class="list-disc">
   <li>состоят только из открывающего тега;</li>
   <li>не содержат текстового содержимого;</li>
   <li>получают содержимое или поведение через атрибуты;</li>
@@ -382,14 +384,14 @@ export const htmlCssCourse = {
 
 <p>Альтернативный текст должен быть у каждого тега <code>&lt;img&gt;</code>.</p>
 
-<ul style="margin: 0; padding-left: 1.2rem; list-style-type: disc;">
+<ul class="list-disc">
   <li>В описании должно быть законченное, полностью сформулированное предложение.</li>
   <li>Альтернативный текст должен отвечать на вопрос «Что изображено на картинке?».</li>
   <li>Описание должно быть уникальным и не повторять то, что есть в тексте к этому изображению.</li>
   <li>В описании не нужно использовать слова «изображение», «картинка» или «иллюстрация», это само собой разумеется.</li>
 </ul>
 
-<img src="/images/module-1/kittens.png" alt="Котята" style="width: 100%; border-radius: 8px; margin: 1rem 0;" />
+<img src="/images/module-1/kittens.png" alt="Котята" class="img-responsive img-rounded my-md" />
 
 <p>Если в тексте страницы описывается история этих котят, достаточно будет такого описания.</p>
 

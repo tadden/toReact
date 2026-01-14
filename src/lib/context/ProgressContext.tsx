@@ -252,8 +252,30 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     const completedTopics = current?.completedTopics || [];
 
     if (!completedTopics.includes(topicId)) {
+      const newCompletedTopics = [...completedTopics, topicId];
+
+      // Check if all topics are completed
+      let isModuleCompleted = false;
+      const course = courses.find(
+        (c) => c.id === courseId || c.slug === courseId
+      );
+      if (course) {
+        const module = course.modules.find(
+          (m) => m.id === moduleId || m.slug === moduleId
+        );
+        if (module && module.topics) {
+          const totalTopics = module.topics.length;
+          // Use Set to ensure uniqueness just in case
+          const uniqueCompleted = new Set(newCompletedTopics);
+          if (uniqueCompleted.size >= totalTopics && totalTopics > 0) {
+            isModuleCompleted = true;
+          }
+        }
+      }
+
       await updateProgress(courseId, moduleId, {
-        completedTopics: [...completedTopics, topicId],
+        completedTopics: newCompletedTopics,
+        ...(isModuleCompleted ? { status: "completed" } : {}),
       });
     }
   };

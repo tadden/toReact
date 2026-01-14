@@ -15,42 +15,44 @@ export const preCourse = {
       topics: [
         {
           title: "Быстрый старт",
+          order: 0,
           content: `
 <h1>Быстрый старт 🚀</h1>
 
-<p style="margin-bottom: 1.5rem;">Хей, мы — <strong>ToReact</strong>, приветствуем тебя на курсе Frontend! 👋<br>
+<p class="mb-sm">Хей, мы — <strong>ToReact</strong>, приветствуем тебя на курсе Frontend! 👋<br>
 Вместе мы пройдем путь с нуля до Junior Frontend Developer — специалиста, которого ищут и нанимают многие IT-компании. 💼</p>
 
-<p style="margin-bottom: 1.5rem;"><strong>Так что же будет на курсе? 🤔</strong></p>
+<p class="mb-sm"><strong>Так что же будет на курсе? 🤔</strong></p>
 
-<p style="margin-bottom: 1.5rem;">Мы разберем <strong>основы HTML и CSS, JavaScript, React, Next.js,</strong> в том объеме, который экспертно определен как обязательный для junior разработчика в современной компании. 💻</p>
+<p class="mb-sm">Мы разберем <strong>основы HTML и CSS, JavaScript, React, Next.js,</strong> в том объеме, который экспертно определен как обязательный для junior разработчика в современной компании. 💻</p>
 
-<p style="margin-bottom: 1.5rem;"><strong>Теория</strong>, безусловно, важна, но практику (огромное её количество) никто не отменял! Именно поэтому на протяжении обучения у тебя будет много <strong>практических заданий</strong>, где ты будешь развивать свои навыки в написании кода. 🛠️</p>
+<p class="mb-sm"><strong>Теория</strong>, безусловно, важна, но практику (огромное её количество) никто не отменял! Именно поэтому на протяжении обучения у тебя будет много <strong>практических заданий</strong>, где ты будет развивать свои навыки в написании кода. 🛠️</p>
 
-<p style="margin-bottom: 1.5rem;">На протяжении обучения тебя ждут <strong>командные проекты</strong>, которые максимально приближены к реальным условиям. В командных проектах наши ученики создают веб-сайты, мобильные приложения — всё то, что ожидают увидеть HR-менеджеры в <strong>портфолио кандидата</strong>. 🤝</p>
+<p class="mb-sm">На протяжении обучения тебя ждут <strong>командные проекты</strong>, которые максимально приближены к реальным условиям. В командных проектах наши ученики создают веб-сайты, мобильные приложения — всё то, что ожидают увидеть HR-менеджеры в <strong>портфолио кандидата</strong>. 🤝</p>
 
-<p style="margin-bottom: 1.5rem;"><strong>Как построено обучение? 📚</strong></p>
+<p class="mb-sm"><strong>Как построено обучение? 📚</strong></p>
 
-<p style="margin-bottom: 1rem;">Важно проходить обучение шаг за шагом! 👣</p>
+<p class="mb-sm">Важно проходить обучение шаг за шагом! 👣</p>
 
-<ul style="margin-bottom: 1.5rem;">
+<ul class="mb-sm list-disc">
   <li>Сначала ты читаешь теорию. 📖</li>
   <li>Затем смотришь видео. 🎥</li>
   <li>И только после этого выполняешь домашнее задание. 📝</li>
 </ul>
 
-<p style="margin-bottom: 1.5rem;">Это проверенный алгоритм успеха! 🚀</p>
+<p class="mb-sm">Это проверенный алгоритм успеха! 🚀</p>
 
 
-<p style="margin-bottom: 1.5rem;">Все домашние задания модуля объединяются в <strong>индивидуальный проект</strong>, например, веб-сайт в блоке HTML и CSS. Обрати внимание, что не все этапы обязательно присутствуют в каждом модуле. 🏗️</p>
+<p class="mb-sm">Все домашние задания модуля объединяются в <strong>индивидуальный проект</strong>, например, веб-сайт в блоке HTML и CSS. Обрати внимание, что не все этапы обязательно присутствуют в каждом модуле. 🏗️</p>
 
-<p style="margin-bottom: 1.5rem;">Финальный командный проект требует использования знаний и навыков со всех модулей. 🏆</p>
+<p class="mb-sm">Финальный командный проект требует использования знаний и навыков со всех модулей. 🏆</p>
 
 <p><strong>Автор курса и ментор:</strong> Ilja Kazanli 👨‍💻</p>
 `,
         },
         {
           title: "Info",
+          order: 1,
           content: `
 
 <h1>Кто такой Frontend Developer?</h1>
@@ -60,8 +62,8 @@ export const preCourse = {
 
 <p><strong>Фронтенд</strong> (англ. — "внешняя часть") — это то, что мы видим, когда открываем сайт или приложение. Кнопки, формы, анимации, адаптация под мобильные устройства — всё это зона ответственности фронтенд-разработчика.</p>
 
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/google-search.png" alt="Google Search Interface" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/google-search.png" alt="Google Search Interface" class="img-responsive" />
 </div>
 
 <p><strong>Бэкенд</strong> (англ. — "внутренняя часть") — это "мозг" сайта, который работает на сервере. Когда ты вводишь запрос в Google и нажимаешь "Поиск", именно бэкенд обрабатывает этот запрос, ищет информацию в базе данных и возвращает результат фронтенду.</p>
@@ -89,8 +91,8 @@ export const preCourse = {
 <p>Главная задача Frontend Developer — сделать интерфейс удобным, красивым и отзывчивым для пользователя.</p>
 
 <h2>Какие основные Hard Skills и Soft Skills Junior Frontend Developer?</h2>
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/hard-soft-skills.png" alt="Hard Skills vs Soft Skills" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/hard-soft-skills.png" alt="Hard Skills vs Soft Skills" class="img-responsive" />
 </div>
 
 <h3>Топ Hard Skills для Frontend-разработчика</h3>
@@ -125,14 +127,15 @@ export const preCourse = {
       topics: [
         {
           title: "Что такое Vs code?",
+          order: 0,
           content: `
 <h1>Редактор кода VS Code</h1>
 <p>Чтобы начать писать код, нужно установить современный редактор кода. В течение обучения мы будем работать с Visual Studio Code.</p>
 
 <p><strong>Visual Studio Code (VS Code)</strong> — это мощный редактор кода, который запускается на компьютере и доступен для Windows, macOS и Linux. Он поддерживает разные языки программирования (JavaScript, TypeScript и Node.js) и имеет богатую экосистему расширений для других языков (C++, Java, Python и др.) и сред выполнения.</p>
 
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/vscode-main.png" alt="Visual Studio Code Interface" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/vscode-main.png" alt="Visual Studio Code Interface" class="img-responsive" />
 </div>
 
 <p>Каждый день разработчики используют редактор кода, работая над коммерческими проектами. В течение обучения ты сможешь ознакомиться с этим инструментом и научиться с ним хорошо работать, ведь редактор кода необходим для выполнения твоего первого домашнего задания. Советуем настроить все инструменты до начала технической части курса, чтобы иметь больше времени на задания и меньше стресса.</p>
@@ -142,19 +145,20 @@ export const preCourse = {
         },
         {
           title: "Установка",
+          order: 1,
           content: `
 <h1>Загрузка и Установка</h1>
 
 <p>1. Перейди по ссылке <a href="https://code.visualstudio.com/" target="_blank">https://code.visualstudio.com/</a>. Это официальный сайт VS Code. На нем можно скачать инсталлятор и, по желанию, ознакомиться с официальной документацией.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> Сайт автоматически определяет версию операционной системы на твоем компьютере и рекомендует скачать VS Code для Windows, macOS или Linux.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> Сайт автоматически определяет версию операционной системы на твоем компьютере и рекомендует скачать VS Code для Windows, macOS или Linux.</p>
 </div>
 
 <p>2. Чтобы начать загрузку, нажми кнопку <strong>Download for ...</strong> (зависит от установленной на твоем компьютере ОС). Загрузка начнется автоматически.</p>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> Если версия была определена неправильно, ты можешь самостоятельно выбрать, какую версию VS Code скачать.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> Если версия была определена неправильно, ты можешь самостоятельно выбрать, какую версию VS Code скачать.</p>
 </div>
 
 <p>Для самостоятельного выбора версии:</p>
@@ -183,8 +187,8 @@ export const preCourse = {
   <li>поставь галочку, чтобы создать ярлык на рабочем столе, и нажми <strong>Next</strong>.</li>
 </ul>
 
-<div style="background-color: #eff6ff; border-left: 4px solid #3b82f6; padding: 1rem; margin: 1.5rem 0; color: #1e293b;">
-  <p style="margin: 0;"><strong>!</strong> Ярлык на рабочем столе позволяет быстро найти и открыть редактор.</p>
+<div class="info-highlight">
+  <p><strong>!</strong> Ярлык на рабочем столе позволяет быстро найти и открыть редактор.</p>
 </div>
 
 <p>6. Чтобы завершить установку редактора:</p>
@@ -195,20 +199,21 @@ export const preCourse = {
 
 <p>Теперь у тебя есть редактор кода на твоем компьютере.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin-top: 2rem;">
-  <iframe src="https://www.youtube.com/embed/Zdy_ZRR4hyY" title="YouTube video player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="aspect-video mt-lg">
+  <iframe src="https://www.youtube.com/embed/Zdy_ZRR4hyY" title="YouTube video player" class="iframe-responsive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 `,
         },
         {
           title: "Интерфейс",
+          order: 2,
           content: `
 <h1>Интерфейс VS Code</h1>
 
 <p>Давай разберемся с основными элементами интерфейса Visual Studio Code. Это поможет тебе быстрее ориентироваться и работать эффективнее.</p>
 
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/vscode-interface.png" alt="Обзор интерфейса VS Code" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/vscode-interface.png" alt="Обзор интерфейса VS Code" class="img-responsive" />
 </div>
 
 <p>Интерфейс редактора состоит из 5 основных зон:</p>
@@ -226,14 +231,15 @@ export const preCourse = {
         },
         {
           title: "Расширения",
+          order: 3,
           content: `
 <h1>Расширения</h1>
 <p>Расширения (Extensions) для Visual Studio Code — это специальные дополнения, которые позволяют настраивать редактор под ваши конкретные нужды, добавляя в него новые функции, инструменты и поддержку языков программирования.</p>
 
 <p>По умолчанию VS Code — это легкий текстовый редактор. Расширения превращают его в полноценную и мощную среду разработки (IDE).</p>
 
-<div style="display: flex; justify-content: center; margin: 2rem 0;">
-  <img src="/images/vscode-extensions.png" alt="VS Code Extensions" style="max-width: 100%; height: auto;" />
+<div class="image-container">
+  <img src="/images/vscode-extensions.png" alt="VS Code Extensions" class="img-responsive" />
 </div>
 
 <h3>Полезные расширения для VS Code</h3>
@@ -244,19 +250,20 @@ export const preCourse = {
   <li><strong>HTML CSS Support</strong>: Предоставляет автодополнение для классов и идентификаторов HTML в CSS.</li>
 </ul>
 <h3>Видео-обзор</h3>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-  <iframe src="https://www.youtube.com/embed/qjf1QdrvsqY" title="YouTube video player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="aspect-video">
+  <iframe src="https://www.youtube.com/embed/qjf1QdrvsqY" title="YouTube video player" class="iframe-responsive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>`,
         },
         {
           title: "Автосохранение и Форматирование",
+          order: 4,
           content: `
 <p>Autosave & Format (onSave) Это две функции, которые избавляют вас от рутины: одна следит, чтобы вы не потеряли код, а вторая — чтобы он всегда выглядел аккуратно.</p>
 
 <h3>Автосохранение (Auto Save)</h3>
 <p>Просто перейдите в меню <strong>File</strong> и поставьте галочку напротив <strong>Auto Save</strong>.</p>
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-  <iframe src="https://www.youtube.com/embed/XxTEO4MhuuQ" title="Auto Save in VS Code" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="aspect-video my-md">
+  <iframe src="https://www.youtube.com/embed/XxTEO4MhuuQ" title="Auto Save in VS Code" class="iframe-responsive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <h3>Форматирование при сохранении (Format On Save)</h3>
@@ -279,6 +286,7 @@ export const preCourse = {
       topics: [
         {
           title: "Что такое терминал?",
+          order: 0,
           content: `
 <h3>Управление операционной системой через терминал</h3>
 <p><strong>Командная строка</strong> (или терминал, консоль) — это интерфейс пользователя, который позволяет вводить текстовые команды для взаимодействия с операционной системой. В командной строке можно вводить команды для навигации по файловой системе, копирования, перемещения или удаления файлов, установки программ и так далее.</p>
@@ -297,6 +305,7 @@ export const preCourse = {
         },
         {
           title: "Открытие терминала",
+          order: 1,
           content: `
 <h3>Открытие терминала</h3>
 <p>На первый взгляд терминал может показаться непонятным и непривычным. В нем нет графики, только текст. Обратная связь ограничена или отсутствует. Некоторые новички вспоминают, что в первый раз боялись случайно все удалить на своем компьютере.</p>
@@ -313,8 +322,8 @@ export const preCourse = {
   <li>Введи <code>powershell</code> в открытое поле и нажми клавишу <code>Enter</code>.</li>
 </ul>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/0f3f32ae-1436-4ad1-b4b8-e11e22554e40run-powershell.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -331,8 +340,8 @@ export const preCourse = {
 
 <p>В следующем видео показан модифицированный терминал macOS. Твой может выглядеть немного иначе с точки зрения палитры цветов и иконок, но функциональность остается абсолютно идентичной.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/d9f98934-db39-407b-8baf-2f0a497e3a4a2023-11-12%2014-08-38.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -350,8 +359,8 @@ export const preCourse = {
 
 <p>Клавиша <code>~</code> (тильда) обычно расположена непосредственно под клавишей <code>Esc</code> (Escape) на стандартной клавиатуре.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/711d769c-399c-4332-83f1-5993465f48572023-11-20%2012-05-34.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -359,6 +368,7 @@ export const preCourse = {
         },
         {
           title: "Текущее расположение",
+          order: 2,
           content: `
 <h3>Текущее расположение</h3>
 
@@ -378,12 +388,13 @@ C:\\Users\\username</code></pre>
 
 <p>Терминальные команды могут казаться запутанными на первый взгляд. Обычно они являются сокращениями. Знание того, как расшифровываются команды, облегчает их запоминание и воспроизведение.</p>
 
-<div class="note">
+<div class="info-highlight">
   <p>💡 Аббревиатура <code>pwd</code> расшифровывается как "print working directory", что означает выведение текущей папки.</p>
 </div>`,
         },
         {
           title: "Просмотр содержимого папки",
+          order: 3,
           content: `
 <h3>Просмотр содержимого папки</h3>
 
@@ -391,8 +402,8 @@ C:\\Users\\username</code></pre>
 
 <p>Команда <code>ls</code> (list directory) используется для вывода списка файлов и папок в текущей рабочей директории (то есть в текущем месте в файловой системе).</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/f37c213e-de35-4b70-926a-ee20d0126f542023-11-12%2015-10-48.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -422,6 +433,7 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Перемещение по файловой структуре",
+          order: 4,
           content: `
 <h3>Перемещение по файловой структуре</h3>
 
@@ -437,7 +449,7 @@ d-r---        11/19/2023  11:27 PM                Downloads
   <li><code>[имя директории]</code> — любое имя директории, в которую ты хочешь перейти.</li>
 </ol>
 
-<div class="note">
+<div class="info-note">
   <p>❗️ ВАЖНО!</p>
   <p>Квадратные скобки означают, что это место для ввода собственной информации, ты не включаешь квадратные скобки в текст команды.</p>
 </div>
@@ -449,8 +461,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
   <li>выполнить команду <code>ls</code></li>
 </ul>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/b82a863f-e87c-4926-a915-14e6cb8009302023-11-12%2015-57-03.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -466,8 +478,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p>Давай сделаем это несколько раз: вернемся в корневую директорию, а затем снова перейдем в <strong>Desktop</strong> и назад.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/b307940e-9fcd-44f8-a6be-b6d76de8b0a52023-11-12%2016-07-03.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -482,8 +494,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
   <li>Затем нужно знать, как вернуться в безопасность, домой. Для этого введи команду <code>cd ~</code>, и ты вернешься в корневую директорию. Оттуда можно снова попробовать добраться, куда нужно.</li>
 </ol>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/f0e426d6-79d6-4676-9ea6-3dd1720e80792023-11-12%2016-21-50.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -491,12 +503,13 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Очистка терминала",
+          order: 5,
           content: `
 <h3>Очистка терминала</h3>
 <p>Команда <code>clear</code> в терминале используется для очистки содержимого экрана. Она позволяет избавиться от предварительно выведенных данных и обеспечивает тебя чистым рабочим полем для нового ввода или вывода информации.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/5d64d5c5-bbbe-4901-8654-9f5fdb9261a82023-11-12%2020-30-12.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -510,8 +523,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Итоги",
+          order: 6,
           content: `
-<h3>Итоги</h3>
 <p>Давай подведем итоги!</p>
 <p>Теперь ты знаешь, как открыть командную строку и выйти из неё. А еще умеешь пользоваться основными командами, которые перечислены в списке ниже.</p>
 
@@ -540,6 +553,7 @@ d-r---        11/19/2023  11:27 PM                Downloads
       topics: [
         {
           title: "Система контроля версий",
+          order: 0,
           content: `
 <h3>Управление версиями кода</h3>
 
@@ -563,16 +577,17 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p>Мы уже разобрались, что для работы с проектами тебе нужен Git. Давай узнаем, как правильно установить Git на твой компьютер.</p>
 
-<div class="note">
+<div class="info-note">
   <p>❗️ ВАЖНО! Посмотрите это видео с начала до 25-й минуты, а затем с 1:15:52 до конца.</p>
 </div>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
-  <iframe src="https://www.youtube.com/embed/QuJcgp5G2lY" title="YouTube video player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="aspect-video">
+  <iframe src="https://www.youtube.com/embed/QuJcgp5G2lY" title="YouTube video player" class="iframe-responsive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>`,
         },
         {
           title: "Регистрация и обзор GitHub",
+          order: 1,
           content: `
 <h3>GitHub</h3>
 
@@ -589,14 +604,14 @@ d-r---        11/19/2023  11:27 PM                Downloads
   <li>На главной странице найди <strong>Sign up</strong> (рус. <strong>Зарегистрироваться</strong>), нажми на нее и зарегистрируйся.</li>
 </ol>
 
-<div class="note">
+<div class="info-note">
   <p>❗️ При выборе имени пользователя на GitHub лучше избегать таких вариантов, как: “Sweet_Bun”, “SexyCoder123”, “code_king”, “Anonymous_Hacker” и т.д. Рекрутеры обычно изучают профиль кандидата на Github и такие имена могут восприниматься как непрофессиональные или непонятные в контексте разработки программного обеспечения. Лучше выбрать более серьезное и понятное имя, которое станет твоей визитной карточкой. Хорошим вариантом может быть твое настоящее имя. Если оно уже занято, то ты можешь добавить к нему дополнительные символы. Например, taras_shevchenko456.</p>
 </div>
 
 <p>Ниже ты увидишь демовидео, где показан процесс регистрации нового пользователя на GitHub.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/da9a4b4f-3625-406f-9654-9bb81bf72843create-accont-github.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -612,8 +627,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p>В верхней части расположена навигационная панель. По умолчанию ты находишься в разделе <strong>Overview</strong>.</p>
 
-<div style="margin: 1rem 0;">
-  <img src="/images/github-overview.png" alt="GitHub Overview" style="width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container my-md">
+  <img src="/images/github-overview.png" alt="GitHub Overview" class="img-responsive img-rounded" />
 </div>
 
 
@@ -626,8 +641,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p>Пока что у тебя здесь нет ни одного репозитория, но скоро их тут будет много.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/ea477471-1024-4c0f-928e-e0ae62a2716c2023-11-24%2014-43-46.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -645,6 +660,7 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Создание репозитория",
+          order: 2,
           content: `
 <p><strong>Репозиторий</strong> — это цифровой "контейнер" для хранения кода и других файлов, связанных с проектом. Физически репозиторий — это просто папка на компьютере, которую использует система контроля версий Git.</p>
 
@@ -662,8 +678,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
   <li>Нажми кнопку <strong>Create repository</strong>, и готово!</li>
 </ol>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/09e03cae-6df5-4496-a4ce-455b6e8428082023-11-24%2014-57-26.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -679,13 +695,14 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Удаленные и локальные репозитории",
+          order: 3,
           content: `
 <h3>Удаленные репозитории (remote repository)</h3>
 
 <p><strong>Удаленный репозиторий</strong> — это проект (папка) на сервере (компьютере) GitHub где-нибудь в Интернете. Тут разработчики хранят код проекта и делятся им. Проектов может быть много, поэтому для каждого проекта выделяется отдельный репозиторий.</p>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/remote-repo.png" alt="Remote Repository Concept" style="width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container my-md">
+  <img src="/images/remote-repo.png" alt="Remote Repository Concept" class="img-responsive img-rounded" />
 </div>
 
 <p>Одним из ключевых преимуществ удаленных репозиториев является возможность сотрудничества. Много людей могут работать над одним проектом, не мешая друг другу, поскольку каждый имеет доступ к последним версиям файлов. Например, ты можешь показать свой код на удаленном репозитории ментору, чтобы он оценил его качество и дал рекомендации при необходимости.</p>
@@ -696,8 +713,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p><strong>Локальный репозиторий</strong> — это копия удаленного репозитория (папка), которая расположена непосредственно на твоем компьютере. Ты можешь вносить все изменения, которые хочешь, а затем синхронизировать их с удаленным репозиторием.</p>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/local-repo.png" alt="Local and Remote Repository Sync" style="width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container my-md">
+  <img src="/images/local-repo.png" alt="Local and Remote Repository Sync" class="img-responsive img-rounded" />
 </div>
 
 <p>Итак, удаленный репозиторий служит централизованным местом для хранения, доступа и управления кодом, где все члены команды могут работать вместе. Локальный репозиторий дает тебе полную копию всех данных на твоем компьютере и возможность работать независимо, эффективно и безопасно.</p>
@@ -706,11 +723,12 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Клонирование удаленного репозитория",
+          order: 4,
           content: `
 <p><strong>Клонирование</strong> — это процесс создания локальной копии удаленного репозитория на своем компьютере. То есть во время клонирования ты получаешь свою копию проекта (папку).</p>
 
-<div style="margin: 2rem 0;">
-  <img src="/images/git-clone-concept.png" alt="Git Clone Concept" style="width: 100%; height: auto; border-radius: 8px;" />
+<div class="image-container my-md">
+  <img src="/images/git-clone-concept.png" alt="Git Clone Concept" class="img-responsive img-rounded" />
 </div>
 
 <p>Но для чего это нужно?</p>
@@ -721,8 +739,8 @@ d-r---        11/19/2023  11:27 PM                Downloads
 
 <p>Вот видеоинструкция, как склонировать репозиторий, для пользователей Windows.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-    <video controls style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+<div class="aspect-video my-md">
+    <video controls class="iframe-responsive">
         <source src="https://goitlmsstorage.b-cdn.net/d98e7161-d173-404e-bee1-d0b35593b36agit-clone.mp4" type="video/mp4">
         Your browser does not support the video tag.
     </video>
@@ -743,13 +761,14 @@ d-r---        11/19/2023  11:27 PM                Downloads
         },
         {
           title: "Итоги",
+          order: 5,
           content: `
 <p>Мы завершили модуль по Git и GitHub. Ты узнал, что такое система контроля версий, создал свой аккаунт на GitHub, научился создавать удаленные репозитории и клонировать их на свой компьютер.</p>
 
 <p>Теперь давай закрепим полученные знания и перейдем к практике. Посмотри это видео, где показано, как установить Git и подключить его к VS Code.</p>
 
-<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; margin: 1rem 0;">
-  <iframe src="https://www.youtube.com/embed/KiMtkJw-4gs" title="Setup Git and VS Code" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<div class="aspect-video my-md">
+  <iframe src="https://www.youtube.com/embed/KiMtkJw-4gs" title="Setup Git and VS Code" class="iframe-responsive" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </div>
 
 <p>Это видео поможет тебе настроить рабочее окружение, чтобы ты мог полноценно работать с Git прямо из своего редактора кода.</p>
@@ -768,10 +787,11 @@ d-r---        11/19/2023  11:27 PM                Downloads
       topics: [
         {
           title: "Что такое Figma?",
+          order: 0,
           content: `
 <p><strong>Figma</strong> — это бесплатный графический редактор и инструмент для дизайна. Он предназначен для создания веб-дизайна, мобильных приложений, интерфейсов пользователей и других графических проектов.</p>
 
-<img src="/images/figma-intro.png" alt="Figma Interface" style="width: 100%; border-radius: 0.5rem; margin: 1rem 0;" />
+<img src="/images/figma-intro.png" alt="Figma Interface" class="img-rounded my-md w-full" />
 
 <p><strong>Figma</strong> отличается от традиционных графических редакторов, таких как <em>Adobe Photoshop</em> или <em>Sketch</em>. Основное преимущество <strong>Figma</strong> заключается в том, что платформа базируется на веб-технологиях и работает непосредственно в браузере, не требуя установки программного обеспечения на твоем компьютере. При этом доступна также и десктопная версия.</p>
 
