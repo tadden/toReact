@@ -18,46 +18,46 @@ interface ProgressContextType {
   updateProgress: (
     courseId: string,
     moduleId: string,
-    updates: Partial<StudentProgress>
+    updates: Partial<StudentProgress>,
   ) => Promise<void>;
   getModuleProgress: (
     courseId: string,
-    moduleId: string
+    moduleId: string,
   ) => StudentProgress | undefined;
   markTopicCompleted: (
     courseId: string,
     moduleId: string,
-    topicId: string
+    topicId: string,
   ) => Promise<void>;
   submitHomework: (
     courseId: string,
     moduleId: string,
     url: string,
-    notes?: string
+    notes?: string,
   ) => Promise<void>;
   approveHomework: (
     userId: string,
     courseId: string,
     moduleId: string,
-    comment?: string
+    comment?: string,
   ) => Promise<void>;
   rejectHomework: (
     userId: string,
     courseId: string,
     moduleId: string,
-    comment?: string
+    comment?: string,
   ) => Promise<void>;
   saveQuizResult: (
     courseId: string,
     moduleId: string,
     quizId: string,
-    result: { selectedOption: number; isCorrect: boolean }
+    result: { selectedOption: number | number[]; isCorrect: boolean },
   ) => Promise<void>;
   saveTopicState: (
     courseId: string,
     moduleId: string,
     topicId: string,
-    pageIndex: number
+    pageIndex: number,
   ) => Promise<void>;
   isModuleLocked: (courseId: string, moduleId: string) => boolean;
   getAllProgress: () => Record<string, StudentProgress>;
@@ -65,7 +65,7 @@ interface ProgressContextType {
 }
 
 const ProgressContext = createContext<ProgressContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
@@ -132,7 +132,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const updateProgress = async (
     courseId: string,
     moduleId: string,
-    updates: Partial<StudentProgress>
+    updates: Partial<StudentProgress>,
   ) => {
     if (!user) return;
 
@@ -185,7 +185,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     courseId: string,
     moduleId: string,
     url: string,
-    notes?: string
+    notes?: string,
   ) => {
     await updateProgress(courseId, moduleId, {
       homeworkUrl: url,
@@ -199,7 +199,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     targetUserId: string,
     courseId: string,
     moduleId: string,
-    comment?: string
+    comment?: string,
   ) => {
     if (user?.role !== "admin") return;
 
@@ -223,7 +223,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     targetUserId: string,
     courseId: string,
     moduleId: string,
-    comment?: string
+    comment?: string,
   ) => {
     if (user?.role !== "admin") return;
 
@@ -245,7 +245,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
   const markTopicCompleted = async (
     courseId: string,
     moduleId: string,
-    topicId: string
+    topicId: string,
   ) => {
     if (!user) return;
     const current = getModuleProgress(courseId, moduleId);
@@ -257,11 +257,11 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       // Check if all topics are completed
       let isModuleCompleted = false;
       const course = courses.find(
-        (c) => c.id === courseId || c.slug === courseId
+        (c) => c.id === courseId || c.slug === courseId,
       );
       if (course) {
         const module = course.modules.find(
-          (m) => m.id === moduleId || m.slug === moduleId
+          (m) => m.id === moduleId || m.slug === moduleId,
         );
         if (module && module.topics) {
           const totalTopics = module.topics.length;
@@ -284,7 +284,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     courseId: string,
     moduleId: string,
     quizId: string,
-    result: { selectedOption: number; isCorrect: boolean }
+    result: { selectedOption: number | number[]; isCorrect: boolean },
   ) => {
     if (!user) return;
     const current = getModuleProgress(courseId, moduleId);
@@ -305,7 +305,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     courseId: string,
     moduleId: string,
     topicId: string,
-    pageIndex: number
+    pageIndex: number,
   ) => {
     if (!user) return;
     const current = getModuleProgress(courseId, moduleId);
@@ -331,7 +331,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     if (courses.length === 0) return false; // Loading or fail safe
 
     const course = courses.find(
-      (c) => c.slug === courseId || c.id === courseId
+      (c) => c.slug === courseId || c.id === courseId,
     ); // slug mismatch possible?
     // The previous mock used IDs like "course_html", but slugs "html-css".
     // The DB uses "slug" as ID for URL, but "id" (cuid) for relations.
@@ -345,7 +345,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     // Let's assume courseId argument IS the URL slug or ID.
     // Robust find:
     const targetCourse = courses.find(
-      (c) => c.id === courseId || c.slug === courseId
+      (c) => c.id === courseId || c.slug === courseId,
     );
     if (!targetCourse) return false;
 
@@ -356,7 +356,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     // Use modules from course
     const moduleIndex = targetCourse.modules.findIndex(
-      (m) => m.id === moduleId || m.slug === moduleId
+      (m) => m.id === moduleId || m.slug === moduleId,
     );
     if (moduleIndex <= 0) return false;
 
@@ -378,7 +378,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     // Let's try to find progress by matching module ID.
     const prevEntry = Object.values(progress).find(
-      (p) => p.moduleId === prevModule.id
+      (p) => p.moduleId === prevModule.id,
     );
 
     if (!prevEntry) return true;
@@ -401,7 +401,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     if (!user) return 0;
     // courseId might be slug
     const targetCourse = courses.find(
-      (c) => c.id === courseId || c.slug === courseId
+      (c) => c.id === courseId || c.slug === courseId,
     );
     if (!targetCourse || !targetCourse.modules.length) return 0;
 

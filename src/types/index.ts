@@ -60,7 +60,10 @@ export interface StudentProgress {
   moduleId: string;
   status: ModuleStatus;
   completedTopics: string[]; // IDs of completed topics
-  quizResults?: Record<string, { selectedOption: number; isCorrect: boolean }>;
+  quizResults?: Record<
+    string,
+    { selectedOption: number | number[]; isCorrect: boolean }
+  >;
   notes?: string | null;
   homeworkUrl?: string | null;
   homeworkStatus?: "pending" | "submitted" | "approved" | "rejected";

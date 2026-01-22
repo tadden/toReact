@@ -1428,7 +1428,6 @@ exercitationem&lt;/p&gt;
 &lt;!-- Вариант 3 --&gt;
 &lt;/html&gt;</code></pre>
 
-[QUIZ: html-skeleton-quiz]
 `,
         },
         {
