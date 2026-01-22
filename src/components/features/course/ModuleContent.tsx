@@ -615,6 +615,27 @@ export function ModuleContent({
                           </div>
                         </li>
                       );
+                    } else if (res.type === "video" && res.url) {
+                      // Fallback for generic video files (webm, mp4, etc.)
+                      return (
+                        <li key={idx} style={{ marginBottom: "2rem" }}>
+                          <h4
+                            style={{ marginBottom: "0.5rem", color: "#e2e8f0" }}
+                          >
+                            {res.title}
+                          </h4>
+                          <div className={styles.videoContainer}>
+                            <video
+                              controls
+                              style={{ width: "100%", height: "100%" }}
+                            >
+                              <source src={res.url} type="video/webm" />
+                              <source src={res.url} type="video/mp4" />
+                              Ваш браузер не поддерживает видео.
+                            </video>
+                          </div>
+                        </li>
+                      );
                     }
 
                     if (res.type === "code") {
