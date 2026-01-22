@@ -2,7 +2,7 @@ export interface QuizData {
   id: string;
   question: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number | number[];
   successMessage?: string;
 }
 
