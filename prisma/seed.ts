@@ -21,7 +21,7 @@ async function main() {
   // await prisma.course.deleteMany();
   // await prisma.user.deleteMany();
   console.log(
-    "⚠️  Safe Seeding: Skipping data deletion to preserve existing records."
+    "⚠️  Safe Seeding: Skipping data deletion to preserve existing records.",
   );
 
   // Create Users
@@ -39,8 +39,13 @@ async function main() {
     { name: "Olga", email: "olga@toreact.com", id: "user_olga" },
     {
       name: "Ilja",
-      email: "ilja.student@toreact.com",
+      email: "tadden12@gmail.com",
       id: "user_ilja_student",
+    },
+    {
+      name: "Vitalijs",
+      email: "vitalijsvolkovickis@inbox.lv",
+      id: "user_vitalijs",
     },
   ];
 
@@ -198,11 +203,15 @@ async function main() {
           update: {
             description: modData.homework.description,
             repoUrl: modData.homework.repoUrl,
+            figmaUrl: (modData.homework as any).figmaUrl,
+            acceptanceCriteria: (modData.homework as any).acceptanceCriteria,
           },
           create: {
             moduleId: module.id,
             description: modData.homework.description,
             repoUrl: modData.homework.repoUrl,
+            figmaUrl: (modData.homework as any).figmaUrl,
+            acceptanceCriteria: (modData.homework as any).acceptanceCriteria,
           },
         });
       }

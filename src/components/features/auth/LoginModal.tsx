@@ -16,8 +16,8 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   const [step, setStep] = useState<"login" | "change-password">("login");
 
   // Login State
-  const [email, setEmail] = useState("student@toreact.com");
-  const [password, setPassword] = useState("password");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   // Change Password State
   const [newPassword, setNewPassword] = useState("");
@@ -114,6 +114,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  autoComplete="email"
                 />
               </div>
 
@@ -124,6 +125,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  autoComplete="current-password"
                 />
               </div>
 
@@ -154,6 +156,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   required
+                  autoComplete="new-password"
                 />
               </div>
 
@@ -164,6 +167,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
+                  autoComplete="new-password"
                 />
               </div>
 

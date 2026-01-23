@@ -78,6 +78,8 @@ model Homework {
   moduleId    String @unique
   description String
   repoUrl     String?
+  figmaUrl    String?
+  acceptanceCriteria Json?
 
   module      Module @relation(fields: [moduleId], references: [id], onDelete: Cascade)
 }

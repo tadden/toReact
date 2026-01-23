@@ -2,7 +2,7 @@ export interface QuizData {
   id: string;
   question: string;
   options: string[];
-  correctAnswer: number;
+  correctAnswer: number | number[];
   successMessage?: string;
 }
 
@@ -101,12 +101,12 @@ export const quizzes: Record<string, QuizData> = {
     id: "html-image-link-quiz",
     question: "Как сделать изображение-ссылку?",
     options: [
-      "Добавить тег &lt;img&gt; вместо текстового контента тега &lt;a&gt;",
-      "Вложить тег &lt;a&gt; в &lt;img&gt; вместо текстового описания изображения",
+      "Добавить тег <img> вместо текстового контента тега <a>",
+      "Вложить тег <a> в <img> вместо текстового описания изображения",
     ],
     correctAnswer: 0,
     successMessage:
-      "Правильно! Тег &lt;img&gt; нужно поместить внутрь тега &lt;a&gt;, чтобы изображение стало кликабельным.",
+      "Правильно! Тег <img> нужно поместить внутрь тега <a>, чтобы изображение стало кликабельным.",
   },
   "html-can-include-a-img": {
     id: "html-can-include-a-img",
@@ -132,5 +132,73 @@ export const quizzes: Record<string, QuizData> = {
     ],
     correctAnswer: 1,
     successMessage: "Ты на правильном пути.",
+  },
+  "html-logo-quiz": {
+    id: "html-logo-quiz",
+    question:
+      "Взгляни на код логотипа. Какие ссылки нужно вставить вместо 'Адрес 1' и 'Адрес 2'?",
+    options: [
+      "Адрес 1 — главная страница бренда, Адрес 2 — путь к файлу изображения.",
+      "Адрес 1 — текущая страница, Адрес 2 — сайт разработчика.",
+      "Адрес 1 — страница 'О нас', Адрес 2 — ссылка на Google.",
+    ],
+    correctAnswer: 0,
+    successMessage: "Верно! Это стандартный паттерн для логотипов.",
+  },
+  "html-nav-quiz": {
+    id: "html-nav-quiz",
+    question: "Как правильно разметить главное навигационное меню?",
+    options: [
+      "Просто оставить ссылки в <ul>.",
+      "Обернуть список ссылок <ul> в тег <nav>.",
+      "Использовать тег <navigation>.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Тег <nav> сообщает браузеру, что здесь находится главная навигация.",
+  },
+  "html-title-quiz": {
+    id: "html-title-quiz",
+    question:
+      "В чем разница между заголовком HTML-документа и заголовками сайта? (1 правильный ответ)",
+    options: [
+      "Все заголовки документа и сайта должны создавать иерархию. А заголовок в теге <title> — самый главный заголовок. Он должен быть таким же, как заголовок <h1>.",
+      "Заголовок HTML документа (<title>) пользователь видит как название вкладки при открытии страницы. Заголовки сайта (<h1>-<h6>) — про содержание самого сайта, и они логически отражают структуру контента.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Именно так! Тег <title> — это метаданные для браузера/поисковика, а <h1>-<h6> — это контент страницы.",
+  },
+  "html-title-placement-quiz": {
+    id: "html-title-placement-quiz",
+    question: `
+      <p class="mb-sm">Рассмотрите код ниже:</p>
+      <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+   &lt;title&gt;Sweet cheese pancakes&lt;/title&gt;
+&lt;/html&gt;</code></pre>
+      <p class="mt-sm">Найдите ошибку в примере выше (1 правильный ответ):</p>
+    `,
+    options: [
+      "Некорректное расположение тега <title>. Тег <title> должен быть вложен в тег <head>.",
+      "Контент тега <title> не соответствует требованиям к содержанию и количеству символов.",
+      "Никаких ошибок.",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Тег <title> всегда должен находиться внутри секции <head>.",
+  },
+  "html-body-quiz": {
+    id: "html-body-quiz",
+    question:
+      "В какой тег следует вкладывать тег &lt;body&gt;? (1 правильный ответ)",
+    options: [
+      "В тег <html>",
+      "В тег <head>",
+      "Никуда нельзя вкладывать, это же все содержимое страницы.",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Тег <body> является непосредственным дочерним элементом <html>.",
   },
 };
