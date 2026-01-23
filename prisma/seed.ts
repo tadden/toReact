@@ -47,6 +47,11 @@ async function main() {
       email: "vitalijsvolkovickis@inbox.lv",
       id: "user_vitalijs",
     },
+    {
+      name: "Alen",
+      email: "alenudov@gmail.com",
+      id: "user_alen",
+    },
   ];
 
   for (const s of students) {
@@ -66,8 +71,7 @@ async function main() {
   }
 
   const admins = [
-    { name: "Commander Shepard", email: "admin@toreact.com", id: "user_admin" },
-    { name: "Ilja", email: "ilja@toreact.com", id: "user_ilja" },
+    { name: "Ilja", email: "admin@toreact.com", id: "user_ilja" },
   ];
 
   for (const a of admins) {

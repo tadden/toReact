@@ -29,7 +29,7 @@ export function AdminDashboard() {
   const [isLoadingData, setIsLoadingData] = useState(true);
 
   const [selectedStudentId, setSelectedStudentId] = useState<string | null>(
-    null
+    null,
   );
   const [expandedCourseId, setExpandedCourseId] = useState<string | null>(null);
   const [reviewState, setReviewState] = useState<{
@@ -64,7 +64,7 @@ export function AdminDashboard() {
     userId: string,
     courseId: string,
     moduleId: string,
-    newStatus: string
+    newStatus: string,
   ) => {
     try {
       await fetch("/api/admin/progress/update", {
@@ -103,7 +103,7 @@ export function AdminDashboard() {
     courseId: string,
     moduleId: string,
     submissionLink?: string,
-    studentNotes?: string
+    studentNotes?: string,
   ) => {
     setReviewState({
       isOpen: true,
@@ -125,7 +125,7 @@ export function AdminDashboard() {
         reviewState.studentId,
         reviewState.courseId,
         reviewState.moduleId,
-        comment
+        comment,
       );
       // Refresh data logic?
       // Optimistic update local state
@@ -151,7 +151,7 @@ export function AdminDashboard() {
             };
           }
           return s;
-        })
+        }),
       );
       closeReview();
     }
@@ -163,7 +163,7 @@ export function AdminDashboard() {
         reviewState.studentId,
         reviewState.courseId,
         reviewState.moduleId,
-        comment
+        comment,
       );
       // Optimistic update
       setStudents((prev) =>
@@ -187,7 +187,7 @@ export function AdminDashboard() {
             };
           }
           return s;
-        })
+        }),
       );
       closeReview();
     }
@@ -223,10 +223,10 @@ export function AdminDashboard() {
               // Calculate overall progress
               const totalModules = courses.reduce(
                 (acc, course) => acc + course.modules.length,
-                0
+                0,
               );
               const completedModules = student.progress.filter(
-                (p) => p.status === "completed"
+                (p) => p.status === "completed",
               ).length;
               const progressPercent =
                 totalModules > 0
@@ -289,13 +289,45 @@ export function AdminDashboard() {
                     </div>
                   </td>
                   <td>
-                    {pendingCount > 0 ? (
-                      <span style={{ color: "#facc15", fontWeight: "bold" }}>
-                        {pendingCount} На проверке
-                      </span>
-                    ) : (
-                      <span style={{ color: "#9ca3af" }}>Всё проверено</span>
-                    )}
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "0.25rem",
+                      }}
+                    >
+                      {pendingCount > 0 && (
+                        <span style={{ color: "#facc15", fontWeight: "bold" }}>
+                          {pendingCount} На проверке
+                        </span>
+                      )}
+                      {student.progress.filter(
+                        (p) => p.homeworkStatus === "rejected",
+                      ).length > 0 && (
+                        <span
+                          style={{
+                            color: "#ef4444",
+                            fontWeight: "bold",
+                            fontSize: "0.85rem",
+                          }}
+                        >
+                          {
+                            student.progress.filter(
+                              (p) => p.homeworkStatus === "rejected",
+                            ).length
+                          }{" "}
+                          На доработке
+                        </span>
+                      )}
+                      {pendingCount === 0 &&
+                        student.progress.filter(
+                          (p) => p.homeworkStatus === "rejected",
+                        ).length === 0 && (
+                          <span style={{ color: "#9ca3af" }}>
+                            Всё проверено
+                          </span>
+                        )}
+                    </div>
                   </td>
                 </tr>
               );
@@ -313,7 +345,7 @@ export function AdminDashboard() {
 
     const studentItems = student.progress;
     const pendingReviews = studentItems.filter(
-      (p) => p.homeworkStatus === "submitted"
+      (p) => p.homeworkStatus === "submitted",
     );
 
     return (
@@ -365,7 +397,7 @@ export function AdminDashboard() {
                           courseId,
                           moduleId,
                           item.homeworkUrl || "",
-                          item.notes || undefined
+                          item.notes || undefined,
                         )
                       }
                     >
@@ -378,17 +410,74 @@ export function AdminDashboard() {
           </div>
         )}
 
+        {/* Rejected / Waiting Section */}
+        {studentItems
+          .filter((p) => p.homeworkStatus === "rejected")
+          .map((item, idx, arr) => {
+            if (idx === 0) {
+              return (
+                <div
+                  key="rejected-section"
+                  className={styles.pendingSection}
+                  style={{
+                    background: "rgba(239, 68, 68, 0.05)",
+                    borderColor: "rgba(239, 68, 68, 0.2)",
+                  }}
+                >
+                  <h3
+                    className={styles.sectionTitle}
+                    style={{ color: "#ef4444" }}
+                  >
+                    Ожидают Исправления{" "}
+                    <span
+                      className={styles.countBadge}
+                      style={{ background: "#ef4444" }}
+                    >
+                      {arr.length}
+                    </span>
+                  </h3>
+                  <div className={styles.pendingGrid}>
+                    {arr.map((rejItem) => (
+                      <div
+                        key={rejItem.moduleId}
+                        className={styles.pendingCard}
+                        style={{ borderColor: "rgba(239, 68, 68, 0.3)" }}
+                      >
+                        <div className={styles.pendingInfo}>
+                          <span className={styles.courseTag}>
+                            {rejItem.module?.course?.slug}
+                          </span>
+                          <h4>{rejItem.module?.title}</h4>
+                        </div>
+                        <span
+                          style={{
+                            color: "#ef4444",
+                            fontSize: "0.8rem",
+                            fontWeight: "bold",
+                          }}
+                        >
+                          ⚠ На доработке
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            }
+            return null;
+          })}
+
         <h3 className={styles.sectionTitle}>Прогресс Курса</h3>
         <div className={styles.coursesGrid}>
           {courses.map((course) => {
             const courseItems = studentItems.filter(
-              (p) => p.courseId === course.id
+              (p) => p.courseId === course.id,
             );
 
             // if (courseItems.length === 0) return null;
             const totalModules = course.modules.length;
             const completedModules = courseItems.filter(
-              (p) => p.status === "completed"
+              (p) => p.status === "completed",
             ).length;
             const percent =
               totalModules > 0
@@ -425,7 +514,7 @@ export function AdminDashboard() {
                   <div className={styles.moduleList}>
                     {course.modules.map((module) => {
                       const progress = courseItems.find(
-                        (p) => p.moduleId === module.id
+                        (p) => p.moduleId === module.id,
                       );
                       const status = progress?.status || "locked";
                       const homeworkStatus = progress?.homeworkStatus;
@@ -447,7 +536,7 @@ export function AdminDashboard() {
                                     student.id,
                                     course.id,
                                     module.id,
-                                    e.target.value
+                                    e.target.value,
                                   )
                                 }
                                 style={{
@@ -535,7 +624,7 @@ export function AdminDashboard() {
     if (!reviewState) return null;
     const student = students.find((u) => u.id === reviewState.studentId);
     const course = courses.find(
-      (c) => c.id === reviewState.courseId || c.slug === reviewState.courseId
+      (c) => c.id === reviewState.courseId || c.slug === reviewState.courseId,
     ); // Support slug in case
     // Module finding: reviewState.moduleId is ID.
     // Course from courses array (fetched) should have modules.

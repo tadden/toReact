@@ -384,16 +384,13 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     if (!prevEntry) return true;
     if (prevEntry.status !== "completed") return true;
 
-    // We don't have homework info in the Course list unless we included it.
-    // 'fetchCourses' includes modules. Ensure it includes 'homework' flag/object.
-    // 'src/lib/client-api.ts' calls '/api/courses' which called 'include modules: { select: id }'.
-    // WAIT! GET /api/courses only selected ID!
-    // I need to update GET /api/courses to include structure (slug, homework existence).
-    // Otherwise locking logic fails.
+    // Check if previous module has homework and if it is approved
+    if (prevModule.homework) {
+      if (prevEntry.homeworkStatus !== "approved") {
+        return true;
+      }
+    }
 
-    // Assume modules have homework property if defined.
-    // If we can't check homework, we might skip that check or fetch more data.
-    // I will update /api/courses to include 'homework' relation count or boolean.
     return false;
   };
 

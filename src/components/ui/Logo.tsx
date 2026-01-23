@@ -67,7 +67,7 @@ export function Logo({ className = "", size = "md" }: LogoProps) {
           letterSpacing: "-0.5px",
         }}
       >
-        To<span style={{ color: "var(--color-primary)" }}>React</span>
+        To <span style={{ color: "var(--color-primary)" }}>React</span>
       </span>
     </div>
   );

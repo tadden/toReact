@@ -5,6 +5,8 @@ import { useSession } from "next-auth/react";
 import { useAuth } from "@/lib/context/AuthContext";
 import styles from "./LoginModal.module.scss";
 
+import { Eye, EyeOff } from "lucide-react";
+
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -18,6 +20,7 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
   // Login State
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   // Change Password State
   const [newPassword, setNewPassword] = useState("");
@@ -120,13 +123,22 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
 
               <div className={styles.group}>
                 <label>Пароль</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  autoComplete="current-password"
-                />
+                <div className={styles.passwordWrapper}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    autoComplete="current-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={styles.toggleButton}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
 
               {error && <div className={styles.error}>{error}</div>}
@@ -151,24 +163,42 @@ export function LoginModal({ isOpen, onClose }: LoginModalProps) {
             <form onSubmit={handlePasswordChangeSubmit} className={styles.form}>
               <div className={styles.group}>
                 <label>Новый Пароль</label>
-                <input
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  required
-                  autoComplete="new-password"
-                />
+                <div className={styles.passwordWrapper}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={styles.toggleButton}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
 
               <div className={styles.group}>
                 <label>Подтвердите Пароль</label>
-                <input
-                  type="password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                  required
-                  autoComplete="new-password"
-                />
+                <div className={styles.passwordWrapper}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className={styles.toggleButton}
+                  >
+                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
+                </div>
               </div>
 
               {error && <div className={styles.error}>{error}</div>}
