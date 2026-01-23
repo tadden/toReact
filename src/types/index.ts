@@ -29,6 +29,12 @@ export interface ModuleTopic {
 export interface ModuleHomework {
   description: string;
   repoUrl?: string | null; // Pre-filled if checking
+  figmaUrl?: string | null;
+  acceptanceCriteria?: {
+    id: string;
+    title: string;
+    items: string[];
+  }[];
 }
 
 export interface Module {

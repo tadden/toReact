@@ -38,7 +38,7 @@ import { challenges } from "@/data/challenges";
 const getTitleFromContent = (
   html: string,
   index: number,
-  type?: "QUIZ" | "CHALLENGE" | "NEXT"
+  type?: "QUIZ" | "CHALLENGE" | "NEXT",
 ) => {
   const match = html.match(/<h[1-6][^>]*>(.*?)<\/h[1-6]>/);
   if (match) {
@@ -104,7 +104,7 @@ export function ModuleContent({
     if (!currentTopic?.content) return [];
 
     const parts = currentTopic.content.split(
-      /\[(QUIZ|CHALLENGE|NEXT)(?:: (.+?))?\]/g
+      /\[(QUIZ|CHALLENGE|NEXT)(?:: (.+?))?\]/g,
     );
     const result: {
       text: string;
@@ -172,7 +172,7 @@ export function ModuleContent({
 
   // Check if topic is completed to unlock all navigation
   const isTopicCompleted = progress?.completedTopics?.includes(
-    currentTopic?.id || ""
+    currentTopic?.id || "",
   );
 
   const handleNavClick = (index: number) => {
@@ -265,7 +265,7 @@ export function ModuleContent({
   }, [activeTab, currentTopic]);
 
   const handleComplete = (
-    updates?: Partial<import("@/types").StudentProgress>
+    updates?: Partial<import("@/types").StudentProgress>,
   ) => {
     updateProgress(course.id, module.id, { status: "completed", ...updates });
     if (nextModuleSlug) {
@@ -276,7 +276,7 @@ export function ModuleContent({
   };
 
   const handleNextSection = (
-    updates?: Partial<import("@/types").StudentProgress>
+    updates?: Partial<import("@/types").StudentProgress>,
   ) => {
     // Logic to determine next view
     if (module.videoUrl || module.resources.length > 0) {
@@ -393,7 +393,7 @@ export function ModuleContent({
                             course.id,
                             module.id,
                             page.quizId!,
-                            result
+                            result,
                           )
                         }
                       />
@@ -443,13 +443,13 @@ export function ModuleContent({
                               course.id,
                               module.id,
                               currentTopic.id,
-                              nextIndex
+                              nextIndex,
                             );
 
                             // Scroll to the next section
                             setTimeout(() => {
                               const element = document.getElementById(
-                                `section-${nextIndex}`
+                                `section-${nextIndex}`,
                               );
                               if (element) {
                                 element.scrollIntoView({
@@ -496,12 +496,12 @@ export function ModuleContent({
                         await markTopicCompleted(
                           course.id,
                           module.id,
-                          currentTopic.id
+                          currentTopic.id,
                         );
 
                         // Find next topic
                         const currentIndex = allTopics.findIndex(
-                          (t) => t.id === currentTopic.id
+                          (t) => t.id === currentTopic.id,
                         );
 
                         // Calculate "updated" completed topics locally to prevent stale closure issues
@@ -741,6 +741,112 @@ export function ModuleContent({
                 __html: module.homework?.description || "",
               }}
             />
+
+            {module.homework?.figmaUrl && (
+              <div style={{ marginBottom: "2rem" }}>
+                <a
+                  href={module.homework.figmaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.5rem",
+                    background: "#22c55e",
+                    color: "white",
+                    padding: "0.75rem 1.5rem",
+                    borderRadius: "8px",
+                    fontWeight: "bold",
+                    textDecoration: "none",
+                    boxShadow: "0 4px 6px -1px rgba(34, 197, 94, 0.2)",
+                  }}
+                >
+                  <ExternalLink size={20} /> Открыть макет в Figma
+                </a>
+              </div>
+            )}
+
+            {module.homework?.acceptanceCriteria &&
+              module.homework.acceptanceCriteria.length > 0 && (
+                <div style={{ marginBottom: "2rem" }}>
+                  <h3
+                    style={{
+                      marginBottom: "1rem",
+                      color: "white",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    Критерии приёма
+                  </h3>
+                  {module.homework.acceptanceCriteria.map((section: any) => (
+                    <div
+                      key={section.id}
+                      style={{
+                        marginBottom: "1.5rem",
+                        background: "rgba(255, 255, 255, 0.03)",
+                        padding: "1rem",
+                        borderRadius: "8px",
+                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                      }}
+                    >
+                      <h4
+                        style={{
+                          color: "var(--color-primary)",
+                          marginBottom: "0.75rem",
+                          fontSize: "1rem",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        {section.title}
+                      </h4>
+                      <ul
+                        style={{
+                          listStyle: "none",
+                          padding: 0,
+                          margin: 0,
+                          display: "flex",
+                          flexDirection: "column",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        {section.items.map((item: string, idx: number) => (
+                          <li
+                            key={idx}
+                            style={{
+                              display: "flex",
+                              alignItems: "flex-start",
+                              gap: "0.5rem",
+                              color: "#e2e8f0",
+                              fontSize: "0.9rem",
+                            }}
+                          >
+                            <span
+                              style={{
+                                color: "#64748b",
+                                minWidth: "1.2rem",
+                                marginTop: "2px",
+                              }}
+                            >
+                              •
+                            </span>
+                            <span
+                              dangerouslySetInnerHTML={{
+                                __html: item.replace(
+                                  /`([^`]+)`/g,
+                                  (_, content) =>
+                                    `<code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 4px; font-family: monospace; font-size: 0.85em;">${content
+                                      .replace(/</g, "&lt;")
+                                      .replace(/>/g, "&gt;")}</code>`,
+                                ),
+                              }}
+                            />
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
 
             {progress?.homeworkStatus === "approved" &&
               progress.adminComments && (
