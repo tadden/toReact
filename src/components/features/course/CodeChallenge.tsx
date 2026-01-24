@@ -37,7 +37,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
       if (!isDragging) return;
 
       const container = document.getElementById(
-        `challenge-container-${data.id}`
+        `challenge-container-${data.id}`,
       );
       if (container) {
         const rect = container.getBoundingClientRect();
@@ -99,10 +99,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
         style={{ width: `${editorWidth}%` }}
       >
         <div className={styles.editorHeader}>Editor html:</div>
-        <div
-          className={styles.editorWrapper}
-          style={{ flex: 1, overflow: "hidden" }}
-        >
+        <div className={styles.editorWrapper}>
           <Editor
             height="100%"
             defaultLanguage="html"
@@ -130,11 +127,8 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
 
       {/* Info/Result Column */}
       <div className={styles.infoSection} style={{ flex: 1 }}>
-        <div
-          className={styles.tabs}
-          style={{ justifyContent: "space-between", alignItems: "center" }}
-        >
-          <div style={{ display: "flex" }}>
+        <div className={`${styles.tabs} ${styles.tabsHeader}`}>
+          <div className={styles.tabList}>
             <button
               className={`${styles.tab} ${
                 activeTab === "task" ? styles.active : ""
@@ -152,18 +146,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
               Результат
             </button>
           </div>
-          {allPassed && (
-            <div
-              style={{
-                color: "#16a34a",
-                fontWeight: "bold",
-                paddingRight: "1rem",
-                fontSize: "0.9rem",
-              }}
-            >
-              Done
-            </div>
-          )}
+          {allPassed && <div className={styles.successLabel}>Done</div>}
         </div>
 
         <div className={styles.content}>
@@ -171,44 +154,12 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
             <>
               <div dangerouslySetInnerHTML={{ __html: data.description }} />
 
-              <h3
-                style={{
-                  marginTop: "2rem",
-                  fontSize: "0.9rem",
-                  textTransform: "uppercase",
-                  color: "#64748b",
-                  fontWeight: 600,
-                }}
-              >
-                Критерии выполнения:
-              </h3>
+              <h3 className={styles.subHeader}>Критерии выполнения:</h3>
 
-              <div style={{ marginTop: "1rem" }}>
-                <h3
-                  style={{
-                    marginTop: "2rem",
-                    fontSize: "0.9rem",
-                    textTransform: "uppercase",
-                    color: "#64748b",
-                    fontWeight: 600,
-                  }}
-                >
-                  Результаты проверки:
-                </h3>
+              <div className={styles.sectionsWrapper}>
+                <h3 className={styles.subHeader}>Результаты проверки:</h3>
                 {allPassed && (
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "0.5rem",
-                      alignItems: "center",
-                      color: "#16a34a",
-                      fontWeight: "bold",
-                      marginBottom: "1rem",
-                      padding: "0.5rem",
-                      background: "rgba(34, 197, 94, 0.1)",
-                      borderRadius: "4px",
-                    }}
-                  >
+                  <div className={styles.successBox}>
                     <CheckCircle size={20} />
                     <span>Отлично! Задание выполнено.</span>
                   </div>
@@ -226,7 +177,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                         : ""
                     }`}
                   >
-                    <div style={{ marginTop: "0.2rem", width: "16px" }}>
+                    <div className={styles.checkIconWrapper}>
                       {results ? (
                         check.passed ? (
                           <CheckCircle size={16} color="#22c55e" />
@@ -238,13 +189,13 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                       )}
                     </div>
                     <span
-                      style={{
-                        color: results
+                      className={`${styles.checkLabel} ${
+                        results
                           ? check.passed
-                            ? "#15803d"
-                            : "#b91c1c"
-                          : "#475569",
-                      }}
+                            ? styles.passed
+                            : styles.failed
+                          : ""
+                      }`}
                     >
                       {check.label}
                     </span>

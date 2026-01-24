@@ -230,3 +230,65 @@
   margin-bottom: 2rem;
   background: rgba(34, 197, 94, 0.05);
 }
+
+.tabsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tabList {
+  display: flex;
+}
+
+.successLabel {
+  color: #16a34a;
+  font-weight: bold;
+  padding-right: 1rem;
+  font-size: 0.9rem;
+}
+
+.subHeader {
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 600;
+}
+
+.sectionsWrapper {
+  margin-top: 1rem;
+}
+
+.successBox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  color: #16a34a;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  background: rgba(34, 197, 94, 0.1);
+  border-radius: 4px;
+}
+
+.checkIconWrapper {
+  margin-top: 0.2rem;
+  width: 16px;
+}
+
+.checkLabel {
+  color: #475569;
+
+  &.passed {
+    color: #15803d;
+  }
+  &.failed {
+    color: #b91c1c;
+  }
+}
+
+.editorWrapper {
+  flex: 1;
+  overflow: hidden;
+}

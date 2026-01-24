@@ -40,14 +40,14 @@ export function Sidebar({ courseId }: { courseId: string }) {
   // State for Theory sections expansion (map of moduleId -> boolean)
   // Default all to true? Or false? User code had <details open>, so true.
   const [expandedTheory, setExpandedTheory] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
 
   // Sync open state with URL navigation
   useEffect(() => {
     if (course && activeModuleSlug) {
       const activeModule = course.modules.find(
-        (m) => m.slug === activeModuleSlug
+        (m) => m.slug === activeModuleSlug,
       );
       if (activeModule) {
         setOpenModuleId(activeModule.id);
@@ -61,22 +61,8 @@ export function Sidebar({ courseId }: { courseId: string }) {
 
   return (
     <aside className={styles.sidebar}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "2rem",
-        }}
-      >
-        <Link
-          href="/dashboard"
-          style={{
-            color: "#94a3b8",
-            fontSize: "0.9rem",
-            display: "block",
-          }}
-        >
+      <div className={styles.sidebarHeader}>
+        <Link href="/dashboard" className={styles.backLink}>
           ← Назад
         </Link>
         <ThemeToggle />
@@ -99,16 +85,8 @@ export function Sidebar({ courseId }: { courseId: string }) {
                 key={module.id}
                 className={`${styles.moduleItem} ${styles.locked}`}
               >
-                <div
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    opacity: 0.5,
-                  }}
-                >
-                  <Lock size={16} style={{ flexShrink: 0 }} />
+                <div className={styles.lockedModule}>
+                  <Lock size={16} className={styles.statusIcon} />
                   {module.title}
                 </div>
               </div>
@@ -130,34 +108,27 @@ export function Sidebar({ courseId }: { courseId: string }) {
                   if (isActive) {
                     e.preventDefault();
                     setOpenModuleId((prev) =>
-                      prev === module.id ? null : module.id
+                      prev === module.id ? null : module.id,
                     );
                   }
                 }}
               >
-                <div
-                  style={{
-                    flex: 1,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
+                <div className={styles.moduleTitleRow}>
                   {isCompleted ? (
                     <CheckCircle
                       size={16}
                       color="#4ade80"
-                      style={{ flexShrink: 0 }}
+                      className={styles.statusIcon}
                     />
                   ) : (
-                    <Circle size={16} style={{ flexShrink: 0 }} />
+                    <Circle size={16} className={styles.statusIcon} />
                   )}
                   {module.title}
                   {progress?.homeworkStatus === "rejected" && (
                     <AlertCircle
                       size={16}
                       color="#ef4444"
-                      style={{ flexShrink: 0, marginLeft: "auto" }}
+                      className={styles.alertIcon}
                     />
                   )}
                 </div>
@@ -238,7 +209,7 @@ export function Sidebar({ courseId }: { courseId: string }) {
                                 window.history.pushState(
                                   null,
                                   "",
-                                  `?view=theory&topic=${topic.id}`
+                                  `?view=theory&topic=${topic.id}`,
                                 );
                               }}
                               className={`${styles.subModuleItem} ${
@@ -249,10 +220,13 @@ export function Sidebar({ courseId }: { courseId: string }) {
                                 <CheckCircle
                                   size={16}
                                   color="#4ade80"
-                                  style={{ flexShrink: 0 }}
+                                  className={styles.statusIcon}
                                 />
                               ) : (
-                                <Circle size={16} style={{ flexShrink: 0 }} />
+                                <Circle
+                                  size={16}
+                                  className={styles.statusIcon}
+                                />
                               )}
                               {topic.title}
                             </Link>
@@ -289,7 +263,7 @@ export function Sidebar({ courseId }: { courseId: string }) {
                         <AlertCircle
                           size={14}
                           color="#ef4444"
-                          style={{ marginLeft: "auto" }}
+                          className={styles.alertIcon}
                         />
                       )}
                     </Link>

@@ -23,7 +23,7 @@ export function LandingPage() {
 
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
-    id: string
+    id: string,
   ) => {
     e.preventDefault();
     const element = document.getElementById(id);
@@ -194,13 +194,14 @@ export function LandingPage() {
             Места в шаттле ограничены. Запишись на вводное собеседование или
             задай свой вопрос ментору напрямую.
           </p>
-          <button
-            className={styles.ctaButton}
-            onClick={() => (window.location.href = "tel:+37127748229")}
-            style={{ margin: "0 auto" }}
-          >
-            Связаться с Ментором <Mail size={24} />
-          </button>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <button
+              className={styles.ctaButton}
+              onClick={() => (window.location.href = "tel:+37127748229")}
+            >
+              Связаться с Ментором <Mail size={24} />
+            </button>
+          </div>
         </section>
 
         {/* Footer */}
