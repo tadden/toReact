@@ -1251,8 +1251,8 @@ exercitationem&lt;/p&gt;
 
 <p>Если сайт состоит из одной страницы (например, <strong>landing page</strong>), то его главная навигация — это ссылки, которые при нажатии прокручивают страницу к определенному разделу без перезагрузки. Это и есть навигация по странице.</p>
 
-<div class="video-container" style="margin: 2rem 0;">
-  <video controls style="width: 100%; border-radius: 8px;">
+<div class="video-container">
+  <video class="video-responsive" controls>
     <source src="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/B04/anchorlink%20(1).webm" type="video/webm" />
     Ваш браузер не поддерживает видео.
   </video>
@@ -1413,8 +1413,8 @@ exercitationem&lt;/p&gt;
 
 <p>Посмотри, как такую навигацию можно использовать в редакторе кода:</p>
 
-<div class="video-container" style="margin: 2rem 0;">
-  <video controls style="width: 100%; border-radius: 8px;">
+<div class="video-container">
+  <video class="video-responsive" controls>
     <source src="https://ac.goit.global/fullstack/html-css-v2/module-1/materials/B04/b04s09.webm" type="video/webm" />
     Ваш браузер не поддерживает видео.
   </video>
@@ -1686,7 +1686,842 @@ exercitationem&lt;/p&gt;
       resources: [] as any[],
       order: 1,
       homework: null as any,
-      topics: [],
+      topics: [
+        {
+          id: "css-module-program",
+          title: "Программа модуля",
+          order: 0,
+          videoUrl: null,
+          content: `
+<h3>Поздравляем!</h3>
+<p>Первый модуль позади, и ты уже знаешь основы разметки. Давай определим, что будем делать во втором модуле блока HTML + CSS!</p>
+
+<h3>Цели модуля 2:</h3>
+
+<ul class="list-disc">
+  <li>Узнать, что такое CSS, какие есть способы добавления стилей и как решать, какой выбрать;</li>
+  <li>Научиться настраивать цвет элементов;</li>
+  <li>Изучить типы селекторов и правила их применения и комбинирования;</li>
+  <li>Научиться настраивать шрифты и оформлять текст;</li>
+</ul>
+
+<h3>Как запоминать большое количество новой информации?</h3>
+
+<p>На изображении — так называемая кривая Эббингауза. В своем исследовании он выяснил, что человек забывает 60% информации в течение первого часа. А за следующие 10 часов еще 5%. Постепенно процесс забывания замедляется и через 6-7 дней в памяти остается 1/5 материала. Так что забывать — это вполне естественно, но очень неудобно.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/ebbinghaus-curve.png" alt="Кривая Эббингауза" class="img-responsive" />
+</div>
+
+<h3>Как же вернуть остальные 80%, которые забылись?</h3>
+
+<div class="info-note>
+  <p class="font-bold text-accent"> Есть метод интервального повторения.</p>
+  <p class="mt-sm">Секрет в том, чтобы возвращаться к изученному через определенные промежутки времени, увеличивая интервалы между повторениями:</p>
+  <ul class="list-none mt-sm" style="padding-left: 0;">
+    <li>— прочитать теорию впервые;</li>
+    <li>— быстренько перечитать перед занятием с преподавателем;</li>
+    <li>— потом еще раз перечитать, выполняя домашнее задание.</li>
+  </ul>
+  <p class="mt-sm">А еще, не пренебрегать конспектами 1-го модуля, и перечитывать их при необходимости.</p>
+  <p>Так ты убедишь свой мозг сохранить полезную информацию, которую ты часто будешь использовать.</p>
+</div>
+`,
+        },
+        {
+          id: "css-connecting-styles",
+          title: "Подключение стилей",
+          order: 1,
+          videoUrl: null,
+          content: `
+
+<p class="italic">«Ты — CSS для моего HTML!» — однажды сказал разработчик близкому человеку.</p>
+
+<p>Переведем на привычный язык: «Ты делаешь мою жизнь яркой и интересной». Именно такую функцию выполняет технология CSS в создании сайта. CSS необходим для того, чтобы строить удобные и яркие сайты, которые нравятся пользователям. В свою очередь, разработчики, умеющие виртуозно работать со стилями, нравятся работодателям.</p>
+
+<h3>Что такое CSS?</h3>
+
+<p>CSS (Cascading Style Sheets, каскадные таблицы стилей) — это язык для описания и изменения внешнего вида элементов.</p>
+
+<ul class="list-disc">
+  <li>HTML используется для определения структуры и семантики содержимого документа;</li>
+  <li>CSS — для его оформления и позиционирования элементов HTML-разметки.</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/module-2/html-vs-css.png" alt="HTML и HTML с CSS" class="img-responsive" />
+</div>
+
+[NEXT]
+
+<h2>Синтаксис</h2>
+
+<p>Блок CSS-кода называется правилом, которое состоит из селектора и группы объявлений в фигурных скобках.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/css-quiz-scheme.png" alt="Схема для квиза" class="img-responsive" />
+</div>
+
+<ul class="list-disc">
+  <li><strong>Селектор</strong> — указывает браузеру, к каким элементам разметки нужно применить стили из этого правила.</li>
+  <li>Каждое <strong>объявление</strong> состоит из пары: <code>свойство: значение;</code>.</li>
+  <li><strong>Свойство</strong> и его <strong>значение</strong> разделяются двоеточием с пробелом <code>: </code>. Они описывают, что именно нужно сделать со стилями элемента.</li>
+  <li>После <strong>значения</strong> обязательно добавлять точку с запятой <code>;</code>. Одно правило может содержать сколько угодно свойств.</li>
+</ul>
+
+<pre><code class="language-css">селектор {
+  свойство: значение;
+  свойство: значение;
+  свойство: значение;
+}</code></pre>
+
+<div class="info-note">
+  <p>❕ Порядок свойств внутри правила не имеет значения.</p>
+</div>
+
+<h3>Рассмотри схему</h3>
+
+
+[QUIZ: css-syntax-1]
+
+<h2>Подключение стилей</h2>
+
+<p>Существует три способа добавить стили в HTML-документ, каждый из которых имеет свои преимущества, недостатки, ограничения и сферу применения.</p>
+<ol>
+  <li>Встроенные стили.</li>
+  <li>Встроенная таблица стилей.</li>
+  <li>Внешняя таблица стилей.</li>
+</ol>
+<p>В этом разделе мы подробно рассмотрим все три способа.</p>
+
+<h3>Встроенные стили</h3>
+
+<p>Встроенные стили (inline styles) задаются тегам прямо в атрибуте <code>style</code>.</p>
+<p>Их невозможно масштабировать, сложно переопределять и использовать повторно, поэтому они применяются в очень редких случаях. Например, для динамических стилей, которые устанавливаются во время выполнения JavaScript-кода, когда мы заранее не знаем, каким будет значение свойства.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;CSS is amazing!&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;p style="color: tomato;"&gt;Этот текст будет красным.&lt;/p&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+[QUIZ: css-inline-styles]
+
+[NEXT]
+
+<h2>Встроенная таблица стилей</h2>
+
+<p>При использовании <strong>встроенной таблицы стилей</strong> (embedded stylesheet) CSS-правила добавляются внутрь тега <code>&lt;style&gt;</code>. Тег <code>&lt;style&gt;</code> размещается в шапке документа после служебной информации, то есть после тега <code>&lt;title&gt;</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;CSS is amazing!&lt;/title&gt;
+    &lt;style&gt;
+      p {
+          color: tomato;
+      }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<p>Встроенную таблицу стилей невозможно использовать повторно на других страницах и сложно масштабировать и поддерживать.</p>
+
+[QUIZ: css-embedded-styles]
+
+[NEXT]
+
+<h2>Внешняя таблица стилей</h2>
+
+<p><strong>Внешний CSS-код (external stylesheet)</strong> легко масштабировать, поддерживать и использовать повторно на других страницах. Это стандарт добавления стилей. В проекте создается отдельный файл стилей с расширением <code>.css</code>, который добавляется в HTML-документ.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8" /&gt;
+    &lt;title&gt;CSS is amazing!&lt;/title&gt;
+    &lt;link rel="stylesheet" href="./css/styles.css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<ul class="list-disc">
+  <li>На одном уровне с <code>index.html</code> создается папка <code>css</code>, а внутри нее файл стилей <code>styles.css</code>.</li>
+  <li>У тега <code>&lt;head&gt;</code> созданный ранее файл <code>styles.css</code> добавляется с помощью тега <code>&lt;link&gt;</code>.</li>
+  <li>В атрибуте <code>href</code> указывается относительный путь к файлу стилей.</li>
+  <li>В атрибуте <code>rel</code> указывается тип документа, который добавляется — <code>stylesheet</code> (таблица стилей).</li>
+</ul>
+
+<div class="info-note">
+  <p>! Можно добавить сколько угодно CSS-файлов, добавляя для каждого тег <code>&lt;link&gt;</code>.</p>
+</div>
+
+[QUIZ: css-external-styles]
+`,
+        },
+        {
+          id: "css-color",
+          title: "Цвет",
+          order: 2,
+          videoUrl: "",
+          content: `
+
+<p>Что именно делает современные веб-страницы такими яркими? Конечно, факторов много, но огромную роль играет сочетание цветов текста и фона элементов. Разработчик использует точно те же оттенки цветов, которые указаны в макете. Но как идентифицировать эти оттенки в макете? Ведь название цвета может быть словом, цифровым кодом или сочетанием букв и цифр.</p>
+
+<p>В этом разделе ты научишься работать с цветами в разных форматах.</p>
+
+<h2>Цвет текста элемента</h2>
+
+<p>С помощью свойства <code>color</code> можно задать цвет текста элемента. Для описания цвета в стилях можно использовать <a href="https://developer.mozilla.org/ru/docs/Web/CSS/named-color" target="_blank" rel="noopener noreferrer">набор зарезервированных имен</a>. На практике такой формат используется редко, но может быть полезным в случаях, когда нужно быстро задать какой-либо цвет для проверки идеи и т.д.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Все абзацы на странице станут красного цвета */
+p {
+  color: tomato;
+}</code></pre>
+</div>
+
+<p>Редактор кода со всеми рекомендуемыми настройками даже подскажет, какой именно цвет ты добавляешь.</p>
+
+<div class="video-container">
+  <video class="video-responsive" controls>
+    <source src="https://ac.goit.global/fullstack/html-css-v2/module-2/materials/b2/%d0%9c02%d0%9202S01.webm" type="video/webm">
+    Your browser does not support the video tag.
+  </video>
+</div>
+
+[CHALLENGE: css-color-challenge]
+
+[NEXT]
+
+<h2>Цвет фона элемента</h2>
+
+<p>Свойство <code>background-color</code> устанавливает цвет фона элемента. По умолчанию цвет фона большинства элементов прозрачный. Это значение <code>transparent</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">p {
+  background-color: tomato;
+  color: white;
+}</code></pre>
+</div>
+
+<p>Фон элемента занимает весь размер прямоугольного бокса.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/background-color-example.png" alt="Пример цвета фона" class="img-responsive img-rounded" />
+</div>
+
+<p>Для строчных элементов ширина бокса зависит от количества контента в элементе. А для блочных элементов ширина блока — это всегда ширина всего ряда (смотри раздел про блочные и строчные элементы в Модуле 1).</p>
+
+[NEXT]
+
+<h2>Форматы цвета</h2>
+
+<p>Существует несколько самых распространенных форматов записи цвета:</p>
+
+<ul class="list-disc">
+  <li>RGB;</li>
+  <li>Hexadecimal;</li>
+  <li>RGBA.</li>
+</ul>
+
+<p>Разработчик должен уметь работать со всеми ними. Итак, рассмотрим каждый из них подробнее.</p>
+
+<h3>RGB</h3>
+
+<p>Есть три основных цвета: <code class="language-css">red</code> (красный), <code class="language-css">green</code> (зеленый), <code class="language-css">blue</code> (синий). Сочетая их в разных пропорциях, можно получить любой другой цвет.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/rgb-diagram.png" alt="Диаграмма RGB цветов" class="img-responsive img-rounded" style="max-width: 400px;" />
+</div>
+
+<p>Чтобы установить значение отдельного цвета в этом формате, используется функция <code>rgb()</code>, в которой указывается доля каждого из трех основных цветов, после чего они смешиваются, и получается нужный цвет.</p>
+
+<div class="info-block">
+  <p><code>rgb(красный, зеленый, синий)</code></p>
+</div>
+
+<p>Каждый параметр определяет интенсивность цвета как целое число от 0 (полное отсутствие цвета) до 255 (максимальная доля). Это основной способ задания RGB цвета. Например, <code>rgb(255, 0, 0)</code> отображается как красный, потому что для красного параметра установлено максимальное значение (255), а для остальных установлено значение 0.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Чистый красный цвет: 255 красный, 0 зеленый, 0 синий */
+p {
+  color: rgb(255, 0, 0);
+}</code></pre>
+</div>
+
+<p>Или процентами от <code>0%</code> до <code>100%</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Чистый красный цвет: 100% красный, 0% зеленый, 0% синий */
+p {
+  color: rgb(100%, 0%, 0%);
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! Запоминать комбинации RGB-значений не нужно, все цвета есть в макете от дизайнера. Кроме того, это не основной формат записи цвета.</p>
+</div>
+
+[NEXT]
+
+<h3>Hexadecimal</h3>
+
+<p>Это описание цвета основывается на записи числа в шестнадцатеричной системе счисления. Доля каждого из трех основных цветов описывается двумя символами и определяет интенсивность цвета.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/hex-diagram.png" alt="Диаграмма Hex цветов" class="img-responsive img-rounded" style="max-width: 400px;" />
+</div>
+
+<p>В этой системе счисления используется набор цифр от <code>0</code> до <code>9</code> и латинские буквы от <code>A</code> до <code>F</code> в нижнем или верхнем регистре. Нижний регистр легче прописывать. Верхний регистр легче читать. Другой существенной разницы между регистрами нет.</p>
+
+<ul class="list-disc">
+  <li><code>00</code> - наименьшая доля цвета;</li>
+  <li><code>ff</code> - наибольшая доля цвета.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Чистый красный цвет: ff (100%) красного, 00 (0%) зеленого, 00 (0%) синего */
+p {
+  color: #ff0000;
+}
+
+/* Чистый зеленый цвет: 00 (0%) красного, ff (100%) зеленого, 00 (0%) синего */
+p {
+  color: #00ff00;
+}
+
+/* Чистый синий цвет: 00 (0%) красного, 00 (0%) зеленого, ff (100%) синего */
+p {
+  color: #0000ff;
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! Запоминать комбинации HEX-значений не нужно, все цвета есть в макете от дизайнера.</p>
+  <p>На сайте <a href="https://htmlcolorcodes.com/color-picker" target="_blank" class="link-accent">https://htmlcolorcodes.com/color-picker</a> можно просмотреть значения цветов в разных форматах.</p>
+</div>
+
+[NEXT]
+
+<h3>Прозрачность цвета</h3>
+
+<p>Основной способ добавления прозрачности цвета — это функция <code>rgba()</code>. В отличие от <code>rgb()</code>, здесь добавляется четвертый параметр — прозрачность цвета (альфа-канал).</p>
+
+<div class="info-block">
+  <p><code>rgba(красный, зеленый, синий, альфа)</code></p>
+</div>
+
+<p>Чаще всего прозрачность задается числом от <code>0</code> (прозрачный) до <code>1</code> (не прозрачный).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Чистый красный цвет с прозрачностью 30% */
+p {
+  background-color: rgba(255, 0, 0, 0.3);
+}</code></pre>
+</div>
+
+<p>Но можно и процентами от <code>0%</code> (прозрачный) до <code>100%</code> (не прозрачный).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Чистый красный цвет с прозрачностью 30% */
+p {
+  background-color: rgba(100%, 0%, 0%, 30%);
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! Прозрачность цвета можно задать также и в <a href="https://htmlcolorcodes.com/color-picker" target="_blank" class="link-accent">Hex-формате</a>, но из-за сложности такой записи и запоминания значений всегда используют функцию rgba().</p>
+</div>
+`,
+        },
+        {
+          slug: "css-selectors",
+          title: "Селекторы",
+          description: "Основные типы селекторов.",
+          videoUrl: null,
+          order: 3,
+          content: `
+<p>Есть проблема, с которой сталкивается каждый разработчик.</p>
+<p>Абзацев на странице много. А текст красным цветом нужно выделить только в одном из них. Замени абзац на любой другой элемент и получишь типичную задачу — стилизацию отдельных элементов. А еще надо учитывать удобство масштабирования, чтобы не тратить кучу времени на внесение изменений.</p>
+
+<h2>Селектор по типу элемента (X)</h2>
+
+<p>С помощью различных селекторов можно выбрать один элемент или группу элементов.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/selectors-diagram.png" alt="Схема селектора по тегу" class="img-responsive img-rounded" style="max-width: 500px;" />
+</div>
+
+<p>Селектор элемента определяет, к какому типу элементов будет применено CSS-правило: ко всем абзацам, как на схеме выше, или ко всем заголовкам первого уровня, ко всем ссылкам и тому подобное.</p>
+<p>Селектор элемента недостаточно специфичен для стилизации отдельных элементов на странице, например отдельного абзаца. Поэтому этот селектор чаще всего применяется для оформления всех тегов одного типа на странице, например, если у всех ссылках в документе нужно убрать подчеркивание.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Применяется ко всем абзацам на странице */
+p {
+  color: tomato;
+}
+
+/* Применяется ко всем ссылкам на странице */
+a {
+  color: tomato;
+}</code></pre>
+</div>
+</div>
+
+[NEXT]
+
+<h2>Селектор идентификатора (#X)</h2>
+
+<p>Ты уже знаешь, что тегам можно задавать глобальный атрибут <code>id</code>, который мы использовали, чтобы создавать ссылки-якоря (см. Модуль 1, Ссылки-якоря). Напомним, что значение <code>id</code> элемента должно быть уникальным на странице, то есть не может быть двух элементов с одинаковыми значениями идентификатора.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 id="title"&gt;Заголовок страницы&lt;/h1&gt;</code></pre>
+</div>
+
+<p>В CSS-селекторе перед именем идентификатора ставится символ решетки <code>#</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">#title {
+  font-weight: 500;
+  color: orange;
+}</code></pre>
+</div>
+
+<p>На практике идентификаторы не используются для оформления. Правило уникальности их значения делает невозможным повторное использование стилей. Идентификаторы предназначены для техники создания ссылок на разделы текущей страницы.</p>
+
+[NEXT]
+
+<h2>Селектор класса (.X)</h2>
+
+<p>Основной селектор в современной разработке. Используется в связи с глобальным атрибутом <code>class</code>. Отличие селектора <code>class</code> от <code>id</code> в том, что класс не должен быть уникальным и может использоваться для выбора нескольких элементов на странице.</p>
+
+<p><strong>Имя класса:</strong></p>
+<ul class="list-disc">
+  <li>задается только на английском языке;</li>
+  <li>это обязательно существительное, описывающее этот элемент.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h2 class="title"&gt;Привет, я Mango.&lt;/h2&gt;
+&lt;p class="text"&gt;
+  Приветствую вас на моей личной странице. Тут можно посмотреть
+  &lt;a class="link" href=""&gt;проекты&lt;/a&gt;.
+&lt;/p&gt;
+
+&lt;h2&gt;Этот заголовок не будет стилизован&lt;/h2&gt;
+&lt;p&gt;Этот текст не будет стилизован&lt;/p&gt;
+&lt;a href=""&gt;Эта ссылка не будет стилизована&lt;/a&gt;</code></pre>
+</div>
+
+<p>В CSS используется селектор класса, чтобы задать стили для одного и более элементов с одинаковым значением атрибута <code>class</code> (именем класса). В селекторе перед именем класса ставится <code>.</code> точка.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Применяется ко всем тегам с классом title */
+.title {
+  color: skyblue;
+}
+
+/* Применяется ко всем тегам с классом text */
+.text {
+  color: brown;
+}
+
+/* Применяется ко всем тегам с классом link */
+.link {
+  color: tomato;
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! В имени класса используются только маленькие буквы и тире. Например <code>list</code>, <code>list-item</code>, <code>logo-image</code> и т.д. Подчеркивания <code>list_item</code>, большие буквы <code>ListItem</code> или цифры <code>listitem27</code> считаются плохим тоном.</p>
+</div>
+
+[QUIZ: selectors-quiz-1]
+
+[NEXT]
+
+<h2>Селектор потомка (X Y)</h2>
+
+<p>Селектор потомка или контекстный селектор. Используется для выбора элементов, отвечающих определенному контексту, то есть селектор применяет стили к потомкам элемента любой глубины вложенности.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;a href=""&gt;Читайте наш блог!&lt;/a&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=""&gt;Spotify&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=""&gt;Netflix&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ul class="social-links"&gt;
+  &lt;li&gt;&lt;a href=""&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=""&gt;Instagram&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=""&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Например, вместо того, чтобы задавать стиль всем ссылкам, нужно изменить стили только тех, которые находятся внутри списка с классом <code>social-links</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Применяется ко всем ссылкам в документе */
+a {
+  color: tomato;
+}
+
+/* Применяется к ссылкам, лежащим внутри неупорядоченных списков */
+ul a {
+  color: tomato;
+}
+
+/* Применяется только к ссылкам, лежащим внутри тега с классом social-links */
+.social-links a {
+  color: tomato;
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! Обрати внимание, что комбинация селекторов читается справа налево.</p>
+</div>
+
+[QUIZ: selectors-quiz-2]
+
+[NEXT]
+
+<h2>Дочерний селектор (X > Y)</h2>
+
+<p>Еще один распространенный селектор, который позволяет выбрать непосредственно только дочерний элемент внутри родительского элемента.</p>
+
+<p>Рассмотрим, как использовать дочерние селекторы, на примере разметки многоуровневого меню магазина. Необходимо стилизовать теги <code>&lt;li&gt;</code> в списке с классом <code>menu</code>, но не <code>submenu</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;ul class="menu"&gt;
+  &lt;li&gt;
+    Компьютеры и комплектующие
+    &lt;ul class="submenu"&gt;
+      &lt;li&gt;Процессоры&lt;/li&gt;
+      &lt;li&gt;Мониторы&lt;/li&gt;
+      &lt;li&gt;Видеокарты&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    Бытовая техника
+    &lt;ul class="submenu"&gt;
+      &lt;li&gt;Холодильники&lt;/li&gt;
+      &lt;li&gt;Телевизоры&lt;/li&gt;
+      &lt;li&gt;Стиральные машины&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    Товары для дома
+    &lt;ul class="submenu"&gt;
+      &lt;li&gt;Кресла&lt;/li&gt;
+      &lt;li&gt;Матрацы&lt;/li&gt;
+      &lt;li&gt;Электрокамины&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Если использовать селектор потомка (контекстный), то CSS, как правило, применится ко всем тегам <code>&lt;li&gt;</code>, и красная рамка будет у каждого.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* ❌ Не решает задачу */
+.menu li {
+  border: 1px solid tomato;
+}</code></pre>
+</div>
+
+<p>Дочерний селектор помогает решить эту проблему, выбирая только те <code>&lt;li&gt;</code>, которые являются детьми (первая вложенность) у списка <code>ul.menu</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* ✅ То что нужно */
+.menu > li {
+  border: 1px solid tomato;
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p>! «Детьми» или «дочерними элементами» в HTML называются элементы, которые непосредственно вложены в «родительский» элемент. Элементы, которые находятся на 2-м и более глубоких уровнях вложенности, «детьми» не являются — это дети детей, то есть «потомки».</p>
+</div>
+
+[NEXT]
+
+<h2>Селекторы состояния (X:state)</h2>
+
+<p>Селекторы состояния (псевдоклассы) используются для применения стилей к интерактивным элементам (элементы, с которыми пользователь может взаимодействовать). Стиль применяется к элементу только при определенном событии, например, при наведении курсора на ссылку или фокусировке с клавиатуры.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* ✅ */
+селектор:псевдокласс {
+  /* Свойство */
+}
+
+/* ❌ */
+селектор :псевдокласс {
+  /* Свойство */
+}</code></pre>
+</div>
+
+<p>Псевдокласс определяет конкретное состояние элемента. Он прикреплен к селектору тега или класса. В следующих разделах мы отдельно рассмотрим несколько наиболее часто используемых псевдоклассов.</p>
+
+<div class="info-note">
+  <p>! Чтобы показать взаимосвязь между селектором и псевдоклассом, ставить пробел не нужно. Если добавить пробел, то псевдокласс применится ко всем элементам документа.</p>
+</div>
+
+[NEXT]
+
+<h2>Псевдокласс: hover</h2>
+
+<p>Псевдокласс <code>:hover</code> активируется, когда курсор мыши находится в пределах элемента, например, при наведении мыши на ссылку или любой другой элемент.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;p&gt;
+  Отличную шпаргалку по тегам можно найти
+  &lt;a class="link" href="https://htmlreference.io"&gt;по ссылке&lt;/a&gt;.
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>Добавим к ссылке:</p>
+<ul class="list-disc">
+  <li>базовый стиль;</li>
+  <li>стиль при наведении.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.link {
+  color: teal;
+}
+
+.link:hover {
+  color: tomato;
+}</code></pre>
+</div>
+
+<p>Псевдоклассы можно применять к любым селекторам, в частности контекстным.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;ul class="social-links"&gt;
+  &lt;li&gt;&lt;a class="link" href="https://twitter.com"&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.instagram.com"&gt;Instagram&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.facebook.com"&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Добавим к ссылке в списке:</p>
+<ul class="list-disc">
+  <li>базовый стиль;</li>
+  <li>стиль при наведении.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.social-links .link {
+  color: teal;
+}
+
+.social-links .link:hover {
+  color: tomato;
+}</code></pre>
+</div>
+
+<p>Такой селектор читается как «При ховере (наведении) на элементы с классом <code>link</code>, которые находятся внутри элемента с классом <code>social-links</code>». Т.е. селекторы читаются справа налево.</p>
+
+<div class="info-note">
+  <p>! Псевдокласс <code>:hover</code> не обязательно должен применяться к ссылкам, т.е. его можно добавлять и к другим элементам документа. Все зависит от дизайна веб-страницы.</p>
+</div>
+`,
+          challenges: [],
+        },
+      ],
     },
     {
       slug: "module-3",

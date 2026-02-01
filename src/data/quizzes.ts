@@ -201,4 +201,128 @@ export const quizzes: Record<string, QuizData> = {
     successMessage:
       "Верно! Тег <body> является непосредственным дочерним элементом <html>.",
   },
+  "css-syntax-1": {
+    id: "css-syntax-1",
+    question: `
+      <div class="image-container">
+        <img src="/images/module-2/css-rule-syntax.png" alt="Схема CSS правил" class="img-responsive" />
+      </div>
+      <p>Какие элементы содержатся в блоке CSS-кода? (1 правильный ответ)</p>
+    `,
+    options: [
+      "1) Элемент; 2) Тег; 3) Контент; 4) Значения.",
+      "1) Селектор; 2) Объявление; 3) Свойство; 4) Значение.",
+      "1) Правило; 2) Значения; 3) Атрибут; 4) Свойство.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Селектор выбирает элемент, объявление содержит свойство и его значение.",
+  },
+  "css-inline-styles": {
+    id: "css-inline-styles",
+    question: "Как добавить встроенные стили в тег?",
+    options: [
+      "Добавить в тег атрибут color со значением (название цвета).",
+      "Добавить в тег атрибут style со значением color: (название цвета).",
+      "Создать отдельный CSS файл.",
+    ],
+    correctAnswer: 1,
+    successMessage: "Именно так!",
+  },
+  "css-embedded-styles": {
+    id: "css-embedded-styles",
+    question:
+      "В чем разница между использованием встроенных стилей и встроенной таблицы стилей?",
+    options: [
+      "Оба подхода требуют добавления атрибута style. Но для встроенных стилей он действует на ограниченный фрагмент кода, а для встроенных таблиц стилей действует для всего HTML-документа.",
+      "Оба подхода требуют добавления тега <style>. Но при использовании встроенной таблицы стилей легче делать изменения и масштабировать добавление свойств на новых страницах.",
+      "Во встроенных стилях разработчик добавляет атрибут style в каждый тег, а при использовании встроенной таблицы стилей тег <style> добавляется в шапку HTML-документа.",
+    ],
+    correctAnswer: 2,
+    successMessage: "Отлично, это правильный ответ!",
+  },
+  "css-external-styles": {
+    id: "css-external-styles",
+    question:
+      "Что нужно сделать, чтобы добавить в проект внешнюю таблицу стилей?",
+    options: [
+      "Создать в проекте папку css и в ней файл styles.css. Стили добавятся автоматически.",
+      "Создать в проекте папку css и в ней файл со стилями. Затем добавить стили в HTML-файл, используя тег <link>.",
+      "Создать в проекте папку css. Добавить стили в HTML-файл, а потом создать файл со стилями.",
+    ],
+    correctAnswer: 1,
+    successMessage: "Узнать ответ",
+  },
+  "selectors-quiz-1": {
+    id: "selectors-quiz-1",
+    question: `
+      <h3>Изучи пример кода</h3>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+          <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <div style="display: flex; gap: 1rem;">
+          <div style="flex: 1;">
+            <p style="color: #666; font-size: 0.8rem; margin-bottom: 0.5rem;">&lt;!-- HTML --&gt;</p>
+            <pre><code class="language-html">&lt;h1&gt;Dental clinic website&lt;/h1&gt;
+
+&lt;h2 class="title"&gt;About&lt;/h2&gt;
+&lt;p&gt;Содержимое секции About&lt;/p&gt;
+
+&lt;h2 class="title"&gt;Features&lt;/h2&gt;
+&lt;p&gt;Содержимое секции Features&lt;/p&gt;
+
+&lt;h2 class="title"&gt;Team&lt;/h2&gt;
+&lt;p&gt;Содержимое секции Team&lt;/p&gt;</code></pre>
+          </div>
+          <div style="flex: 1;">
+            <p style="color: #666; font-size: 0.8rem; margin-bottom: 0.5rem;">/* CSS */</p>
+             <pre><code class="language-css">.title {
+  font-weight: 500;
+  color: orange;
+}</code></pre>
+          </div>
+        </div>
+      </div>
+      <p class="mt-sm">Какой тип селектора применен во фрагменте кода выше? (1 правильный ответ)</p>
+    `,
+    options: [
+      "Селектор по типу элемента",
+      "Селектор идентификатора",
+      "Селектор класса",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Точка перед именем (.title) и атрибут class указывают на селектор класса.",
+  },
+  "selectors-quiz-2": {
+    id: "selectors-quiz-2",
+    question: `
+      <h3>Изучи фрагмент кода</h3>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+          <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">#footer li a {
+  font-weight: bold;
+}</code></pre>
+      </div>
+      <p class="mt-sm">К каким элементам будет применен стиль во фрагменте кода выше? (1 правильный ответ)</p>
+    `,
+    options: [
+      "Ко всем ссылкам в элементах списков, находящихся в элементе с id footer",
+      "Ко всем элементам списка, имеющим ссылки с классом footer",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Селектор выбирает все <a>, которые находятся внутри <li>, которые находятся внутри элемента с id #footer.",
+  },
 };

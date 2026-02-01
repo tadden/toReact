@@ -8,8 +8,9 @@ export interface ChallengeData {
   id: string;
   title: string;
   description: string;
-  initialCode: string;
-  checks: (code: string) => CheckResult[];
+  initialCode: string; // HTML code
+  initialCss?: string; // Optional CSS code
+  checks: (code: string, cssCode?: string) => CheckResult[];
 }
 
 export const challenges: Record<string, ChallengeData> = {
@@ -47,6 +48,60 @@ fruit in pretty much any form.`,
       ];
     },
   },
+  "css-color-challenge": {
+    id: "css-color-challenge",
+    title: "Цвет ссылок",
+    description: `
+      <p>Добавь в файл стилей правило для ссылок, в котором измени цвет текста ссылок на <code>black</code>.</p>
+    `,
+    initialCode: `<header>
+  <a href="/">
+    <img
+      src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/b04pflogo.svg"
+      width="40"
+      height="40"
+      alt="Planet Fatness logo"
+    />
+  </a>
+
+  <nav>
+    <ul>
+      <li><a href="#clubs">Our Clubs</a></li>
+      <li><a href="#benefits">PF Benefits</a></li>
+      <li><a href="#programs">Tips and Programs</a></li>
+    </ul>
+  </nav>
+</header>`,
+    initialCss: ``,
+    checks: (code: string, cssCode: string = "") => {
+      // We check cssCode for this challenge
+      const cleanCss = cssCode.replace(/\s+/g, " ").trim();
+      const lowerCss = cleanCss.toLowerCase();
+
+      // Check for selector 'a'
+      const hasSelector = /a\s*\{/.test(lowerCss);
+
+      // Extract content of 'a' block
+      const match = lowerCss.match(/a\s*\{([^}]*)\}/);
+      const content = match ? match[1] : "";
+
+      const hasColorBlack = /color\s*:\s*black/.test(content);
+
+      return [
+        {
+          id: "selector-check",
+          label: "В файле стилей есть CSS правило с селектором a",
+          passed: hasSelector,
+        },
+        {
+          id: "property-check",
+          label:
+            "В CSS правиле с селектором a есть свойство color со значением black",
+          passed: hasColorBlack,
+        },
+      ];
+    },
+  },
   "html-h1-tag": {
     id: "html-h1-tag",
     title: "Тег заголовок",
@@ -70,7 +125,7 @@ fruit in pretty much any form.`,
       const hasH1Open = lowerCode.includes("<h1>");
       const hasH1Close = lowerCode.includes("</h1>");
       const hasContent = /<h1>\s*sweet cheese pancakes\s*<\/h1>/i.test(
-        cleanCode
+        cleanCode,
       );
 
       // Check order: h1 should appear before p
@@ -215,7 +270,7 @@ fruit in pretty much any form.`,
           id: "src-value",
           label: "Значение атрибута src корректное",
           passed: lowerCode.includes(
-            'src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"'
+            'src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"',
           ),
         },
       ];
@@ -279,7 +334,7 @@ fruit in pretty much any form.`,
           id: "src-value",
           label: "Значение атрибута src корректное",
           passed: lowerCode.includes(
-            'src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"'
+            'src="https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg"',
           ),
         },
         {
@@ -292,7 +347,7 @@ fruit in pretty much any form.`,
           label:
             "Значение атрибута alt — Sweet cheese pancakes served with berries",
           passed: lowerCode.includes(
-            'alt="sweet cheese pancakes served with berries"'
+            'alt="sweet cheese pancakes served with berries"',
           ),
         },
         {

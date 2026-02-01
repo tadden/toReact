@@ -446,6 +446,15 @@
   width: 100% !important;
 }
 
+:global(.video-container) {
+  margin: 2rem 0;
+}
+
+:global(.video-responsive) {
+  width: 100%;
+  border-radius: 8px;
+}
+
 .sidebarHeader {
   display: flex;
   justify-content: space-between;
