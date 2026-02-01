@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { CheckCircle, Circle, Check, Square, CheckSquare } from "lucide-react";
 import { QuizData } from "@/data/quizzes";
+import styles from "./Quiz.module.scss";
 
 export interface QuizResult {
   selectedOption: number | number[];
@@ -70,7 +71,7 @@ export function Quiz({
         ? (selectedOption as number[]).sort((a, b) => a - b)
         : [];
       const correctAnswers = (data.correctAnswer as number[]).sort(
-        (a, b) => a - b
+        (a, b) => a - b,
       );
 
       correct =
@@ -109,56 +110,28 @@ export function Quiz({
   };
 
   return (
-    <div
-      style={{
-        background: "var(--color-bg-secondary)", // #1e293b
-        padding: "2rem",
-        borderRadius: "16px",
-        boxShadow: "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
-        border: "1px solid var(--color-border)",
-        maxWidth: "800px",
-        margin: "2rem auto",
-      }}
-    >
-      <h3
-        style={{ marginBottom: "1.5rem", fontWeight: 600, fontSize: "1.1rem" }}
-        dangerouslySetInnerHTML={{ __html: data.question }}
-      />
+    <div className={styles.quizContainer}>
+      <h3 dangerouslySetInnerHTML={{ __html: data.question }} />
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+      <div className={styles.optionsList}>
         {data.options.map((option, index) => {
           const selected = isSelected(index);
           const correct = isOptionCorrect(index);
 
-          let borderColor = "var(--color-border)";
-          let bgColor = "transparent";
-
+          let optionClassName = styles.optionLabel;
           if (isSubmitted) {
+            optionClassName += ` ${styles.readOnly}`;
             if (correct) {
-              borderColor = "#22c55e"; // Green
-              bgColor = "rgba(34, 197, 94, 0.1)";
+              optionClassName += ` ${styles.correct}`;
             } else if (selected && !correct) {
-              borderColor = "#ef4444"; // Red
+              optionClassName += ` ${styles.wrong}`;
             }
           } else if (selected) {
-            borderColor = "var(--color-primary)";
+            optionClassName += ` ${styles.selected}`;
           }
 
           return (
-            <label
-              key={index}
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-                padding: "1rem",
-                border: `2px solid ${borderColor}`,
-                borderRadius: "12px",
-                cursor: isSubmitted ? "default" : "pointer",
-                transition: "all 0.2s",
-                background: bgColor,
-              }}
-            >
+            <label key={index} className={optionClassName}>
               <input
                 type={isMultipleChoice ? "checkbox" : "radio"}
                 name={`quiz-${data.id}`}
@@ -166,9 +139,8 @@ export function Quiz({
                 checked={selected}
                 onChange={() => handleOptionClick(index)}
                 disabled={isSubmitted}
-                style={{ display: "none" }}
               />
-              <div style={{ flexShrink: 0 }}>
+              <div className={styles.icon}>
                 {isMultipleChoice ? (
                   selected ? (
                     isSubmitted && correct ? (
@@ -198,14 +170,7 @@ export function Quiz({
                   <Circle color="var(--color-text-dim)" size={24} />
                 )}
               </div>
-              <span
-                style={{
-                  fontSize: "1rem",
-                  color: "var(--color-text-main)",
-                }}
-              >
-                {option}
-              </span>
+              <span>{option}</span>
             </label>
           );
         })}
@@ -213,76 +178,30 @@ export function Quiz({
 
       {!isSubmitted ? (
         <button
+          className={styles.checkBtn}
           onClick={handleSubmit}
           disabled={
             selectedOption === null ||
             (Array.isArray(selectedOption) && selectedOption.length === 0)
           }
-          style={{
-            marginTop: "2rem",
-            width: "100%",
-            padding: "1rem",
-            borderRadius: "12px",
-            background: "var(--color-accent)",
-            color: "var(--color-accent-text)",
-            border: "none",
-            fontWeight: "bold",
-            fontSize: "1rem",
-            cursor:
-              selectedOption === null ||
-              (Array.isArray(selectedOption) && selectedOption.length === 0)
-                ? "not-allowed"
-                : "pointer",
-            opacity:
-              selectedOption === null ||
-              (Array.isArray(selectedOption) && selectedOption.length === 0)
-                ? 0.5
-                : 1,
-            transition: "all 0.2s",
-          }}
         >
           Проверить ответ
         </button>
       ) : (
-        <div style={{ marginTop: "2rem", textAlign: "center" }}>
+        <div className={styles.feedback}>
           {isCorrect ? (
-            <div
-              style={{
-                color: "#22c55e",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "0.5rem",
-              }}
-            >
+            <div className={styles.success}>
               <CheckCircle /> {data.successMessage || "Правильно!"}
             </div>
           ) : (
-            <div
-              style={{
-                color: "#ef4444",
-                fontWeight: "bold",
-                fontSize: "1.1rem",
-              }}
-            >
+            <div className={styles.error}>
               Неправильно. Попробуй еще раз!
               <button
+                className={styles.retryBtn}
                 onClick={() => {
                   setIsSubmitted(false);
                   setIsCorrect(false);
                   setSelectedOption(null);
-                }}
-                style={{
-                  display: "block",
-                  margin: "1rem auto 0",
-                  background: "transparent",
-                  border: "1px solid #ef4444",
-                  color: "#ef4444",
-                  padding: "0.5rem 1rem",
-                  borderRadius: "8px",
-                  cursor: "pointer",
                 }}
               >
                 Попробовать снова

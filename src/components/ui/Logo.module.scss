@@ -1,0 +1,82 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-inter, sans-serif);
+  font-weight: 800;
+  user-select: none;
+
+  // Sizes
+  &.sm {
+    .rocket {
+      width: 20px;
+      height: 20px;
+    }
+    .text {
+      font-size: 1.2rem;
+    }
+  }
+
+  &.md {
+    .rocket {
+      width: 28px;
+      height: 28px;
+    }
+    .text {
+      font-size: 1.5rem;
+    }
+  }
+
+  &.lg {
+    .rocket {
+      width: 40px;
+      height: 40px;
+    }
+    .text {
+      font-size: 2.5rem;
+    }
+  }
+
+  &.xl {
+    .rocket {
+      width: 60px;
+      height: 60px;
+    }
+    .text {
+      font-size: 4rem;
+    }
+  }
+}
+
+.rocketWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rocket {
+  transform: rotate(-45deg);
+  filter: drop-shadow(0 0 8px var(--color-accent));
+  color: var(--color-accent);
+  fill: rgba(255, 197, 47, 0.2);
+}
+
+.glow {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--color-accent);
+  filter: blur(15px);
+  opacity: 0.2;
+  z-index: -1;
+}
+
+.text {
+  color: var(--color-text-main);
+  letter-spacing: -0.5px;
+}
+
+.accent {
+  color: var(--color-primary);
+}

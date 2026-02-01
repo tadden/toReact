@@ -13,13 +13,12 @@ interface CodeChallengeProps {
 
 export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
   const [code, setCode] = useState(data.initialCode);
+  const [cssCode, setCssCode] = useState(data.initialCss || "");
   const [activeTab, setActiveTab] = useState<"task" | "result">("task");
+  const [activeEditorTab, setActiveEditorTab] = useState<"html" | "css">(
+    "html",
+  );
   const [results, setResults] = useState<CheckResult[] | null>(null);
-  // Add a state to trigger refresh of iframe if needed, or just depend on code.
-  // We want to update iframe content when code changes?
-  // Probably better to only update on check or debounce?
-  // User said "after student complete" but seeing result is nice.
-  // As per screenshot "Result" tab is active. Let's render `code` directly.
 
   // Resizing state
   const [editorWidth, setEditorWidth] = useState(50); // percentage
@@ -28,16 +27,18 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
   // When switching topic/challenge, reset state
   useEffect(() => {
     setCode(data.initialCode);
+    setCssCode(data.initialCss || "");
     setResults(null);
     setActiveTab("task");
-  }, [data.id, data.initialCode]);
+    setActiveEditorTab("html");
+  }, [data.id, data.initialCode, data.initialCss]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDragging) return;
 
       const container = document.getElementById(
-        `challenge-container-${data.id}`
+        `challenge-container-${data.id}`,
       );
       if (container) {
         const rect = container.getBoundingClientRect();
@@ -69,7 +70,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
   }, [isDragging, data.id]);
 
   const handleCheck = () => {
-    const checkResults = data.checks(code);
+    const checkResults = data.checks(code, cssCode);
     setResults(checkResults);
 
     const checkPassed = checkResults.every((r) => r.passed);
@@ -85,11 +86,28 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
 
   const handleReset = () => {
     setCode(data.initialCode);
+    setCssCode(data.initialCss || "");
     setResults(null);
     setActiveTab("task");
+    setActiveEditorTab("html");
   };
 
   const allPassed = results && results.every((r) => r.passed);
+
+  // Combine HTML and CSS for preview
+  const previewDoc = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <style>${cssCode}</style>
+      </head>
+      <body>
+        ${code}
+      </body>
+    </html>
+  `;
+
+  const hasCss = data.initialCss !== undefined;
 
   return (
     <div className={styles.container} id={`challenge-container-${data.id}`}>
@@ -98,17 +116,45 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
         className={styles.editorSection}
         style={{ width: `${editorWidth}%` }}
       >
-        <div className={styles.editorHeader}>Editor html:</div>
-        <div
-          className={styles.editorWrapper}
-          style={{ flex: 1, overflow: "hidden" }}
-        >
+        <div className={styles.tabsHeader}>
+          <div className={styles.tabList}>
+            <button
+              className={`${styles.tab} ${
+                activeEditorTab === "html" ? styles.active : ""
+              }`}
+              onClick={() => setActiveEditorTab("html")}
+              style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }}
+            >
+              Редактор html:
+            </button>
+            {hasCss && (
+              <button
+                className={`${styles.tab} ${
+                  activeEditorTab === "css" ? styles.active : ""
+                }`}
+                onClick={() => setActiveEditorTab("css")}
+                style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }}
+              >
+                Редактор css:
+              </button>
+            )}
+          </div>
+        </div>
+
+        <div className={styles.editorWrapper}>
           <Editor
             height="100%"
-            defaultLanguage="html"
-            value={code}
+            defaultLanguage={activeEditorTab === "html" ? "html" : "css"}
+            language={activeEditorTab === "html" ? "html" : "css"}
+            value={activeEditorTab === "html" ? code : cssCode}
             theme="vs-dark"
-            onChange={(value) => setCode(value || "")}
+            onChange={(value) => {
+              if (activeEditorTab === "html") {
+                setCode(value || "");
+              } else {
+                setCssCode(value || "");
+              }
+            }}
             options={{
               minimap: { enabled: false },
               fontSize: 14,
@@ -130,11 +176,8 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
 
       {/* Info/Result Column */}
       <div className={styles.infoSection} style={{ flex: 1 }}>
-        <div
-          className={styles.tabs}
-          style={{ justifyContent: "space-between", alignItems: "center" }}
-        >
-          <div style={{ display: "flex" }}>
+        <div className={`${styles.tabs} ${styles.tabsHeader}`}>
+          <div className={styles.tabList}>
             <button
               className={`${styles.tab} ${
                 activeTab === "task" ? styles.active : ""
@@ -152,18 +195,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
               Результат
             </button>
           </div>
-          {allPassed && (
-            <div
-              style={{
-                color: "#16a34a",
-                fontWeight: "bold",
-                paddingRight: "1rem",
-                fontSize: "0.9rem",
-              }}
-            >
-              Done
-            </div>
-          )}
+          {allPassed && <div className={styles.successLabel}>Done</div>}
         </div>
 
         <div className={styles.content}>
@@ -171,50 +203,20 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
             <>
               <div dangerouslySetInnerHTML={{ __html: data.description }} />
 
-              <h3
-                style={{
-                  marginTop: "2rem",
-                  fontSize: "0.9rem",
-                  textTransform: "uppercase",
-                  color: "#64748b",
-                  fontWeight: 600,
-                }}
-              >
-                Критерии выполнения:
-              </h3>
+              <h3 className={styles.subHeader}>Критерии выполнения:</h3>
 
-              <div style={{ marginTop: "1rem" }}>
-                <h3
-                  style={{
-                    marginTop: "2rem",
-                    fontSize: "0.9rem",
-                    textTransform: "uppercase",
-                    color: "#64748b",
-                    fontWeight: 600,
-                  }}
-                >
-                  Результаты проверки:
-                </h3>
+              <div className={styles.sectionsWrapper}>
+                <h3 className={styles.subHeader}>Результаты проверки:</h3>
                 {allPassed && (
-                  <div
-                    style={{
-                      display: "flex",
-                      gap: "0.5rem",
-                      alignItems: "center",
-                      color: "#16a34a",
-                      fontWeight: "bold",
-                      marginBottom: "1rem",
-                      padding: "0.5rem",
-                      background: "rgba(34, 197, 94, 0.1)",
-                      borderRadius: "4px",
-                    }}
-                  >
+                  <div className={styles.successBox}>
                     <CheckCircle size={20} />
                     <span>Отлично! Задание выполнено.</span>
                   </div>
                 )}
 
-                {(results || data.checks(data.initialCode)).map((check) => (
+                {(
+                  results || data.checks(data.initialCode, data.initialCss)
+                ).map((check) => (
                   <div
                     key={check.id}
                     className={`${styles.checkItem} ${
@@ -226,7 +228,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                         : ""
                     }`}
                   >
-                    <div style={{ marginTop: "0.2rem", width: "16px" }}>
+                    <div className={styles.checkIconWrapper}>
                       {results ? (
                         check.passed ? (
                           <CheckCircle size={16} color="#22c55e" />
@@ -238,13 +240,13 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                       )}
                     </div>
                     <span
-                      style={{
-                        color: results
+                      className={`${styles.checkLabel} ${
+                        results
                           ? check.passed
-                            ? "#15803d"
-                            : "#b91c1c"
-                          : "#475569",
-                      }}
+                            ? styles.passed
+                            : styles.failed
+                          : ""
+                      }`}
                     >
                       {check.label}
                     </span>
@@ -256,7 +258,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
             <div className={styles.browserContainer}>
               <iframe
                 className={styles.browserFrame}
-                srcDoc={code}
+                srcDoc={previewDoc}
                 title="Preview"
                 sandbox="allow-scripts"
               />

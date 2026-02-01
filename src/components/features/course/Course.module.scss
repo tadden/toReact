@@ -445,3 +445,53 @@
 :global(.w-full) {
   width: 100% !important;
 }
+
+:global(.video-container) {
+  margin: 2rem 0;
+}
+
+:global(.video-responsive) {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.backLink {
+  color: #94a3b8;
+  font-size: 0.9rem;
+  display: block;
+
+  &:hover {
+    color: var(--color-text-hover);
+  }
+}
+
+.lockedModule {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0.5;
+}
+
+.moduleTitleRow {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.statusIcon {
+  flex-shrink: 0;
+}
+
+.alertIcon {
+  flex-shrink: 0;
+  margin-left: auto;
+}

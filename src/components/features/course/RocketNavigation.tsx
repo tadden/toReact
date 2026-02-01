@@ -28,11 +28,7 @@ export const RocketNavigation: React.FC<RocketNavigationProps> = ({
 
       {/* The Rocket ship traveling down/up */}
       <div className={styles.rocketIcon} style={{ top: `${rocketPosition}px` }}>
-        <Rocket
-          size={18}
-          fill="currentColor"
-          style={{ transform: "rotate(45deg)" }}
-        />
+        <Rocket size={18} fill="currentColor" />
       </div>
 
       {steps.map((step, index) => {
