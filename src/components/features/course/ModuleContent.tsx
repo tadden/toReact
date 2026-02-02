@@ -32,6 +32,7 @@ import { CongratulationModal } from "./CongratulationModal";
 import { Quiz } from "./Quiz";
 import { quizzes } from "@/data/quizzes";
 import { CodeChallenge } from "./CodeChallenge";
+import { InteractiveHomework } from "./InteractiveHomework";
 import { challenges } from "@/data/challenges";
 
 // Helper to extract first header or provide fallback based on content type
@@ -297,175 +298,248 @@ export function ModuleContent({
         isOpen={showCongratulationModal}
         onConfirm={() => handleNextSection()}
       />
-      <div className={styles.moduleHeader}>
-        <p
+      <div className={styles.standardContainer} style={{ paddingBottom: 0 }}>
+        <div className={styles.moduleHeader}>
+          <p
+            style={{
+              textTransform: "uppercase",
+              letterSpacing: "2px",
+              fontSize: "0.8rem",
+              marginBottom: "0.5rem",
+              color: "var(--color-primary)",
+            }}
+          >
+            {course.title} / Модуль {module.order + 1}
+          </p>
+          {/* <h1>{module.title}</h1> - Removed to save space */}
+          <p>{module.description}</p>
+        </div>
+
+        <div
           style={{
-            textTransform: "uppercase",
-            letterSpacing: "2px",
-            fontSize: "0.8rem",
-            marginBottom: "0.5rem",
-            color: "var(--color-primary)",
+            display: "flex",
+            gap: "1rem",
+            borderBottom: "1px solid var(--color-border)",
+            marginBottom: "0",
           }}
         >
-          {course.title} / Модуль {module.order + 1}
-        </p>
-        <h1>{module.title}</h1>
-        <p>{module.description}</p>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          gap: "1rem",
-          borderBottom: "1px solid var(--color-border)",
-          marginBottom: "2rem",
-        }}
-      >
-        <Link
-          href={`?view=theory`}
-          className={`${styles.tabLink} ${
-            activeTab === "theory" ? styles.activeTab : ""
-          }`}
-        >
-          <BookOpen size={18} /> Теория
-        </Link>
-        {(module.videoUrl || module.resources.length > 0) && (
           <Link
-            href={`?view=materials`}
+            href={`?view=theory`}
             className={`${styles.tabLink} ${
-              activeTab === "materials" ? styles.activeTab : ""
+              activeTab === "theory" ? styles.activeTab : ""
             }`}
           >
-            <Youtube size={18} /> Материалы
+            <BookOpen size={18} /> Теория
           </Link>
-        )}
-        {module.homework && (
-          <Link
-            href={`?view=homework`}
-            className={`${styles.tabLink} ${
-              activeTab === "homework" ? styles.activeTab : ""
-            }`}
-          >
-            <PenTool size={18} /> Домашнее задание
-            {progress?.homeworkStatus === "rejected" && (
-              <AlertCircle
-                size={16}
-                color="#ef4444"
-                style={{ marginLeft: "0.5rem" }}
-              />
-            )}
-          </Link>
-        )}
+          {(module.videoUrl || module.resources.length > 0) && (
+            <Link
+              href={`?view=materials`}
+              className={`${styles.tabLink} ${
+                activeTab === "materials" ? styles.activeTab : ""
+              }`}
+            >
+              <Youtube size={18} /> Материалы
+            </Link>
+          )}
+          {module.homework && (
+            <Link
+              href={`?view=homework`}
+              className={`${styles.tabLink} ${
+                activeTab === "homework" ? styles.activeTab : ""
+              }`}
+            >
+              <PenTool size={18} /> Домашнее задание
+              {progress?.homeworkStatus === "rejected" && (
+                <AlertCircle
+                  size={16}
+                  color="#ef4444"
+                  style={{ marginLeft: "0.5rem" }}
+                />
+              )}
+            </Link>
+          )}
+        </div>
       </div>
 
       <div className={styles.tabContent}>
         {activeTab === "theory" && currentTopic && (
-          <div
-            style={{ display: "flex", gap: "2rem", alignItems: "flex-start" }}
-          >
-            <div className={styles.theoryContent} style={{ flex: 1 }}>
-              <h2
-                style={{
-                  color: "var(--color-text-main)",
-                  marginBottom: "1rem",
-                  borderBottom: "1px solid var(--color-border)",
-                  paddingBottom: "0.5rem",
-                }}
-              >
-                {currentTopic.title}
-              </h2>
-              <div ref={contentRef}>
-                {pages.slice(0, visiblePageIndex + 1).map((page, pageIdx) => (
-                  <div
-                    key={pageIdx}
-                    id={`section-${pageIdx}`}
-                    className="fade-in-content"
-                    style={{ scrollMarginTop: "6rem" }}
-                  >
-                    <div dangerouslySetInnerHTML={{ __html: page.text }} />
-                    {page.quizId && quizzes[page.quizId] && (
-                      <Quiz
-                        data={quizzes[page.quizId]}
-                        userId={user?.id || ""}
-                        initialState={progress?.quizResults?.[page.quizId]}
-                        onSave={(result) =>
-                          saveQuizResult(
-                            course.id,
-                            module.id,
-                            page.quizId!,
-                            result,
-                          )
-                        }
-                      />
-                    )}
-                    {page.challengeId && challenges[page.challengeId] && (
-                      <CodeChallenge
-                        data={challenges[page.challengeId]}
-                        onComplete={
-                          page.isNext
-                            ? () => setVisiblePageIndex(pageIdx + 1)
-                            : undefined
-                        }
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              <div
-                style={{
-                  marginTop: "3rem",
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                {(() => {
-                  const isLastPage = visiblePageIndex >= pages.length - 1;
-                  const currentPage = pages[visiblePageIndex];
-                  const currentQuizId = currentPage?.quizId;
-
-                  // Check if current page has a quiz and if it's passed
-                  // If it has a quiz, we must have a result where isCorrect is true
-                  // If no quiz, condition is effectively passed
-                  const isQuizPassed =
-                    !currentQuizId ||
-                    (progress?.quizResults?.[currentQuizId]?.isCorrect ??
-                      false);
-
-                  if (!isLastPage) {
-                    return (
-                      <button
-                        onClick={() => {
-                          const nextIndex = visiblePageIndex + 1;
-                          setVisiblePageIndex(nextIndex);
-                          if (currentTopic) {
-                            saveTopicState(
+          <div className={styles.standardContainer}>
+            <div
+              style={{ display: "flex", gap: "2rem", alignItems: "flex-start" }}
+            >
+              <div className={styles.theoryContent} style={{ flex: 1 }}>
+                <h2
+                  style={{
+                    color: "var(--color-text-main)",
+                    marginBottom: "1rem",
+                    borderBottom: "1px solid var(--color-border)",
+                    paddingBottom: "0.5rem",
+                  }}
+                >
+                  {currentTopic.title}
+                </h2>
+                <div ref={contentRef}>
+                  {pages.slice(0, visiblePageIndex + 1).map((page, pageIdx) => (
+                    <div
+                      key={pageIdx}
+                      id={`section-${pageIdx}`}
+                      className="fade-in-content"
+                      style={{ scrollMarginTop: "6rem" }}
+                    >
+                      <div dangerouslySetInnerHTML={{ __html: page.text }} />
+                      {page.quizId && quizzes[page.quizId] && (
+                        <Quiz
+                          data={quizzes[page.quizId]}
+                          userId={user?.id || ""}
+                          initialState={progress?.quizResults?.[page.quizId]}
+                          onSave={(result) =>
+                            saveQuizResult(
                               course.id,
                               module.id,
-                              currentTopic.id,
-                              nextIndex,
-                            );
+                              page.quizId!,
+                              result,
+                            )
+                          }
+                        />
+                      )}
+                      {page.challengeId && challenges[page.challengeId] && (
+                        <CodeChallenge
+                          data={challenges[page.challengeId]}
+                          onComplete={
+                            page.isNext
+                              ? () => setVisiblePageIndex(pageIdx + 1)
+                              : undefined
+                          }
+                        />
+                      )}
+                    </div>
+                  ))}
+                </div>
 
-                            // Scroll to the next section
-                            setTimeout(() => {
-                              const element = document.getElementById(
-                                `section-${nextIndex}`,
+                <div
+                  style={{
+                    marginTop: "3rem",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  {(() => {
+                    const isLastPage = visiblePageIndex >= pages.length - 1;
+                    const currentPage = pages[visiblePageIndex];
+                    const currentQuizId = currentPage?.quizId;
+
+                    // Check if current page has a quiz and if it's passed
+                    // If it has a quiz, we must have a result where isCorrect is true
+                    // If no quiz, condition is effectively passed
+                    const isQuizPassed =
+                      !currentQuizId ||
+                      (progress?.quizResults?.[currentQuizId]?.isCorrect ??
+                        false);
+
+                    if (!isLastPage) {
+                      return (
+                        <button
+                          onClick={() => {
+                            const nextIndex = visiblePageIndex + 1;
+                            setVisiblePageIndex(nextIndex);
+                            if (currentTopic) {
+                              saveTopicState(
+                                course.id,
+                                module.id,
+                                currentTopic.id,
+                                nextIndex,
                               );
-                              if (element) {
-                                element.scrollIntoView({
-                                  behavior: "smooth",
-                                  block: "start",
-                                });
-                              }
-                            }, 100);
+
+                              // Scroll to the next section
+                              setTimeout(() => {
+                                const element = document.getElementById(
+                                  `section-${nextIndex}`,
+                                );
+                                if (element) {
+                                  element.scrollIntoView({
+                                    behavior: "smooth",
+                                    block: "start",
+                                  });
+                                }
+                              }, 100);
+                            }
+                          }}
+                          disabled={!isQuizPassed}
+                          className={styles.ctaButton}
+                          style={{
+                            background: "var(--color-primary)",
+                            border: "none",
+                            color: "white",
+                            padding: "1rem 2rem",
+                            fontSize: "1rem",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            gap: "0.5rem",
+                            width: "100%",
+                            fontWeight: "bold",
+                            borderRadius: "var(--radius-md)",
+                            cursor: isQuizPassed ? "pointer" : "not-allowed",
+                            boxShadow: isQuizPassed
+                              ? "var(--shadow-glow-blue)"
+                              : "none",
+                            opacity: isQuizPassed ? 1 : 0.5,
+                          }}
+                        >
+                          Продолжить <ArrowRight size={20} />
+                        </button>
+                      );
+                    }
+
+                    return (
+                      <button
+                        onClick={async () => {
+                          if (!isQuizPassed) return;
+
+                          // Mark current as complete
+                          await markTopicCompleted(
+                            course.id,
+                            module.id,
+                            currentTopic.id,
+                          );
+
+                          // Find next topic
+                          const currentIndex = allTopics.findIndex(
+                            (t) => t.id === currentTopic.id,
+                          );
+
+                          // Calculate "updated" completed topics locally to prevent stale closure issues
+                          // when calling handleNextSection -> handleComplete
+                          const currentCompleted =
+                            progress?.completedTopics || [];
+                          const updatedCompletedTopics =
+                            currentCompleted.includes(currentTopic.id)
+                              ? currentCompleted
+                              : [...currentCompleted, currentTopic.id];
+
+                          if (currentIndex < allTopics.length - 1) {
+                            const nextTopic = allTopics[currentIndex + 1];
+                            // Optimized instant navigation
+                            setActiveTopic(nextTopic.id);
+                          } else {
+                            // It's the last topic
+                            if (!nextModuleSlug) {
+                              // Only show modal if it's the LAST module of the course
+                              setShowCongratulationModal(true);
+                            } else {
+                              // Otherwise just proceed, PASSING the updated topics
+                              handleNextSection({
+                                completedTopics: updatedCompletedTopics,
+                              });
+                            }
                           }
                         }}
                         disabled={!isQuizPassed}
                         className={styles.ctaButton}
                         style={{
-                          background: "var(--color-primary)",
+                          background: "var(--color-accent)",
                           border: "none",
-                          color: "white",
+                          color: "var(--color-accent-text)",
                           padding: "1rem 2rem",
                           fontSize: "1rem",
                           display: "flex",
@@ -477,98 +551,31 @@ export function ModuleContent({
                           borderRadius: "var(--radius-md)",
                           cursor: isQuizPassed ? "pointer" : "not-allowed",
                           boxShadow: isQuizPassed
-                            ? "var(--shadow-glow-blue)"
+                            ? "var(--shadow-glow-yellow)"
                             : "none",
                           opacity: isQuizPassed ? 1 : 0.5,
                         }}
                       >
-                        Продолжить <ArrowRight size={20} />
+                        {allTopics.findIndex(
+                          (t) => t.id === currentTopic.id,
+                        ) ===
+                        allTopics.length - 1
+                          ? !nextModuleSlug
+                            ? "Завершить курс"
+                            : "Завершить модуль"
+                          : "К следующей теме"}{" "}
+                        <ArrowRight size={20} />
                       </button>
                     );
-                  }
-
-                  return (
-                    <button
-                      onClick={async () => {
-                        if (!isQuizPassed) return;
-
-                        // Mark current as complete
-                        await markTopicCompleted(
-                          course.id,
-                          module.id,
-                          currentTopic.id,
-                        );
-
-                        // Find next topic
-                        const currentIndex = allTopics.findIndex(
-                          (t) => t.id === currentTopic.id,
-                        );
-
-                        // Calculate "updated" completed topics locally to prevent stale closure issues
-                        // when calling handleNextSection -> handleComplete
-                        const currentCompleted =
-                          progress?.completedTopics || [];
-                        const updatedCompletedTopics =
-                          currentCompleted.includes(currentTopic.id)
-                            ? currentCompleted
-                            : [...currentCompleted, currentTopic.id];
-
-                        if (currentIndex < allTopics.length - 1) {
-                          const nextTopic = allTopics[currentIndex + 1];
-                          // Optimized instant navigation
-                          setActiveTopic(nextTopic.id);
-                        } else {
-                          // It's the last topic
-                          if (!nextModuleSlug) {
-                            // Only show modal if it's the LAST module of the course
-                            setShowCongratulationModal(true);
-                          } else {
-                            // Otherwise just proceed, PASSING the updated topics
-                            handleNextSection({
-                              completedTopics: updatedCompletedTopics,
-                            });
-                          }
-                        }
-                      }}
-                      disabled={!isQuizPassed}
-                      className={styles.ctaButton}
-                      style={{
-                        background: "var(--color-accent)",
-                        border: "none",
-                        color: "var(--color-accent-text)",
-                        padding: "1rem 2rem",
-                        fontSize: "1rem",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        gap: "0.5rem",
-                        width: "100%",
-                        fontWeight: "bold",
-                        borderRadius: "var(--radius-md)",
-                        cursor: isQuizPassed ? "pointer" : "not-allowed",
-                        boxShadow: isQuizPassed
-                          ? "var(--shadow-glow-yellow)"
-                          : "none",
-                        opacity: isQuizPassed ? 1 : 0.5,
-                      }}
-                    >
-                      {allTopics.findIndex((t) => t.id === currentTopic.id) ===
-                      allTopics.length - 1
-                        ? !nextModuleSlug
-                          ? "Завершить курс"
-                          : "Завершить модуль"
-                        : "К следующей теме"}{" "}
-                      <ArrowRight size={20} />
-                    </button>
-                  );
-                })()}
+                  })()}
+                </div>
               </div>
             </div>
           </div>
         )}
 
         {activeTab === "materials" && (
-          <div>
+          <div className={styles.standardContainer}>
             {module.videoUrl ? (
               <div className={styles.videoContainer}>
                 <iframe
@@ -726,298 +733,369 @@ export function ModuleContent({
         )}
 
         {activeTab === "homework" && (
-          <div className={styles.actionSection} style={{ marginTop: 0 }}>
-            <h3>
-              <Code style={{ display: "inline", verticalAlign: "middle" }} />{" "}
-              Практическое Задание
-            </h3>
-            <div
-              style={{
-                marginBottom: "1.5rem",
-                color: "#cbd5e1",
-                lineHeight: "1.6",
-              }}
-              dangerouslySetInnerHTML={{
-                __html: module.homework?.description || "",
-              }}
-            />
-
-            {module.homework?.figmaUrl && (
-              <div style={{ marginBottom: "2rem" }}>
-                <a
-                  href={module.homework.figmaUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    background: "#22c55e",
-                    color: "white",
-                    padding: "0.75rem 1.5rem",
-                    borderRadius: "8px",
-                    fontWeight: "bold",
-                    textDecoration: "none",
-                    boxShadow: "0 4px 6px -1px rgba(34, 197, 94, 0.2)",
-                  }}
-                >
-                  <ExternalLink size={20} /> Открыть макет в Figma
-                </a>
-              </div>
-            )}
-
+          <div className={styles.homeworkSection}>
             {module.homework?.acceptanceCriteria &&
-              module.homework.acceptanceCriteria.length > 0 && (
-                <div style={{ marginBottom: "2rem" }}>
-                  <h3
-                    style={{
-                      marginBottom: "1rem",
-                      color: "white",
-                      fontSize: "1.2rem",
-                    }}
-                  >
-                    Критерии приёма
+            Array.isArray(module.homework.acceptanceCriteria) &&
+            module.homework.acceptanceCriteria.some(
+              (c: any) => c.type === "challenges",
+            ) ? (
+              // New Interactive Homework Mode
+              (() => {
+                const challengesSection =
+                  module.homework!.acceptanceCriteria.find(
+                    (c: any) => c.type === "challenges",
+                  ) as any;
+                const challengeIds: string[] = challengesSection?.items || [];
+
+                // Calculate initial completed IDs from topicStates
+                // We saved them as { challengeId: 1 } via saveTopicState
+                // progress.topicStates is { topicId: number }
+                const initialCompletedIds = Object.entries(
+                  progress?.topicStates || {},
+                )
+                  .filter(
+                    ([key, value]) =>
+                      challengeIds.includes(key) &&
+                      (value === 1 ||
+                        value === true ||
+                        (typeof value === "object" && value?.completed)),
+                  )
+                  .map(([key]) => key);
+
+                return (
+                  <div style={{ height: "calc(100vh - 140px)" }}>
+                    <InteractiveHomework
+                      challengeIds={challengeIds}
+                      courseId={course.id}
+                      moduleId={module.id}
+                      initialCompletedIds={initialCompletedIds}
+                      onComplete={() => {
+                        // Mark as approved (done)
+                        // Note: submitHomework usually sets to 'submitted', wait for admin.
+                        // But requirement says "Done when all tasks are done".
+                        // Let's assume we can set to 'submitted' using the generic submit logic?
+                        // Or if we need auto-approval, we might need a specific API.
+                        // For now, let's submit with a note "Auto-completed via interactive tasks"
+                        submitHomework(
+                          course.id,
+                          module.id,
+                          "interactive-completion",
+                          "Completed all interactive tasks",
+                        );
+                      }}
+                    />
+                  </div>
+                );
+              })()
+            ) : (
+              // Original Manual Homework Mode
+              <div className={styles.standardContainer}>
+                <div className={styles.actionSection} style={{ marginTop: 0 }}>
+                  <h3>
+                    <Code
+                      style={{ display: "inline", verticalAlign: "middle" }}
+                    />{" "}
+                    Практическое Задание
                   </h3>
-                  {module.homework.acceptanceCriteria.map((section: any) => (
+                  <div
+                    style={{
+                      marginBottom: "1.5rem",
+                      color: "#cbd5e1",
+                      lineHeight: "1.6",
+                    }}
+                    dangerouslySetInnerHTML={{
+                      __html: module.homework?.description || "",
+                    }}
+                  />
+
+                  {module.homework?.figmaUrl && (
+                    <div style={{ marginBottom: "2rem" }}>
+                      <a
+                        href={module.homework.figmaUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{
+                          display: "inline-flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                          background: "#22c55e",
+                          color: "white",
+                          padding: "0.75rem 1.5rem",
+                          borderRadius: "8px",
+                          fontWeight: "bold",
+                          textDecoration: "none",
+                          boxShadow: "0 4px 6px -1px rgba(34, 197, 94, 0.2)",
+                        }}
+                      >
+                        <ExternalLink size={20} /> Открыть макет в Figma
+                      </a>
+                    </div>
+                  )}
+
+                  {module.homework?.acceptanceCriteria &&
+                    module.homework.acceptanceCriteria.length > 0 && (
+                      <div style={{ marginBottom: "2rem" }}>
+                        <h3
+                          style={{
+                            marginBottom: "1rem",
+                            color: "white",
+                            fontSize: "1.2rem",
+                          }}
+                        >
+                          Критерии приёма
+                        </h3>
+                        {module.homework.acceptanceCriteria.map(
+                          (section: any) => (
+                            <div
+                              key={section.id}
+                              style={{
+                                marginBottom: "1.5rem",
+                                background: "rgba(255, 255, 255, 0.03)",
+                                padding: "1rem",
+                                borderRadius: "8px",
+                                border: "1px solid rgba(255, 255, 255, 0.1)",
+                              }}
+                            >
+                              <h4
+                                style={{
+                                  color: "var(--color-primary)",
+                                  marginBottom: "0.75rem",
+                                  fontSize: "1rem",
+                                  fontWeight: "bold",
+                                }}
+                              >
+                                {section.title}
+                              </h4>
+                              <ul
+                                style={{
+                                  listStyle: "none",
+                                  padding: 0,
+                                  margin: 0,
+                                  display: "flex",
+                                  flexDirection: "column",
+                                  gap: "0.5rem",
+                                }}
+                              >
+                                {section.items.map(
+                                  (item: string, idx: number) => (
+                                    <li
+                                      key={idx}
+                                      style={{
+                                        display: "flex",
+                                        alignItems: "flex-start",
+                                        gap: "0.5rem",
+                                        color: "#e2e8f0",
+                                        fontSize: "0.9rem",
+                                      }}
+                                    >
+                                      <span
+                                        style={{
+                                          color: "#64748b",
+                                          minWidth: "1.2rem",
+                                          marginTop: "2px",
+                                        }}
+                                      >
+                                        •
+                                      </span>
+                                      <span
+                                        dangerouslySetInnerHTML={{
+                                          __html: item.replace(
+                                            /`([^`]+)`/g,
+                                            (_, content) =>
+                                              `<code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 4px; font-family: monospace; font-size: 0.85em;">${content
+                                                .replace(/</g, "&lt;")
+                                                .replace(/>/g, "&gt;")}</code>`,
+                                          ),
+                                        }}
+                                      />
+                                    </li>
+                                  ),
+                                )}
+                              </ul>
+                            </div>
+                          ),
+                        )}
+                      </div>
+                    )}
+
+                  {progress?.homeworkStatus === "approved" &&
+                    progress.adminComments && (
+                      <div
+                        style={{
+                          background: "rgba(74, 222, 128, 0.1)",
+                          border: "1px solid rgba(74, 222, 128, 0.2)",
+                          borderRadius: "8px",
+                          padding: "1rem",
+                          marginBottom: "1.5rem",
+                        }}
+                      >
+                        <h4
+                          style={{
+                            color: "#4ade80",
+                            margin: "0 0 0.5rem 0",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                          }}
+                        >
+                          <CheckCircle size={18} /> Отзыв Ментора
+                        </h4>
+                        <p style={{ margin: 0, color: "#bbf7d0" }}>
+                          {progress.adminComments}
+                        </p>
+                      </div>
+                    )}
+
+                  {progress?.homeworkStatus === "rejected" && (
                     <div
-                      key={section.id}
                       style={{
-                        marginBottom: "1.5rem",
-                        background: "rgba(255, 255, 255, 0.03)",
-                        padding: "1rem",
+                        background: "rgba(239, 68, 68, 0.1)",
+                        border: "1px solid rgba(239, 68, 68, 0.2)",
                         borderRadius: "8px",
-                        border: "1px solid rgba(255, 255, 255, 0.1)",
+                        padding: "1rem",
+                        marginBottom: "1.5rem",
                       }}
                     >
                       <h4
                         style={{
-                          color: "var(--color-primary)",
-                          marginBottom: "0.75rem",
-                          fontSize: "1rem",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        {section.title}
-                      </h4>
-                      <ul
-                        style={{
-                          listStyle: "none",
-                          padding: 0,
-                          margin: 0,
+                          color: "#ef4444",
+                          margin: "0 0 0.5rem 0",
                           display: "flex",
-                          flexDirection: "column",
+                          alignItems: "center",
                           gap: "0.5rem",
                         }}
                       >
-                        {section.items.map((item: string, idx: number) => (
-                          <li
-                            key={idx}
-                            style={{
-                              display: "flex",
-                              alignItems: "flex-start",
-                              gap: "0.5rem",
-                              color: "#e2e8f0",
-                              fontSize: "0.9rem",
-                            }}
-                          >
-                            <span
-                              style={{
-                                color: "#64748b",
-                                minWidth: "1.2rem",
-                                marginTop: "2px",
-                              }}
-                            >
-                              •
-                            </span>
-                            <span
-                              dangerouslySetInnerHTML={{
-                                __html: item.replace(
-                                  /`([^`]+)`/g,
-                                  (_, content) =>
-                                    `<code style="background: rgba(255,255,255,0.1); padding: 0.1rem 0.3rem; border-radius: 4px; font-family: monospace; font-size: 0.85em;">${content
-                                      .replace(/</g, "&lt;")
-                                      .replace(/>/g, "&gt;")}</code>`,
-                                ),
-                              }}
-                            />
-                          </li>
-                        ))}
-                      </ul>
+                        <AlertTriangle size={18} /> Требуются Исправления
+                      </h4>
+                      <p style={{ margin: 0, color: "#fca5a5" }}>
+                        {progress.adminComments ||
+                          "Администратор запросил изменения."}
+                      </p>
                     </div>
-                  ))}
-                </div>
-              )}
-
-            {progress?.homeworkStatus === "approved" &&
-              progress.adminComments && (
-                <div
-                  style={{
-                    background: "rgba(74, 222, 128, 0.1)",
-                    border: "1px solid rgba(74, 222, 128, 0.2)",
-                    borderRadius: "8px",
-                    padding: "1rem",
-                    marginBottom: "1.5rem",
-                  }}
-                >
-                  <h4
-                    style={{
-                      color: "#4ade80",
-                      margin: "0 0 0.5rem 0",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <CheckCircle size={18} /> Отзыв Ментора
-                  </h4>
-                  <p style={{ margin: 0, color: "#bbf7d0" }}>
-                    {progress.adminComments}
-                  </p>
-                </div>
-              )}
-
-            {progress?.homeworkStatus === "rejected" && (
-              <div
-                style={{
-                  background: "rgba(239, 68, 68, 0.1)",
-                  border: "1px solid rgba(239, 68, 68, 0.2)",
-                  borderRadius: "8px",
-                  padding: "1rem",
-                  marginBottom: "1.5rem",
-                }}
-              >
-                <h4
-                  style={{
-                    color: "#ef4444",
-                    margin: "0 0 0.5rem 0",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <AlertTriangle size={18} /> Требуются Исправления
-                </h4>
-                <p style={{ margin: 0, color: "#fca5a5" }}>
-                  {progress.adminComments ||
-                    "Администратор запросил изменения."}
-                </p>
-              </div>
-            )}
-
-            <div className={styles.inputGroup}>
-              <label>Ссылка на репозиторий GitHub</label>
-              {progress?.homeworkStatus === "approved" ? (
-                <div style={{ padding: "0.5rem 0" }}>
-                  <a
-                    href={
-                      homeworkLink.startsWith("http")
-                        ? homeworkLink
-                        : `https://${homeworkLink}`
-                    }
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{
-                      color: "#60a5fa",
-                      textDecoration: "underline",
-                      display: "flex",
-                      alignItems: "center",
-                      gap: "0.5rem",
-                    }}
-                  >
-                    <ExternalLink size={16} /> {homeworkLink}
-                  </a>
-                </div>
-              ) : (
-                <input
-                  type="text"
-                  placeholder="https://github.com/username/repo"
-                  value={homeworkLink}
-                  onChange={(e) => setHomeworkLink(e.target.value)}
-                  disabled={progress?.homeworkStatus === "submitted"}
-                />
-              )}
-            </div>
-
-            {progress?.homeworkStatus !== "approved" && (
-              <div className={styles.inputGroup}>
-                <label>Вопросы ментору</label>
-                <textarea
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  placeholder="Есть трудности или вопросы?"
-                  disabled={progress?.homeworkStatus === "submitted"}
-                />
-              </div>
-            )}
-
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "flex-end",
-                alignItems: "center",
-                marginTop: "2rem",
-              }}
-            >
-              {progress?.homeworkStatus === "approved" ? (
-                <div
-                  style={{
-                    color: "#4ade80",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <CheckCircle size={20} /> Задание Принято!
-                </div>
-              ) : progress?.homeworkStatus === "submitted" ? (
-                <div
-                  style={{
-                    color: "#facc15",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <CheckCircle size={20} /> На Проверке
-                </div>
-              ) : (
-                <button
-                  onClick={() => {
-                    if (homeworkLink) {
-                      submitHomework(course.id, module.id, homeworkLink, notes);
-                    } else {
-                      alert("Пожалуйста, предоставьте ссылку на GitHub");
-                    }
-                  }}
-                  className={styles.ctaButton}
-                  style={{
-                    background:
-                      progress?.homeworkStatus === "rejected"
-                        ? "#ef4444"
-                        : "var(--color-accent)",
-                    border: "none",
-                    padding: "0.75rem 2rem",
-                    borderRadius: "4px",
-                    fontWeight: "bold",
-                    cursor: "pointer",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                    color: "var(--color-accent-text)",
-                  }}
-                >
-                  {progress?.homeworkStatus === "rejected" ? (
-                    <>
-                      Отправить Исправления <CheckCircle size={18} />
-                    </>
-                  ) : (
-                    <>
-                      Отправить на Проверку <CheckCircle size={18} />
-                    </>
                   )}
-                </button>
-              )}
-            </div>
+
+                  <div className={styles.inputGroup}>
+                    <label>Ссылка на репозиторий GitHub</label>
+                    {progress?.homeworkStatus === "approved" ? (
+                      <div style={{ padding: "0.5rem 0" }}>
+                        <a
+                          href={
+                            homeworkLink.startsWith("http")
+                              ? homeworkLink
+                              : `https://${homeworkLink}`
+                          }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            color: "#60a5fa",
+                            textDecoration: "underline",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.5rem",
+                          }}
+                        >
+                          <ExternalLink size={16} /> {homeworkLink}
+                        </a>
+                      </div>
+                    ) : (
+                      <input
+                        type="text"
+                        placeholder="https://github.com/username/repo"
+                        value={homeworkLink}
+                        onChange={(e) => setHomeworkLink(e.target.value)}
+                        disabled={progress?.homeworkStatus === "submitted"}
+                      />
+                    )}
+                  </div>
+
+                  {progress?.homeworkStatus !== "approved" && (
+                    <div className={styles.inputGroup}>
+                      <label>Вопросы ментору</label>
+                      <textarea
+                        value={notes}
+                        onChange={(e) => setNotes(e.target.value)}
+                        placeholder="Есть трудности или вопросы?"
+                        disabled={progress?.homeworkStatus === "submitted"}
+                      />
+                    </div>
+                  )}
+
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "flex-end",
+                      alignItems: "center",
+                      marginTop: "2rem",
+                    }}
+                  >
+                    {progress?.homeworkStatus === "approved" ? (
+                      <div
+                        style={{
+                          color: "#4ade80",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <CheckCircle size={20} /> Задание Принято!
+                      </div>
+                    ) : progress?.homeworkStatus === "submitted" ? (
+                      <div
+                        style={{
+                          color: "#facc15",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                        }}
+                      >
+                        <CheckCircle size={20} /> На Проверке
+                      </div>
+                    ) : (
+                      <button
+                        onClick={() => {
+                          if (homeworkLink) {
+                            submitHomework(
+                              course.id,
+                              module.id,
+                              homeworkLink,
+                              notes,
+                            );
+                          } else {
+                            alert("Пожалуйста, предоставьте ссылку на GitHub");
+                          }
+                        }}
+                        className={styles.ctaButton}
+                        style={{
+                          background:
+                            progress?.homeworkStatus === "rejected"
+                              ? "#ef4444"
+                              : "var(--color-accent)",
+                          border: "none",
+                          padding: "0.75rem 2rem",
+                          borderRadius: "4px",
+                          fontWeight: "bold",
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "0.5rem",
+                          color: "var(--color-accent-text)",
+                        }}
+                      >
+                        {progress?.homeworkStatus === "rejected" ? (
+                          <>
+                            Отправить Исправления <CheckCircle size={18} />
+                          </>
+                        ) : (
+                          <>
+                            Отправить на Проверку <CheckCircle size={18} />
+                          </>
+                        )}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </div>

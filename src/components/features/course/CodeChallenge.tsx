@@ -9,15 +9,28 @@ import { CheckCircle, XCircle, RotateCcw, Play } from "lucide-react";
 interface CodeChallengeProps {
   data: ChallengeData;
   onComplete?: () => void;
+  onCodeChange?: (code: string) => void;
+  savedCode?: string;
 }
 
-export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
-  const [code, setCode] = useState(data.initialCode);
+export function CodeChallenge({
+  data,
+  onComplete,
+  onCodeChange,
+  savedCode,
+}: CodeChallengeProps) {
+  // Determine challenge type
+  const isJs = data.type === "javascript";
+  const defaultTab = isJs ? "javascript" : "html";
+
+  const [code, setCode] = useState(savedCode || data.initialCode);
   const [cssCode, setCssCode] = useState(data.initialCss || "");
-  const [activeTab, setActiveTab] = useState<"task" | "result">("task");
-  const [activeEditorTab, setActiveEditorTab] = useState<"html" | "css">(
-    "html",
+  const [activeTab, setActiveTab] = useState<"task" | "checks" | "result">(
+    "task",
   );
+  const [activeEditorTab, setActiveEditorTab] = useState<
+    "html" | "css" | "javascript"
+  >(defaultTab);
   const [results, setResults] = useState<CheckResult[] | null>(null);
 
   // Resizing state
@@ -26,12 +39,16 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
 
   // When switching topic/challenge, reset state
   useEffect(() => {
-    setCode(data.initialCode);
+    if (savedCode) {
+      setCode(savedCode);
+    } else {
+      setCode(data.initialCode);
+    }
     setCssCode(data.initialCss || "");
     setResults(null);
     setActiveTab("task");
-    setActiveEditorTab("html");
-  }, [data.id, data.initialCode, data.initialCss]);
+    setActiveEditorTab(data.type === "javascript" ? "javascript" : "html");
+  }, [data.id, data.initialCode, data.initialCss, data.type, savedCode]);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -75,12 +92,14 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
 
     const checkPassed = checkResults.every((r) => r.passed);
     if (checkPassed) {
-      setActiveTab("result");
+      // Stay on checks tab to show success, or switch to Result?
+      // Maybe switch to Checks to show the green checks?
+      setActiveTab("checks");
       if (onComplete) {
         onComplete();
       }
     } else {
-      setActiveTab("task");
+      setActiveTab("checks");
     }
   };
 
@@ -89,13 +108,32 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
     setCssCode(data.initialCss || "");
     setResults(null);
     setActiveTab("task");
-    setActiveEditorTab("html");
+    setActiveEditorTab(data.type === "javascript" ? "javascript" : "html");
   };
 
   const allPassed = results && results.every((r) => r.passed);
 
   // Combine HTML and CSS for preview
-  const previewDoc = `
+  // If JS, we might want to wrap in script tag?
+  // For now, let's assume JS challenges don't need visual preview or just output console?
+  // But existing challenges.ts has checks that parse string.
+  // We can just embed it.
+  const previewDoc = isJs
+    ? `
+      <!DOCTYPE html>
+      <html>
+        <body>
+          <script>
+            try {
+              ${code}
+            } catch (e) {
+              console.error(e);
+            }
+          </script>
+        </body>
+      </html>
+    `
+    : `
     <!DOCTYPE html>
     <html>
       <head>
@@ -107,7 +145,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
     </html>
   `;
 
-  const hasCss = data.initialCss !== undefined;
+  const hasCss = data.initialCss !== undefined && !isJs;
 
   return (
     <div className={styles.container} id={`challenge-container-${data.id}`}>
@@ -120,12 +158,14 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
           <div className={styles.tabList}>
             <button
               className={`${styles.tab} ${
-                activeEditorTab === "html" ? styles.active : ""
+                activeEditorTab === "html" || activeEditorTab === "javascript"
+                  ? styles.active
+                  : ""
               }`}
-              onClick={() => setActiveEditorTab("html")}
+              onClick={() => setActiveEditorTab(isJs ? "javascript" : "html")}
               style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }}
             >
-              Редактор html:
+              {isJs ? "JavaScript" : "HTML"}
             </button>
             {hasCss && (
               <button
@@ -135,7 +175,7 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                 onClick={() => setActiveEditorTab("css")}
                 style={{ padding: "0.5rem 1rem", fontSize: "0.9rem" }}
               >
-                Редактор css:
+                CSS
               </button>
             )}
           </div>
@@ -144,15 +184,21 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
         <div className={styles.editorWrapper}>
           <Editor
             height="100%"
-            defaultLanguage={activeEditorTab === "html" ? "html" : "css"}
-            language={activeEditorTab === "html" ? "html" : "css"}
-            value={activeEditorTab === "html" ? code : cssCode}
+            defaultLanguage={isJs ? "javascript" : "html"} // simplified
+            language={
+              activeEditorTab === "css" ? "css" : isJs ? "javascript" : "html"
+            }
+            value={activeEditorTab === "css" ? cssCode : code}
             theme="vs-dark"
             onChange={(value) => {
-              if (activeEditorTab === "html") {
-                setCode(value || "");
-              } else {
+              if (activeEditorTab === "css") {
                 setCssCode(value || "");
+              } else {
+                const newCode = value || "";
+                setCode(newCode);
+                if (onCodeChange) {
+                  onCodeChange(newCode);
+                }
               }
             }}
             options={{
@@ -184,7 +230,15 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
               }`}
               onClick={() => setActiveTab("task")}
             >
-              Задание и тесты
+              Задание
+            </button>
+            <button
+              className={`${styles.tab} ${
+                activeTab === "checks" ? styles.active : ""
+              }`}
+              onClick={() => setActiveTab("checks")}
+            >
+              Критерии
             </button>
             <button
               className={`${styles.tab} ${
@@ -199,24 +253,22 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
         </div>
 
         <div className={styles.content}>
-          {activeTab === "task" ? (
-            <>
-              <div dangerouslySetInnerHTML={{ __html: data.description }} />
+          {activeTab === "task" && (
+            <div dangerouslySetInnerHTML={{ __html: data.description }} />
+          )}
 
-              <h3 className={styles.subHeader}>Критерии выполнения:</h3>
+          {activeTab === "checks" && (
+            <div className={styles.sectionsWrapper}>
+              <h3 className={styles.subHeader}>Результаты проверки:</h3>
+              {allPassed && (
+                <div className={styles.successBox}>
+                  <CheckCircle size={20} />
+                  <span>Отлично! Задание выполнено.</span>
+                </div>
+              )}
 
-              <div className={styles.sectionsWrapper}>
-                <h3 className={styles.subHeader}>Результаты проверки:</h3>
-                {allPassed && (
-                  <div className={styles.successBox}>
-                    <CheckCircle size={20} />
-                    <span>Отлично! Задание выполнено.</span>
-                  </div>
-                )}
-
-                {(
-                  results || data.checks(data.initialCode, data.initialCss)
-                ).map((check) => (
+              {(results || data.checks(data.initialCode, data.initialCss)).map(
+                (check) => (
                   <div
                     key={check.id}
                     className={`${styles.checkItem} ${
@@ -251,10 +303,12 @@ export function CodeChallenge({ data, onComplete }: CodeChallengeProps) {
                       {check.label}
                     </span>
                   </div>
-                ))}
-              </div>
-            </>
-          ) : (
+                ),
+              )}
+            </div>
+          )}
+
+          {activeTab === "result" && (
             <div className={styles.browserContainer}>
               <iframe
                 className={styles.browserFrame}

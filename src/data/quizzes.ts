@@ -325,4 +325,163 @@ export const quizzes: Record<string, QuizData> = {
     successMessage:
       "Верно! Селектор выбирает все <a>, которые находятся внутри <li>, которые находятся внутри элемента с id #footer.",
   },
+  "js-output-quiz": {
+    id: "js-output-quiz",
+    question:
+      "Какой метод используют для вывода информации из кода в консоль инструментов разработчика?",
+    options: ["print()", "output()", "console.log()"],
+    correctAnswer: 2,
+    successMessage: "Правильно! console.log() выводит сообщения в консоль.",
+  },
+  "js-variables-quiz": {
+    id: "js-variables-quiz",
+    question:
+      "Какие ошибки допущены в этом фрагменте кода во время объявления переменной: username = 'Jacob Mercer'; ?",
+    options: [
+      "Недопустимое имя переменной",
+      "Недопустимое значение переменной",
+      "Не хватает ключевого слова const (или let)",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Именно! Переменная всегда объявляется с использованием ключевого слова.",
+  },
+  "js-const-let-quiz": {
+    id: "js-const-let-quiz",
+    question:
+      "С помощью какого ключевого слова объявляется переменная, которой нельзя задать новое значение после её объявления?",
+    options: ["const", "let"],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! const создает константу, которую нельзя изменить.",
+  },
+  "js-null-undefined-quiz": {
+    id: "js-null-undefined-quiz",
+    question:
+      "Что будет выведено в консоль: let username; console.log(username); ?",
+    options: ["ReferenceError", "null", "undefined"],
+    correctAnswer: 2,
+    successMessage:
+      "Правильно! Переменная объявлена, но не инициализирована, поэтому её значение undefined.",
+  },
+  "js-typeof-quiz": {
+    id: "js-typeof-quiz",
+    question: 'Каким будет результат выражения typeof "true"?',
+    options: ['"string"', '"boolean"', '"true"'],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! Это строка, так как значение заключено в кавычки.",
+  },
+  "js-strict-equality-quiz": {
+    id: "js-strict-equality-quiz",
+    question: 'Каким будет результат выражения: console.log(1 === "1"); ?',
+    options: ["true", "false"],
+    correctAnswer: 1,
+    successMessage:
+      "Именно так! В коде использован оператор строгого равенства. Сравнивая число 1 и строку '1', этот оператор возвращает false, так как типы данных различаются.",
+  },
+  "js-loose-equality-quiz": {
+    id: "js-loose-equality-quiz",
+    question: "Каким будет результат выражения: console.log(0 == false); ?",
+    options: ["true", "false"],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Используется оператор нестрогого равенства. При сравнении числа 0 и булевого значения false, последнее приводится к числу 0. Поэтому 0 равно 0, и результат true.",
+  },
+  "js-string-conversion-quiz": {
+    id: "js-string-conversion-quiz",
+    question:
+      'Что будет выведено в консоль при выполнении кода: console.log("false" + null); ?',
+    options: ["null", "Ошибка", 'Строка "falsenull"', 'Строка "false"'],
+    correctAnswer: 2,
+    successMessage:
+      'Правильно! Оператор + при наличии строки выполняет конкатенацию. null преобразуется в строку "null" и объединяется с "false".',
+  },
+  "js-string-index-quiz": {
+    id: "js-string-index-quiz",
+    question: "Какой индекс первого элемента строки?",
+    options: ["-1", "0", "1"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Индексация строк в JavaScript начинается с нуля.",
+  },
+  "js-string-immutability-quiz": {
+    id: "js-string-immutability-quiz",
+    question: "Каким будет финальное значение переменной username?",
+    options: ['"Poly"', '"Pola"', "Будет ошибка"],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! Строки в JavaScript неизменяемы. Попытка изменить отдельный символ не изменит саму строку.",
+  },
+  "js-logical-boolean-quiz": {
+    id: "js-logical-boolean-quiz",
+    question: 'Каким будет результат выражения Boolean("false")?',
+    options: ["true", "false"],
+    correctAnswer: 0,
+    successMessage: "Правильно! Любая не пустая строка преобразуется в true.",
+  },
+  "js-logical-and-null-quiz": {
+    id: "js-logical-and-null-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["true", "false", "null"],
+    correctAnswer: 2,
+    successMessage:
+      "Правильно! null является ложным значением, поэтому оператор && возвращает его, не вычисляя правый операнд.",
+  },
+  "js-logical-and-string-number-quiz": {
+    id: "js-logical-and-string-number-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["0", "false", '"false"'],
+    correctAnswer: 0,
+    successMessage:
+      'Отлично! Строка "false" является истинной (true), поэтому оператор переходит к следующему операнду 0, который является ложным, и возвращает его.',
+  },
+  "js-logical-and-strings-quiz": {
+    id: "js-logical-and-strings-quiz",
+    question: "Каким будет результат выражения?",
+    options: ['"Mango"', '"Poly"', "true"],
+    correctAnswer: 1,
+    successMessage:
+      "Абсолютно верно! Оба операнда являются истинными. В этом случае возвращается значение последнего операнда.",
+  },
+  "js-logical-or-null-quiz": {
+    id: "js-logical-or-null-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["null", "true", "false"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Оператор || находит первое истинное значение и возвращает его.",
+  },
+  "js-logical-or-string-number-quiz": {
+    id: "js-logical-or-string-number-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["0", "false", '"false"'],
+    correctAnswer: 2,
+    successMessage:
+      'Верно! Строка "false" является истинной (true), поэтому оператор || возвращает её сразу же.',
+  },
+  "js-logical-or-strings-quiz": {
+    id: "js-logical-or-strings-quiz",
+    question: "Каким будет результат выражения?",
+    options: ['"Mango"', '"Poly"', "true"],
+    correctAnswer: 0,
+    successMessage:
+      'Правильно! К первому операнду "Mango" применимо преобразование в true, поэтому он и возвращается.',
+  },
+  "js-logical-not-zero-quiz": {
+    id: "js-logical-not-zero-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["true", "false", "1"],
+    correctAnswer: 0,
+    successMessage:
+      'Правильно! В примере выше !0 — 0 преобразуется в false, а оператор "НЕ" инвертирует его в true.',
+  },
+  "js-logical-not-string-quiz": {
+    id: "js-logical-not-string-quiz",
+    question: "Каким будет результат выражения?",
+    options: ["true", "false", "0"],
+    correctAnswer: 1,
+    successMessage:
+      'Правильно! Любая не пустая строка преобразуется в true. Оператор "НЕ" меняет true на false.',
+  },
 };
