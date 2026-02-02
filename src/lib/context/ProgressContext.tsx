@@ -57,7 +57,7 @@ interface ProgressContextType {
     courseId: string,
     moduleId: string,
     topicId: string,
-    pageIndex: number,
+    value: any,
   ) => Promise<void>;
   isModuleLocked: (courseId: string, moduleId: string) => boolean;
   getAllProgress: () => Record<string, StudentProgress>;
@@ -305,7 +305,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     courseId: string,
     moduleId: string,
     topicId: string,
-    pageIndex: number,
+    value: any,
   ) => {
     if (!user) return;
     const current = getModuleProgress(courseId, moduleId);
@@ -313,7 +313,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
 
     const updatedStates = {
       ...currentStates,
-      [topicId]: pageIndex,
+      [topicId]: value,
     };
 
     await updateProgress(courseId, moduleId, {

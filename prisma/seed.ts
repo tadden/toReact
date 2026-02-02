@@ -2,11 +2,17 @@ import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcryptjs";
 import { preCourse } from "./data/pre-course";
 import { htmlCssCourse } from "./data/html-css";
+import { javascriptCourse } from "./data/javascript";
 import { upcomingCourses } from "./data/upcoming";
 
 const prisma = new PrismaClient();
 
-const COURSES = [preCourse, htmlCssCourse, ...upcomingCourses];
+const COURSES = [
+  preCourse,
+  htmlCssCourse,
+  javascriptCourse,
+  ...upcomingCourses,
+];
 
 async function main() {
   console.log("Start seeding ...");
@@ -35,7 +41,7 @@ async function main() {
     },
     { name: "Roman", email: "roman@toreact.com", id: "user_roman" },
     { name: "Dima", email: "dima@toreact.com", id: "user_dima" },
-    { name: "Vadim", email: "vadim@toreact.com", id: "user_vadim" },
+    { name: "Vadim", email: "vadimka.ramkovich@gmail.com", id: "user_vadim" },
     { name: "Olga", email: "olga@toreact.com", id: "user_olga" },
     {
       name: "Ilja",

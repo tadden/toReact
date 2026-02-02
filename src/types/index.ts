@@ -74,7 +74,7 @@ export interface StudentProgress {
   homeworkUrl?: string | null;
   homeworkStatus?: "pending" | "submitted" | "approved" | "rejected";
   adminComments?: string | null;
-  topicStates?: Record<string, number>; // JSON state: { topicId: pageIndex }
+  topicStates?: Record<string, any>; // JSON state: { topicId: pageIndex, "code:challengeId": string }
   updatedAt: number;
 }
 

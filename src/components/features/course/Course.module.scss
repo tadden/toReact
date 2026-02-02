@@ -91,8 +91,13 @@
 .contentArea {
   margin-left: 300px;
   flex: 1;
+  /* Removed padding and max-width to allow full-width children */
+}
+
+.standardContainer {
   padding: 3rem;
   max-width: 1000px;
+  /* margin: 0 auto; Optional, if centering is desired */
 }
 
 .moduleHeader {
