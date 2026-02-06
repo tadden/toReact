@@ -1041,4 +1041,619 @@ const pricePerItem = 3500;
       ];
     },
   },
+  "js-function-declaration": {
+    id: "js-function-declaration",
+    title: "Объявление функции",
+    type: "javascript",
+    description: `
+      <p>Функция — это подпрограмма, независимая часть кода, предназначенная для многократного выполнения конкретной задачи с разными начальными значениями.</p>
+      
+      <p>Функцию можно представить как черный ящик — она получает что-то на входе (данные), и возвращает что-то на выходе (результат выполнения кода внутри неё).</p>
+
+      <pre><code class="language-javascript">// 1. Объявление функции multiply
+function multiply() {
+  // Тело функции
+  console.log("multiply function invocation");
+}
+
+// 2. Вызовы функции multiply
+multiply(); // multiply function invocation
+multiply(); // multiply function invocation
+multiply(); // multiply function invocation</code></pre>
+
+      <p>Объявление функции начинается с ключевого слова <code>function</code>, за которым идет её имя — глагол, отвечающий на вопрос «Что сделать?» и пара круглых скобок. Тело функции берется в фигурные скобки <code>{}</code> и содержит инструкции, которые необходимо выполнить во время её вызова. Затем, когда необходимо, функция вызывается с помощью имени и пары круглых скобок.</p>
+
+      <h3>Задание</h3>
+      <p>Объяви функцию <code>sayHi</code>, внутри которой добавь <code>console.log()</code> со строкой <code>"Hello, this is my first function!"</code>. После объявления вызови функцию <code>sayHi</code>.</p>
+    `,
+    initialCode: `// Change code below this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction = /function\s+sayHi\s*\(\)\s*\{/.test(cleanCode);
+      const hasConsoleLog =
+        /console\.log\s*\(\s*["']Hello,\s+this\s+is\s+my\s+first\s+function!["']\s*\)/.test(
+          cleanCode,
+        );
+      // Check if call exists after function declaration (simplified check for existence)
+      const hasCall = /sayHi\s*\(\s*\)/.test(cleanCode);
+
+      return [
+        {
+          id: "function-declared",
+          label: "Ожидается объявление функции",
+          passed: hasFunction,
+        },
+        {
+          id: "function-name",
+          label: "Функции присвоено имя sayHi",
+          passed: hasFunction,
+        },
+        {
+          id: "console-log",
+          label:
+            'В теле функции sayHi есть console.log("Hello, this is my first function!")',
+          passed: hasConsoleLog,
+        },
+        {
+          id: "function-call",
+          label: "После объявления есть вызов функции sayHi",
+          passed: hasFunction && hasCall,
+        },
+      ];
+    },
+  },
+  "js-function-parameters": {
+    id: "js-function-parameters",
+    title: "Параметры функции",
+    type: "javascript",
+    description: `
+      <p>В круглых скобках после имени функции идут параметры - перечень данных, которые функция ожидает во время вызова.</p>
+      
+      <p><strong>Параметры</strong> - это локальные переменные, доступные только в теле функции. Они разделяются запятыми. Параметров может быть несколько или их вообще может не быть, тогда записываются просто пустые круглые скобки.</p>
+
+      <p>Во время вызова функции, в круглых скобках можно передать аргументы - значения для объявленных параметров функции.</p>
+
+      <pre><code class="language-javascript">// 1. Объявление параметров x, y, z
+function multiply(x, y, z) {
+  console.log(\`Результат умножения равен \${x * y * z}\`);
+}
+
+// 2. Передача аргументов
+multiply(2, 3, 5); // Результат умножения равен 30
+multiply(4, 8, 12); // Результат умножения равен 384
+multiply(17, 6, 25); // Результат умножения равен 2550</code></pre>
+
+      <p>Порядок передачи аргументов должен соответствовать порядку объявления параметров: значение первого аргумента будет присвоено первому параметру, второго аргумента - второму параметру и т.д.</p>
+
+      <h3>Задание</h3>
+      <p>Функция <code>add</code> должна уметь добавлять три числа и выводить результат в консоль. Добавь функции <code>add</code> три параметра: <code>a</code>, <code>b</code> и <code>c</code>, которые будут получать значения аргументов во время вызова.</p>
+      <p>Дополни <code>console.log()</code> таким образом, чтобы он логировал строку <code>"Addition result equals &lt;result&gt;"</code>, где <code>&lt;result&gt;</code> - это сумма переданных чисел.</p>
+    `,
+    initialCode: `// Change code below this line
+function add() {
+  console.log("Addition result equals ");
+}
+// Change code above this line
+
+add(15, 27, 10);
+add(10, 20, 30);
+add(5, 10, 15);
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasParameters = /function\s+add\s*\(\s*a\s*,\s*b\s*,\s*c\s*\)/.test(
+        cleanCode,
+      );
+      const hasConsoleLog =
+        /console\.log\s*\(\s*`Addition result equals \$\{\s*a\s*\+\s*b\s*\+\s*c\s*\}\s*`\s*\)/.test(
+          cleanCode,
+        ) ||
+        /console\.log\s*\(\s*["']Addition result equals ["']\s*\+\s*\(\s*a\s*\+\s*b\s*\+\s*c\s*\)\s*\)/.test(
+          cleanCode,
+        );
+
+      return [
+        {
+          id: "function-parameters",
+          label: "Объявлена функция add(a, b, c)",
+          passed: hasParameters,
+        },
+        {
+          id: "log-call-1",
+          label:
+            'Вызов add(15, 27, 10) выводит в консоль "Addition result equals 52"',
+          passed: hasParameters && hasConsoleLog, // Simplification: if logic is correct, it passes
+        },
+        {
+          id: "log-call-2",
+          label:
+            'Вызов add(10, 20, 30) выводит в консоль "Addition result equals 60"',
+          passed: hasParameters && hasConsoleLog,
+        },
+        {
+          id: "log-call-3",
+          label:
+            'Вызов add(5, 10, 15) выводит в консоль "Addition result equals 30"',
+          passed: hasParameters && hasConsoleLog,
+        },
+      ];
+    },
+  },
+  "js-function-return": {
+    id: "js-function-return",
+    title: "Возврат значения",
+    type: "javascript",
+    description: `
+      <p>Оператор <code>return</code> используется для передачи значения из тела функции во внешний код. Когда интерпретатор встречает <code>return</code>, он сразу же выходит из функции (прекращает её выполнение) и возвращает указанное значение в то место кода, где функция была вызвана.</p>
+
+      <pre><code class="language-javascript">function multiply(x, y, z) {
+  console.log("Код до return выполняется обычным образом");
+
+  // Возвращаем результат выражения умножения
+  return x * y * z;
+
+  console.log("Этот лог никогда не выполнится, он стоит после return");
+}
+
+// Результат работы функции можно сохранить в переменную
+let result = multiply(2, 3, 5);
+console.log(result); // 30
+
+result = multiply(4, 8, 12);
+console.log(result); // 384
+
+result = multiply(17, 6, 25);
+console.log(result); // 2550</code></pre>
+
+      <p>Оператор <code>return</code> без явно указанного значения возвращает специальное значение <code>undefined</code>. При отсутствии <code>return</code> в теле функции, она также вернет <code>undefined</code>.</p>
+
+      <h3>Задание</h3>
+      <p>Дополни код функции <code>add</code> таким образом, чтобы она возвращала результат сложения значений трех параметров: <code>a</code>, <code>b</code> и <code>c</code>.</p>
+    `,
+    initialCode: `function add(a, b, c) {
+  // Change code below this line
+
+  // Change code above this line
+}
+
+add(2, 5, 8); // 15
+
+console.log(add(15, 27, 10));
+console.log(add(10, 20, 30));
+console.log(add(5, 10, 15));
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction = /function\s+add\s*\(\s*a\s*,\s*b\s*,\s*c\s*\)/.test(
+        cleanCode,
+      );
+      const hasReturn = /\s+return\s+/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        // Dynamic execution to check values
+        const userFn = new Function(code + "; return add;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(15, 27, 10);
+          const r2 = userFn(10, 20, 30);
+          const r3 = userFn(5, 10, 15);
+          const r4 = userFn(1, 1, 1);
+
+          if (r1 === 52 && r2 === 60 && r3 === 30 && r4 === 3) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция add(a, b, c)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-return",
+          label: "В функции add есть оператор return",
+          passed: hasReturn,
+        },
+        {
+          id: "test-1",
+          label: "Вызов add(15, 27, 10) возвращает 52",
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label: "Вызов add(10, 20, 30) возвращает 60",
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label: "Вызов add(5, 10, 15) возвращает 30",
+          passed: passesTests,
+        },
+        {
+          id: "test-random",
+          label:
+            "Вызов функции со случайными, но валидными аргументами, возвращает правильное значение",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-make-message": {
+    id: "js-make-message",
+    title: "Шаблонные строки 2",
+    type: "javascript",
+    description: `
+      <p>Функция <code>makeMessage(name, price)</code> составляет и возвращает сообщение о покупке. Она объявляет два параметра, значения которых будут задаваться во время её вызова.</p>
+      
+      <ul class="list-disc">
+        <li><code>name</code> - название товара</li>
+        <li><code>price</code> - цена товара</li>
+      </ul>
+
+      <p>Дополни код функции таким образом, чтобы в переменную <code>message</code> записывалась строка <code>"You picked &lt;product name&gt;, price per item is &lt;product price&gt; credits"</code>, где <code>&lt;product name&gt;</code> и <code>&lt;product price&gt;</code> - это значения параметров <code>name</code> и <code>price</code>. Используй синтаксис шаблонных строк.</p>
+
+      <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-lg my-4">
+        <h4 class="text-red-400 font-bold mb-2 flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.56 2.9A7 7 0 0 1 19 8.15W22 21.74A1.73 1.73 0 0 0 23.94 21.46A2.78 2.78 0 0 0 23.94 15.89A5.4 5.4 0 0 0 19 8.15z"></path><path d="M12 2v2"></path><path d="M12 20v2"></path><path d="M4.93 4.93l1.41 1.41"></path><path d="M17.66 17.66l1.41 1.41"></path><path d="M2.9 8.56a7 7 0 0 1 5.25-5.66"></path><path d="M2 12h2"></path><path d="M20 12h2"></path><path d="M4.93 19.07l1.41-1.41"></path><path d="M17.66 6.34l1.41-1.41"></path></svg>
+          Внимание
+        </h4>
+        <p class="text-sm text-red-200">
+          Обрати внимание на то, что в коде отсутствует вызов функции <code>makeMessage</code>. С этого задания и далее мы сами будем вызывать твои функции и проверять то, как они работают. Результат наших проверок ты увидишь в блоке <code>Результаты</code> под редактором кода.
+        </p>
+      </div>
+    `,
+    initialCode: `function makeMessage(name, price) {
+  // Change code below this line
+   const message = "";
+  // Change code above this line
+  return message;
+};
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction =
+        /function\s+makeMessage\s*\(\s*name\s*,\s*price\s*\)/.test(cleanCode);
+      const hasTemplateString = /`.*`/.test(code); // Basic check for backticks
+
+      let passesTests = false;
+      try {
+        // Dynamic execution to check values
+        const userFn = new Function(code + "; return makeMessage;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn("Radar", 6150);
+          const r2 = userFn("Scanner", 3500);
+          const r3 = userFn("Reactor", 8000);
+          const r4 = userFn("Engine", 4070);
+
+          if (
+            r1 === "You picked Radar, price per item is 6150 credits" &&
+            r2 === "You picked Scanner, price per item is 3500 credits" &&
+            r3 === "You picked Reactor, price per item is 8000 credits" &&
+            r4 === "You picked Engine, price per item is 4070 credits"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция makeMessage(name, price)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            "Вызов makeMessage('Radar', 6150) возвращает \"You picked Radar, price per item is 6150 credits\"",
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            "Вызов makeMessage('Scanner', 3500) возвращает \"You picked Scanner, price per item is 3500 credits\"",
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            "Вызов makeMessage('Reactor', 8000) возвращает \"You picked Reactor, price per item is 8000 credits\"",
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label:
+            "Вызов makeMessage('Engine', 4070) возвращает \"You picked Engine, price per item is 4070 credits\"",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-calculate-total-price": {
+    id: "js-calculate-total-price",
+    title: "Базовые математические операции",
+    type: "javascript",
+    description: `
+      <p>Функция <code>calculateTotalPrice</code> считает и возвращает общую сумму покупки на основе количества товаров в заказе и цены за единицу товара. Она принимает два параметра, значения которых будут задаваться во время её вызова.</p>
+      
+      <ul class="list-disc">
+        <li><code>orderedQuantity</code> - количество единиц товара в заказе</li>
+        <li><code>pricePerItem</code> - цена за единицу товара</li>
+      </ul>
+
+      <p>Дополни код функции так, чтобы общая сумма покупки была присвоена переменной <code>totalPrice</code>. Загальная сума покупки получается путем умножения количества заказанных товаров на цену единицы.</p>
+    `,
+    initialCode: `function calculateTotalPrice (orderedQuantity, pricePerItem) {
+  // Change code below this line
+  const totalPrice = orderedQuantity + pricePerItem;
+
+  // Change code above this line
+  return totalPrice;
+};
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction =
+        /function\s+calculateTotalPrice\s*\(\s*orderedQuantity\s*,\s*pricePerItem\s*\)/.test(
+          cleanCode,
+        );
+      const hasMultiplication =
+        /orderedQuantity\s*\*\s*pricePerItem/.test(cleanCode) ||
+        /pricePerItem\s*\*\s*orderedQuantity/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        // Dynamic execution to check values
+        const userFn = new Function(code + "; return calculateTotalPrice;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(5, 100);
+          const r2 = userFn(8, 60);
+          const r3 = userFn(3, 400);
+          const r4 = userFn(1, 3500);
+          const r5 = userFn(12, 70);
+
+          if (
+            r1 === 500 &&
+            r2 === 480 &&
+            r3 === 1200 &&
+            r4 === 3500 &&
+            r5 === 840
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label:
+            "Объявлена функция calculateTotalPrice(orderedQuantity, pricePerItem)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Вызов calculateTotalPrice(5, 100) возвращает 500",
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label: "Вызов calculateTotalPrice(8, 60) возвращает 480",
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label: "Вызов calculateTotalPrice(3, 400) возвращает 1200",
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label: "Вызов calculateTotalPrice(1, 3500) возвращает 3500",
+          passed: passesTests,
+        },
+        {
+          id: "test-5",
+          label: "Вызов calculateTotalPrice(12, 70) возвращает 840",
+          passed: passesTests,
+        },
+        {
+          id: "test-random",
+          label:
+            "Вызов функции со случайными, но валидными аргументами, возвращает правильное значение",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-make-order-message": {
+    id: "js-make-order-message",
+    title: "Заказ дроидов",
+    type: "javascript",
+    description: `
+      <p>Функция <code>makeOrderMessage(orderedQuantity, pricePerDroid, deliveryFee)</code> составляет и возвращает сообщение о покупке ремонтных дроидов. Она объявляет три параметра, значения которых будут задаваться во время её вызова.</p>
+      
+      <ul class="list-disc">
+        <li><code>orderedQuantity</code> - количество дроидов в заказе</li>
+        <li><code>pricePerDroid</code> - цена одного дроида</li>
+        <li><code>deliveryFee</code> - стоимость доставки</li>
+      </ul>
+
+      <p>Дополни код функции таким образом, чтобы она возвращала сообщение про заказ в формате <code>"You ordered droids worth &lt;total price&gt; credits. Delivery (&lt;delivery fee&gt; credits) is included in total price."</code>. Не забудь про цену доставки в вычислениях общей стоимости.</p>
+    `,
+    initialCode: `function makeOrderMessage(orderedQuantity, pricePerDroid, deliveryFee) {
+  // Change code below this line
+  let message = "";
+
+  // Change code above this line
+  return message;
+};
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction =
+        /function\s+makeOrderMessage\s*\(\s*orderedQuantity\s*,\s*pricePerDroid\s*,\s*deliveryFee\s*\)/.test(
+          cleanCode,
+        );
+
+      let passesTests = false;
+      try {
+        // Dynamic execution to check values
+        const userFn = new Function(code + "; return makeOrderMessage;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(2, 100, 50);
+          const r2 = userFn(4, 300, 100);
+          const r3 = userFn(10, 70, 200);
+
+          if (
+            r1 ===
+              "You ordered droids worth 250 credits. Delivery (50 credits) is included in total price." &&
+            r2 ===
+              "You ordered droids worth 1300 credits. Delivery (100 credits) is included in total price." &&
+            r3 ===
+              "You ordered droids worth 900 credits. Delivery (200 credits) is included in total price."
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label:
+            "Объявлена функция makeOrderMessage(orderedQuantity, pricePerDroid, deliveryFee)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов makeOrderMessage(2, 100, 50) возвращает "You ordered droids worth 250 credits. Delivery (50 credits) is included in total price."',
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов makeOrderMessage(4, 300, 100) возвращает "You ordered droids worth 1300 credits. Delivery (100 credits) is included in total price."',
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов makeOrderMessage(10, 70, 200) возвращает "You ordered droids worth 900 credits. Delivery (200 credits) is included in total price."',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-is-adult": {
+    id: "js-is-adult",
+    title: "Операторы сравнения",
+    type: "javascript",
+    description: `
+      <p>Используется для сравнения двух значений. Результатом своего выполнения возвращают буль - <code>true</code> или <code>false</code>, то есть «да» или «нет».</p>
+      
+      <ul class="list-disc">
+        <li><code>&gt;</code> - больше</li>
+        <li><code>&lt;</code> - меньше</li>
+        <li><code>&gt;=</code> - больше или равно</li>
+        <li><code>&lt;=</code> - меньше или равно</li>
+      </ul>
+
+      <pre><code class="language-javascript">const a = 2;
+const b = 5;
+
+console.log(a > b); // false
+console.log(b > a); // true
+console.log(a >= b); // false
+console.log(b >= a); // true
+
+console.log(a < b); // true
+console.log(b < a); // false
+console.log(a <= b); // true
+console.log(b <= a); // false</code></pre>
+
+      <p>Функция <code>isAdult</code> объявляет один параметр <code>age</code> (возраст), значение которого будет задаваться во время её вызова. Присвой переменной <code>passed</code> выражение проверки возраста пользователя на совершеннолетие. Человек считается совершеннолетним в возрасте 18 лет и старше.</p>
+    `,
+    initialCode: `function isAdult(age) {
+  // Change code below this line
+  const passed = null;
+
+  // Change code above this line
+  return passed;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+isAdult\s*\(\s*age\s*\)/.test(cleanCode);
+      const hasOperator = />=/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return isAdult;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(20) === true &&
+            userFn(14) === false &&
+            userFn(8) === false &&
+            userFn(37) === true &&
+            userFn(18) === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция isAdult(age)",
+          passed: hasFunction,
+        },
+        {
+          id: "operator-used",
+          label: "В выражении проверки используется оператор >=",
+          passed: hasOperator,
+        },
+        {
+          id: "test-20",
+          label: "Вызов isAdult(20) возвращает true",
+          passed: passesTests,
+        },
+        {
+          id: "test-14",
+          label: "Вызов isAdult(14) возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-8",
+          label: "Вызов isAdult(8) возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-37",
+          label: "Вызов isAdult(37) возвращает true",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
 };
