@@ -87,3 +87,52 @@ button {
   cursor: pointer;
   font-family: inherit;
 }
+
+.challenge-code-block {
+  background-color: #1e1e1e;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin: 1rem 0;
+  overflow-x: auto;
+
+  code {
+    color: rgb(240, 113, 120) !important;
+    font-family: "Fira Code", monospace;
+    font-size: 0.9em;
+    background-color: transparent !important; /* Override module styles */
+  }
+}
+
+.info-highlight {
+  background-color: rgba(16, 185, 129, 0.1); /* Default Green */
+  color: black;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem 0;
+  border-left: 4px solid #10b981;
+
+  &.warning {
+    background-color: #fef2f2 !important; /* Red background */
+    color: #991b1b !important; /* Red text */
+    border-left-color: #ef4444 !important;
+
+    p,
+    strong {
+      color: #991b1b !important;
+    }
+  }
+}
+
+.task-instruction {
+  background-color: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  margin-top: 2rem;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    color: #60a5fa;
+  }
+}

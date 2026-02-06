@@ -500,28 +500,32 @@ fruit in pretty much any form.`,
       
       <p>Переменную можно представить как коробку с надписью (имя переменной), в которой что-то находится (значение переменной).</p>
       
-      <pre><code class="language-javascript">&lt;ключевое слово&gt; &lt;имя переменной&gt; = &lt;значение&gt;</code></pre>
+      <p>Переменную можно представить как коробку с надписью (имя переменной), в которой что-то находится (значение переменной).</p>
+      
+      <pre class="challenge-code-block"><code class="language-javascript">&lt;ключевое слово&gt; &lt;имя переменной&gt; = &lt;значение&gt;</code></pre>
 
       <p>Объявление переменной начинается с ключевого слова <code>const</code>. Такая переменная должна быть сразу инициализирована начальным значением, и такой переменной нельзя присвоить другое значение после её инициализации.</p>
 
-      <div class="info-highlight" style="background-color: #fef2f2; color: #991b1b; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+      <div class="info-highlight">
         <p><strong>Внимание</strong></p>
         <p>Создание переменной без ключевого слова <code>const</code> приведет к ошибке.</p>
       </div>
 
-      <pre><code class="language-javascript">const age = 20;
+      <pre class="challenge-code-block"><code class="language-javascript">const age = 20;
 const userName = "Mango";
 const socialProfileTag = "@gluck";
 const totalWorkerSalary = 4052;</code></pre>
 
       <p>В <code>JavaScript</code> имя переменной записывается в <code>camelCase</code>-нотации. Первое слово пишется маленькими буквами, а каждое следующее начинается с большой. Имена переменных чувствительны к регистру, то есть <code>user</code>, <code>usEr</code> и <code>User</code> - это разные переменные.</p>
 
-      <h3>Задание</h3>
-      <p>Объяви две переменные, <code>productName</code> для названия товара, и <code>pricePerItem</code> для хранения цены за штуку. При объявлении присвой переменным следующие значения:</p>
-      <ul class="list-disc">
-        <li>название - строка <code>"Droid"</code>;</li>
-        <li>цена за штуку - число <code>2000</code>.</li>
-      </ul>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Объяви две переменные, <code>productName</code> для названия товара, и <code>pricePerItem</code> для хранения цены за штуку. При объявлении присвой переменным следующие значения:</p>
+        <ul class="list-disc">
+          <li>название - строка <code>"Droid"</code>;</li>
+          <li>цена за штуку - число <code>2000</code>.</li>
+        </ul>
+      </div>
     `,
     initialCode: `// Change code below this line
 `,
@@ -577,7 +581,7 @@ const totalWorkerSalary = 4052;</code></pre>
     description: `
       <p>Для того чтобы объявить переменную, которой в будущем можно будет присвоить новое значение, используется ключевое слово <code>let</code>. Создание переменной без ключевого слова <code>let</code> или <code>const</code> приведет к ошибке.</p>
 
-      <pre><code class="language-javascript">let age = 5;
+      <pre class="challenge-code-block"><code class="language-javascript">let age = 5;
 age = 10;
 
 let username = "Mango";
@@ -586,7 +590,7 @@ username = "Poly";</code></pre>
       <p>Попытка обратиться к переменной по имени до её объявления вызовет ошибку.</p>
       <p>Например, нельзя пытаться прочитать или изменить значение переменной до её объявления:</p>
 
-      <pre><code class="language-javascript">// ❌ Неправильно, будет ошибка reference error
+      <pre class="challenge-code-block"><code class="language-javascript">// ❌ Неправильно, будет ошибка reference error
 age = 15; // ReferenceError: Cannot access 'age' before initialization
 console.log(age); // ReferenceError: age is not defined
 
@@ -597,8 +601,10 @@ let age = 20;
 age = 25;
 console.log(age); // 25</code></pre>
 
-      <h3>Задание</h3>
-      <p>Имя товара изменили на <code>"Repair droid"</code> и увеличили его цену на <code>1500</code> кредитов. Переопредели значения переменных <code>pricePerItem</code> и <code>productName</code> после их объявления.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Имя товара изменили на <code>"Repair droid"</code> и увеличили его цену на <code>1500</code> кредитов. Переопредели значения переменных <code>pricePerItem</code> и <code>productName</code> после их объявления.</p>
+      </div>
     `,
     initialCode: `let productName = "Droid";
 let pricePerItem = 2000;
@@ -695,7 +701,7 @@ let pricePerItem = 2000;
         <li><strong>Boolean</strong> - логический тип данных, флаги состояния. Всего два значения: <code>true</code> и <code>false</code>. Например, на вопрос, включен ли свет в комнате, можно ответить <code>true</code> (да) или <code>false</code> (нет).</li>
       </ul>
 
-      <pre><code class="language-javascript">// Числа
+      <pre class="challenge-code-block"><code class="language-javascript">// Числа
 const age = 20;
 const salary = 3710.84;
 
@@ -707,16 +713,18 @@ const description = "JavaSript essentials";
 const isModalOpen = true;
 const isLoggedIn = false;</code></pre>
 
-      <h3>Задание</h3>
-      <p>Объяви следующие переменные, используя ключевое слово <code>const</code> или <code>let</code> и присвой им соответствующие значения.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Объяви следующие переменные, используя ключевое слово <code>const</code> или <code>let</code> и присвой им соответствующие значения.</p>
 
-      <ul class="list-disc">
-        <li><code>topSpeed</code> - число 160.</li>
-        <li><code>distance</code> - число 617.54.</li>
-        <li><code>login</code> - строка "mango935".</li>
-        <li><code>isOnline</code> - буль true.</li>
-        <li><code>isAdmin</code> - буль false.</li>
-      </ul>
+        <ul class="list-disc">
+          <li><code>topSpeed</code> - число 160.</li>
+          <li><code>distance</code> - число 617.54.</li>
+          <li><code>login</code> - строка "mango935".</li>
+          <li><code>isOnline</code> - буль true.</li>
+          <li><code>isAdmin</code> - буль false.</li>
+        </ul>
+      </div>
     `,
     initialCode: `// Change code below this line
 `,
@@ -770,7 +778,7 @@ const isLoggedIn = false;</code></pre>
     description: `
       <p>Назначение, функционал и приоритет (порядок) операций ничем не отличаются от школьного курса алгебры. Операторы возвращают значение как результат выражения.</p>
 
-      <pre><code class="language-javascript">const x = 10;
+      <pre class="challenge-code-block"><code class="language-javascript">const x = 10;
 const y = 5;
 
 // Сложение
@@ -785,13 +793,15 @@ console.log(x * y); // 50
 // Деление
 console.log(x / y); // 2</code></pre>
 
-      <div class="info-highlight" style="background-color: #f3f4f6; color: #1f2937; padding: 1rem; border-radius: 0.5rem; margin: 1rem 0;">
+      <div class="info-highlight">
         <p><strong>Полезно</strong></p>
         <p>Важно запомнить правильное именование составляющих алгебраического выражения: <code>+</code> , <code>-</code> , <code>*</code> и <code>/</code> называются операторами, а то, к чему они применяются (числа) - операндами.</p>
       </div>
 
-      <h3>Задание</h3>
-      <p>Дополни код, присвоив переменной <code>totalPrice</code> выражение для подсчета общей суммы заказа. Переменная <code>pricePerItem</code> хранит цену одной единицы товара, а <code>orderedQuantity</code> - количество единиц товара в заказе.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Дополни код, присвоив переменной <code>totalPrice</code> выражение для подсчета общей суммы заказа. Переменная <code>pricePerItem</code> хранит цену одной единицы товара, а <code>orderedQuantity</code> - количество единиц товара в заказе.</p>
+      </div>
     `,
     initialCode: `const pricePerItem = 3500;
 const orderedQuantity = 4;
@@ -1050,7 +1060,7 @@ const pricePerItem = 3500;
       
       <p>Функцию можно представить как черный ящик — она получает что-то на входе (данные), и возвращает что-то на выходе (результат выполнения кода внутри неё).</p>
 
-      <pre><code class="language-javascript">// 1. Объявление функции multiply
+      <pre class="challenge-code-block"><code class="language-javascript">// 1. Объявление функции multiply
 function multiply() {
   // Тело функции
   console.log("multiply function invocation");
@@ -1063,8 +1073,10 @@ multiply(); // multiply function invocation</code></pre>
 
       <p>Объявление функции начинается с ключевого слова <code>function</code>, за которым идет её имя — глагол, отвечающий на вопрос «Что сделать?» и пара круглых скобок. Тело функции берется в фигурные скобки <code>{}</code> и содержит инструкции, которые необходимо выполнить во время её вызова. Затем, когда необходимо, функция вызывается с помощью имени и пары круглых скобок.</p>
 
-      <h3>Задание</h3>
-      <p>Объяви функцию <code>sayHi</code>, внутри которой добавь <code>console.log()</code> со строкой <code>"Hello, this is my first function!"</code>. После объявления вызови функцию <code>sayHi</code>.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Объяви функцию <code>sayHi</code>, внутри которой добавь <code>console.log()</code> со строкой <code>"Hello, this is my first function!"</code>. После объявления вызови функцию <code>sayHi</code>.</p>
+      </div>
     `,
     initialCode: `// Change code below this line
 `,
@@ -1115,7 +1127,7 @@ multiply(); // multiply function invocation</code></pre>
 
       <p>Во время вызова функции, в круглых скобках можно передать аргументы - значения для объявленных параметров функции.</p>
 
-      <pre><code class="language-javascript">// 1. Объявление параметров x, y, z
+      <pre class="challenge-code-block"><code class="language-javascript">// 1. Объявление параметров x, y, z
 function multiply(x, y, z) {
   console.log(\`Результат умножения равен \${x * y * z}\`);
 }
@@ -1127,9 +1139,11 @@ multiply(17, 6, 25); // Результат умножения равен 2550</c
 
       <p>Порядок передачи аргументов должен соответствовать порядку объявления параметров: значение первого аргумента будет присвоено первому параметру, второго аргумента - второму параметру и т.д.</p>
 
-      <h3>Задание</h3>
-      <p>Функция <code>add</code> должна уметь добавлять три числа и выводить результат в консоль. Добавь функции <code>add</code> три параметра: <code>a</code>, <code>b</code> и <code>c</code>, которые будут получать значения аргументов во время вызова.</p>
-      <p>Дополни <code>console.log()</code> таким образом, чтобы он логировал строку <code>"Addition result equals &lt;result&gt;"</code>, где <code>&lt;result&gt;</code> - это сумма переданных чисел.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Функция <code>add</code> должна уметь добавлять три числа и выводить результат в консоль. Добавь функции <code>add</code> три параметра: <code>a</code>, <code>b</code> и <code>c</code>, которые будут получать значения аргументов во время вызова.</p>
+        <p>Дополни <code>console.log()</code> таким образом, чтобы он логировал строку <code>"Addition result equals &lt;result&gt;"</code>, где <code>&lt;result&gt;</code> - это сумма переданных чисел.</p>
+      </div>
     `,
     initialCode: `// Change code below this line
 function add() {
@@ -1189,7 +1203,7 @@ add(5, 10, 15);
     description: `
       <p>Оператор <code>return</code> используется для передачи значения из тела функции во внешний код. Когда интерпретатор встречает <code>return</code>, он сразу же выходит из функции (прекращает её выполнение) и возвращает указанное значение в то место кода, где функция была вызвана.</p>
 
-      <pre><code class="language-javascript">function multiply(x, y, z) {
+      <pre class="challenge-code-block"><code class="language-javascript">function multiply(x, y, z) {
   console.log("Код до return выполняется обычным образом");
 
   // Возвращаем результат выражения умножения
@@ -1210,8 +1224,10 @@ console.log(result); // 2550</code></pre>
 
       <p>Оператор <code>return</code> без явно указанного значения возвращает специальное значение <code>undefined</code>. При отсутствии <code>return</code> в теле функции, она также вернет <code>undefined</code>.</p>
 
-      <h3>Задание</h3>
-      <p>Дополни код функции <code>add</code> таким образом, чтобы она возвращала результат сложения значений трех параметров: <code>a</code>, <code>b</code> и <code>c</code>.</p>
+      <div class="task-instruction">
+        <h3>Задание</h3>
+        <p>Дополни код функции <code>add</code> таким образом, чтобы она возвращала результат сложения значений трех параметров: <code>a</code>, <code>b</code> и <code>c</code>.</p>
+      </div>
     `,
     initialCode: `function add(a, b, c) {
   // Change code below this line
@@ -1298,7 +1314,9 @@ console.log(add(5, 10, 15));
         <li><code>price</code> - цена товара</li>
       </ul>
 
-      <p>Дополни код функции таким образом, чтобы в переменную <code>message</code> записывалась строка <code>"You picked &lt;product name&gt;, price per item is &lt;product price&gt; credits"</code>, где <code>&lt;product name&gt;</code> и <code>&lt;product price&gt;</code> - это значения параметров <code>name</code> и <code>price</code>. Используй синтаксис шаблонных строк.</p>
+      <div class="task-instruction">
+        <p>Дополни код функции таким образом, чтобы в переменную <code>message</code> записывалась строка <code>"You picked &lt;product name&gt;, price per item is &lt;product price&gt; credits"</code>, где <code>&lt;product name&gt;</code> и <code>&lt;product price&gt;</code> - это значения параметров <code>name</code> и <code>price</code>. Используй синтаксис шаблонных строк.</p>
+      </div>
 
       <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-lg my-4">
         <h4 class="text-red-400 font-bold mb-2 flex items-center gap-2">
@@ -1392,7 +1410,9 @@ console.log(add(5, 10, 15));
         <li><code>pricePerItem</code> - цена за единицу товара</li>
       </ul>
 
-      <p>Дополни код функции так, чтобы общая сумма покупки была присвоена переменной <code>totalPrice</code>. Загальная сума покупки получается путем умножения количества заказанных товаров на цену единицы.</p>
+      <div class="task-instruction">
+        <p>Дополни код функции так, чтобы общая сумма покупки была присвоена переменной <code>totalPrice</code>. Загальная сума покупки получается путем умножения количества заказанных товаров на цену единицы.</p>
+      </div>
     `,
     initialCode: `function calculateTotalPrice (orderedQuantity, pricePerItem) {
   // Change code below this line
@@ -1492,7 +1512,9 @@ console.log(add(5, 10, 15));
         <li><code>deliveryFee</code> - стоимость доставки</li>
       </ul>
 
-      <p>Дополни код функции таким образом, чтобы она возвращала сообщение про заказ в формате <code>"You ordered droids worth &lt;total price&gt; credits. Delivery (&lt;delivery fee&gt; credits) is included in total price."</code>. Не забудь про цену доставки в вычислениях общей стоимости.</p>
+      <div class="task-instruction">
+        <p>Дополни код функции таким образом, чтобы она возвращала сообщение про заказ в формате <code>"You ordered droids worth &lt;total price&gt; credits. Delivery (&lt;delivery fee&gt; credits) is included in total price."</code>. Не забудь про цену доставки в вычислениях общей стоимости.</p>
+      </div>
     `,
     initialCode: `function makeOrderMessage(orderedQuantity, pricePerDroid, deliveryFee) {
   // Change code below this line
@@ -1576,7 +1598,8 @@ console.log(add(5, 10, 15));
         <li><code>&lt;=</code> - меньше или равно</li>
       </ul>
 
-      <pre><code class="language-javascript">const a = 2;
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const a = 2;
 const b = 5;
 
 console.log(a > b); // false
@@ -1588,12 +1611,15 @@ console.log(a < b); // true
 console.log(b < a); // false
 console.log(a <= b); // true
 console.log(b <= a); // false</code></pre>
+      </div>
 
-      <p>Функция <code>isAdult</code> объявляет один параметр <code>age</code> (возраст), значение которого будет задаваться во время её вызова. Присвой переменной <code>passed</code> выражение проверки возраста пользователя на совершеннолетие. Человек считается совершеннолетним в возрасте 18 лет и старше.</p>
+      <div class="task-instruction">
+        <p>Функция <code>isAdult</code> объявляет один параметр <code>age</code> (возраст), значение которого будет задаваться во время её вызова. Присвой переменной <code>passed</code> выражение проверки возраста пользователя на совершеннолетие. Человек считается совершеннолетним в возрасте 18 лет и старше.</p>
+      </div>
     `,
     initialCode: `function isAdult(age) {
   // Change code below this line
-  const passed = null;
+  const passed = ;
 
   // Change code above this line
   return passed;
@@ -1651,6 +1677,1049 @@ console.log(b <= a); // false</code></pre>
         {
           id: "test-37",
           label: "Вызов isAdult(37) возвращает true",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-is-valid-password": {
+    id: "js-is-valid-password",
+    title: "Строгое равенство",
+    type: "javascript",
+    description: `
+      <p>«Нестрогие» операторы <code>==</code> и <code>!=</code> выполняют преобразование типов значений, что сравниваются, что может привести к ошибкам, особенно у начинающих.</p>
+
+      <div class="bg-red-500/10 border border-red-500/20 p-4 rounded-lg my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">// ❌ Плохо, выполняется приведение типов
+console.log(5 == "5"); // true
+console.log(5 != "5"); // false
+console.log(1 == true); // true
+console.log(1 != true); // false</code></pre>
+      </div>
+
+      <p>Поэтому для проверки равенства или неравенства двух значений используются операторы <code>===</code> (строгое равенство) и <code>!==</code> (строгое неравенство), которые не выполняют приведение типов операндов.</p>
+
+      <div class="bg-green-500/10 border border-green-500/20 p-4 rounded-lg my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">// ✅ Хорошо, приведение типов не выполняется
+console.log(5 === "5"); // false
+console.log(5 === 5); // true
+console.log(5 !== "5"); // true
+console.log(5 !== 5); // false
+console.log(1 === true); // false
+console.log(1 !== true); // true</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>isValidPassword(password)</code> проверяет равенство сохранённого и введённого паролей и возвращает результат проверки - буль <code>true</code> или <code>false</code>. Переменная <code>SAVED_PASSWORD</code> хранит значение предварительно сохраненного пароля. Введенный пароль передается в параметр <code>password</code>.</p>
+        <p>Присвой переменной <code>isMatch</code> выражение проверки равенства введенных и предварительно сохраненных паролей. Результатом выражения проверки должно быть <code>true</code>, если значения совпадают, и <code>false</code> - если нет.</p>
+      </div>
+    `,
+    initialCode: `function isValidPassword(password) {
+  const SAVED_PASSWORD = 'jqueryismyjam';
+  // Change code below this line
+  const isMatch = ;
+
+  // Change code above this line
+  return isMatch;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+isValidPassword\s*\(\s*password\s*\)/.test(cleanCode);
+      const hasOperator = /===/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return isValidPassword;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("mangodab3st") === false &&
+            userFn("kiwirul3z") === false &&
+            userFn("jqueryismyjam") === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция isValidPassword(password)",
+          passed: hasFunction,
+        },
+        {
+          id: "operator-used",
+          label: "В выражении проверки паролей использован оператор ===",
+          passed: hasOperator,
+        },
+        {
+          id: "test-false-1",
+          label: "Вызов isValidPassword('mangodab3st') возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-false-2",
+          label: "Вызов isValidPassword('kiwirul3z') возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-true",
+          label: "Вызов isValidPassword('jqueryismyjam') возвращает true",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-age": {
+    id: "js-check-age",
+    title: "Инструкция if...else",
+    type: "javascript",
+    description: `
+      <p>Ветвления используются для выполнения различного кода в зависимости от условия. Принцип работы прост - результат выражения в условии блока <code>if</code> приводится к булю <code>true</code> или <code>false</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">if (условие) {
+  // тело if
+} else {
+  // тело else
+}</code></pre>
+      </div>
+
+      <p>Если условие приводится к <code>true</code>, то выполняется код в фигурных скобках тела <code>if</code>, а блок <code>else</code> игнорируется.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let cost;
+const subscription = "pro";
+
+if (subscription === "pro") {
+  cost = 100;
+} else {
+  cost = 0;
+}
+
+console.log(cost); // 100</code></pre>
+      </div>
+
+      <p>Если условие приводится к <code>false</code>, код блока <code>if</code> будет пропущен, и выполнится код в фигурных скобках после блока <code>else</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let cost;
+const subscription = "free";
+
+if (subscription === "pro") {
+  cost = 100;
+} else {
+  cost = 0;
+}
+
+console.log(cost); // 0</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Добавь выражение проверки совершеннолетия пользователя, значения параметра <code>age</code>, в условие для инструкции <code>if</code>.</p>
+        <ul class="list-disc">
+          <li>Если пользователь совершеннолетний, должен выполняться блок <code>if</code> и в переменную <code>message</code> записывается строка <code>"You are an adult"</code>.</li>
+          <li>В противном случае должен выполняться блок <code>else</code> и записывается строка <code>"You are a minor"</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkAge(age) {
+  let message;
+
+  if () { // Change this line
+    message = 'You are an adult';
+  } else {
+    message = 'You are a minor';
+  }
+
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkAge\s*\(\s*age\s*\)/.test(cleanCode);
+      const hasOperator = />=/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkAge;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(20) === "You are an adult" &&
+            userFn(8) === "You are a minor" &&
+            userFn(14) === "You are a minor" &&
+            userFn(38) === "You are an adult"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkAge(age)",
+          passed: hasFunction,
+        },
+        {
+          id: "operator-used",
+          label: "В выражении проверки возраста использован оператор >=",
+          passed: hasOperator,
+        },
+        {
+          id: "test-20",
+          label: 'Вызов checkAge(20) возвращает "You are an adult"',
+          passed: passesTests,
+        },
+        {
+          id: "test-8",
+          label: 'Вызов checkAge(8) возвращает "You are a minor"',
+          passed: passesTests,
+        },
+        {
+          id: "test-14",
+          label: 'Вызов checkAge(14) возвращает "You are a minor"',
+          passed: passesTests,
+        },
+        {
+          id: "test-38",
+          label: 'Вызов checkAge(38) возвращает "You are an adult"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-storage": {
+    id: "js-check-storage",
+    title: "Задача: Склад товаров",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkStorage(available, ordered)</code> проверяет возможность оформления заказа и возвращает сообщение о результате. Она объявляет два параметра, значения которых будут задаваться во время её вызова:</p>
+      
+      <ul class="list-disc">
+        <li><code>available</code> - общее количество товаров на складе</li>
+        <li><code>ordered</code> - единиц товара в заказе</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Используя ветвления, дополни код функции таким образом, что:</p>
+        <ul class="list-disc">
+          <li>Если в заказе указано число, превышающее количество товаров на складе, в переменную <code>message</code> записывается строка <code>"Not enough goods in stock!"</code>.</li>
+          <li>В противном случае записывается строка <code>"Order is processed, our manager will contact you."</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkStorage(available, ordered) {
+  let message;
+  // Change code below this line
+
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkStorage\s*\(\s*available\s*,\s*ordered\s*\)/.test(
+          cleanCode,
+        );
+      const hasResult =
+        (/message\s*=\s*'Not enough goods in stock!'/.test(
+          code,
+        ) /* We use loosely test for string content */ &&
+          /message\s*=\s*'Order is processed, our manager will contact you.'/.test(
+            code,
+          )) ||
+        (/message\s*=\s*"Not enough goods in stock!"/.test(code) &&
+          /message\s*=\s*"Order is processed, our manager will contact you."/.test(
+            code,
+          ));
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkStorage;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(100, 50);
+          const r2 = userFn(100, 130);
+          const r3 = userFn(200, 20);
+          const r4 = userFn(200, 150);
+          const r5 = userFn(150, 180);
+
+          if (
+            r1 === "Order is processed, our manager will contact you." &&
+            r2 === "Not enough goods in stock!" &&
+            r3 === "Order is processed, our manager will contact you." &&
+            r4 === "Order is processed, our manager will contact you." &&
+            r5 === "Not enough goods in stock!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkStorage(available, ordered)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов checkStorage(100, 50) возвращает "Order is processed, our manager will contact you."',
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов checkStorage(100, 130) возвращает "Not enough goods in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов checkStorage(200, 20) возвращает "Order is processed, our manager will contact you."',
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов checkStorage(200, 150) возвращает "Order is processed, our manager will contact you."',
+          passed: passesTests,
+        },
+        {
+          id: "test-5",
+          label:
+            'Вызов checkStorage(150, 180) возвращает "Not enough goods in stock!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-combined-assignment": {
+    id: "js-combined-assignment",
+    title: "Комбинированные операторы",
+    type: "javascript",
+    description: `
+      <p>Комбинированные операторы - это более короткий способ присвоить переменной новое значение, основываясь на её предыдущем значении.</p>
+      
+      <p>Будем увеличивать значение переменной <code>age</code> на единицу от предыдущего, имитируя обновление возраста после дня рождения пользователя.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let age = 25;
+// Классическая запись
+age = age + 1;
+console.log(age); // 26</code></pre>
+      </div>
+
+      <p>Сначала выполняется правая часть выражения. Вместо <code>age</code> подставляется <code>25</code>, выполняется операция сложения, и в переменную <code>age</code> записывается <code>26</code>.</p>
+      
+      <p>Выполним рефакторинг операции обновления возраста, используя комбинированный оператор присвоения со сложением.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let age = 25;
+// Просто более короткая запись, работает так же
+age += 1;
+console.log(age); // 26</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Выполни рефакторинг кода, заменив операции присвоения с арифметическими операциями на комбинированные операторы.</p>
+        <ul class="list-disc">
+          <li>Замени <code>a = a + 2</code> на комбинированный оператор <code>+=</code>.</li>
+          <li>Замени <code>b = b - 4</code> на комбинированный оператор <code>-=</code>.</li>
+          <li>Замени <code>c = c * 3</code> на комбинированный оператор <code>*=</code>.</li>
+          <li>Замени <code>d = d / 10</code> на комбинированный оператор <code>/=</code>.</li>
+        </p>
+      </div>
+    `,
+    initialCode: `let a = 5;
+let b = 10;
+let c = 15;
+let d = 20;
+
+// Change code below this line
+a = a + 2;
+b = b - 4;
+c = c * 3;
+d = d / 10;
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      // Check for operators
+      const hasPlusAssign = /\+=\s*2/.test(cleanCode);
+      const hasMinusAssign = /-=\s*4/.test(cleanCode);
+      const hasMultiplyAssign = /\*=\s*3/.test(cleanCode);
+      const hasDivideAssign = /\/=\s*10/.test(cleanCode);
+
+      // Check final values logic
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return {a, b, c, d};")();
+        if (
+          userFn.a === 7 &&
+          userFn.b === 6 &&
+          userFn.c === 45 &&
+          userFn.d === 2
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "test-a",
+          label: "Значение переменной a равно 7",
+          passed:
+            passesTests &&
+            hasPlusAssign /* Ensuring value correctness implies operator usage to some extent, but let's be strict if needed. The task asks for operator usage specifically. */,
+        },
+        {
+          id: "check-plus-assign",
+          label: "Использован оператор +=",
+          passed: hasPlusAssign,
+        },
+        {
+          id: "test-b",
+          label: "Значение переменной b равно 6",
+          passed: passesTests && hasMinusAssign,
+        },
+        {
+          id: "check-minus-assign",
+          label: "Использован оператор -=",
+          passed: hasMinusAssign,
+        },
+        {
+          id: "test-c",
+          label: "Значение переменной c равно 45",
+          passed: passesTests && hasMultiplyAssign,
+        },
+        {
+          id: "check-multiply-assign",
+          label: "Использован оператор *=",
+          passed: hasMultiplyAssign,
+        },
+        {
+          id: "test-d",
+          label: "Значение переменной d равно 2",
+          passed: passesTests && hasDivideAssign,
+        },
+        {
+          id: "check-divide-assign",
+          label: "Использован оператор /=",
+          passed: hasDivideAssign,
+        },
+      ];
+    },
+  },
+  "js-check-balance": {
+    id: "js-check-balance",
+    title: "Задача: Проверка баланса",
+    type: "javascript",
+    description: `
+      <p>Станция по продаже ремонтных дроидов готова к запуску, осталось написать программное обеспечение для отдела продаж.</p>
+      
+      <p>Функция <code>makeTransaction(pricePerDroid, orderedQuantity, customerCredits)</code> выполняет транзакцию по продаже дроидов и возвращает сообщение о результате операции. Она объявляет три параметра, значения которых будут задаваться во время её вызова:</p>
+
+      <ul class="list-disc">
+        <li><code>pricePerDroid</code> - цена одного дроида</li>
+        <li><code>orderedQuantity</code> - кол-во заказанных дроидов</li>
+        <li><code>customerCredits</code> - сумма средств на счету клиента</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Дополни её следующим функционалом:</p>
+        <ul class="list-disc">
+          <li>Объяви переменную <code>totalPrice</code> для хранения общей суммы заказа и присвой ей выражение пересчета этой суммы.</li>
+          <li>Добавь проверку, сможет ли клиент оплатить заказ:</li>
+          <ul class="list-disc ml-4">
+             <li>если сумма к оплате превышает количество кредитов на счету клиента, запиши в переменную <code>message</code> строку <code>"Insufficient funds!"</code>;</li>
+             <li>в противном случае, отними сумму покупки со счета клиента и запиши в переменную <code>message</code> сообщение: <code>"You ordered &lt;число&gt; droids, you have &lt;число&gt; credits left"</code>.</li>
+          </ul>
+        </ul>
+      </div>
+    `,
+    initialCode: `function makeTransaction(pricePerDroid, orderedQuantity, customerCredits) {
+  let message;
+  // Change code below this line
+
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+makeTransaction\s*\(\s*pricePerDroid\s*,\s*orderedQuantity\s*,\s*customerCredits\s*\)/.test(
+          cleanCode,
+        );
+      const hasTotalPrice =
+        /totalPrice\s*=\s*/.test(cleanCode) ||
+        /const\s+totalPrice\s*=/.test(cleanCode) ||
+        /let\s+totalPrice\s*=/.test(cleanCode);
+
+      // Basic logic check regex is hard for this one, relying on tests
+      const hasInsufficientFunds = /Insufficient funds!/.test(code);
+      const hasSuccessMessage =
+        /You ordered/.test(code) && /credits left/.test(code);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return makeTransaction;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(3000, 5, 23000);
+          const r2 = userFn(1000, 3, 15000);
+          const r3 = userFn(5000, 10, 8000);
+          const r4 = userFn(2000, 8, 10000);
+          const r5 = userFn(500, 10, 5000);
+
+          if (
+            r1 === "You ordered 5 droids, you have 8000 credits left" &&
+            r2 === "You ordered 3 droids, you have 12000 credits left" &&
+            r3 === "Insufficient funds!" &&
+            r4 === "Insufficient funds!" &&
+            r5 === "You ordered 10 droids, you have 0 credits left"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label:
+            "Объявлена функция makeTransaction(pricePerDroid, orderedQuantity, customerCredits)",
+          passed: hasFunction,
+        },
+        {
+          id: "total-price-declared",
+          label: "Объявлена переменная totalPrice",
+          passed: hasTotalPrice,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов makeTransaction(3000, 5, 23000) возвращает "You ordered 5 droids, you have 8000 credits left"',
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов makeTransaction(1000, 3, 15000) возвращает "You ordered 3 droids, you have 12000 credits left"',
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов makeTransaction(5000, 10, 8000) возвращает "Insufficient funds!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов makeTransaction(2000, 8, 10000) возвращает "Insufficient funds!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-5",
+          label:
+            'Вызов makeTransaction(500, 10, 5000) возвращает "You ordered 10 droids, you have 0 credits left"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-password": {
+    id: "js-check-password",
+    title: "Блок else...if",
+    type: "javascript",
+    description: `
+      <p>Конструкция <code>if...else</code> может проверить и среагировать на выполнение или невыполнение только одного условия.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let cost;
+const subscription = "pro";
+
+if (subscription === "pro") {
+  cost = 100;
+} else {
+  cost = 0;
+}
+
+console.log(cost); // 100</code></pre>
+      </div>
+
+      <p>Блок <code>else...if</code> позволяет добавить после <code>else</code> еще один оператор <code>if</code> с условием. В конце цепочки может быть классический блок <code>else</code>, который выполнится только в том случае, если ни одно из условий не приведется к <code>true</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let cost;
+const subscription = "premium";
+
+if (subscription === "free") {
+  cost = 0;
+} else if (subscription === "pro") {
+  cost = 100;
+} else if (subscription === "premium") {
+  cost = 500;
+} else {
+  console.log(\`Invalid subscription type - \${subscription}\`);
+}
+
+console.log(cost); // 500</code></pre>
+      </div>
+
+      <p>При первом же удовлетворении условия проверка прекращается и выполняется только тело соответствующего блока <code>if</code>. Поэтому такую запись нужно читать как: «ищу первое выполнение условия, игнорирую все остальное».</p>
+
+      <div class="task-instruction">
+        <p>Функция <code>checkPassword(password)</code> получает пароль пользователя в параметр <code>password</code>, проверяет его на совпадение с паролем администратора в переменной <code>ADMIN_PASSWORD</code> и возвращает сообщение о результате сравнения.</p>
+        <ul class="list-disc">
+          <li>Если значение параметра <code>password</code> равно <code>null</code>, значит пользователь отменил операцию, в переменную <code>message</code> записывается строка <code>"Canceled by user!"</code>.</li>
+          <li>Если значение параметра <code>password</code> совпадает со значением <code>ADMIN_PASSWORD</code>, в переменную <code>message</code> присваивается строка <code>"Welcome!"</code>.</li>
+          <li>Если ни одно из предыдущих условий не выполнилось, в переменную <code>message</code> записывается строка <code>"Access denied, wrong password!"</code>.</li>
+        </ul
+      </div>
+    `,
+    initialCode: `function checkPassword(password) {
+  const ADMIN_PASSWORD = 'jqueryismyjam';
+  let message;
+
+  if () { // Change this line
+    message = 'Canceled by user!';
+  } else if () { // Change this line
+    message = 'Welcome!';
+  } else {
+    message = 'Access denied, wrong password!';
+  }
+
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkPassword\s*\(\s*password\s*\)/.test(
+        cleanCode,
+      );
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkPassword;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn("mangohackzor");
+          const r2 = userFn(null);
+          const r3 = userFn("polyhax");
+          const r4 = userFn("jqueryismyjam");
+
+          if (
+            r1 === "Access denied, wrong password!" &&
+            r2 === "Canceled by user!" &&
+            r3 === "Access denied, wrong password!" &&
+            r4 === "Welcome!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkPassword(password)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-wrong",
+          label:
+            'Вызов checkPassword("mangohackzor") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-null",
+          label: 'Вызов checkPassword(null) возвращает "Canceled by user!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-wrong-2",
+          label:
+            'Вызов checkPassword("polyhax") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-correct",
+          label: 'Вызов checkPassword("jqueryismyjam") возвращает "Welcome!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-storage-2": {
+    id: "js-check-storage-2",
+    title: "Задача: Склад товаров 2.0",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkStorage(available, ordered)</code> проверяет возможность оформления заказа и возвращает сообщение о результате. Она объявляет два параметра, значения которых будут задаваться во время её вызова:</p>
+      
+      <ul class="list-disc">
+        <li><code>available</code> - доступное количество товаров на складе</li>
+        <li><code>ordered</code> - единиц товара в заказе</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Используя ветвления, дополни код функции таким образом, что:</p>
+        <ul class="list-disc">
+          <li>Если в заказе еще нет товаров, то есть значение параметра <code>ordered</code> равно <code>0</code>, в переменную <code>message</code> присваивается строка <code>"There are no products in the order!"</code>.</li>
+          <li>Если товаров в заказе больше, чем доступно товаров на складе, то в переменную <code>message</code> присваивается строка <code>"Your order is too large, there are not enough items in stock!"</code>.</li>
+          <li>В противном случае в переменную <code>message</code> присваивается строка <code>"The order is accepted, our manager will contact you"</code>.</li>
+        </ul
+      </div>
+    `,
+    initialCode: `function checkStorage(available, ordered) {
+  let message;
+  // Change code below this line
+
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkStorage\s*\(\s*available\s*,\s*ordered\s*\)/.test(
+          cleanCode,
+        );
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkStorage;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(100, 50);
+          const r2 = userFn(100, 130);
+          const r3 = userFn(70, 0);
+          const r4 = userFn(200, 20);
+          const r5 = userFn(200, 250);
+          const r6 = userFn(150, 0);
+
+          if (
+            r1 === "The order is accepted, our manager will contact you" &&
+            r2 ===
+              "Your order is too large, there are not enough items in stock!" &&
+            r3 === "There are no products in the order!" &&
+            r4 === "The order is accepted, our manager will contact you" &&
+            r5 ===
+              "Your order is too large, there are not enough items in stock!" &&
+            r6 === "There are no products in the order!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkStorage(available, ordered)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-accepted",
+          label:
+            'Вызов checkStorage(100, 50) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-too-large",
+          label:
+            'Вызов checkStorage(100, 130) возвращает "Your order is too large, there are not enough items in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-no-products",
+          label:
+            'Вызов checkStorage(70, 0) возвращает "There are no products in the order!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-accepted-2",
+          label:
+            'Вызов checkStorage(200, 20) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-too-large-2",
+          label:
+            'Вызов checkStorage(200, 250) возвращает "Your order is too large, there are not enough items in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-no-products-2",
+          label:
+            'Вызов checkStorage(150, 0) возвращает "There are no products in the order!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-is-number-in-range": {
+    id: "js-is-number-in-range",
+    title: "Логические операторы",
+    type: "javascript",
+    description: `
+      <p>Логические операторы используются для проверки условий с множеством выражений, например в ветвлениях.</p>
+      
+      <p>Оператор <code>&&</code> приводит все операнды к булю и возвращает значение одного из них. Левый операнд, если его можно привести к <code>false</code>, и правый - в остальных случаях.</p>
+      
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+         <pre class="challenge-code-block"><code class="language-javascript">выражение && выражение</code></pre>
+      </div>
+
+      <p>В следующем примере оба условия вернут <code>true</code>, поэтому результатом всего выражения будет <code>true</code> - вернется значение правого операнда.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 20;
+console.log(age > 10 && age < 30); // true && true -> true</code></pre>
+      </div>
+
+      <p>Если хотя бы один из операндов будет приведен к <code>false</code>, результатом выражения будет этот операнд.</p>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 50;
+console.log(age > 10 && age < 30); // true && false -> false
+console.log(age > 80 && age < 120); // false && true -> false</code></pre>
+      </div>
+
+      <p>То есть логическое «И» запинается на лжи и возвращает то, на чем запнулось или последний операнд.</p>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">console.log(true && false); // false
+console.log(false && true); // false
+console.log(true && true); // true
+
+console.log(3 && false); // false
+console.log(false && 3); // false
+console.log(3 && true); // true
+console.log(true && 3); // 3</code></pre>
+      </div>
+
+       <div class="info-highlight">
+        <p><strong>Полезно</strong></p>
+        <p>Запомните шесть значений, которые в булевом преобразовании приводятся к <code>false</code>: <code>0</code>, <code>NaN</code>, <code>null</code>, <code>undefined</code>, пустая строка <code>""</code> или <code>''</code> и само значение <code>false</code>. Абсолютно все остальное приводится к <code>true</code>.</p>
+      </div>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">console.log(1 && 5); // true && true -> 5
+console.log(5 && 1); // true && true -> 1
+console.log(0 && 2); // false && true -> 0
+console.log(2 && 0); // true && false -> 0
+console.log("" && "Mango"); // false && true -> ""
+console.log("Mango" && ""); // true && false -> ""
+console.log("Mango" && "Poly"); // true && true -> "Poly"
+console.log("Poly" && "Mango"); // true && true -> "Mango"</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>isNumberInRange(start, end, number)</code> проверяет, входит ли число в промежуток. Она объявляет три параметра, значения которых будут задаваться во время её вызова:</p>
+        <ul class="list-disc">
+          <li><code>number</code> - число, вхождение которого проверяется</li>
+          <li><code>start</code> - начало числового промежутка</li>
+          <li><code>end</code> - конец числового промежутка</li>
+        </ul>
+        <p>Присвой переменной <code>isInRange</code> выражение проверки вхождения <code>number</code> в числовой промежуток от <code>start</code> до <code>end</code>. То есть число должно быть больше или равно <code>start</code>, и меньше или равно <code>end</code>. Результатом выражения проверки будет буль <code>true</code> или <code>false</code>.</p>
+      </div>
+    `,
+    initialCode: `function isNumberInRange(start, end, number) {
+  const isInRange = false; // Change this line
+
+  return isInRange;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+isNumberInRange\s*\(\s*start\s*,\s*end\s*,\s*number\s*\)/.test(
+          cleanCode,
+        );
+      const hasAnd = /&&/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return isNumberInRange;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(10, 30, 17) === true &&
+            userFn(10, 30, 5) === false &&
+            userFn(20, 50, 24) === true &&
+            userFn(20, 50, 76) === false
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция isNumberInRange(start, end, number)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-and",
+          label: "В выражении проверки использован оператор &&",
+          passed: hasAnd,
+        },
+        {
+          id: "test-true-1",
+          label: "Вызов isNumberInRange(10, 30, 17) возвращает true",
+          passed: passesTests,
+        },
+        {
+          id: "test-false-1",
+          label: "Вызов isNumberInRange(10, 30, 5) возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-true-2",
+          label: "Вызов isNumberInRange(20, 50, 24) возвращает true",
+          passed: passesTests,
+        },
+        {
+          id: "test-false-2",
+          label: "Вызов isNumberInRange(20, 50, 76) возвращает false",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-if-can-access-content": {
+    id: "js-check-if-can-access-content",
+    title: "Логическое «ИЛИ»",
+    type: "javascript",
+    description: `
+      <p>Оператор <code>||</code> приводит все операнды к булю и возвращает значение одного из них. Левый операнд, если его можно привести к <code>true</code>, и правый - в остальных случаях.</p>
+      
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+         <pre class="challenge-code-block"><code class="language-javascript">выражение || выражение</code></pre>
+      </div>
+
+      <p>В следующем примере условие слева вернет <code>true</code>, поэтому результатом всего выражения будет <code>true</code> - вернется значение первого операнда, которое было приведено к <code>true</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 5;
+console.log(age < 10 || age > 30); // true || false -> true</code></pre>
+      </div>
+
+      <p>Тут результат тоже будет <code>true</code>, так как хотя бы один из операндов, в данном случае правый, был приведен к <code>true</code>.</p>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 40;
+console.log(age < 10 || age > 30); // false || true -> true</code></pre>
+      </div>
+
+      <p>А тут ни одно из условий не выполняется, поэтому получаем <code>false</code> - значение последнего операнда.</p>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 20;
+console.log(age < 10 || age > 30); // false || false -> false</code></pre>
+      </div>
+
+      <p>То есть логическое «ИЛИ» запинается на истине и возвращает то, на чем запнулось или последний операнд.</p>
+
+       <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">console.log(true || false); // true
+console.log(false || true); // true
+console.log(true || true); // true
+
+console.log(3 || false); // 3
+console.log(false || 3); // 3
+console.log(3 || true); // 3
+console.log(true || 3); // true</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>checkIfCanAccessContent(subType)</code> проверяет, может ли пользователь получить доступ к контенту. Проверка происходит по типу подписки. Получить доступ могут только пользователи с подпиской <code>pro</code> или <code>vip</code>.</p>
+        <p>Присвой переменной <code>canAccessContent</code> выражение проверки подписки. Если значение параметра <code>subType</code> равно строкам <code>"pro"</code> или <code>"vip"</code>, пользователь получает доступ. Результатом выражения проверки будет буль <code>true</code> или <code>false</code>.</p>
+      </div>
+    `,
+    initialCode: `function checkIfCanAccessContent(subType) {
+  const canAccessContent = false; // Change this line
+
+  return canAccessContent;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkIfCanAccessContent\s*\(\s*subType\s*\)/.test(
+          cleanCode,
+        );
+      const hasOr = /\|\|/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(
+          code + "; return checkIfCanAccessContent;",
+        )();
+        if (typeof userFn === "function") {
+          if (
+            userFn("pro") === true &&
+            userFn("vip") === true &&
+            userFn("starter") === false &&
+            userFn("free") === false
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkIfCanAccessContent(subType)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-or",
+          label: "В выражении проверки использован оператор ||",
+          passed: hasOr,
+        },
+        {
+          id: "test-pro",
+          label: 'Вызов checkIfCanAccessContent("pro") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-starter",
+          label: 'Вызов checkIfCanAccessContent("starter") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-vip",
+          label: 'Вызов checkIfCanAccessContent("vip") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-free",
+          label: 'Вызов checkIfCanAccessContent("free") возвращает false',
           passed: passesTests,
         },
       ];
