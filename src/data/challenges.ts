@@ -506,7 +506,7 @@ fruit in pretty much any form.`,
 
       <p>Объявление переменной начинается с ключевого слова <code>const</code>. Такая переменная должна быть сразу инициализирована начальным значением, и такой переменной нельзя присвоить другое значение после её инициализации.</p>
 
-      <div class="info-highlight">
+      <div class="info-highlight light">
         <p><strong>Внимание</strong></p>
         <p>Создание переменной без ключевого слова <code>const</code> приведет к ошибке.</p>
       </div>
@@ -793,7 +793,7 @@ console.log(x * y); // 50
 // Деление
 console.log(x / y); // 2</code></pre>
 
-      <div class="info-highlight">
+      <div class="info-highlight light">
         <p><strong>Полезно</strong></p>
         <p>Важно запомнить правильное именование составляющих алгебраического выражения: <code>+</code> , <code>-</code> , <code>*</code> и <code>/</code> называются операторами, а то, к чему они применяются (числа) - операндами.</p>
       </div>
@@ -2517,7 +2517,7 @@ console.log(3 && true); // true
 console.log(true && 3); // 3</code></pre>
       </div>
 
-       <div class="info-highlight">
+       <div class="info-highlight light">
         <p><strong>Полезно</strong></p>
         <p>Запомните шесть значений, которые в булевом преобразовании приводятся к <code>false</code>: <code>0</code>, <code>NaN</code>, <code>null</code>, <code>undefined</code>, пустая строка <code>""</code> или <code>''</code> и само значение <code>false</code>. Абсолютно все остальное приводится к <code>true</code>.</p>
       </div>
@@ -2720,6 +2720,1423 @@ console.log(true || 3); // true</code></pre>
         {
           id: "test-free",
           label: 'Вызов checkIfCanAccessContent("free") возвращает false',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-is-number-not-in-range": {
+    id: "js-is-number-not-in-range",
+    title: "Логическое «НЕ»",
+    type: "javascript",
+    description: `
+      <p>Все операторы, которые мы рассматривали до этого, были <strong>бинарными</strong>. То есть они содержали два операнда: левый и правый. Логическое «НЕ» - это <strong>унарный</strong> оператор, который выполняет операцию над одним операндом справа.</p>
+      
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+         <pre class="challenge-code-block"><code class="language-javascript">!выражение</code></pre>
+      </div>
+
+      <p>Оператор <code>!</code> приводит операнд к булю, если необходимо, а затем делает инверсию - заменяет его на противоположный <code>true -> false</code> или <code>false -> true</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">console.log(!true); // false
+console.log(!false); // true
+console.log(!3); // !3 -> !true -> false
+console.log(!"Mango"); // !"Mango" -> !true -> false
+console.log(!0); // !0 -> !false -> true
+console.log(!""); // !"" -> !false -> true
+
+const isOnline = true;
+const isNotOnline = !isOnline; // !isOnline -> !true -> false</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>isNumberNotInRange(start, end, number)</code> проверяет, не входит ли число в промежуток. То есть число должно быть меньше или равно <code>start</code> и больше или равно <code>end</code>. Результатом выражения проверки будет буль <code>true</code> или <code>false</code>.</p>
+        <p>Она объявляет три параметра, значения которых будут задаваться во время её вызова:</p>
+        <ul class="list-disc">
+          <li><code>number</code> - число, невхождение которого проверяется</li>
+          <li><code>start</code> - начало числового промежутка</li>
+          <li><code>end</code> - конец числового промежутка</li>
+        </ul>
+        <p>Присвой переменной <code>isNotInRange</code> выражение инверсии значения переменной <code>isInRange</code>, используя оператор <code>!</code>.</p>
+      </div>
+    `,
+    initialCode: `function isNumberNotInRange(start, end, number) {
+  const isInRange = number >= start && number <= end;
+  const isNotInRange = ; // Change this line
+
+  return isNotInRange;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+isNumberNotInRange\s*\(\s*start\s*,\s*end\s*,\s*number\s*\)/.test(
+          cleanCode,
+        );
+      const hasNot = /!isInRange/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return isNumberNotInRange;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(10, 30, 17) === false &&
+            userFn(10, 30, 5) === true &&
+            userFn(20, 50, 24) === false &&
+            userFn(20, 50, 76) === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция isNumberNotInRange(start, end, number)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-not",
+          label: "В выражении использован оператор !",
+          passed: hasNot,
+        },
+        {
+          id: "test-false-1",
+          label: "Вызов isNumberNotInRange(10, 30, 17) возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-true-1",
+          label: "Вызов isNumberNotInRange(10, 30, 5) возвращает true",
+          passed: passesTests,
+        },
+        {
+          id: "test-false-2",
+          label: "Вызов isNumberNotInRange(20, 50, 24) возвращает false",
+          passed: passesTests,
+        },
+        {
+          id: "test-true-2",
+          label: "Вызов isNumberNotInRange(20, 50, 76) возвращает true",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-get-discount": {
+    id: "js-get-discount",
+    title: "Задача: Расчет скидки",
+    type: "javascript",
+    description: `
+      <p>Функция <code>getDiscount(totalSpent)</code> определяет значение скидки в зависимости от общей суммы потраченных денег (параметр <code>totalSpent</code>) в магазине за всё время (партнерская программа). Скидка записывается в переменную <code>discount</code> и возвращается из функции как результат её работы.</p>
+
+      <div class="task-instruction">
+        <p>Используя ветвления и логические операторы, дополни код функции:</p>
+        <ul class="list-disc">
+          <li>Если потрачено от <code>50000</code> (включительно) или больше кредитов - скидка <code>10%</code> (золотой партнер)</li>
+          <li>Если потрачено от <code>20000</code> (включительно) до <code>50000</code> кредитов - скидка <code>5%</code> (серебряный партнер)</li>
+          <li>Если потрачено от <code>5000</code> (включительно) до <code>20000</code> кредитов - скидка <code>2%</code> (бронзовый партнер)</li>
+          <li>Если потрачено меньше <code>5000</code> кредитов - скидка <code>0</code> (базовый партнер)</li>
+        </ul>
+        <p>Значения скидок каждого уровня хранятся в одноимённых константах <code>BASE_DISCOUNT</code>, <code>BRONZE_DISCOUNT</code>, <code>SILVER_DISCOUNT</code> и <code>GOLD_DISCOUNT</code>.</p>
+      </div>
+    `,
+    initialCode: `function getDiscount(totalSpent) {
+  const BASE_DISCOUNT = 0;
+  const BRONZE_DISCOUNT = 0.02;
+  const SILVER_DISCOUNT = 0.05;
+  const GOLD_DISCOUNT = 0.1;
+  let discount;
+  // Change code below this line
+
+  // Change code above this line
+  return discount;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+getDiscount\s*\(\s*totalSpent\s*\)/.test(
+        cleanCode,
+      );
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getDiscount;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(137000) === 0.1 &&
+            userFn(46900) === 0.05 &&
+            userFn(8250) === 0.02 &&
+            userFn(1300) === 0 &&
+            userFn(5000) === 0.02 &&
+            userFn(20000) === 0.05 &&
+            userFn(50000) === 0.1
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getDiscount(totalSpent)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-gold",
+          label: "Вызов getDiscount(137000) возвращает 0.1",
+          passed: passesTests,
+        },
+        {
+          id: "test-silver",
+          label: "Вызов getDiscount(46900) возвращает 0.05",
+          passed: passesTests,
+        },
+        {
+          id: "test-bronze",
+          label: "Вызов getDiscount(8250) возвращает 0.02",
+          passed: passesTests,
+        },
+        {
+          id: "test-basic",
+          label: "Вызов getDiscount(1300) возвращает 0",
+          passed: passesTests,
+        },
+        {
+          id: "test-bronze-edge",
+          label: "Вызов getDiscount(5000) возвращает 0.02",
+          passed: passesTests,
+        },
+        {
+          id: "test-silver-edge",
+          label: "Вызов getDiscount(20000) возвращает 0.05",
+          passed: passesTests,
+        },
+        {
+          id: "test-gold-edge",
+          label: "Вызов getDiscount(50000) возвращает 0.1",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-storage-ternary": {
+    id: "js-check-storage-ternary",
+    title: "Тернарный оператор",
+    type: "javascript",
+    description: `
+      <p>Тернарный оператор используется как синтаксически более короткая замена инструкции <code>if...else</code>, когда одной и той же переменной необходимо присвоить разные значения по условию.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">&lt;условие&gt; ? &lt;выражение, если условие истинно&gt; : &lt;выражение, если условие ложно&gt;</code></pre>
+      </div>
+
+      <p>Работает по следующей схеме:</p>
+      <ul class="list-disc">
+        <li>Вычисляется <code>условие</code>.</li>
+        <li>Если условие истинно, то есть приводится к <code>true</code>, вычисляется выражение после <code>?</code>.</li>
+        <li>Если условие ложно, то есть приводится к <code>false</code>, вычисляется выражение после <code>:</code>.</li>
+        <li>Значение вычисленного выражения возвращается как результат работы тернарного оператора.</li>
+      </ul>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">let type;
+const age = 20;
+
+if (age >= 18) {
+  type = "adult";
+} else {
+  type = "child";
+}
+
+console.log(type); // "adult"</code></pre>
+      </div>
+
+      <p>Выполним рефакторинг, заменив <code>if...else</code> тернарным оператором.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const age = 20;
+const type = age >= 18 ? "adult" : "child";
+console.log(type); // "adult"</code></pre>
+      </div>
+
+      <div class="bg-red-500/20 border border-red-500/50 rounded-lg p-4 my-2">
+        <h3 class="font-bold mb-2">Внимание</h3>
+        <p>Тернарный оператор должен использоваться в простых операциях присваивания или возврата. Использовать его для замены сложных ветвлений - плохая практика (антипаттерн).</p>
+      </div>
+
+      <div class="task-instruction">
+        <p>Выполни рефакторинг решения задачи «Склад товаров», заменив инструкцию <code>if...else</code> тернарным оператором.</p>
+      </div>
+    `,
+    initialCode: `function checkStorage(available, ordered) {
+  let message;
+  // Change code below this line
+  if (ordered > available) {
+    message = "Not enough goods in stock!";
+  } else {
+    message = "The order is accepted, our manager will contact you";
+  }
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkStorage\s*\(\s*available\s*,\s*ordered\s*\)/.test(
+          cleanCode,
+        );
+      const hasTernary = /\?.*:/.test(cleanCode);
+      const hasIf = /if\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkStorage;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn(100, 50);
+          const r2 = userFn(100, 130);
+          const r3 = userFn(200, 20);
+          const r4 = userFn(200, 150);
+          const r5 = userFn(150, 180);
+
+          if (
+            r1 === "The order is accepted, our manager will contact you" &&
+            r2 === "Not enough goods in stock!" &&
+            r3 === "The order is accepted, our manager will contact you" &&
+            r4 === "The order is accepted, our manager will contact you" &&
+            r5 === "Not enough goods in stock!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkStorage(available, ordered)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-ternary",
+          label: "Использован тернарный оператор",
+          passed: hasTernary,
+        },
+        {
+          id: "no-if",
+          label: "Не используется инструкция if",
+          passed: !hasIf,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов checkStorage(100, 50) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов checkStorage(100, 130) возвращает "Not enough goods in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов checkStorage(200, 20) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов checkStorage(200, 150) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-5",
+          label:
+            'Вызов checkStorage(150, 180) возвращает "Not enough goods in stock!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-password-ternary": {
+    id: "js-check-password-ternary",
+    title: "Задача: Проверка пароля",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkPassword(password)</code> сравнивает переданный ей пароль (параметр <code>password</code>) с сохраненным паролем администратора (константа <code>ADMIN_PASSWORD</code>) и возвращает строку с сообщением о результате.</p>
+
+      <div class="task-instruction">
+        <p>Используя тернарный оператор, дополни функцию таким образом, что:</p>
+        <ul class="list-disc">
+          <li>Если значения <code>password</code> и <code>ADMIN_PASSWORD</code> совпадают, присвой переменной <code>message</code> строку <code>"Access is allowed"</code>.</li>
+          <li>В противном случае, присвой <code>message</code> строку <code>"Access denied, wrong password!"</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkPassword(password) {
+  const ADMIN_PASSWORD = "jqueryismyjam";
+  let message;
+  // Change code below this line
+  
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkPassword\s*\(\s*password\s*\)/.test(
+        cleanCode,
+      );
+      const hasTernary = /\?.*:/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkPassword;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("jqueryismyjam") === "Access is allowed" &&
+            userFn("angul4r1sl1f3") === "Access denied, wrong password!" &&
+            userFn("r3actsux") === "Access denied, wrong password!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkPassword(password)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-ternary",
+          label: "Использован тернарный оператор",
+          passed: hasTernary,
+        },
+        {
+          id: "test-allowed",
+          label:
+            'Вызов checkPassword("jqueryismyjam") возвращает "Access is allowed"',
+          passed: passesTests,
+        },
+        {
+          id: "test-denied-1",
+          label:
+            'Вызов checkPassword("angul4r1sl1f3") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-denied-2",
+          label:
+            'Вызов checkPassword("r3actsux") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-get-subscription-price": {
+    id: "js-get-subscription-price",
+    title: "Инструкция switch",
+    type: "javascript",
+    description: `
+      <p>В некоторых случаях неудобство чтения сложных ветвлений <code>if...else</code> можно избежать, используя «более плоский» синтаксис инструкции ветвления <code>switch</code>.</p>
+      <p>Сфера применения <code>switch</code> ограничена задачами с одним общим вопросом (что сравнивать) и множеством вариантов ответов (с чем сравнивать).</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">switch (значение) {
+  case значение:
+    инструкции;
+    break;
+
+  case значение:
+    инструкции;
+    break;
+}</code></pre>
+      </div>
+
+      <p>Его синтаксис состоит из блока <code>switch(значение)</code> - что нужно сравнить и множества отдельных случаев <code>case значение:</code> - с чем нужно сравнить. Для сравнения используется оператор строгого равенства <code>===</code>. То есть нельзя сравнить на больше или меньше, только на равенство.</p>
+      
+      <p>Значение в блоке <code>switch(значение)</code> - строка или число, которое сравнивается на строгое равенство со всеми значениями в блоках <code>case значение:</code> по очереди, сверху вниз.</p>
+
+      <p>Оператор <code>break</code> в конце каждого блока <code>case</code> необходим, чтобы прервать дальнейшие проверки и сразу перейти к коду после <code>switch</code> в том случае, когда проверка на равенство вернула <code>true</code>.</p>
+
+      <div class="task-instruction">
+        <p>Функция <code>getSubscriptionPrice(type)</code> получает строку с типом подписки пользователя (параметр <code>type</code>), проверяет её на совпадение с тремя возможными типами ежемесячной подписки и возвращает цену, хранящуюся в переменной <code>price</code>.</p>
+        <p>Если значение параметра <code>type</code> - это строка:</p>
+        <ul class="list-disc">
+          <li><code>"starter"</code> - цена подписки <code>0</code> кредитов.</li>
+          <li><code>"professional"</code> - цена подписки <code>20</code> кредитов.</li>
+          <li><code>"organization"</code> - цена подписки <code>50</code> кредитов.</li>
+        </ul>
+        <p>Изначально в теле функции была инструкция <code>if...else</code>, которая выглядела вот так.</p>
+        <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">if (type === "starter") {
+  price = 0;
+} else if (type === "professional") {
+  price = 20;
+} else if (type === "organization") {
+  price = 50;
+}</code></pre>
+      </div>
+       <p>После рефакторинга инструкция <code>if..else</code> была заменена на <code>switch</code>. Дополни код инструкции <code>switch</code>, чтобы функция работала правильно.</p>
+      </div>
+    `,
+    initialCode: `function getSubscriptionPrice(type) {
+  let price;
+  // Change code below this line
+
+ switch () { // Change this line
+    case : // Change this line
+      price = ; // Change this line
+      break;
+
+    case : // Change this line
+      price = ; // Change this line
+      break;
+
+    case : // Change this line
+      price = ; // Change this line
+      break;
+  }
+
+  // Change code above this line
+  return price;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+getSubscriptionPrice\s*\(\s*type\s*\)/.test(cleanCode);
+      const hasSwitch = /switch\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getSubscriptionPrice;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("starter") === 0 &&
+            userFn("professional") === 20 &&
+            userFn("organization") === 50
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getSubscriptionPrice(type)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-switch",
+          label: "Использована инструкция switch",
+          passed: hasSwitch,
+        },
+        {
+          id: "test-starter",
+          label: 'Вызов getSubscriptionPrice("starter") возвращает 0',
+          passed: passesTests,
+        },
+        {
+          id: "test-professional",
+          label: 'Вызов getSubscriptionPrice("professional") возвращает 20',
+          passed: passesTests,
+        },
+        {
+          id: "test-organization",
+          label: 'Вызов getSubscriptionPrice("organization") возвращает 50',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-password-switch": {
+    id: "js-check-password-switch",
+    title: "Блок default в инструкции switch",
+    type: "javascript",
+    description: `
+      <p>Если ни одного совпадения значений не произошло, необходимо выполнить код по умолчанию, как в блоке <code>else</code> для инструкции <code>if...else</code>. Для этого, после всех блоков <code>case</code> добавляется блок <code>default</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">switch (значение) {
+  case значение:
+    инструкции;
+    break;
+
+  case значение:
+    инструкции;
+    break;
+
+  default:
+    инструкции;
+}</code></pre>
+      </div>
+
+      <p>Оператор <code>break</code> после блока <code>default</code> не нужен, так как это и так последнее, что будет выполнено в <code>switch</code> и управление будет передано коду после него.</p>
+
+      <div class="task-instruction">
+        <p>Функция <code>checkPassword(password)</code> получает пароль в параметр <code>password</code>, проверяет его на совпадение с паролем администратора в переменной <code>ADMIN_PASSWORD</code> и возвращает сообщение о результате сравнения, которое хранится в переменной <code>message</code>.</p>
+        <p>Если значение параметра <code>password</code>:</p>
+        <ul class="list-disc">
+          <li>равно <code>null</code>, значит пользователь отменил операцию и в <code>message</code> записывается строка <code>"Canceled by user!"</code>.</li>
+          <li>совпадает со значением <code>ADMIN_PASSWORD</code>, в переменную <code>message</code> присваивается строка <code>"Welcome!"</code>.</li>
+          <li>не удовлетворяет ни одному из предыдущих условий, в переменную <code>message</code> записывается строка <code>"Access denied, wrong password!"</code>.</li>
+        </ul>
+        <p>Выполни рефакторинг кода, заменив инструкцию <code>if..else</code> на <code>switch</code>, и не забудь про блок <code>default</code> (аналог else).</p>
+      </div>
+    `,
+    initialCode: `function checkPassword(password) {
+  const ADMIN_PASSWORD = "jqueryismyjam";
+  let message;
+  // Change code below this line
+
+  if (password === null) {
+    message = "Canceled by user!";
+  } else if (password === ADMIN_PASSWORD) {
+    message = "Welcome!";
+  } else {
+    message = "Access denied, wrong password!";
+  }
+
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkPassword\s*\(\s*password\s*\)/.test(
+        cleanCode,
+      );
+      const hasSwitch = /switch\s*\(/.test(cleanCode);
+      const hasDefault = /default\s*:/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkPassword;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("mangohackzor") === "Access denied, wrong password!" &&
+            userFn(null) === "Canceled by user!" &&
+            userFn("polyhax") === "Access denied, wrong password!" &&
+            userFn("jqueryismyjam") === "Welcome!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkPassword(password)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-switch",
+          label: "Использована инструкция switch",
+          passed: hasSwitch,
+        },
+        {
+          id: "has-default",
+          label: "Добавлен блок default",
+          passed: hasDefault,
+        },
+        {
+          id: "test-denied",
+          label:
+            'Вызов checkPassword("mangohackzor") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-canceled",
+          label: 'Вызов checkPassword(null) возвращает "Canceled by user!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-denied-2",
+          label:
+            'Вызов checkPassword("polyhax") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-welcome",
+          label: 'Вызов checkPassword("jqueryismyjam") возвращает "Welcome!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-get-shipping-cost": {
+    id: "js-get-shipping-cost",
+    title: "Доставка товара",
+    type: "javascript",
+    description: `
+      <p>Функция <code>getShippingCost(country)</code> должна проверять возможность доставки товара в страну пользователя (параметр <code>country</code>) и возвращать сообщение о результате, хранящееся в переменной <code>message</code>. Обязательно используй инструкцию <code>switch</code>.</p>
+      
+      <p>Формат строки, которая возвращается <code>"Shipping to &lt;country&gt; will cost &lt;price&gt; credits"</code>, где вместо <code>&lt;country&gt;</code> и <code>&lt;price&gt;</code> необходимо подставить соответствующие значения.</p>
+
+      <p>Список стран и стоимость доставки:</p>
+      <ul class="list-disc">
+        <li><code>China</code> - 100 кредитов</li>
+        <li><code>Chile</code> - 250 кредитов</li>
+        <li><code>Australia</code> - 170 кредитов</li>
+        <li><code>Jamaica</code> - 120 кредитов</li>
+      </ul>
+
+      <p>Из списка видно, что доставка возможна не везде. Если указанная страна отсутствует в списке, то функция должна вернуть строку <code>"Sorry, there is no delivery to your country"</code></p>
+
+      <div class="task-instruction">
+        <p>Используя инструкцию <code>switch</code>, дополни код функции. Не забудь про блок <code>default</code> для стран, которых нет в списке.</p>
+      </div>
+    `,
+    initialCode: `function getShippingCost(country) {
+  let message;
+  // Change code below this line
+
+  // Change code above this line
+  return message;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+getShippingCost\s*\(\s*country\s*\)/.test(
+        cleanCode,
+      );
+      const hasSwitch = /switch\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getShippingCost;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Australia") ===
+              "Shipping to Australia will cost 170 credits" &&
+            userFn("Germany") ===
+              "Sorry, there is no delivery to your country" &&
+            userFn("China") === "Shipping to China will cost 100 credits" &&
+            userFn("Chile") === "Shipping to Chile will cost 250 credits" &&
+            userFn("Jamaica") === "Shipping to Jamaica will cost 120 credits" &&
+            userFn("Sweden") === "Sorry, there is no delivery to your country"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getShippingCost(country)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-switch",
+          label: "Использована инструкция switch",
+          passed: hasSwitch,
+        },
+        {
+          id: "test-australia",
+          label:
+            'Вызов getShippingCost("Australia") возвращает "Shipping to Australia will cost 170 credits"',
+          passed: passesTests,
+        },
+        {
+          id: "test-germany",
+          label:
+            'Вызов getShippingCost("Germany") возвращает "Sorry, there is no delivery to your country"',
+          passed: passesTests,
+        },
+        {
+          id: "test-china",
+          label:
+            'Вызов getShippingCost("China") возвращает "Shipping to China will cost 100 credits"',
+          passed: passesTests,
+        },
+        {
+          id: "test-chile",
+          label:
+            'Вызов getShippingCost("Chile") возвращает "Shipping to Chile will cost 250 credits"',
+          passed: passesTests,
+        },
+        {
+          id: "test-jamaica",
+          label:
+            'Вызов getShippingCost("Jamaica") возвращает "Shipping to Jamaica will cost 120 credits"',
+          passed: passesTests,
+        },
+        {
+          id: "test-sweden",
+          label:
+            'Вызов getShippingCost("Sweden") возвращает "Sorry, there is no delivery to your country"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-string-length": {
+    id: "js-string-length",
+    title: "Длина строки",
+    type: "javascript",
+    description: `
+      <p>В коде объявлена функция <code>getCourseTopicLength(courseTopic)</code>, где параметр <code>courseTopic</code> хранит строку заголовка курса.</p>
+
+      <div class="task-instruction">
+        <p>Используя свойство <code>length</code>, дополни код так, чтобы в переменной <code>length</code> сохранялась длина строки из <code>courseTopic</code>.</p>
+      </div>
+    `,
+    initialCode: `function getCourseTopicLength(courseTopic) {
+  // Change code below this line
+  const length = ;
+
+  return length;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+getCourseTopicLength\s*\(\s*courseTopic\s*\)/.test(
+          cleanCode,
+        );
+      const hasLength = /\.length/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getCourseTopicLength;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("JavaScript") === 10 &&
+            userFn("Python") === 6 &&
+            userFn("C++") === 3
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getCourseTopicLength",
+          passed: hasFunction,
+        },
+        {
+          id: "has-length",
+          label: "Использовано свойство length",
+          passed: hasLength,
+        },
+        {
+          id: "test-cases",
+          label: "Функция возвращает правильную длину строки",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-string-indexing": {
+    id: "js-string-indexing",
+    title: "Индексация элементов",
+    type: "javascript",
+    description: `
+      <p>Рядок — это индексированный набор из нуля или больше символов, взятых в одинарные, двойные или обратные кавычки.</p>
+      
+      <p>Индексация элементов строки начинается с нуля. Например, в строке <code>'JavaScript'</code> буква <code>'J'</code> стоит на позиции с индексом <code>0</code>, а <code>'t'</code> - под индексом <code>9</code>. При этом длина строки <code>'JavaScript'</code> равна <code>10</code>, то есть индекс последнего элемента всегда на единицу меньше его длины.</p>
+
+      <p>Для доступа до значения элемента строки используется синтаксис квадратных дубок <code>строка[индекс]</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const productName = "Repair droid";
+console.log(productName[0]); // "R"
+console.log(productName[5]); // "r"
+console.log(productName[11]); // "d"
+console.log(productName[productName.length - 1]); // "d"</code></pre>
+      </div>
+
+      <p>Содержимое строки нельзя изменить, только прочитать. То есть нельзя взять какой-то символ и заменить его, как только строка создана - она такая навсегда. Можно лишь создать полностью новую строку и присвоить в переменную вместо старой.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код, присвоив объявленным переменным выражения обращения к соответствующим элементам или свойствам строки в переменной <code>courseTopic</code>.</p>
+        <ul class="list-disc">
+          <li><code>courseTopicLength</code> - длина строки.</li>
+          <li><code>firstElement</code> - первый символ строки.</li>
+          <li><code>lastElement</code> - последний символ строки.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `const courseTopic = "JavaScript essentials";
+// Change code below this line
+
+const courseTopicLength = ;
+const firstElement = ;
+const lastElement = ;
+
+// Change code above this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      let passesTests = false;
+      try {
+        // Evaluate code to check variable values
+        // We wrap it in a function to isolate scope and extract values
+        const evalCode = `
+          ${code}
+          return {
+            courseTopic: typeof courseTopic !== 'undefined' ? courseTopic : undefined,
+            courseTopicLength: typeof courseTopicLength !== 'undefined' ? courseTopicLength : undefined,
+            firstElement: typeof firstElement !== 'undefined' ? firstElement : undefined,
+            lastElement: typeof lastElement !== 'undefined' ? lastElement : undefined
+          };
+        `;
+        const result = new Function(evalCode)();
+
+        if (
+          result.courseTopic === "JavaScript essentials" &&
+          result.courseTopicLength === 21 &&
+          result.firstElement === "J" &&
+          result.lastElement === "s"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "coursetopic-declared",
+          label: "Объявлена переменная courseTopic",
+          passed:
+            /const\s+courseTopic\s*=\s*["']JavaScript essentials["']/.test(
+              cleanCode,
+            ),
+        },
+        {
+          id: "coursetopic-value",
+          label:
+            'Значение переменной courseTopic - это строка "JavaScript essentials"',
+          passed:
+            /const\s+courseTopic\s*=\s*["']JavaScript essentials["']/.test(
+              cleanCode,
+            ),
+        },
+        {
+          id: "coursetopiclength-declared",
+          label: "Объявлена переменная courseTopicLength",
+          passed: /const\s+courseTopicLength/.test(cleanCode),
+        },
+        {
+          id: "coursetopiclength-value",
+          label: "Значение переменной courseTopicLength - это число 21",
+          passed: passesTests,
+        },
+        {
+          id: "firstelement-declared",
+          label: "Объявлена переменная firstElement",
+          passed: /const\s+firstElement/.test(cleanCode),
+        },
+        {
+          id: "firstelement-value",
+          label: 'Значение переменной firstElement - это строка "J"',
+          passed: passesTests,
+        },
+        {
+          id: "lastelement-declared",
+          label: "Объявлена переменная lastElement",
+          passed: /const\s+lastElement/.test(cleanCode),
+        },
+        {
+          id: "lastelement-value",
+          label: 'Значение переменной lastElement - это строка "s"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-string-slice": {
+    id: "js-string-slice",
+    title: "Метод slice()",
+    type: "javascript",
+    description: `
+      <p>Метод строк <code>slice(startIndex, endIndex)</code> используется для создания копии части или всей строки. Он делает копию элементов строки от <code>startIndex</code> и до, но не включая <code>endIndex</code>, и возвращает новую строку.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const productName = "Repair droid";
+console.log(productName.slice(0, 4)); // "Repa"
+console.log(productName.slice(3, 9)); // "air dr"
+console.log(productName.slice(0, productName.length)); // "Repair droid"
+console.log(productName.slice(7, productName.length)); // "droid"</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>getSubstring(string, length)</code> принимает строку и возвращает подстроку от начала длиной <code>length</code> символов.</p>
+        <ul class="list-disc">
+          <li><code>string</code> - оригинальная строка.</li>
+          <li><code>length</code> - количество символов с начала строки для подстроки.</li>
+        </ul>
+        <p>Присвой переменной <code>substring</code> выражение создания подстроки длиной <code>length</code> символов (от начала) из строки <code>string</code>.</p>
+      </div>
+    `,
+    initialCode: `function getSubstring(string, length) {
+  const substring = ; // Change this line
+
+  return substring;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+getSubstring\s*\(\s*string\s*,\s*length\s*\)/.test(
+          cleanCode,
+        );
+      const hasSlice = /\.slice\s*\(\s*0\s*,\s*length\s*\)/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getSubstring;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Hello world", 3) === "Hel" &&
+            userFn("Hello world", 6) === "Hello " &&
+            userFn("Hello world", 8) === "Hello wo" &&
+            userFn("Hello world", 11) === "Hello world" &&
+            userFn("Hello world", 0) === ""
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getSubstring(string, length)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-slice",
+          label: "Использован метод slice() с правильными аргументами",
+          passed: hasSlice,
+        },
+        {
+          id: "test-cases",
+          label: "Функция возвращает правильную подстроку",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-format-message": {
+    id: "js-format-message",
+    title: "Форматирование сообщения",
+    type: "javascript",
+    description: `
+      <p>Функция <code>formatMessage(message, maxLength)</code> принимает строку (параметр <code>message</code>) и проверяет её длину относительно заданной максимальной длины (параметр <code>maxLength</code>).</p>
+
+      <div class="task-instruction">
+        <p>Дополни код функции таким образом, что:</p>
+        <ul class="list-disc">
+          <li>Если длина строки равна или меньше <code>maxLength</code>, то функция возвращает начальную строку без изменений.</li>
+          <li>Если длина строки превышает <code>maxLength</code>, то функция обрезает строку до <code>maxLength</code> символов, добавляет троеточие <code>"..."</code> в конце и возвращает обрезанную версию.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function formatMessage(message, maxLength) {
+  let result;
+  // Change code below this line
+
+  /// Change code above this line
+  return result;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+formatMessage\s*\(\s*message\s*,\s*maxLength\s*\)/.test(
+          cleanCode,
+        );
+      const hasSlice = /\.slice/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return formatMessage;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Curabitur ligula sapien", 16) === "Curabitur ligula..." &&
+            userFn("Curabitur ligula sapien", 23) ===
+              "Curabitur ligula sapien" &&
+            userFn("Vestibulum facilisis purus nec", 20) ===
+              "Vestibulum facilisis..." &&
+            userFn("Vestibulum facilisis purus nec", 30) ===
+              "Vestibulum facilisis purus nec" &&
+            userFn("Nunc sed turpis a felis in nunc fringilla", 15) ===
+              "Nunc sed turpis..." &&
+            userFn("Nunc sed turpis a felis in nunc fringilla", 41) ===
+              "Nunc sed turpis a felis in nunc fringilla"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция formatMessage(message, maxLength)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-case-1",
+          label:
+            'Вызов функции formatMessage("Curabitur ligula sapien", 16) возвращает "Curabitur ligula..."',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-2",
+          label:
+            'Вызов функции formatMessage("Curabitur ligula sapien", 23) возвращает "Curabitur ligula sapien"',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-3",
+          label:
+            'Вызов функции formatMessage("Vestibulum facilisis purus nec", 20) возвращает "Vestibulum facilisis..."',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-4",
+          label:
+            'Вызов функции formatMessage("Vestibulum facilisis purus nec", 30) возвращает "Vestibulum facilisis purus nec"',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-5",
+          label:
+            'Вызов функции formatMessage("Nunc sed turpis a felis in nunc fringilla", 15) возвращает "Nunc sed turpis..."',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-6",
+          label:
+            'Вызов функции formatMessage("Nunc sed turpis a felis in nunc fringilla", 41) возвращает "Nunc sed turpis a felis in nunc fringilla"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-normalize-input": {
+    id: "js-normalize-input",
+    title: "Нормализация ввода",
+    type: "javascript",
+    description: `
+      <p>Бывают ситуации, когда все символы в строке необходимо преобразовать в один регистр, верхний или нижний. Например, при поиске по ключевому слову, когда пользователь вводит строку <code>'saMsUng'</code>, а сравнить её нужно со строкой <code>'samsung'</code> или <code>'SAMSUNG'</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">console.log("saMsUng" === "samsung"); // false
+console.log("saMsUng" === "SAMSUNG"); // false</code></pre>
+      </div>
+
+      <p>Чтобы не требовать абсолютно точного ввода, можно сделать «нормализацию» введенной пользователем строки, то есть преобразовать все её символы в верхний или нижний регистр. Методы строки <code>toLowerCase()</code> и <code>toUpperCase()</code> вернут новую строку в соответствующем регистре, не изменяя оригинальную.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const BRAND_NAME = "SAMSUNG";
+const userInput = "saMsUng";
+const normalizedToUpperCaseInput = userInput.toUpperCase();
+
+console.log(userInput); // 'saMsUng'
+console.log(userInput === BRAND_NAME); // false
+console.log(normalizedToUpperCaseInput); // 'SAMSUNG'
+console.log(normalizedToUpperCaseInput === BRAND_NAME); // true</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>normalizeInput(input)</code> принимает строку (параметр <code>input</code>) и возвращает такую же строку, но в нижнем регистре.</p>
+        <p>Присвой переменной <code>normalizedInput</code> выражение создания строки в нижнем регистре из параметра <code>input</code>.</p>
+      </div>
+    `,
+    initialCode: `function normalizeInput(input) {
+  const normalizedInput = ; // Change this line
+
+  return normalizedInput;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+normalizeInput\s*\(\s*input\s*\)/.test(
+        cleanCode,
+      );
+      const hasLowerCase = /\.toLowerCase\s*\(\s*\)/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return normalizeInput;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Hello World") === "hello world" &&
+            userFn("This is JEOPARDY") === "this is jeopardy" &&
+            userFn("Hello world") === "hello world"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция normalizeInput(input)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-lower-case",
+          label: "Использован метод toLowerCase()",
+          passed: hasLowerCase,
+        },
+        {
+          id: "test-cases",
+          label: "Функция возвращает строку в нижнем регистре",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-for-name": {
+    id: "js-check-for-name",
+    title: "Метод includes()",
+    type: "javascript",
+    description: `
+      <p>Метод строк <code>includes(substring)</code> проверяет, входит ли подстрока <code>substring</code> в строку, возвращает буль - <code>true</code>, если входит, и <code>false</code> - в противном случае. Регистр символов в строке и подстроке имеет значение, так как, например буква <code>"a"</code> не равна букве <code>"A"</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const productName = "Repair droid";
+
+console.log(productName.includes("a")); // true
+console.log(productName.includes("A")); // false
+console.log(productName.includes("droid")); // true
+console.log(productName.includes("Droid")); // false
+console.log(productName.includes("Repair")); // true
+console.log(productName.includes("repair")); // false</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Функция <code>checkForName(fullName, name)</code> принимает два параметра и возвращает буль <code>true</code> или <code>false</code> - результат проверки вхождения подстроки <code>name</code> в строку <code>fullName</code>.</p>
+        <ul class="list-disc">
+          <li><code>fullName</code> - полное имя, состоящее из двух слов (имени и фамилии), разделенных пробелом.</li>
+          <li><code>name</code> - имя для проверки вхождения в полное имя.</li>
+        </ul>
+        <p>Присвой переменной <code>result</code> выражение проверки вхождения имени (параметр <code>name</code>), в полное имя (параметр <code>fullName</code>). Пусть функция четко различает регистр букв, то есть «Петя» и «петя» - для неё разные имена.</p>
+      </div>
+    `,
+    initialCode: `function checkForName(fullName, name) {
+  const result = ; // Change this line
+  return result;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkForName\s*\(\s*fullName\s*,\s*name\s*\)/.test(
+          cleanCode,
+        );
+      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkForName;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Egor Kolbasov", "Egor") === true &&
+            userFn("Egor Kolbasov", "egor") === false &&
+            userFn("Egor Kolbasov", "eg0r") === false &&
+            userFn("Egor Kolbasov", "Zhenya") === false &&
+            userFn("Vadim Nekrasov", "Vadim") === true &&
+            userFn("Vadim Nekrasov", "vadim") === false &&
+            userFn("Vadim Nekrasov", "Dima") === false
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkForName(fullName, name)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-case-1",
+          label:
+            'Вызов функции checkForName("Egor Kolbasov", "Egor") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-2",
+          label:
+            'Вызов функции checkForName("Egor Kolbasov", "egor") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-3",
+          label:
+            'Вызов функции checkForName("Egor Kolbasov", "eg0r") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-4",
+          label:
+            'Вызов функции checkForName("Egor Kolbasov", "Zhenya") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-5",
+          label:
+            'Вызов функции checkForName("Vadim Nekrasov", "Vadim") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-6",
+          label:
+            'Вызов функции checkForName("Vadim Nekrasov", "vadim") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-7",
+          label:
+            'Вызов функции checkForName("Vadim Nekrasov", "Dima") возвращает false',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-for-spam": {
+    id: "js-check-for-spam",
+    title: "Проверка на спам",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkForSpam(message)</code> принимает строку (параметр <code>message</code>), проверяет её на содержание запрещенных слов <code>spam</code> и <code>sale</code>, и возвращает результат проверки. Слова в строке параметра <code>message</code> могут быть в произвольном регистре, например <code>SPAM</code> или <code>sAlE</code>.</p>
+
+      <div class="task-instruction">
+        <ul class="list-disc">
+          <li>Если нашли запрещенное слово (<code>spam</code> или <code>sale</code>) то функция возвращает буль <code>true</code>.</li>
+          <li>Если в строке отсутствуют запрещенные слова, функция возвращает буль <code>false</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkForSpam(message) {
+  let result;
+  // Change code below this line
+
+  // Change code above this line
+  return result;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkForSpam\s*\(\s*message\s*\)/.test(
+        cleanCode,
+      );
+      const hasLowerCase = /\.toLowerCase\s*\(\s*\)/.test(cleanCode);
+      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkForSpam;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("Latest technology news") === false &&
+            userFn("JavaScript weekly newsletter") === false &&
+            userFn("Get best sale offers now!") === true &&
+            userFn("Amazing SalE, only tonight!") === true &&
+            userFn("Trust me, this is not a spam message") === true &&
+            userFn("Get rid of sPaM emails. Our book in on sale!") === true &&
+            userFn("[SPAM] How to earn fast money?") === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkForSpam(message)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-case-1",
+          label:
+            'Вызов функции checkForSpam("Latest technology news") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-2",
+          label:
+            'Вызов функции checkForSpam("JavaScript weekly newsletter") возвращает false',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-3",
+          label:
+            'Вызов функции checkForSpam("Get best sale offers now!") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-4",
+          label:
+            'Вызов функции checkForSpam("Amazing SalE, only tonight!") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-5",
+          label:
+            'Вызов функции checkForSpam("Trust me, this is not a spam message") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-6",
+          label:
+            'Вызов функции checkForSpam("Get rid of sPaM emails. Our book in on sale!") возвращает true',
+          passed: passesTests,
+        },
+        {
+          id: "test-case-7",
+          label:
+            'Вызов функции checkForSpam("[SPAM] How to earn fast money?") возвращает true',
           passed: passesTests,
         },
       ];
