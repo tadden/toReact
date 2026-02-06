@@ -2518,6 +2518,342 @@ ul a {
 <div class="info-note">
   <p>! Псевдокласс <code>:hover</code> не обязательно должен применяться к ссылкам, т.е. его можно добавлять и к другим элементам документа. Все зависит от дизайна веб-страницы.</p>
 </div>
+
+[QUIZ: css-hover-quiz]
+
+[NEXT]
+
+<h2>Псевдокласс: active</h2>
+
+<p>Результат применения становится видимым во время активации элемента. Ссылка становится активной, если навести на нее курсор и кликнуть мышкой. Несмотря на то, что активным может стать практически любой элемент, псевдокласс <code>:active</code> используется в основном для ссылок и кнопок.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;ul class="social-links"&gt;
+  &lt;li&gt;&lt;a class="link" href="https://twitter.com"&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.instagram.com"&gt;Instagram&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.facebook.com"&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Важно понимать, что псевдоклассы <code>:hover</code> и <code>:active</code> — это разные состояния. Состояние <code>:hover</code> инициируется, когда пользователь наводит мышь на элемент. Состояние <code>:hover</code> обычно представлено изменением <code>background-color</code> (или <code>color</code>). Разница стилей между состоянием <code>:hover</code> и его отсутствием не обязательно должна быть ярко выражена, так как пользователь уже знает, что он навел мышку на что-то.</p>
+
+<p>Состояние <code>:active</code> инициируется, когда вы взаимодействуете с элементами. Под взаимодействием понимается:</p>
+<ul class="list-disc">
+  <li>удержание левой кнопки мыши на элементе;</li>
+  <li>удержание кнопки пробела (на элементах button).</li>
+</ul>
+
+<p>Итак, рассмотрим эти состояния на примере.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.social-links .link {
+  color: teal;
+}
+
+.social-links .link:hover {
+  color: orange;
+}
+
+.social-links .link:active {
+  color: red;
+}</code></pre>
+</div>
+
+<p>При наведении на ссылку, принадлежащую к классу <code>.social-links</code>, цвет текста в ссылке меняется на помаранчевый.</p>
+
+<p>При нажатии на ссылку, принадлежащую к классу <code>.social-links</code>, цвет текста в ссылке меняется на красный.</p>
+
+[QUIZ: css-active-quiz]
+
+[NEXT]
+
+<h2>Псевдокласс: focus</h2>
+
+<p>Активируется, когда интерактивный элемент (ссылка, кнопка, поле формы) получает фокус при нажатии на него мышкой или при навигации по странице клавиатурой (клавишей <code>Tab</code>).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;ul class="social-links"&gt;
+  &lt;li&gt;&lt;a class="link" href="https://twitter.com"&gt;Twitter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.instagram.com"&gt;Instagram&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a class="link" href="https://www.facebook.com"&gt;Facebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Добавим к ссылке базовый стиль и стиль при фокусе на списке.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.social-links .link {
+  color: teal;
+}
+
+.social-links .link:focus {
+  color: orange;
+}</code></pre>
+</div>
+
+<p>Для того, чтобы учесть наведение и фокусировку, стоит стилизовать оба состояния сразу. Это делается простым перечислением селекторов.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.social-links .link {
+  color: teal;
+}
+
+/* Два и более селекторов для одного правила разделяются запятой */
+.social-links .link:hover,
+.social-links .link:focus {
+  color: orange;
+}</code></pre>
+</div>
+
+[QUIZ: css-focus-quiz]
+`,
+          challenges: [],
+        },
+        {
+          slug: "css-cascade",
+          title: "Каскад стилей",
+          description: "Как браузер решает конфликты стилей.",
+          videoUrl: null,
+          order: 4,
+          content: `
+
+<p>Бывают ли конфликты между селекторами?</p>
+<p>Вы уже знаете, что CSS правила могут приходить из разных источников: внешних и внутренних таблиц стилей, селекторов классов, ID, тегов или атрибута style. А что произойдет, если одно правило говорит, что цвет текста в абзаце должен быть зеленым, а другое утверждает, что синим?</p>
+<p>Возникнет конфликт. И решаться этот конфликт будет по специальным правилам. Разработчики, знающие эти правила, умеют использовать их в свою пользу!</p>
+
+<p><strong>Каскадирование</strong> — это механизм, управляющий конечными значениями свойств элемента, если к нему применяется несколько CSS-правил.</p>
+
+<ul class="list-disc">
+  <li>Если к элементу применяется несколько правил, их свойства объединяются.</li>
+  <li>Если в правилах есть одинаковые свойства с разными значениями, возникает конфликт.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Каким будет цвет текста абзацев? */
+p {
+  color: blue;
+  background-color: orange;
+}
+
+p {
+  color: teal;
+}</code></pre>
+</div>
+
+<p>Чтобы собрать финальные стили элемента и разрешить конфликты значений свойств, браузер использует два механизма: <strong>специфичность</strong> и <strong>наследование</strong>.</p>
+
+[NEXT]
+
+<h2>Специфичность селекторов</h2>
+
+<p>Для каждого CSS-правила браузер вычисляет специфичность (вес) селектора.</p>
+
+<p>Представь, что к элементу нужно применить свойства из разных правил, при этом элемент содержит свойства, которые конфликтуют, то есть они одинаковые. Браузер отдаст предпочтение тому правилу, чей селектор будет иметь наивысшую специфичность, и именно свойства этого правила отобразятся на странице.</p>
+
+<p>Чтобы определить специфичность каждого селектора, существует система приоритетов. Это как если бы браузер награждал каждый наименее специфичный селектор 1 баллом. Более специфичный тип селектора — уже 10 баллами. Еще более специфичный тип селектора — 100 баллами, а самый уникальный получал бы 1000 баллов. А потом останется посчитать, сколько баллов имеет определенное CSS правило, и наградить его отображением на странице.</p>
+
+<p>Значение специфичности состоит из четырех рангов. Их важность возрастает справа налево, то есть 1 в левой колонке — это та же 1000 баллов, а 1 в правой — остается единица.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
+</div>
+
+[NEXT]
+
+<h2>Селекторы 4-го ранга</h2>
+
+<p>К селекторам 4-го ранга относятся:</p>
+<ul class="list-disc">
+  <li>селекторы элементов (<strong>X</strong>);</li>
+  <li>селекторы псевдоэлементов (концепцию псевдоэлементов рассмотрим далее в курсе).</li>
+</ul>
+
+<p>Они имеют самую низкую специфичность, а значит будут проигрывать конфликты более специфичным элементам.</p>
+
+<p>Каждый селектор элемента и псевдоэлемента добавляет единицу в четвертый ранг.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;section&gt;
+  &lt;h1&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet
+  &lt;/p&gt;
+&lt;/section&gt;</code></pre>
+</div>
+
+<p>Цвет текста абзаца будет помаранчевым, потому что:</p>
+<ul class="list-disc">
+  <li>первое правило содержит один селектор по типу тега, значит его специфичность 0001;</li>
+  <li>второе правило содержит дочерний селектор с двумя элементами, его специфичность 0002;</li>
+  <li>специфичность второго правила выше.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Специфичность - 0 0 0 1 */
+p {
+  color: green;
+}
+
+/* ✅ Специфичность - 0 0 0 2 */
+section > p {
+  color: orange;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Селекторы 3-го ранга</h2>
+
+<p>К селекторам 3-го ранга относятся:</p>
+<ul class="list-disc">
+  <li>селекторы классов (<strong>.X</strong>);</li>
+  <li>селекторы атрибутов;</li>
+  <li>селекторы псевдоклассов (<code>:hover</code>, <code>:active</code>, <code>:focus</code> и т.д.).</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/module-2/specificity-rank-3.png" alt="Селекторы 3-го ранга" class="img-responsive" />
+</div>
+
+<p>Каждый селектор класса, атрибута и псевдокласса добавляет единицу в третий ранг.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1 class="post-title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;a href="#" class="post-link"&gt;Читать далее...&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<p>Цвет текста заголовка будет оранжевым, потому что специфичность третьего правила выше.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Специфичность - 0 0 1 0 */
+.post-title {
+  color: green;
+}
+
+/* Специфичность - 0 0 1 1 */
+.post > h1 {
+  color: red;
+}
+
+/* ✅ Специфичность - 0 0 2 0 */
+.post > .post-title {
+  color: orange;
+}</code></pre>
+</div>
+
+<p>Цвет текста ссылки будет коричневым, потому что специфичность пятого правила выше.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Специфичность - 0 0 0 1 */
+a {
+  color: green;
+}
+
+/* Специфичность - 0 0 1 0 */
+.post-link {
+  color: orange;
+}
+
+/* Специфичность - 0 0 1 1 */
+a.post-link {
+  color: blue;
+}
+
+/* Специфичность - 0 0 2 0 */
+.post > .post-link {
+  color: red;
+}
+
+/* ✅ Специфичность - 0 0 2 1 */
+.post > a.post-link {
+  color: brown;
+}</code></pre>
+</div>
+
 `,
           challenges: [],
         },

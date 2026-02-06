@@ -88,7 +88,11 @@
   text-align: center;
 
   .success {
-    color: #22c55e;
+    color: white;
+    background: rgba(34, 197, 94, 0.2);
+    border: 1px solid #22c55e;
+    padding: 1rem;
+    border-radius: 8px;
     font-weight: bold;
     font-size: 1.1rem;
     display: flex;
@@ -98,7 +102,11 @@
   }
 
   .error {
-    color: #ef4444;
+    color: white;
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid #ef4444;
+    padding: 1rem;
+    border-radius: 8px;
     font-weight: bold;
     font-size: 1.1rem;
   }
