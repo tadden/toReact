@@ -2121,9 +2121,8 @@ p {
 `,
         },
         {
-          slug: "css-selectors",
+          id: "css-selectors",
           title: "Селекторы",
-          description: "Основные типы селекторов.",
           videoUrl: null,
           order: 3,
           content: `
@@ -2645,9 +2644,8 @@ ul a {
           challenges: [],
         },
         {
-          slug: "css-cascade",
+          id: "css-cascade",
           title: "Каскад стилей",
-          description: "Как браузер решает конфликты стилей.",
           videoUrl: null,
           order: 4,
           content: `
@@ -2696,13 +2694,13 @@ p {
 
 <p>Значение специфичности состоит из четырех рангов. Их важность возрастает справа налево, то есть 1 в левой колонке — это та же 1000 баллов, а 1 в правой — остается единица.</p>
 
-<div class="image-container">
-  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
-</div>
-
 [NEXT]
 
 <h2>Селекторы 4-го ранга</h2>
+
+<div class="image-container">
+  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
+</div>
 
 <p>К селекторам 4-го ранга относятся:</p>
 <ul class="list-disc">
@@ -2760,16 +2758,16 @@ section > p {
 
 <h2>Селекторы 3-го ранга</h2>
 
+<div class="image-container">
+  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
+</div>
+
 <p>К селекторам 3-го ранга относятся:</p>
 <ul class="list-disc">
   <li>селекторы классов (<strong>.X</strong>);</li>
   <li>селекторы атрибутов;</li>
   <li>селекторы псевдоклассов (<code>:hover</code>, <code>:active</code>, <code>:focus</code> и т.д.).</li>
 </ul>
-
-<div class="image-container">
-  <img src="/images/module-2/specificity-rank-3.png" alt="Селекторы 3-го ранга" class="img-responsive" />
-</div>
 
 <p>Каждый селектор класса, атрибута и псевдокласса добавляет единицу в третий ранг.</p>
 
@@ -2854,6 +2852,1796 @@ a.post-link {
 }</code></pre>
 </div>
 
+
+[NEXT]
+
+<h2>Селекторы 2-го ранга</h2>
+
+<p>Селекторы 2-го ранга имеют более высокий приоритет (вес), чем селекторы 3-го ранга.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
+</div>
+
+<p>Каждый селектор идентификатора добавляет единицу во второй ранг.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1 class="post-title" id="title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  &lt;/p&gt;
+  &lt;p&gt;
+    &lt;a href="" class="post-link"&gt;Читать далее...&lt;/a&gt;
+  &lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<p>Цвет текста заголовка будет оранжевым, потому что специфичность второго правила выше.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Специфичность - 0 0 1 0 */
+.post-title {
+  color: green;
+}
+
+/* ✅ Специфичность - 0 1 0 0 */
+#title {
+  color: orange;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Селекторы 1-го ранга</h2>
+
+<p>Селекторы 1-го ранга имеют наивысший приоритет.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/specificity-diagram.png" alt="Специфичность селекторов" class="img-responsive" />
+</div>
+
+<p>Помнишь про встроенные стили (Inline styles)? Те, что задаются у тега прямо в атрибуте <code>style</code>. Встроенные стили добавляют единицу в первый ранг, а значит имеют наивысшую специфичность (1000).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;!-- Специфичность такого стиля - 1 0 0 0 --&gt;
+&lt;p style="color: green;"&gt;
+  Lorem, ipsum dolor sit amet...
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>Встроенные стили почти не используют, так как их:</p>
+<ul class="list-disc">
+  <li>невозможно переопределить через CSS (кроме как с !important);</li>
+  <li>сложно масштабировать и поддерживать.</li>
+</ul>
+
+<p><em>Чи бывает у конфликтах CSS-правил ничья?</em><br>
+Так, бывает, если разные правила имеют <strong>равную специфичность</strong>. Но браузер имеет на такой случай четкий план действий.</p>
+
+<h2>Равная специфичность</h2>
+
+<p>Если специфичность одинакова, побеждает правило, расположенное ниже в CSS-коде, то есть последнее по порядку из конфликтующих.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* Три селектора элемента с одинаковой специфичностью */
+a {
+  color: teal;
+}
+
+a {
+  color: brown;
+}
+
+/* Это правило стоит ниже, значит ко всем ссылкам
+применится оранжевый цвет текста */
+a {
+  color: orange;
+}</code></pre>
+</div>
+
+[QUIZ: css-equal-specificity-quiz-1]
+
+[QUIZ: css-equal-specificity-quiz-2]
+
+[NEXT]
+
+<h2>Ключевое слово !important</h2>
+
+<p>Специфичность правила можно повысить с помощью ключевого слова <code>!important</code>, если добавить его после значения свойства.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;p class="text" id="text-id"&gt;
+  Lorem, ipsum dolor sit amet...
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>В этом примере абзацу задан глобальный атрибут <code>id="text-id"</code>. Следовательно, в коде ниже, селектор идентификатора имеет высшую специфичность, чем селектор по типу тега, и цвет текста в абзацах будет синим.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">p {
+  color: orange;
+}
+
+p#text-id.text {
+  color: blue;
+}</code></pre>
+</div>
+
+<p>Добавим <code>!important</code> к правилу с селектором по типу тега. Значение свойства с <code>!important</code> приоритетнее за другие, и цвет текста абзаца будет оранжевым.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">p {
+  color: orange !important;
+}
+
+p#text-id.text {
+  color: blue;
+}</code></pre>
+</div>
+
+<div class="note-container">
+  <p>❗️ Крайне не рекомендуется использовать <code>!important</code> в современной разработке. Единственным приемлемым случаем является переопределение значения свойства, если нет прямого доступа к файлу со стилями, например, стиль библиотеки.</p>
+</div>
+
+[QUIZ: css-important-quiz]
+
+[NEXT]
+
+<h2>Уникаем специфичности</h2>
+
+<p>Если селектор выглядит как <code>A &gt; B &gt; C &gt; X &gt; Y</code>, стоит задуматься. Чем проще селектор, тем меньше проблем со специфичностью. Возьми за правило использовать селекторы класса. Атрибут <code>class</code> не только помогает избегнуть проблем со специфичностью, но и повышает читабельность HTML-разметки.</p>
+
+<h3>1. Присвоение класса лишь общему блоку</h3>
+
+<p>Первый подход — это присвоение класса общему блоку-родителю и использование дочерних селекторов и потомков.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a href=""&gt;Read more...&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<p>Такой CSS-код хорошо работает, когда разметка простая. Но при росте сложности разметки блока, которому присвоен отдельный класс (например <code>.post</code>) удобная стилизация по селектору тега (то есть <code>.post > h1</code>, <code>.post > link</code>) становится невозможной. Например, если в посте будет 5 ссылок, а не одна, точечно выбрать какую-то ссылку не выйдет или селектор будет слишком сложный.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  /* Стили статьи */
+}
+
+.post > h1 {
+  /* Стили заголовка */
+}
+
+.post > p {
+  /* Стили текста */
+}
+
+.post > a {
+  /* Стили ссылок */
+}
+
+.post > a:hover {
+  /* Стили ссылок при наведении */
+}</code></pre>
+</div>
+
+<h3>2. Описательные классы для блока-родителя и тегов внутри</h3>
+
+<p>Второй подход — это добавление описательных классов блоку-родителю и тегам внутри него.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1 class="title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p class="text"&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a class="link" href=""&gt;Read more...&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<p>Такой CSS-код неплохо масштабируется и поддерживается. Это отправная точка для написания хорошего CSS. Однако, при росте сложности разметки могут возникнуть небольшие проблемы со специфичностью.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  /* Стили статьи */
+}
+
+.post > .title {
+  /* Стили заголовка */
+}
+
+.post > .text {
+  /* Стили текста */
+}
+
+.post > .link {
+  /* Стили ссылок */
+}
+
+.post > .link:hover {
+  /* Стили ссылок при наведении */
+}</code></pre>
+</div>
+
+<h3>Специфичные классы для каждого тега</h3>
+
+<p>Третий подход заключается в задании очень специфичных классов блоку-родителю и каждому тегу внутри него по принципу "имя родителя — имя ребенка".</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1 class="post-title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p class="post-text"&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a class="post-link" href=""&gt;Read more...&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Наследование свойств</h2>
+
+<p>Генетическое наследование привычно видеть в жизни. Например, у высоких родителей чаще всего высокие дети, часто передается цвет волос и так далее. Нечто подобное есть и в CSS. Если установить зеленый цвет текста родителю, то, какое-либо правило не переопределит это значение, цвет текста у всех его потомков также будет зеленым.</p>
+
+<p><strong>Наследование</strong> — это механизм передачи определенных качеств от предка к его потомкам. Наследуются, в основном, свойства оформления текста, например цвет. Это удобно, потому что не нужно повторять стили для каждого потомка отдельно.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;h1&gt;Популярное за этот месяц&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a href=""&gt;Читать дальше...&lt;/a&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<p>Сделаем весь текст поста зеленого цвета.</p>
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  color: green;
+}</code></pre>
+</div>
+
+<p>В инструментах разработчика на вкладке <code>Styles</code> в самом низу увидим наследование для абзаца и заголовка.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/inheritance.png" alt="Наследование свойств в DevTools" class="img-responsive" />
+</div>
+
+<p>В жизни не все атрибуты родителей в полном объеме передаются детям. Так же и в CSS, не каждое свойство по умолчанию наследуется потомками. Фактически, если бы все свойства были унаследованы, эффект был бы аналогичным полному отсутствию наследования вообще. Пришлось бы написать очень много CSS для сброса стилей, унаследованных от отца, чтобы переопределить это поведение.</p>
+
+[NEXT]
+
+<h2>Исключения наследования</h2>
+
+<p>Не все элементы наследуют значения свойств предков. Например, ссылки (<code>&lt;a&gt;</code>) не наследуют цвет текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;section class="post"&gt;
+  &lt;h1&gt;Популярное за этот месяц&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a href="" class="post-link"&gt;Читать далее...&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+</div>
+
+<p>Если необходимо, чтобы в посте ссылка была того же цвета, как и весь текст, можно использовать специальное значение <code>inherit</code> для свойства <code>color</code>, чтобы не дублировать цвет в двух местах.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  color: green;
+}
+
+.post-link {
+  color: inherit;
+}</code></pre>
+</div>
+
+<div class="note-container">
+  <p>❗️ Значение <code>inherit</code> сообщает браузеру, что элементу необходимо унаследовать значение свойства от родительского элемента.</p>
+</div>
+
+[NEXT]
+
+<h2>Ключевое слово currentColor</h2>
+
+<p>Если необходимо унаследовать значение свойства цвета текста (властивість <code>color</code>), то в большинстве случаев мы увидим для него значение <code>inherit</code>.</p>
+
+<p>Но для ссылок обычно исользуется ключевое слово <code>currentColor</code> (текущий цвет). Добавим это значение в предыдущий пример. Цель — чтобы цвет текста ссылки наследовался от секции.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;section class="post"&gt;
+  &lt;h1&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p&gt;
+    Lorem, ipsum dolor sit amet...
+  &lt;/p&gt;
+  &lt;a href="" class="post-link"&gt;Read more...&lt;/a&gt;
+&lt;/section&gt;</code></pre>
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  color: green;
+}
+
+.post-link {
+  color: currentColor;
+}</code></pre>
+</div>
+
+<p>Сравни отображение текста ссылки в браузере до и после использования ключевого слова <code>currentColor</code>.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/current-color-comparison.png" alt="Сравнение color: inherit и currentColor" class="img-responsive" />
+</div>
+
+<p>Кроме того, <code>currentColor</code> можно использовать для других свойств элемента, связанных с цветом, чтобы снизить количество повторений. Например, цвет рамки ссылки должен быть идентичным текущему цвету её текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;a href="" class="link"&gt;Lorem ipsum dolor sit amet&lt;/a&gt;</code></pre>
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.link {
+  color: orangered;
+  border: 1px solid currentColor;
+}</code></pre>
+</div>
+
+<div class="image-container">
+  <img src="/images/module-2/current-color-border.png" alt="Использование currentColor для границы" class="img-responsive" />
+</div>
+
+[QUIZ: css-current-color-quiz]
+
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post {
+  /* Стили статьи */
+}
+
+.post-title {
+  /* Стили заголовка */
+}
+
+.post-text {
+  /* Стили текста */
+}
+
+.post-link {
+  /* Стили ссылок */
+}
+
+.post-link:hover {
+  /* Стили ссылок при наведении */
+}</code></pre>
+</div>
+
+<div class="note-container">
+  <p> Не стоит ограничивать себя выбором лишь одного подхода. Все три методы именования разметки классами и написания стилей можно использовать вместе, в зависимости от ситуации.</p>
+</div>
+
+`,
+          challenges: [],
+        },
+        {
+          id: "css-fonts",
+          title: "Шрифты",
+          videoUrl:
+            "https://goitlmsstorage.b-cdn.net/6332ea8b-c797-4696-a061-882f55780b232025-03-13%2013-17-03.mp4",
+          order: 5,
+          content: `
+<p><em>Times New Roman</em> на сайте — это моветон, а <em>Open Sans</em> — современная классика веб-дизайна. «Что мне с того? Пускай веб-дизайнер решает по шрифтам» — думаешь ты. Но так не работает. Все, что веб-дизайнер сделает в макете, разработчик должен реализовать в коде.</p>
+
+<p>Итак, тебя уже ждет знакомство со шрифтами. Их тип, размер, жирность и другие свойства, которые позволяют «сделать красиво».</p>
+
+[NEXT]
+
+<h2>Свойство font-family</h2>
+
+<p><strong>Шрифт</strong> — это набор типографских букв, цифр и специальных знаков определенного стиля для набора текста.</p>
+
+<p>Шрифты делятся на несколько основных групп (семейств):</p>
+<ul class="list-disc">
+  <li>шрифты с засечками (serif);</li>
+  <li>шрифты без засечек (sans-serif);</li>
+  <li>моноширинные (monospace);</li>
+  <li>декоративные;</li>
+  <li>рукописные и т.д.</li>
+</ul>
+
+<p>MacOS, Linux и Windows содержат набор стандартных шрифтов из каждого семейства. По умолчанию, если никакой другой шрифт не задан, браузер использует <code>Times New Roman</code> из семейства с засечками (serif).</p>
+
+<p>Посмотреть, каким именно шрифтом отображен текст элемента, можно в инструментах разработчика на вкладке <code>Computed</code>.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/rendered-fonts.png" alt="Rendered Fonts в DevTools" class="img-responsive" />
+</div>
+
+<p>Свойство <code>font-family</code> задает шрифт тексту элемента. Через запятую можно перечислить произвольное количество шрифтов, которые браузер попытается найти в системе пользователя и применить. Браузер будет искать шрифты слева направо и применит первый найденный.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">p {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', 'Tahoma', sans-serif;
+}</code></pre>
+</div>
+
+<p>В конце списка всегда указывается семейство шрифтов, на случай, если ни одного из перечисленных шрифтов не найдено. Тогда применится стандартный шрифт из этого семейства, который есть в системе пользователя.</p>
+
+[NEXT]
+
+<h2>Основной шрифт документа</h2>
+
+<p>Дизайн веб-страницы делается в одном стиле. Итак, обычно, есть:</p>
+
+<ul class="list-disc">
+  <li><strong>основной шрифт</strong> — применяется к большинству текста;</li>
+  <li><strong>вспомогательные шрифты</strong> — для декорирования, например, заголовки и/или ссылки могут быть отображены другим шрифтом, нежели основной текст страницы.</li>
+</ul>
+
+<p>Свойство <code>font-family</code> наследуется большинством элементов, поэтому его задают элементу <code>body</code>. Исключения наследования шрифта мы разберем позже.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+}</code></pre>
+</div>
+
+<p>В селекторе <code>body</code> всегда перечисляется набор возможных шрифтов. Последним указывается семейство шрифтов на случай, если ни одного шрифта из перечня не найдено. В этом случае применится стандартный шрифт из этого семейства, который есть в системе пользователя.</p>
+
+<p>Далее, если нужно отобразить элемент шрифтом, который отличается от главного:</p>
+
+<ul class="list-disc">
+  <li>в HTML-документе определяем элемент, который будет иметь отдельный шрифт;</li>
+  <li>в CSS-правиле переопределяем значение свойства <code>font-family</code>.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="page-title"&gt;Super cool page title&lt;/h1&gt;
+&lt;p&gt;Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+Alias reiciendis,
+dignissimos, placeat eius repellat earum est ea cum id
+voluptatum quo. Expedita
+suscipit quis quidem, placeat voluptatum ducimus nisi dolores!
+&lt;/p&gt;</code></pre>
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.page-title {
+  font-family: 'Tahoma';
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство font-size</h2>
+
+<p>Свойство <code>font-size</code> задает размер шрифта элемента в абсолютных или относительных единицах измерения. Пока ограничимся абсолютными единицами — <code>px</code> (пикселями).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;p class="text"&gt;
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  Obcaecati commodi,
+  veritatis nihil alias iste odit similique sit eius optio
+  veniam, impedit
+  cumque fuga facere labore quo id necessitatibus quaerat
+  rerum.
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>По умолчанию размер шрифта абзацев, который установлен в таблице стилей браузера, равен <code>16px</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.text {
+  font-size: 20px;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство font-weight</h2>
+
+<p>Свойство <code>font-weight</code> контролирует толщину изображения (жирность, вес) букв в шрифте. Значение свойства можно задавать с помощью набора зарезервированных слов или цифрами от <code>100</code> до <code>900</code> с шагом <code>100</code>. Эти значения задают степень толщины глифа от тонкого <code>100</code> до толстого <code>900</code>.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/font-weight-diagram.png" alt="Степени жирности шрифта" class="img-responsive" />
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">font-weight: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900</code></pre>
+</div>
+
+<p>Ключевые слова привязаны к цифрам, например <code>normal</code> — это <code>400</code>, а <code>bold</code> — <code>700</code>. В разработке используются только цифры, из-за возможности задать одинаковую точную жирность во всех браузерах.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="title"&gt;Iste odit similique sit&lt;/h1&gt;
+&lt;p class="text"&gt;
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  Obcaecati commodi,
+  veritatis nihil alias iste odit similique sit eius optio
+  veniam, impedit
+  cumque fuga facere labore quo id necessitatibus quaerat
+  rerum.
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>По умолчанию жирность шрифта абзацев, которая установлена в таблице стилей браузера, равна <code>400</code>, а вес заголовков — <code>700</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="dot red"></div>
+    <div class="dot yellow"></div>
+    <div class="dot green"></div>
+  </div>
+  <pre><code class="language-css">/* Поменяем местами жирность текста заголовка и абзаца */
+.title {
+  font-weight: 400;
+}
+
+.text {
+  font-weight: 700;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство font-style</h2>
+
+<p>Свойство <code>font-style</code> задает тип начертания текста, например, можно сделать текст курсивом.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">font-style: normal | italic | oblique | initial | inherit</code></pre>
+</div>
+
+<p>Из всех значений используют только два:</p>
+<ul class="list-disc">
+  <li><code>normal</code> - значение по умолчанию у большинства тегов;</li>
+  <li><code>italic</code> - текст курсивом (с наклоном).</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="title"&gt;Iste odit similique sit&lt;/h1&gt;
+&lt;p class="text"&gt;
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+  Obcaecati commodi,
+  veritatis nihil alias iste odit similique sit eius optio
+  veniam, impedit
+  cumque fuga facere labore quo id necessabilitatibus quaerat
+  rerum.
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>Сделаем текст заголовка курсивом.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.title {
+  font-style: italic;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Нестандартные шрифты</h2>
+
+<p>Шрифт помогает сделать сайт уникальным. Миллионы сайтов с одним шрифтом Times New Roman были бы, наверное, слишком скучными. Поэтому дизайнеры создают свои шрифты, а разработчики могут использовать их в проектах.</p>
+
+<div class="info-note">
+  <p><strong>Шрифты делятся на платные и бесплатные.</strong></p>
+  <p>Лицензию для использования платного шрифта необходимо покупать, а использование шрифта без лицензии может привести к нарушению авторских прав. Есть много красивых бесплатных шрифтов, которые находятся в открытом доступе.</p>
+</div>
+
+<p><a href="https://fonts.google.com/" target="_blank" rel="noopener noreferrer">Google Fonts</a> — это хранилище с бесчисленным количеством бесплатных шрифтов. Все, что необходимо сделать, это:</p>
+<ul class="list-disc">
+  <li>найти шрифт, который понравился;</li>
+  <li>получить на него ссылку;</li>
+  <li>подключить в своем HTML-файле, как еще одну таблицу стилей.</li>
+</ul>
+
+<p>Для того, чтобы добавить нестандартный бесплатный шрифт из сервиса <strong>Google Fonts</strong>:</p>
+
+<p>1. Переходим по ссылке на <a href="https://fonts.google.com/" target="_blank" rel="noopener noreferrer">страницу поиска</a>.</p>
+<p>2. Выбрать шрифт можно 2 способами:</p>
+<ul class="list-disc">
+  <li>проскролить галерею шрифтов в поисках того, который понравится;</li>
+  <li>ввести в поле поиска имя шрифта и нажать на карточку шрифта.</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/module-2/google-fonts-search.png" alt="Поиск шрифта в Google Fonts" class="img-responsive" />
+</div>
+
+<p>3. На странице шрифта выбираем необходимый вес.</p>
+<p>Выбирать все доступные опции не нужно — чем больше вариантов, тем тяжелее будет файл шрифта, и тем дольше будет загружаться ваша веб-страница. То же самое и с количеством шрифтов: обычно ограничиваются одним, максимум двумя шрифтами для всего сайта. Нам нужен только вес <code>700</code>, ведь мы подключаем шрифт для заголовков.</p>
+
+<div class="info-note">
+  <p><strong>Не все шрифты поддерживают полный диапазон веса (от 100 до 900) и начертаний (стандартный или курсив).</strong></p>
+  <p>Дизайнер создает набор самых популярных значений. Если шрифт не поддерживает определенный вес, браузер будет рисовать его ближайшей доступной жирностью.</p>
+</div>
+
+<p>4. На вкладке <code>Embed</code> копируем теги <code>&lt;link&gt;</code>, в которых указана ссылка на таблицу стилей шрифта, и добавляем её в шапку своего HTML-документа, перед другими стилями.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap" rel="stylesheet"&gt;
+    &lt;link href="./css/styles.css" rel="stylesheet" /&gt;
+    &lt;title&gt;Document title&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Making the Web Beautiful!&lt;/h1&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+
+<p>Теги <code>&lt;link rel="preconnect"&gt;</code> используются для предварительного установления соединения с серверами Google Fonts. Это ускоряет загрузку шрифтов, улучшая производительность сайта.</p>
+<ul class="list-disc">
+  <li>Первый <code>link</code> — устанавливает раннее соединение с основным сервером Google Fonts, откуда приходят стили шрифтов.</li>
+  <li>Второй <code>link</code> — устанавливает раннее соединение с сервером, где хранятся сами файлы шрифтов. <code>crossorigin</code> нужен для безопасной загрузки ресурсов из внешних источников.</li>
+  <li>Третий <code>link</code> — используется для подключения конкретного шрифта из Google Fonts.</li>
+</ul>
+
+<p>5. Теперь в файле стилей можно использовать шрифт <code>Tangerine</code>, указав его в свойстве <code>font-family</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Tangerine', cursive;
+}</code></pre>
+</div>
+
+<p>Текст, изображенный нестандартным шрифтом, не отличается ничем, кроме внешнего вида, поэтому для его оформления можно использовать любые CSS-свойства.</p>
+
+[NEXT]
+
+<h2>Директива @font-face</h2>
+
+<p>Разберемся, что именно мы добавили в HTML-документ на предыдущем шаге.</p>
+
+<div class="image-container">
+  <img src="/images/module-2/font-face-network.png" alt="Вкладка Network в DevTools" class="img-responsive" />
+</div>
+
+<ol>
+  <li>Открываем инструменты разработчика и переходим на вкладку <strong>Network</strong>.</li>
+  <li>Выбираем фильтр <strong>CSS</strong>, чтобы отображались только файлы стилей.</li>
+  <li>Кликаем по файлу от <strong>Google Fonts</strong>.</li>
+  <li>Выбираем вкладку <strong>Preview</strong>, в которой отображается содержимое файла.</li>
+</ol>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">/* latin */
+@font-face {
+  font-family: 'Tangerine';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: local('Tangerine Bold'), local('Tangerine-Bold'), 
+  url(https://fonts.gstatic.com/s/tangerine/v12/Iurd6Y5j_oScZZow4V05srNZi5FNym499g.woff2);
+}</code></pre>
+</div>
+
+<p>Итак, <strong>Google Fonts</strong> вернул нам обычный CSS-файл, в котором есть директива <code>@font-face</code> — объявление шрифта. Эта директива позволяет указать браузеру параметры подключаемого шрифта.</p>
+
+<ul class="list-disc">
+  <li><code>font-family</code> — локальное имя для использования в нашем CSS-коде.</li>
+  <li><code>font-style</code> — тип начертания (обычный, курсив и т.д.).</li>
+  <li><code>font-weight</code> — вес подключаемого шрифта.</li>
+  <li><code>font-display</code> — управляет отображением текста во время загрузки шрифта.</li>
+  <li><code>src</code> — ссылка на сам файл шрифта и уточнение его типа, обычно <code>woff</code> или <code>woff2</code>. В нашем случае файл шрифта размещен на серверах Google, но это может быть локальный шрифт, который хранится в файлах проекта.</li>
+  <li><code>unicode-range</code> — указывает набор необходимых символов в шрифте из <a href="https://unicode-table.com/ru/" target="_blank" rel="noopener noreferrer">таблицы символов Unicode</a>. Загружать все символы не нужно, чем меньше, тем быстрее загрузится шрифт.</li>
+</ul>
+
+<div class="info-note">
+  <p><strong>!</strong></p>
+  <p>Все известные человечеству символы (буквы, математические знаки и т.д.) собраны и описаны стандартом <strong>Unicode</strong>, в котором каждый символ имеет имя (например, «latin capital letter a») и код (code point) — число от <code>0</code> до <code>10FFFF</code>.</p>
+</div>
+`,
+          challenges: [],
+        },
+        {
+          id: "css-text-formatting",
+          title: "Оформление текста",
+          videoUrl: null,
+          order: 6,
+          content: `
+<p>Для чего нужны веб-страницы?</p> 
+<p>Если коротко — для поиска определенной информации. Чаще всего эта информация находится в текстовом виде. Поэтому, тексты должны легко читаться и хорошо сочетаться с другими элементами сайта.</p>
+
+<p>Интервалы между буквами, отступы между строками, выравнивание, подчеркивание — все это влияет на восприятие текста. И все это будет в макетах, которые ты будешь верстать.</p>
+
+[NEXT]
+
+<h2>Свойство text-align</h2>
+
+<p>Свойство <code>text-align</code> управляет выравниванием текстового содержимого элемента по горизонтали.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">text-align: left | right | center | justify</code></pre>
+</div>
+
+<p>По умолчанию текст выравнивается по левому краю (значение <code>left</code>).</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;article class="post"&gt;
+  &lt;h1 class="post-title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p class="post-text align-right"&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+    veritatis nihil alias iste odit similique sit eius optio veniam, impedit
+    cumque fuga facere labore quo id necessitatibus quaerat rerum.
+  &lt;/p&gt;
+
+  &lt;p class="post-text align-justify"&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+    veritatis nihil alias iste odit similique sit eius optio veniam, impedit
+    cumque fuga facere labore quo id necessitatibus quaerat rerum.
+  &lt;/p&gt;
+&lt;/article&gt;</code></pre>
+</div>
+
+<p>Центрируем текст заголовка и выравниваем текст абзацев по правому краю и равномерно.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post-title {
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-justify {
+  text-align: justify;
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p><strong>ВНИМАНИЕ</strong></p>
+  <p>Использование значения <code>justify</code> не самая лучшая идея. Хотя текст и прижимается к левой и правой границе блока равномерно, его читабельность сильно падает. Всё потому, что пробелы между словами становятся разной ширины, а это негативно влияет на восприятие текста.</p>
+</div>
+
+[NEXT]
+
+<h2>Свойство text-decoration</h2>
+
+<p>Задаёт различное оформительное подчёркивание и другие эффекты текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">text-decoration: none | underline | line-through | overline</code></pre>
+</div>
+
+<p>Таблица стилей от браузера устанавливает большинству элементов значение <code>none</code>, то есть отключено. А вот, например, у ссылок по умолчанию указано <code>underline</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="title"&gt;Iste odit similique sit&lt;/h1&gt;
+&lt;p class="text"&gt;
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+  &lt;span&gt;veritatis nihil alias iste&lt;/span&gt; odit similique sit eius optio veniam,
+  impedit cumque fuga facere labore quo id necessitatibus quaerat rerum.
+&lt;/p&gt;
+&lt;a href="" class="link"&gt;Читать дальше...&lt;/a&gt;</code></pre>
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.text > span {
+  text-decoration: line-through;
+}
+
+.link {
+  text-decoration: none;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство text-transform</h2>
+
+<p>Управляет регистром символов в тексте, например сделать все буквы заглавными или прописными. В разметке текст всегда набирается согласно правилам языка. После чего, при помощи <code>text-transform</code>, приводится к нужному виду, потому что всё оформление должно быть в CSS.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">text-transform: none | uppercase | lowercase | capitalize</code></pre>
+</div>
+
+<p>Создадим разметку меню навигации, текст пунктов которой в макете нарисован заглавными буквами.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;ul class="site-nav"&gt;
+  &lt;li&gt;&lt;a href="" class="link"&gt;Blog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="" class="link"&gt;Workshops&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="" class="link"&gt;Podcasts&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="" class="link"&gt;About&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+</div>
+
+<p>Теперь в стилях делаем все буквы текста ссылок заглавными.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.site-nav .link {
+  text-transform: uppercase;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство text-indent</h2>
+
+<p>Устанавливает величину отступа первой строки блока текста, например абзаца. Не влияет на все остальные строки кроме первой.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">text-indent: значение | проценты | inherit</code></pre>
+</div>
+
+<p>В качестве значений принимаются любые единицы длины, например пиксели (<code>px</code>). При задании значения в процентах, отступ вычисляется в зависимости от ширины блока.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;article class="post"&gt;
+  &lt;h1 class="post-title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p class="post-text"&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+    veritatis nihil alias iste odit similique sit eius optio veniam, impedit
+    cumque fuga facere labore quo id necessitatibus quaerat rerum.Obcaecati 
+    commodi, veritatis nihil alias iste odit similique sit eius optio veniam, 
+    impedit cumque fuga facere labore quo id necessitatibus quaerat rerum.
+  &lt;/p&gt;
+&lt;/article&gt;</code></pre>
+</div>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post-text {
+  text-indent: 100px;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство line-height</h2>
+
+<p>Устанавливает межстрочный интервал (интерлиньяж, высоту строки) текста. По умолчанию расстояние между строками зависит от вида шрифта и его размеров, и определяется браузером автоматически.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">line-height: множитель | значение | проценты | normal | inherit</code></pre>
+</div>
+
+<p>Значение можно задавать абсолютными или относительными единицами и множителем. Лучше всего устанавливать значение в виде множителя, тогда интерлиньяж рассчитывается от текущего размера шрифта текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;p class="text"&gt;
+  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+  veritatis nihil alias iste odit similique sit eius optio veniam, impedit
+  cumque fuga facere labore quo id necessitatibus quaerat rerum.Obcaecati 
+  commodi, veritatis nihil alias iste odit similique sit eius optio veniam, 
+  impedit cumque fuga facere labore quo id necessitatibus quaerat rerum.
+&lt;/p&gt;</code></pre>
+</div>
+
+<p>Например, если в макете размер шрифта <code>16px</code> а интерлиньяж <code>24px</code>, просто делим <code>24</code> на <code>16</code> и получаем множитель <code>1.5</code>. Использование множителя гарантирует равномерное масштабирование межстрочного интервала при изменении размера текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.text {
+  font-size: 16px;
+  line-height: 1.5;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство letter-spacing</h2>
+
+<p>Определяет интервал между символами. По умолчанию расстояние между символами устанавливается исходя из типа и вида шрифта, его размеров и настроек операционной системы.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">letter-spacing: значение | normal | inherit</code></pre>
+</div>
+
+<p>Иногда дизайнеры устанавливают нестандартное значение межсимвольного расстояния, и именно для этого существует свойство <code>letter-spacing</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;article class="post"&gt;
+  &lt;h1 class="post-title"&gt;Lorem ipsum dolor sit amet&lt;/h1&gt;
+  &lt;p class="post-text"&gt;
+    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Obcaecati commodi,
+    veritatis nihil alias iste odit similique sit eius optio veniam, impedit
+    cumque fuga facere labore quo id necessitatibus quaerat rerum.Obcaecati 
+    commodi, veritatis nihil alias iste odit similique sit eius optio veniam, 
+    impedit cumque fuga facere labore quo id necessitatibus quaerat rerum.
+  &lt;/p&gt;
+&lt;/article&gt;</code></pre>
+</div>
+
+<p>Для наглядности зададим большие значения <code>letter-spacing</code> тексту заголовка и абзаца.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.post-title {
+  letter-spacing: 10px;
+}
+
+.post-text {
+  letter-spacing: 5px;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство word-spacing</h2>
+
+<p>Определяет интервал между словами. По умолчанию расстояние между словами устанавливается исходя из типа и вида шрифта, его размеров и настроек операционной системы.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">word-spacing: значение | normal | inherit</code></pre>
+</div>
+
+<div class="info-note">
+  <p><strong>ИНТЕРЕСНО</strong></p>
+  <p>Свойство <code>word-spacing</code> относится к группе свойств оформления текста, которые применяются довольно редко.</p>
+</div>
+
+[NEXT]
+
+<h2>Свойство text-shadow</h2>
+
+<p>Контролирует тень текста, а также устанавливает её параметры: цвет, смещение и радиус размытия.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">text-shadow: &lt;смещение по x&gt; &lt;смещение по y&gt; &lt;радиус размытия&gt; &lt;цвет&gt;</code></pre>
+</div>
+
+<ul class="list-disc">
+  <li><code>цвет</code> - задаётся в любом формате. По умолчанию цвет тени совпадает с цветом текста.</li>
+  <li><code>смещение по x</code> - сдвиг тени по горизонтали относительно текста. Положительное значение задает сдвиг тени вправо, отрицательное - влево.</li>
+  <li><code>смещение по y</code> - сдвиг тени по вертикали относительно текста. Положительное значение задает сдвиг тени вниз, отрицательное - вверх.</li>
+  <li><code>радиус размытия</code> - чем больше значение, тем сильнее тень размывается и становится светлее. По умолчанию, если не задан, будет равен <code>0</code>.</li>
+</ul>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="title"&gt;Fusce posuere ligula elementum purus&lt;/h1&gt;</code></pre>
+</div>
+
+<p>Сделаем белый текст с тёмной тенью. Для этого установим смещение по осям X и Y в <code>2px</code>, радиус размытия <code>4px</code> и чёрный цвет тени.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.title {
+  color: #ffffff;
+  text-shadow: 2px 2px 4px #000000;
+}</code></pre>
+</div>
+
+<h3>Многослойная тень</h3>
+
+<p>На один элемент можно добавить несколько теней, указав их через запятую. Получается многослойный пирог из теней.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;h1 class="title"&gt;Fusce posuere ligula elementum purus&lt;/h1&gt;</code></pre>
+</div>
+
+<p>Порядок отображения следующий - первая тень в списке размещается на самом верху, последняя - в самом низу. То есть, чем раньше указана тень, тем выше она в слоях, и будет визуально перекрывать все последующие.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.title {
+  color: #ffffff;
+  text-shadow: 2px 2px 20px #ff0000, 5px 5px 5px #000000;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Свойство white-space</h2>
+
+<p>По умолчанию браузер игнорирует больше одного пробела и переноса строки в HTML-разметке. Свойство <code>white-space</code>, как и тег <code>&lt;pre&gt;</code>, но более гибко, управляет форматированием пробелов и переносов текста.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">white-space: normal | nowrap | pre | pre-wrap</code></pre>
+</div>
+
+[QUIZ: css-text-align-quiz]
+[QUIZ: css-text-decoration-quiz]
+[QUIZ: css-text-transform-quiz]
+`,
+          challenges: [],
+        },
+        {
+          id: "css-global-styles",
+          title: "Глобальные стили. Нормализация",
+          videoUrl: null,
+          order: 7,
+          content: `
+
+<p>Время разработчика — ценный ресурс.</p>
+<p>А стилизация требует много времени и внимания. Хорошо, что всегда есть возможность сократить время на добавление одинаковых свойств с помощью глобальных настроек.</p>
+
+<p>А еще мы знаем, как сильно работодатели ценят кроссплатформенность. Поэтому добавили раздел про нормализацию. Там мы учим разработчиков работать с разными браузерами.</p>
+
+<h2>Что такое глобальные стили?</h2>
+
+<p><strong>Глобальные стили документа</strong> — это набор унаследованных и неунаследованных CSS-свойств, указанных в правиле тега <code>body</code>, а также набор CSS-правил для задания глобальных значений по селекторам тега. Например, убрать подчеркивание всех ссылок документа, сбросить маркеры списков, задать альтернативный шрифт всем заголовкам и т.д.</p>
+<p>Мы уже знаем, как задавать основной шрифт страницы.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  /* Теперь (почти) все элементы отображаются шрифтом без засечек */
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+}</code></pre>
+</div>
+
+<p>Большинство текста страницы, по дизайну, выполняется одним цветом, иначе страница визуально превратится в радугу и воспринимать текст будет трудно. Свойство <code>color</code>, которое устанавливает цвет текста элемента, также наследуется. Поэтому при применении к тегу <code>body</code>, цвет будет унаследован всем текстовым содержимым страницы, кроме ссылок.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: #2a2a2a;
+}</code></pre>
+</div>
+
+<div class="image-container">
+  <img src="/images/module-2/global-styles-inherit.png" alt="Наследование стилей в DevTools" class="img-responsive" />
+</div>
+
+[QUIZ: css-global-styles-quiz]
+
+[NEXT]
+
+<h2>Цвет фона документа</h2>
+
+<p>По умолчанию вся страница имеет белый цвет фона <code>#ffffff</code>, но в дизайне он может отличаться, даже на несколько оттенков. Тому, в будь-якому разі, необхідно задати колір для всього документа.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  
+  color: #2a2a2a;
+  background-color: #fafafa;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Межстрочный интервал</h2>
+
+<p>В дизайне большинство текста документа будет иметь одинаковое значение межстрочного интервала. Значение свойства <code>line-height</code> наследуется, следовательно, можем указать его в глобальных стилях. Потом точечно переопределять в тех местах, где это необходимо.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  
+  color: #2a2a2a;
+  background-color: #fafafa;
+  line-height: 1.5;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Оформление группы тегов</h2>
+
+<p>Мы уже говорили, что по дизайну заголовки могут быть отображены шрифтом, отличающимся от основного. Чтобы не задавать <code>font-family</code> каждому заголовку отдельно, можно написать CSS-правило с селектором всех тегов от <code>h1</code> до <code>h6</code> и установить нужный шрифт.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: #2a2a2a;
+  background-color: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tahoma';
+}</code></pre>
+</div>
+
+<p>Поскольку в правиле для заголовков используется селектор тега, но именно правило находится ниже в коде, его специфичность выше. Таким образом, при составлении финальных стилей элемента все заголовки получат шрифт <code>Tahoma</code>.</p>
+
+
+[QUIZ: css-heading-color-quiz-1]
+
+[QUIZ: css-heading-color-quiz-2]
+
+[NEXT]
+
+<h2>Оформление списков</h2>
+
+<p>По умолчанию элементы списков выделены маркерами или цифрами, в зависимости от типа списка. В подавляющем большинстве случаев эти маркеры не используются в дизайне, особенно для маркированных списков.</p>
+
+<p>Свойство <code>list-style-type</code> определяет тип маркера списка. Чтобы убрать отображение маркера, необходимо установить значение <code>none</code>.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: #2a2a2a;
+  background-color: #fafafa;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Tahoma';
+}
+
+ul, ol {
+  list-style-type: none;
+}</code></pre>
+</div>
+
+[NEXT]
+
+<h2>Нормализация стилей</h2>
+
+<p>Мы хотим, чтобы HTML-элементы выглядели одинаково независимо от браузера. К сожалению, это не так. В разных браузерах элементы могут выглядеть немного иначе. Когда браузер отображает веб-страницу, сначала используется его базовая таблица стилей (user agent stylesheet), значения свойств которой могут отличаться от таблиц стилей других браузеров. Это и приводит к небольшим отличиям во внешнем виде элементов.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">p {
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+}</code></pre>
+</div>
+
+<p>Нормализация стилей — это попытка решить эту проблему путем подключения еще одного файла стилей, в котором исправлены все возможные расхождения между таблицами стилей браузеров. То есть, это техника улучшения <strong>кроссбраузерности</strong> веб-страницы — одинакового отображения и работы сайта в разных браузерах.</p>
+
+<p>Для этого можно использовать готовую библиотеку <a href="https://github.com/sindresorhus/modern-normalize" target="_blank" style="color: #2196f3; font-weight: bold;">Modern Normalize</a>, которая предоставляет готовый файл стилей с нормализацией. Все, что нужно сделать, — это подключить этот файл стилей перед всеми вашими стилями.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-html">&lt;head&gt;
+  &lt;!-- Сначала нормализатор --&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/modern-normalize@2.0.0/modern-normalize.min.css"&gt;
+  &lt;!-- Потом ваши стили --&gt;
+  &lt;link rel="stylesheet" href="./css/styles.css" /&gt;
+&lt;/head&gt;</code></pre>
+</div>
+
+<div class="info-note">
+  <p><strong>!</strong> Файл стилей библиотеки нормализации — это внешняя зависимость вашего проекта. Тому, ссылка на файл — это абсолютный путь к серверу, на котором размещается файл стилей. При загрузке HTML-документа браузер загрузит этот файл стилей для текущей страницы.</p>
+</div>
+
+[QUIZ: css-normalization-quiz]
+`,
+          challenges: [],
+        },
+        {
+          id: "css-variables",
+          title: "CSS-переменные",
+          videoUrl: null,
+          order: 8,
+          content: `
+
+<p>Пользовательские свойства (CSS Custom Properties), также известные как CSS-переменные - это контейнеры для значений, определённые в CSS-документе с целью повторного использования. CSS-переменные упрощают использование и изменение повторяющихся значений в файле стилей. Они поддерживаются браузером нативно и не требуют никаких дополнительных инструментов.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.section {
+  /* Другие стили */
+  border: 2px solid #3f51b5;
+}
+
+.section-title {
+  /* Другие стили */
+  color: #3f51b5;
+}
+
+.section-title::before {
+  /* Другие стили */
+  background-color: #3f51b5;
+}</code></pre>
+</div>
+
+<p>В приведенном примере значению <code>#3f51b5</code> определили трижды. Допустим это главный цвет бренда, который постоянно используется на разных страницах сайта. Если поменяется цвет бренда, нам будет необходимо везде заменить это значение, а в большом проекте это могут быть сотни мест. Лучшее, что мы можем сделать - использовать поиск и замену.</p>
+
+[NEXT]
+
+<h2>Объявление переменной</h2>
+
+<p>На помощь приходят CSS-переменные. Имя переменной чувствительно к регистру и может содержать латинские буквы, цифры, подчеркивание и тире. Создадим переменную <code>--brand-color</code> для хранения цвета бренда (<code>#3f51b5</code>) и будем её использовать.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">:root {
+  --brand-color: #3f51b5;
+}</code></pre>
+</div>
+
+<p>Глобальные переменные, доступные в любом другом правиле, определяются в селекторе <code>:root</code> — более специфичном псевдо-классе элемента <code>html</code>. Объявление переменной начинается с двойного дефиса <code>--</code>, за которым следует её имя и произвольное значение. Например, <code>brand-color</code> или <code>brandColor</code> — это валидные имена переменной, главное чтобы все переменные в проекте были в одинаковой нотации. Имя и значение разделяются двоеточием, а в конце объявления ставится точка с запятой.</p>
+
+<div class="info-note">
+  <p><strong>ИНТЕРЕСНО</strong></p>
+  <p>Объявление переменной это создание нового CSS-свойства, которое наследуется и поэтому доступно везде, так как любой элемент это потомок элемента <code>html</code>.</p>
+</div>
+
+[NEXT]
+
+<h2>Использование переменной</h2>
+
+<p>Для получения доступа к значению переменной применяется встроенная функция <code>var()</code>, которой первым аргументом передается имя переменной.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">:root {
+  --brand-color: #3f51b5;
+}
+
+.section {
+  /* Другие стили */
+  border: 2px solid var(--brand-color);
+}
+
+.section-title {
+  /* Другие стили */
+  color: var(--brand-color);
+}
+
+.section-title::before {
+  /* Другие стили */
+  background-color: var(--brand-color);
+}</code></pre>
+</div>
+
+<p>Кода стало не намного больше, но он более гибкий и читабельный. Теперь если нужно изменить цвет бренда, достаточно заменить значение переменной <code>--brand-color</code> и цвет изменится везде, где она используется.</p>
+
+<div class="info-note">
+  <p><strong>ПОЛЕЗНО</strong></p>
+  <p>CSS-переменные применяются не только для хранения палитры цветов проекта, в них можно хранить что угодно. Например: стандартные размеры шрифта, радиус скругления рамки, общие отступы и поля, ширина контейнера, точки перелома для адаптивной вёрстки и т. п. То есть любые значения, которые используются повторно в разных CSS-правилах.</p>
+</div>
+
+[NEXT]
+
+<h2>Резервные значения</h2>
+
+<p>Функция <code>var(имя_переменной, fallback)</code> может принимать два значения. Второй аргумент это <code>fallback</code> — значение, которое будет использоваться если переменная, переданная первым аргументом, не определена.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.section {
+  border: 2px solid var(--brand-color, orange);
+}
+
+.section-title {
+  color: var(--brand-color, black);
+}
+
+.section-title::before {
+  background-color: var(--brand-color, tomato);
+}</code></pre>
+</div>
+
+<div class="info-note">
+  <p><strong>ПОЛЕЗНО</strong></p>
+  <p>Возможность передать значение по умолчанию это в первую очередь <strong>возможность</strong>, а не обязательное требование при использовании CSS-переменных. Нет необходимости везде указывать фоллбек.</p>
+</div>
+
+[NEXT]
+
+<h2>Область видимости</h2>
+
+<p>Переменная <code>--brand-color</code> глобальная, потому что определена в <code>:root</code>, то есть доступна в любом другом элементе. Если значение будет использоваться только в определенной части страницы, можно создавать переменные с локальной областью видимости. Они будут доступны только для того элемента и его потомков, в котором были объявлены.</p>
+
+<div class="code-editor-container">
+  <div class="code-editor-header">
+    <div class="code-editor-dots">
+      <div class="dot red"></div>
+      <div class="dot yellow"></div>
+      <div class="dot green"></div>
+    </div>
+  </div>
+  <pre><code class="language-css">.alert {
+  --alert-text-color: black;
+  --alert-accent-color: tomato;
+}
+
+.alert-text {
+  color: var(--alert-text-color);
+  border: 1px solid var(--alert-accent-color);
+}
+
+.alert-icon {
+  background-color: var(--alert-accent-color);
+}</code></pre>
+</div>
+
+[QUIZ: css-variables-quiz]
 `,
           challenges: [],
         },

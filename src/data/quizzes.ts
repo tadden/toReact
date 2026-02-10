@@ -520,4 +520,252 @@ export const quizzes: Record<string, QuizData> = {
     successMessage:
       "Верно! :focus часто используется для доступности, позволяя видеть активный элемент при навигации с клавиатуры.",
   },
+  "css-equal-specificity-quiz-1": {
+    id: "css-equal-specificity-quiz-1",
+    question: `
+      <h3>Прочитай фрагмент кода</h3>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+          <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">#personal-info .link {
+  color: blue;
+}
+
+body .my-portfolio {
+  color: red;
+}
+
+ul .my-portfolio {
+  color: green;
+}
+
+ul > li .social-nets {
+  color: gray;
+}</code></pre>
+      </div>
+      <p class="mt-sm">Какой элемент имеет свойства с равной специфичностью, которые конфликтуют? (1 правильный ответ)</p>
+    `,
+    options: [
+      "Элемент с классом link",
+      "Элемент с класом my-portfolio",
+      "Элемент с классом social-nets",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Правила для `.my-portfolio` (body .my-portfolio и ul .my-portfolio) имеют одинаковую специфичность.",
+  },
+  "css-equal-specificity-quiz-2": {
+    id: "css-equal-specificity-quiz-2",
+    question: `
+      <h3>Изучи фрагмент кода</h3>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+          <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">#personal-info .link {
+  color: blue;
+}
+
+body .my-portfolio {
+  color: red;
+}
+
+ul .my-portfolio {
+  color: green;
+}
+
+ul > li .social-nets {
+  color: gray;
+}</code></pre>
+      </div>
+      <p class="mt-sm">Какой цвет будет у элемента с классом my-portfolio в браузере? (1 правильный ответ)</p>
+    `,
+    options: ["red", "green"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! При равной специфичности побеждает последнее правило в коде (green).",
+  },
+  "css-important-quiz": {
+    id: "css-important-quiz",
+    question: `
+      <h3>Изучи примеры 1-3</h3>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+          <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">/* Пример 1 */
+p {
+  color: !important orange;
+}
+
+/* Пример 2 */
+p {
+  !important color: orange;
+}
+
+/* Пример 3 */
+p {
+  color: orange !important;
+}</code></pre>
+      </div>
+      <p class="mt-sm">В каком из примеров ключевое слово !important использовано синтаксически верно? (1 правильный ответ)</p>
+    `,
+    options: ["Пример 1", "Пример 2", "Пример 3"],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Ключевое слово `!important` ставится в конце объявления, перед точкой с запятой.",
+  },
+  "css-current-color-quiz": {
+    id: "css-current-color-quiz",
+    question:
+      "Какие свойства элемента можно задавать с помощью currentColor? (1 правильный ответ)",
+    options: [
+      "Только цвет текста ссылки",
+      "Цвет и отступы ссылок",
+      "Различные свойства, связанные с цветом",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! `currentColor` можно использовать для любых свойств, принимающих цвет (border-color, background-color, box-shadow и т.д.).",
+  },
+  "css-text-align-quiz": {
+    id: "css-text-align-quiz",
+    question: "В чем основной недостаток использования text-align: justify?",
+    options: [
+      "Текст прижимается только к левому краю.",
+      "Ухудшается читабельность из-за неравномерных пробелов.",
+      "Текст становится жирным.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Неравномерные пробелы между словами затрудняют чтение, поэтому justify стоит использовать с осторожностью.",
+  },
+  "css-text-decoration-quiz": {
+    id: "css-text-decoration-quiz",
+    question:
+      "Какое значение свойства text-decoration по умолчанию установлено у ссылок (тег <a>)?",
+    options: ["none", "underline", "line-through"],
+    correctAnswer: 1,
+    successMessage: "Правильно! Ссылки по умолчанию подчеркнуты (underline).",
+  },
+  "css-text-transform-quiz": {
+    id: "css-text-transform-quiz",
+    question:
+      "Какое свойство и значение нужно использовать, чтобы сделать все буквы заглавными (верхний регистр)?",
+    options: [
+      "text-style: uppercase",
+      "font-weight: bold",
+      "text-transform: uppercase",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! text-transform: uppercase переводит все символы в верхний регистр.",
+  },
+  "css-global-styles-quiz": {
+    id: "css-global-styles-quiz",
+    question: "Для чего нужны глобальные стили?",
+    options: [
+      "Чтобы настроить свойства, которые будут использоваться для большинства элементов.",
+      "Чтобы быстро найти все свойства, используемые в HTML-документе.",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Глобальные стили позволяют задать общие правила (шрифт, цвет) для всего документа сразу.",
+  },
+  "css-heading-color-quiz-1": {
+    id: "css-heading-color-quiz-1",
+    question: `
+      <p>Изучи фрагмент кода</p>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+           <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: darkgray;
+  background-color: white;
+}
+
+h1, h2, h3 {
+  font-family: 'Tahoma';
+  color: red;
+}</code></pre>
+      </div>
+      <p class="mt-sm">Определи, какого цвета будет текст заголовка второго уровня?</p>
+    `,
+    options: ["darkgray", "red"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Для заголовков h1-h3 явно задан красный цвет, который переопределяет наследуемый darkgray.",
+  },
+  "css-heading-color-quiz-2": {
+    id: "css-heading-color-quiz-2",
+    question: `
+      <p>Изучи фрагмент кода.</p>
+      <div class="code-editor-container">
+        <div class="code-editor-header">
+           <div class="code-editor-dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+          </div>
+        </div>
+        <pre><code class="language-css">body {
+  font-family: 'Helvetica Neue', 'Roboto', 'Verdana', sans-serif;
+  color: darkgray;
+  background-color: white;
+}
+
+h1, h2, h3 {
+  font-family: 'Tahoma';
+  color: red;
+}</code></pre>
+      </div>
+      <p class="mt-sm">Определи, какого цвета будет текст заголовка четвертого уровня?</p>
+    `,
+    options: ["darkgray", "red"],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! h4 не входит в групповой селектор h1-h3, поэтому он наследует цвет darkgray от body.",
+  },
+  "css-normalization-quiz": {
+    id: "css-normalization-quiz",
+    question: "Что является целью улучшения кроссбраузерности веб-страницы?",
+    options: [
+      "Нормализация стилей для лучшего отображения страницы в поисковых системах.",
+      "Одинаковое отображение стилей разными браузерами.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Именно так! Мы хотим, чтобы сайт выглядел одинаково везде.",
+  },
+  "css-variables-quiz": {
+    id: "css-variables-quiz",
+    question: "Как правильно объявить глобальную CSS-переменную?",
+    options: [
+      "var --main-color: black; внутри селектора body",
+      "--main-color: black; внутри селектора :root",
+      "$main-color: black; внутри селектора :root",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Глобальные переменные объявляются в псевдоклассе :root с префиксом --.",
+  },
 };
