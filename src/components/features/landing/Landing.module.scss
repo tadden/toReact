@@ -73,7 +73,9 @@
   padding: 2rem;
   border-radius: var(--radius-lg);
   backdrop-filter: blur(10px);
-  transition: transform 0.3s, border-color 0.3s;
+  transition:
+    transform 0.3s,
+    border-color 0.3s;
   display: flex;
   flex-direction: column;
   align-items: center;

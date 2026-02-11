@@ -100,7 +100,7 @@ export const getCourseWithTargetModule = cache(
       ...course,
       modules: modulesWithData,
     };
-  }
+  },
 );
 
 export const getUserProgress = cache(async (userId: string) => {

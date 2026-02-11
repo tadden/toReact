@@ -15,7 +15,7 @@ interface CourseViewContextType {
 }
 
 const CourseViewContext = createContext<CourseViewContextType | undefined>(
-  undefined
+  undefined,
 );
 
 export function CourseViewProvider({ children }: { children: ReactNode }) {

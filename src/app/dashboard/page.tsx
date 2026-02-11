@@ -154,7 +154,7 @@ export default function Dashboard() {
                   (p) =>
                     p.courseId === course.id &&
                     p.userId === user?.id &&
-                    (p.completedTopics?.length || 0) > 0
+                    (p.completedTopics?.length || 0) > 0,
                 );
 
                 // Smart Continue Logic
@@ -164,7 +164,7 @@ export default function Dashboard() {
                   }
 
                   const sortedModules = [...course.modules].sort(
-                    (a, b) => a.order - b.order
+                    (a, b) => a.order - b.order,
                   );
 
                   // 1. Find the first non-completed module (or in-progress one)
@@ -191,11 +191,11 @@ export default function Dashboard() {
                   // If in-progress, find first uncompleted topic
                   const allTopics = targetModule.topics || [];
                   const completedSet = new Set(
-                    modProgress.completedTopics || []
+                    modProgress.completedTopics || [],
                   );
 
                   const nextTopic = allTopics.find(
-                    (t) => !completedSet.has(t.id)
+                    (t) => !completedSet.has(t.id),
                   );
 
                   if (nextTopic) {

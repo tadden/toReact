@@ -5,7 +5,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ slug: string }> } // Params is a Promise in Next.js 15+! Wait, user has next 16? Let's assume standard behavior or Promise.
+  { params }: { params: Promise<{ slug: string }> }, // Params is a Promise in Next.js 15+! Wait, user has next 16? Let's assume standard behavior or Promise.
 ) {
   const { slug } = await params;
 

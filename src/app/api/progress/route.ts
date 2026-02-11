@@ -81,7 +81,7 @@ export async function POST(request: Request) {
     console.error("API Progress Error:", error);
     return new NextResponse(
       JSON.stringify({ error: "Failed to save progress", details: error }),
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

@@ -11,7 +11,7 @@ export default async function ModulePage({
   // Use Optimized Fetcher
   const course = (await getCourseWithTargetModule(
     courseSlug,
-    moduleSlug
+    moduleSlug,
   )) as any; // Cast to any because we know the shape matches what's needed, even if specific props are missing on inactive modules
   const module = course?.modules.find((m: any) => m.slug === moduleSlug);
 

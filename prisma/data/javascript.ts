@@ -618,13 +618,6 @@ console.log(typeof status); // выведет "object"</code></pre>
 
 [NEXT]
 
-
-
-
-
-
-
-
 `,
         },
         {
@@ -1811,6 +1804,920 @@ for (let i = 0; i < number; i += 1) {
 
         [NEXT]
       `,
+        },
+      ],
+    },
+    {
+      slug: "module-2-arrays-functions",
+      title: "Модуль 2. Массивы и Функции",
+      description: "Массивы, функции, функциональные выражения",
+      order: 1,
+      videoUrl: null,
+      resources: [
+        {
+          type: "video",
+          title: "Модуль 2. Занятие 3. Массивы",
+          url: "https://www.youtube.com/watch?v=gi-YyrxjXqk",
+        },
+        {
+          type: "video",
+          title: "Модуль 2. Занятие 4. Функции",
+          url: "https://www.youtube.com/watch?v=TkV_O-hsU5w",
+        },
+      ],
+      homework: null,
+      topics: [
+        {
+          id: "js-arrays",
+          title: "Массивы",
+          order: 0,
+          content: `
+<p><strong>Массив</strong> - структура данных для хранения и манипулирования коллекцией индексированных значений. Используется для хранения упорядоченных коллекций данных, например, списка курортов, товаров, клиентов в отеле и т.д.</p>
+
+<h3>Создание</h3>
+<p>Массив объявляется и берется в квадратные скобки <code>[]</code> - литералом массива. Внутри скобок каждый элемент массива разделяется запятой.</p>
+
+<pre><code class="language-javascript">const clients = ["Mango", "Poly", "Ajax"];</code></pre>
+
+[QUIZ: js-array-literal-syntax]
+<h3>Доступ к элементам</h3>
+
+<p>Массив — это упорядоченная коллекция элементов, где каждый элемент имеет свой порядковый номер, который называется индексом. Индексация элементов массива начинается с нуля, то есть первый элемент имеет индекс 0, второй элемент — индекс 1 и так далее.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/array-access.png" alt="Доступ к элементам массива" class="img-responsive img-rounded" />
+</div>
+
+<p>Чтобы получить доступ к значению элемента массива, мы используем синтаксис квадратных скобок:</p>
+
+<pre><code class="language-javascript">arrayName[index]</code></pre>
+
+<p>Между именем переменной, которая хранит массив, и квадратными скобками не должно быть пробела. Указываем индекс элемента внутри квадратных скобок.</p>
+
+<pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+console.log(planets[0]); // "Earth"
+console.log(planets[1]); // "Mars"
+console.log(planets[2]); // "Venus"</code></pre>
+
+<p>В этом примере мы создали массив строк <code>planets</code>, содержащий названия планет. Затем мы обращаемся к элементам массива, указывая соответствующий индекс в квадратных скобках.</p>
+
+<p>Результат обращения к элементу массива можно сохранить в переменную и использовать его в дальнейшем.</p>
+
+<pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+const firstElement = planets[0];
+console.log(firstElement); // "Earth"</code></pre>
+
+<p>Теперь значение первого элемента массива "Earth" сохранено в переменной <code>firstElement</code>, и мы можем использовать это значение для других операций или выражений в коде.</p>
+
+<p>Попытка доступа к несуществующему индексу вернет значение <code>undefined</code>.</p>
+
+<pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+console.log(planets[3]); // undefined
+console.log(planets[999]); // undefined</code></pre>
+
+[QUIZ: js-array-first-element-index]
+
+[NEXT]
+
+<h3>Переопределение</h3>
+<p>В отличие от строк, элементы массива можно изменять, обратившись к ним по индексу и присвоив другое значение.</p>
+
+<pre><code class="language-javascript">const clients = ["Mango", "Poly", "Ajax"];
+clients[0] = "Kiwi";
+clients[1] = "Pango";
+console.log(clients); // ["Kiwi", "Pango", "Ajax"]</code></pre>
+
+<h3>Длина массива</h3>
+<p>Длина массива, то есть количество его элементов, хранится в свойстве <code>length</code>. Это динамическая величина, которая изменяется автоматически во время добавления или удаления элементов.</p>
+
+<pre><code class="language-javascript">const clients = ["Mango", "Poly", "Ajax"];
+console.log(clients.length); // 3</code></pre>
+
+<h3>Индекс последнего элемента</h3>
+<p>Чаще всего мы заранее не знаем какая будет длина массива в коде. Для того, чтобы получить значение последнего элемента, применяется следующий подход - длина массива всегда на единицу больше, чем индекс последнего элемента. Используя формулу <code>длина_массива - 1</code>, можно получить значение последнего элемента массива произвольной длины.</p>
+
+<pre><code class="language-javascript">const clients = ["Mango", "Poly", "Ajax"];
+const lastElementIndex = clients.length - 1;
+
+
+console.log(lastElementIndex); // 2
+console.log(clients[lastElementIndex]); // "Ajax"</code></pre>
+
+
+`,
+        },
+        {
+          id: "js-arrays-iteration",
+          title: "Итерация по массиву",
+          order: 1,
+          content: `
+        <p>Итерация по массиву с использованием цикла <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> позволяет перебрать элементы массива и выполнить определенное действие для каждого элемента.</p>
+
+        <p>В примере ниже массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code> содержит названия планет, и цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> используется для выведения каждого элемента в консоль.</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+for (let i = 0; i < planets.length; i += 1) {
+  console.log(planets[i]);
+}</code></pre>
+
+        <ul class="list-disc">
+          <li>Начальное значение счетчика <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code> устанавливается как 0 и цикл продолжается, пока <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code> меньше длины массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets.length</code></li>
+          <li>На каждой итерации цикла используется <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets[i]</code> для доступа к элементам массива по их индексу <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code></li>
+          <li>Значение счетчика <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code> с каждой итерацией увеличивается на 1 (выражение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i += 1</code>)</li>
+          <li>Условие <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i < planets.length</code> будет возвращать <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code> для значений счетчика 0, 1 и 2. Когда <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code> достигнет значения 3, условие станет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code> и цикл остановится</li>
+        </ul>
+
+        <p>Таким образом, на каждой итерации цикла будет выполняться блок кода внутри фигурных скобок, где мы выводим текущий элемент массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets[i]</code> в консоль. Результатом работы цикла будет выведение названий планет одна за другой.</p>
+
+        [QUIZ: js-arrays-loop-condition]
+
+        [NEXT]
+
+        <h3>Цикл for...of</h3>
+        <p>Цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code> - это удобный способ перебора массива. Тело цикла будет выполняться на каждом элементе массива. Это хорошая замена циклу <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code>, если не нужен доступ к счетчику.</p>
+
+        <p>Синтаксис цикла <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code> выглядит так:</p>
+
+        <pre><code class="language-javascript">for (const element of array) {
+  // тело цикла
+}</code></pre>
+
+        <p>Где:</p>
+        <ul class="list-disc">
+          <li><strong>element</strong> — это переменная, в которую на каждой итерации будет записываться текущий элемент массива.</li>
+          <li><strong>array</strong> — это исходный массив, который мы хотим перебрать.</li>
+        </ul>
+
+        <p>Пример использования цикла <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code> для массива:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+for (const planet of planets) {
+  console.log(planet);
+}</code></pre>
+
+        <p>В примере мы объявляем массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code>.</p>
+        <p>Затем используем цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>, в котором объявляем переменную <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planet</code>, которая будет принимать значение текущего элемента массива на каждой итерации. Внутри тела цикла мы выводим значение переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planet</code> с помощью <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">console.log()</code>. Результатом выполнения кода будет последовательное выведение каждого элемента массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code>.</p>
+
+        <p>Цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code> всегда перебирает массив от первого и до последнего элемента, задать условие прекращения цикла нельзя. Если необходимо закончить выполнение цикла преждевременно, используется уже знакомый оператор <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">break</code>.</p>
+
+        [QUIZ: js-arrays-for-of-counter]
+
+        [NEXT]
+
+        <h3>Метод includes()</h3>
+        <p>Метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> используется для проверки наличия определенного элемента в массиве. Он возвращает логическое значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code>, если элемент найден в массиве, и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code>, если элемент отсутствует.</p>
+
+        <p>Синтаксис метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> выглядит так:</p>
+
+        <pre><code class="language-javascript">array.includes(element)</code></pre>
+
+        <p>где:</p>
+        <ul class="list-disc">
+          <li><strong>array</strong> — это исходный массив, в котором осуществляется поиск элемента;</li>
+          <li><strong>element</strong> — это элемент, наличие которого нужно проверить.</li>
+        </ul>
+
+        <p>Пример использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code>:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+console.log(planets.includes("Earth")); // true
+console.log(planets.includes("Mars")); // true
+console.log(planets.includes("Venus")); // true
+console.log(planets.includes("Jupiter")); // false</code></pre>
+
+        <p>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> можно сочетать с разветвлениями для проверки условий. Например, выполнить разный код в зависимости от наличия значения в массиве.</p>
+
+        <pre><code class="language-javascript">const fruits = ["apple", "banana", "orange"];
+
+if (fruits.includes("banana")) {
+  console.log("The array has an element banana");
+} else {
+  console.log("Array does not contain banana element");
+}</code></pre>
+
+        <p>Код примера выше проверяет наличие элемента "banana" в массиве fruits и выводит соответствующее сообщение в зависимости от результата проверки.</p>
+
+        <p>Мы используем метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> для проверки наличия элемента "banana" в массиве. Для этого в <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code> мы вызываем метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes("banana")</code> на массиве fruits.</p>
+
+        <ul class="list-disc">
+          <li>Если метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code>, значит элемент "banana" найден в массиве, и выполняется код внутри блока <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code>.</li>
+          <li>Если метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code>, значит элемент "banana" отсутствует в массиве, и выполняется код внутри блока <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">else</code>.</li>
+        </ul>
+
+        [QUIZ: js-arrays-includes]
+          `,
+        },
+        {
+          id: "js-arrays-methods",
+          title: "Методы массива",
+          order: 2,
+          content: `
+        
+        <p>У массивов есть встроенные методы, которые позволяют выполнять удобные операции для работы с элементами массива. Методы массива позволяют добавлять, удалять, изменять и выполнять другие операции над элементами массива.</p>
+
+        <h3>Метод join()</h3>
+        <p>Метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">join(delimiter)</code> позволяет объединить элементы массива в строку. В результирующей строке элементы будут разделены символом или группой символов, указанных в <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">delimiter</code>.</p>
+
+        <p>Примеры использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">join()</code>:</p>
+
+        <pre><code class="language-javascript">const words = ["JavaScript", "is", "amazing"];
+console.log(words.join("")); // 'JavaScriptisamazing'
+console.log(words.join(" ")); // 'JavaScript is amazing'
+console.log(words.join("-")); // 'JavaScript-is-amazing'</code></pre>
+
+        <p>Результат работы метода можно сохранить в переменную для дальнейшего использования.</p>
+
+        <p>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">join()</code> полезен при необходимости преобразования массива в строку с определенными разделителями между элементами. Например, нам нужно написать функцию, которая преобразует строки из snake_case (змеиной нотации с подчеркиваниями) в kebab-case (нотацию с тире).</p>
+
+        <pre><code class="language-javascript">function transformString(string) {
+  const words = string.split("_");
+  return words.join("-");
+}
+
+transformString("user_age"); // "user-age"
+transformString("price_per_droid"); // "price-per-droid"</code></pre>
+
+        [NEXT]
+
+        <h3>Метод split()</h3>
+        <p>Метод строк <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">split(delimiter)</code> выполняет обратную операцию по сравнению с методом массивов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">join(delimiter)</code>. Он позволяет превратить строку в массив, разбив ее по указанному разделителю <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">delimiter</code>.</p>
+
+        <p>Если разделитель является пустой строкой (строкой, в которой нет символов), то получится массив отдельных символов строки. Разделителем может быть один или несколько символов. Результат работы метода можно сохранить в переменную для дальнейшего использования.</p>
+
+        <p>Примеры использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">split()</code>:</p>
+
+        <pre><code class="language-javascript">const name = "Mango";
+const letters = name.split("");
+console.log(letters); // ["M", "a", "n", "g", "o"]
+
+const message = "JavaScript essentials";
+const words = message.split(" ");
+console.log(words); // ["JavaScript", "essentials"]
+
+const slug = "amazing-french-recipes";
+const slugParts = slug.split("-");
+console.log(slugParts); // ["amazing", "french", "recipes"]</code></pre>
+
+        <ul class="list-disc">
+          <li>В первом примере строка <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"Mango"</code> была преобразована в массив, где каждая буква стала отдельным элементом массива. Разделителем была указана пустая строка.</li>
+          <li>Во втором примере строка <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"JavaScript essentials"</code> была разделена на два элемента массива, используя пробел как разделитель.</li>
+          <li>В третьем примере строка <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"amazing-french-recipes"</code> была разделена на три элемента массива, используя тире как разделитель.</li>
+        </ul>
+
+        [NEXT]
+
+        <h3>Метод slice()</h3>
+        <p>Метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice(begin, end)</code> возвращает новый массив, содержащий копию части исходного массива, не изменяя его. Копия создается от индекса <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code> до, но не включая индекс <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">end</code>.</p>
+
+        <img src="/images/javascript/slice-diagram.png" alt="Диаграмма работы метода slice" class="img-responsive img-rounded" />
+
+        <p>Примеры использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice()</code>:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+console.log(planets.slice(0, 2)); // ['Earth', 'Mars']
+console.log(planets.slice(0, 4)); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+console.log(planets.slice(1, 3)); // ['Mars', 'Venus']</code></pre>
+
+        <ul class="list-disc">
+          <li>В первом примере метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice(0, 2)</code> создает новый массив, содержащий элементы с индексами от 0 до 2 (не включая 2) исходного массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code>. Результатом будет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">['Earth', 'Mars']</code>.</li>
+          <li>Во втором примере метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice(0, 4)</code> создает новый массив, содержащий элементы с индексами от 0 до 4 (не включая 4) исходного массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code>. Результатом будет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">['Earth', 'Mars', 'Venus', 'Jupiter']</code>.</li>
+          <li>В третьем примере метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice(1, 3)</code> создает новый массив, содержащий элементы с индексами от 1 до 3 (не включая 3) исходного массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code>. Результатом будет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">['Mars', 'Venus']</code>.</li>
+        </ul>
+
+        <p>Результат работы метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice()</code> можно сохранить в переменную для дальнейшего использования:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+const result = planets.slice(1, 3);
+console.log(result); // ["Mars", "Venus"]</code></pre>
+
+        <p>Если не указать параметры <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">end</code>, будет создана полная копия исходного массива:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+console.log(planets.slice()); // ["Earth", "Mars", "Venus", "Jupiter", "Saturn"]</code></pre>
+
+        <p>Если не указать <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">end</code>, копирование будет происходить от <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code> до конца массива:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+console.log(planets.slice(1)); // ["Mars", "Venus", "Jupiter", "Saturn"]
+console.log(planets.slice(2)); // ["Venus", "Jupiter", "Saturn"]</code></pre>
+
+        <p>Если значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code> негативное, а <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">end</code> не указано, будут скопированы последние <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code> элементов (то есть столько элементов с конца, сколько указано в параметре <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">begin</code>):</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+console.log(planets.slice(-2)); // ["Jupiter", "Saturn"]</code></pre>
+
+        <p>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice()</code> полезен, когда необходимо получить подмассив из исходного массива или создать его копию для дальнейшей работы с ним.</p>
+
+        [NEXT]
+
+        <h3>Метод concat()</h3>
+        <p>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">concat(arr1, arr2, ..., arrN)</code> используется для объединения двух или более массивов.</p>
+
+        <pre><code class="language-javascript">const firstArray = ["Mercury", "Venus"];
+const secondArray = ["Mars", "Jupiter"];
+const result = firstArray.concat(secondArray);
+
+console.log(result); // ["Mercury", "Venus", "Mars", "Jupiter"];</code></pre>
+
+        <p>Обратите внимание, что исходные массивы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">firstArray</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">secondArray</code> остаются неизменными после вызова <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">concat()</code>. Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">concat()</code> создает и возвращает новый массив, содержащий все элементы объединенных массивов.</p>
+
+        <pre><code class="language-javascript">const firstArray = ["Mercury", "Venus"];
+const secondArray = ["Mars", "Jupiter"];
+const result = firstArray.concat(secondArray);
+
+console.log(firstArray); // ["Mercury", "Venus"];
+console.log(secondArray); // ["Mars", "Jupiter"];
+console.log(result); // ["Mercury", "Venus", "Mars", "Jupiter"];</code></pre>
+
+        <p>Порядок аргументов метода определяет порядок расположения элементов в новом массиве.</p>
+
+        <pre><code class="language-javascript">const firstArray = ["Mercury", "Venus"];
+const secondArray = ["Mars", "Jupiter"];
+const thirdArray = ["Saturn", "Neptune"];
+
+console.log(firstArray.concat(secondArray, thirdArray));
+// ["Mercury", "Venus", "Mars", "Jupiter", "Saturn", "Neptune"];
+
+console.log(firstArray.concat(thirdArray, secondArray));
+// ["Mercury", "Venus", "Saturn", "Neptune", "Mars", "Jupiter"];</code></pre>
+
+        [NEXT]
+
+        <h3>Метод indexOf()</h3>
+        <p>Метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf(elem)</code> используется для определения индекса первого вхождения элемента <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">elem</code> в массиве. Он возвращает индекс элемента, если он найден, или -1, если элемент не найден. Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf()</code> выполняет строгое равенство (<code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">===</code>) при сравнении элементов.</p>
+
+        <p>Синтаксис метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf()</code> имеет следующий вид:</p>
+
+        <pre><code class="language-javascript">array.indexOf(elem)</code></pre>
+
+        <ul class="list-disc">
+          <li><strong>array</strong> — массив, в котором осуществляется поиск.</li>
+          <li><strong>elem</strong> — элемент, индекс которого нужно найти в массиве.</li>
+        </ul>
+
+        <p>Пример использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf()</code>:</p>
+
+        <pre><code class="language-javascript">const clients = ["Mango", "Ajax", "Poly", "Kiwi", "Poly"];
+console.log(clients.indexOf("Poly")); // 2
+console.log(clients.indexOf("Monkong")); // -1</code></pre>
+
+        <p>В этом примере массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">clients</code> содержит имена клиентов. Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf("Poly")</code> возвращает индекс первого вхождения строки "Poly" в массиве, который равен 2, все последующие вхождения (индекс 4) уже не будут анализироваться. Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">indexOf("Monkong")</code> возвращает -1, поскольку элемент "Monkong" не найден в массиве.</p>
+
+        [NEXT]
+
+        <h3>Метод push()</h3>
+        <p>Метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code> используется для добавления одного или более элементов в конец массива.</p>
+
+        <img src="/images/javascript/push-diagram.png" alt="Диаграмма работы метода push" class="img-responsive img-rounded" />
+
+        <p>Синтаксис метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code> имеет такой вид:</p>
+
+        <pre><code class="language-javascript">array.push(element1, element2, ..., elementN);</code></pre>
+
+        <p>где:</p>
+        <ul class="list-disc">
+          <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">array</code> — это исходный массив, до которого нужно добавить элементы;</li>
+          <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">element1, element2, ..., elementN</code> — элементы, которые необходимо добавить в конец массива.</li>
+        </ul>
+
+        <p>Пример использования метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code>:</p>
+
+        <pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+planets.push("Jupiter");
+console.log(planets); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+
+planets.push("Saturn", "Neptune");
+console.log(planets); // ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn', 'Neptune']</code></pre>
+
+        <p>У примере мы создаем массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code> з исходными элементами "Earth", "Mars" i "Venus". Потом за помощью метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code> последовательно добавляем элементы "Jupiter", "Saturn" i "Neptune" у конец массива. После выполнения <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code> массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">planets</code> будет содержать все добавленные элементы.</p>
+
+        <p>За помощью цикла мы можем выполнять повторяющиеся операции i использовать метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push</code> для добавления новых элементов у массив на каждой итерации. Це очень полезно, коли нам нужно создать массив з элементами, которые можно динамично добавлять.</p>
+
+        <pre><code class="language-javascript">const tags = [];
+
+for(let i = 0; i < 3; i += 1) {
+  tags.push(\`tag-\${i}\`);
+}
+
+console.log(tags); // ["tag-0", "tag-1", "tag-2"]</code></pre>
+
+        <p>Код приклада создает пустой массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">tags</code> i за помощью цикла <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> добавляет строки вида <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"tag-0"</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"tag-1"</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"tag-2"</code> до массива. Кожен рядок формируется за помощью шаблонного рядка, де значения <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">i</code> в цикле используется для создания уникального тега на каждой итерации. У результате ми отримаємо массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">tags</code>, що містить усі додані значення.</p>
+          `,
+        },
+        {
+          id: "js-functions-basics",
+          title: "Функции",
+          order: 3,
+          content: `
+        <h3>Основы функций</h3>
+        <h4 class="small-title">Объявление и вызов функции</h4>
+
+        <p>Функция — это независимый блок кода, который выполняет определенную задачу с разными начальными значениями. Функцию можно представить как черный ящик, который принимает данные на входе и возвращает результат на выходе после выполнения кода внутри функции.</p>
+
+        <img src="/images/javascript/function-diagram.png" alt="Диаграмма функции" class="img-responsive img-rounded" />
+
+        <h4 class="small-title">Объявление функции</h4>
+        <p>Объявление функции имеет следующую структуру:</p>
+        <ol>
+          <li>Ключевое слово <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">function</code></li>
+          <li>Имя функции — это глагол, отвечающий на вопрос "Что сделать?"</li>
+          <li>Пара круглых скобок <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">()</code></li>
+          <li>Тело функции в фигурных скобках <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{}</code></li>
+        </ol>
+
+        <pre><code class="language-javascript">function doStuff() {
+  // Тело функции
+  console.log('Log inside multiply function');
+}</code></pre>
+
+        <p>Тело функции находится в фигурных скобках <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{}</code>. Оно содержит инструкции, которые нужно выполнить во время вызова функции. Эти инструкции могут включать операторы, условные конструкции, циклы и другие функции.</p>
+
+        <h4 class="small-title">Вызов функции</h4>
+        <p>Когда функцию нужно выполнить, она вызывается с помощью её имени и пары круглых скобок.</p>
+
+        <pre><code class="language-javascript">// Объявление функции doStuff
+function doStuff() {
+  // Тело функции
+  console.log('Log inside multiply function');
+}
+
+// Вызовы функции doStuff
+doStuff(); // 'Log inside multiply function'
+doStuff(); // 'Log inside multiply function'
+doStuff(); // 'Log inside multiply function'</code></pre>
+
+        <p>Если при вызове функции аргументов будет передано больше, чем объявлено параметров, лишние значения будут проигнорированы.</p>
+
+        [QUIZ: js-functions-call]
+
+        [NEXT]
+
+        <h3 class="small-title">Параметры и аргументы</h3>
+        <p>В круглых скобках после имени функции указываются параметры. Параметры — это перечисление данных, которые функция ожидает при вызове.</p>
+
+        <pre><code class="language-javascript">// Объявление параметров x, y, z
+function multiply(x, y, z) {
+  console.log(\`Result: \${x * y + z}\`);
+}</code></pre>
+
+        <p><strong>Параметры</strong> — это локальные переменные, доступные только внутри тела функции.</p>
+
+        <p>Параметры разделяются запятыми. Функция может иметь любое количество параметров или не иметь их вовсе, в таком случае указываются пустые круглые скобки.</p>
+
+        <p>При вызове функции в круглых скобках можно передать <strong>аргументы</strong>, которые являются значениями для объявленных параметров функции.</p>
+
+        <pre><code class="language-javascript">// Объявление параметров x, y, z
+function multiply(x, y, z) {
+  console.log(\`Result: \${x * y + z}\`);
+}
+
+// Передача аргументов
+multiply(2, 3, 5); // Result: 11
+multiply(4, 8, 12); // Result: 44
+multiply(17, 6, 25); // Result: 127</code></pre>
+
+        <p>Итак, в примере выше мы имеем параметры x, y, z.</p>
+        <p>При каждом вызове функции мы передаем ей новые аргументы. Например, параметр x получит значение 2, затем 4, затем 17.</p>
+
+        <img src="/images/javascript/function-params-diagram.png" alt="Диаграмма параметров функции" class="img-responsive img-rounded" />
+
+        <p>При передаче аргументов во время вызова функции необходимо соблюдать порядок, соответствующий порядку объявления параметров. Значение первого аргумента будет присвоено первому параметру, второго аргумента — второму параметру и так далее.</p>
+
+        <p>Если при вызове функции аргументов будет передано больше, чем объявлено параметров, лишние значения будут проигнорированы.</p>
+
+        <p>Прочитай пример кода</p>
+
+        <pre><code class="language-javascript">function calculate(x, y) {} 
+        calculate(5, 8);</code></pre>
+        [QUIZ: js-functions-params]
+
+        [NEXT]
+
+        <h3 class="small-title">Возврат значения</h3>
+        <p>Оператор <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">return</code> используется для возврата значения из тела функции назад в место её вызова. Когда интерпретатор встречает оператор <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">return</code>, он немедленно выходит из функции (прекращает её выполнение) и возвращает указанное значение в место вызова функции.</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  const product = x * y * z;
+  // Возвращаем результат выражения умножения
+  return product;
+}
+
+// Результат работы функции можно сохранить в переменную
+const result = multiply(2, 3, 5);
+console.log(result); // 30</code></pre>
+
+        <p>Чтобы избежать объявления лишней переменной в теле функции, можно сразу же <strong>возвращать результат выражения</strong>. Так, нет необходимости создавать отдельную переменную для хранения результата выражения.</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  return x * y * z;
+}
+
+const result = multiply(2, 3, 5);
+console.log(result); // 30</code></pre>
+
+        <p>Если в теле функции отсутствует оператор <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">return</code> или он не указывает на конкретное значение, функция вернет специальное значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">undefined</code>.</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  const product = x * y * z;
+}
+
+const result = multiply(2, 3, 5);
+console.log(result); // undefined</code></pre>
+
+        <p>При использовании оператора <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">return</code> все инструкции, идущие на строках после него, в теле функции не выполняются, так как выполнение функции прекращается сразу после встречи оператора <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">return</code>.</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  console.log('The code before return is executed as usual');
+
+  return x * y * z;
+
+  console.log('This code is never executed because it is after return');
+}
+
+console.log(multiply(2, 3, 5)); // 30</code></pre>
+
+        <p>Прочитай пример кода</p>
+
+        <pre><code class="language-javascript">function makeMessage(username) {
+  console.log(\`Hello \${username}\`);
+}
+
+makeMessage("Jacob")</code></pre>
+
+        [QUIZ: js-functions-implicit-return]
+
+        [NEXT]
+
+        <h3 class="small-title">Порядок выполнения кода</h3>
+        <p>Когда интерпретатор встречает вызов функции, он приостанавливает выполнение текущего кода и начинает выполнять код из тела функции.</p>
+
+        <p>После того, как весь код в функции будет выполнен, интерпретатор возвращает управление в то место, откуда был совершен вызов функции, и продолжает выполнение оставшегося кода программы.</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  console.log(\`Result: \${x * y * z}\`);
+}
+
+console.log("Log before multiply execution");
+multiply(2, 3, 5); // "Result: 30"
+console.log("Log after multiply execution");</code></pre>
+
+        <p>Последовательность логов в консоли будет такой:</p>
+
+        <ol>
+          <li>"Log before multiply execution"</li>
+          <li>"Result: 30"</li>
+          <li>"Log after multiply execution"</li>
+        </ol>
+
+        <p>Прочитай фрагмент кода</p>
+
+        <pre><code class="language-javascript">console.log("A");
+
+function logStuff() {
+  console.log("B");
+}
+
+console.log("C");
+
+logStuff();
+
+console.log("D");</code></pre>
+
+        [QUIZ: js-functions-execution-order]
+
+        [NEXT]
+
+        <h3 class="small-title">Область видимости функции</h3>
+        <p>Область видимости определяет, где и какие переменные и функции могут быть доступны в твоем коде. Когда ты объявляешь переменную или функцию, она становится «видимой» только в определенной части кода. Это влияет на то, где и как ты можешь использовать их в своем коде.</p>
+
+        <p>Переменные или функции, объявленные за пределами любых блоков кода — то есть в глобальной области видимости, будут доступны в любой части кода. Они являются <strong>глобальными переменными</strong>.</p>
+
+        <pre><code class="language-javascript">// Глобальная переменная
+const value = "I'm a global variable";
+
+function foo() {
+  // Можно обратиться к глобальной переменной
+  console.log(value); // "I'm a global variable"
+}
+
+foo();
+// Можно обратиться к глобальной переменной
+console.log(value);
+// "I'm a global variable"</code></pre>
+
+        <p>Переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code> объявлена в глобальной области видимости, то есть за пределами любого блока кода, в нашем случае — за пределами тела функции, и доступна в любом месте после объявления.</p>
+
+        <p>Любая конструкция, которая использует фигурные скобки <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{}</code> (условия, циклы, функции и т.д.) создает новую <strong>локальную область видимости</strong>. Переменные, объявленные в локальной области видимости, могут быть использованы только внутри этого блока кода.</p>
+
+        <pre><code class="language-javascript">function foo() {
+  // Локальная переменная
+  const value = "I'm a local variable";
+  // Можно обратиться к локальной переменной
+  console.log(value); // "I'm a local variable"
+}
+
+foo();
+
+console.log(value); // ReferenceError: value is not defined
+                    // Ошибка: локальную переменную не видно за
+                    // пределами функции</code></pre>
+
+        <p>Переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code> объявлена в теле функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">foo</code>, то есть в локальной области видимости функции, ограниченной телом функции. Эта переменная будет доступна лишь внутри функции, и попытка обращения к ней за пределами тела функции вызовет ошибку.</p>
+
+        [NEXT]
+
+        <h3 class="small-title">Псевдомассив arguments</h3>
+        <p>Доступ к списку всех аргументов можно получить с помощью специальной переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code>. Когда ты вызываешь функцию с аргументами, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code> автоматически создается внутри этой функции и заполняется переданными значениями аргументов.</p>
+
+        <pre><code class="language-javascript">function sum(a, b) {
+  console.log(arguments);
+  return a + b;
+}
+
+sum(2, 5);</code></pre>
+
+        <p>В этом примере при вызове функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">sum(2, 5)</code> сохраняются все переданные аргументы (числа 2 и 5) и записываются как элементы коллекции псевдомассива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code>.</p>
+
+        <p>Эта коллекция похожа на массив, но на самом деле является <strong>псевдомассивом</strong>, то есть:</p>
+
+        <ul>
+          <li>у нее есть некоторые свойства массива, например <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">length</code>;</li>
+          <li>у нее есть возможность обратиться к элементу по индексу;</li>
+          <li>у нее нет методов для работы с массивом;</li>
+          <li>ее можно перебирать с помощью цикла.</li>
+        </ul>
+
+        <p>Рассмотрим пример использования <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code> в функции, которая возвращает результат умножения любого количества аргументов.</p>
+
+        <pre><code class="language-javascript">function multiply() {
+  let total = 1;
+
+  for (const arg of arguments) {
+    total *= arg;
+  }
+
+  return total;
+}
+
+console.log(multiply(1, 2, 3)); // 6
+console.log(multiply(1, 2, 3, 4)); // 24
+console.log(multiply(1, 2, 3, 4, 5)); // 120</code></pre>
+
+        <p>Если при работе с <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code> нужно использовать методы массива, тогда псевдомассив необходимо преобразовать в массив, используя метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Array.from()</code>, который создаст массив из псевдомассива.</p>
+
+        <pre><code class="language-javascript">function foo() {
+  // В переменной args будет полноценный массив из всех аргументов
+  const args = Array.from(arguments);
+  return args.join("-");
+}
+
+foo(1, 2, 3); // Вернет "1-2-3"</code></pre>
+
+        [QUIZ: js-functions-arguments]
+
+        [NEXT]
+
+        <h3 class="small-title">Параметры по умолчанию</h3>
+        <p>Функции могут иметь параметры со значениями по умолчанию, то есть необязательные параметры. Эти значения используются в том случае, если функция вызывается без передачи соответствующего аргумента для этого параметра. Значением по умолчанию может быть любой тип данных.</p>
+
+        <p>Вот пример:</p>
+
+        <pre><code class="language-javascript">function greet(username = "Guest") {
+  console.log(\`Hello, \${username}!\`);
+}
+
+greet("Jacob"); // "Hello, Jacob!"
+greet();        // "Hello, Guest!"</code></pre>
+
+        <p>В этом примере функция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">greet</code> имеет параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">username</code>, который имеет значение по умолчанию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"Guest"</code>. Если аргумент не передан во время вызова функции, будет использовано значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"Guest"</code>. Если передан аргумент, этот аргумент заменит значение по умолчанию.</p>
+
+        <p>Пример с несколькими параметрами.</p>
+
+        <pre><code class="language-javascript">function count(from, to, step = 1) {
+  console.log(\`from: \${from}, to: \${to}, step: \${step}\`);
+
+  for (let i = from; i <= to; i += step) {
+    // ...
+  }
+}
+
+count(1, 15, 4); // "from: 1, to: 15, step: 4"
+count(1, 15);    // "from: 1, to: 15, step: 1"</code></pre>
+
+        [NEXT]
+
+        <h3 class="small-title">Функциональный выраз</h3>
+        <p><strong>Функциональный выраз</strong> (function expression) — обычное объявление переменной, значением которой будет функция. Это альтернативный способ объявления функции. Синтаксис объявления функции, который ты уже знаешь (<strong>function declaration</strong>):</p>
+
+        <pre><code class="language-javascript">function multiply(x, y, z) {
+  console.log(x * y * z);
+}</code></pre>
+
+        <p>Синтаксис функционального выраза (<strong>function expression</strong>):</p>
+
+        <pre><code class="language-javascript">const multiply = function (x, y, z) {
+  console.log(x * y * z);
+};</code></pre>
+
+        <p>Разница в том, что функциональный выраз (<strong>function expression</strong>) нельзя вызывать до места его создания, только после, потому что это буквально объявление <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">const</code> переменной.</p>
+
+        <pre><code class="language-javascript">// ❌ Ошибка! Не работает вызов до объявления
+multiply(1, 2, 3);
+
+const multiply = function (x, y, z) {
+  console.log(x * y * z);
+};
+
+// ✅ Работает вызов после объявления
+multiply(4, 5, 6);</code></pre>
+
+        <p>А объявление функции (<strong>function declaration</strong>) можно вызывать до места её создания в коде.</p>
+
+        <pre><code class="language-javascript">// ✅ Работает вызов перед объявлением
+multiply(1, 2, 3);
+
+function multiply(x, y, z) {
+  console.log(x * y * z);
+}
+
+// ✅ Работает вызов после объявления
+multiply(4, 5, 6);</code></pre>
+
+        <p>Не важно, какой синтаксис использовать, главное, чтобы код у проекте был однородным. Тебе необходимо стараться не смешивать объявления функций (<strong>function declaration</strong>) с функциональными выразами (<strong>function expression</strong>), чтобы писать более стандартизированный и понятный код.</p>
+
+        [QUIZ: js-functions-expression]
+          `,
+        },
+        {
+          id: "js-scope",
+          title: "Область видимости",
+          order: 4,
+          content: `
+        <h3>Область видимости</h3>
+        <p><strong>Область видимости (scope)</strong> — механизм, который определяет доступность переменных в коде, где они используются.</p>
+
+        <p>Вложенные области видимости (scope chain) — область видимости утроенно иерархически, за каждый дочерний объем имеет доступ до значений в батьковських областях, но не наоборот.</p>
+
+        <blockquote style="border-left: 4px solid #4fc3f7; padding: 10px 15px; margin: 16px 0; background-color: rgba(79, 195, 247, 0.1);">
+          <strong>🧠 ИНТЕРЕСНО</strong><br/>
+          Значение видно для кода, который выполняется, если оно есть в глобальной области видимости или в локальной области видимости.
+        </blockquote>
+
+        [NEXT]
+
+        <h3 class="small-title">Глобальная область видимости</h3>
+        <p>Значения, объявленные на наивысшем уровне, то есть за пределами каких-либо конструкций (за пределами <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">while</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> и функций), находятся в <strong>глобальной области видимости</strong> и доступны всегда после их объявления.</p>
+
+        <pre><code class="language-javascript">const globalValue = 10;
+
+console.log(globalValue); // 10
+
+function foo() {
+  console.log(globalValue); // 10
+}
+
+for (let i = 0; i < 5; i++) {
+  console.log(globalValue); // 10
+}
+
+if (5 === 5) {
+  console.log(globalValue); // 10
+}</code></pre>
+
+        [NEXT]
+
+        <h3 class="small-title">Блочная область видимости</h3>
+        <p>Значения, объявленные внутри инструкций <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code>, функций и других блоков кода, взятых в фигурные скобки <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{}</code>, находятся в блочной области видимости и доступны только внутри этого блока кода или в блоках, вложенных в него.</p>
+
+        <pre><code class="language-javascript">function foo() {
+  const a = 20;
+  console.log(a); // 20
+
+  for (let i = 0; i < 5; i++) {
+    console.log(a); // 20
+  }
+
+  if (5 === 5) {
+    console.log(a); // 20
+  }
+}
+
+// ❌ Ошибка! Значение a — недоступно в глобальной области
+// видимости
+console.log(a);
+
+for (let i = 0; i < 5; i++) {
+  // ❌ Ошибка! Значение a — недоступно в этой области видимости
+  console.log(a);
+}</code></pre>
+
+        <p>Это можно увидеть в примере с будинком и комнатами. Будинок находится в глобальной области видимости. Каждая функция / блок создает свою «комнату», внутри которой эти значения доступных. Только тогда, если что-то находится «за пределами» будинка, оно доступно везде. За границами комнаты (т.е. блока) — недоступно.</p>
+
+        <pre><code class="language-javascript">for (let i = 0; i < 5; i++) {
+  const a = 10;
+  console.log(a); // 10
+}
+
+if (5 === 5) {
+  const b = 30;
+  console.log(a); // ❌
+  console.log(b); // 30
+}
+
+if (5 === 5) {
+  // ❌ Ошибка! Значение b — отсутствует в этой области
+  // видимости
+  console.log(b);
+}</code></pre>
+
+        [NEXT]
+
+        <h3 class="small-title">Поиск по цепочке областей видимости</h3>
+        <p>Интерпретатор начнет искать значение сначала в той области видимости, в которой к нему обращаются. Если такого значения в локальной области видимости нет, то он поднимется на один уровень за пределы данного блока и начнет искать значение в нем, и так далее до наинаивысшей области видимости (глобальной). Поэтому, если в глобальной области видимости есть две переменные с одинаковым именем и в другой (дочерней) области видимости объявлена переменная с таким же именем, то используется ближайшая в цепочке, те что выше по цепи могут не использоваться.</p>
+          `,
+        },
+
+        {
+          id: "js-call-stack",
+          title: "Стек вызовов",
+          order: 5,
+          content: `
+        <p>На каждую вложенную функцию, которая в теле может вызывать нашу функцию, в коде — что только JavaScript — однопоточный язык, то есть за одну единицу часу может одновременно только одну команду. Это означает, что при вызове функции, если она не завершила свое выполнение, должна «помнить» каждую вложенную функцию, включительно вкладенні все для того, чтобы продолжить свою работу.</p>
+
+        <pre><code class="language-javascript">function fn1() {
+  console.log("Где вызывается функция? fn1 до вызова fn2");
+  fn2();
+  console.log("Где вызывается функция? fn1 после вызова fn2");
+}
+
+function fn2() {
+  console.log("Где до вызова fn3");
+}
+
+console.log("Где до вызова fn1");
+fn1();
+console.log("Где после вызова fn1");
+
+// "Где до вызова fn1"
+// "Где вызывается функция? fn1 до вызова fn2"
+// "Где до вызова fn3"
+// "Где вызывается функция? fn1 после вызова fn2"
+// "Где после вызова fn1"</code></pre>
+
+        <p>Необходимо каждый раз сохранять стопку функций, они были вызваны, при этом ещё не завершили своё выполнение, — механизм хранения и предопределения последовательности выполнения этих функций — сама это и есть коллекция стэка викликов (call stack).</p>
+
+        [NEXT]
+
+        <h3 class="small-title">Стек</h3>
+        <p><strong>Стек</strong> — структура данных, которая работает по принципу LIFO (Last In First Out), то есть «последний пришёл — первый ушёл». Означает, что добавленный позже стек, будет извлечён в первую очередь — тебе можно добавить или удалить только верхний элемент стека в каждой момент.</p>
+
+        <p>Увижь стек в виде маски, в мне с точки методов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">pop</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push</code>, то есть можно добавить или удалить только элемент в конце коллекции.</p>
+
+        [NEXT]
+
+        <h3 class="small-title">Стек выполнения</h3>
+        <p><strong>Стек вызовов (call stack)</strong> — это механизм для отслеживания текущего местоположения интерпретатора в коде, который вызывает несколько функций. Мы знаем, какая функция выполняется сейчас, и какие функции вызываются из внутри этой функции, и в случае, если функция, что вызывается, если функция будет выполнена наступает то:</p>
+
+        <ul>
+          <li>Когда происходит вызов функции, интерпретатор добавит её в стек выполнения и начинает выполнение.</li>
+          <li>Любые функции, вызываемые функцией, что выполняется, добавляются у стек выполнения и выполняются, как только начинается их вызов.</li>
+          <li>Когда выполнение функции завершается, интерпретатор убирает её из стека и возобновляет выполнение кода с той точки, где остановился до этого. То есть начинает выполняться функция, запись которой наступает на стеку.</li>
+        </ul>
+
+        <blockquote style="border-left: 4px solid #4fc3f7; padding: 10px 15px; margin: 16px 0; background-color: rgba(79, 195, 247, 0.1);">
+          <strong>🧠 ИНТЕРЕСНО</strong><br/>
+          Stack frame (кадр стека, запись стека) — структура, которая добавляется у стек на каждый вызов функции. Хранит следующую информацию — например, какая функция и номер строки, в каком была вызвана.
+        </blockquote>
+
+        <pre><code class="language-javascript">function bar() {
+  console.log("bar");
+}
+
+function baz() {
+  console.log("baz");
+}
+
+function foo() {
+  console.log("foo");
+  bar();
+  baz();
+}
+
+foo();</code></pre>
+
+        <p>Когда выполняется данный код, сперва вызывается <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">foo()</code>, потом вызывается <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bar()</code> и выполняется <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bar()</code>, а потом — <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">baz()</code>. Вызовы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">console.log()</code> тоже считаются вызовами функции, но в этот момент для простоты пусть мы их пока что игнорируем.</p>
+
+        [NEXT]
+
+        <h3 class="small-title">Переполнение стека выполнения</h3>
+        <p>Стек вызовов — не бесконечный. Если вызывается какая-то однажды объем памяти, в каком и можно попабить ошибку "Uncaught RangeError: Maximum call stack size exceeded" — переполнение стека (stack overflow).</p>
+
+        <p>Это может случиться в случае непрямого бесконечною вызова рекурсивной обо актуальною вызов функции, то есть когда вызывается вложенная или вставленна функцию  — закрытие на таку системну — это обязательно. Тоткі самі случай вот  когда должно подключенных позначень того, що значення не отвечает.</p>
+          `,
         },
       ],
     },

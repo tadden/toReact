@@ -589,8 +589,8 @@ export function ModuleContent({
             )}
 
             {module.resources.length > 0 && (
-              <div style={{ marginTop: "2rem" }}>
-                <h3>Дополнительные Ресурсы</h3>
+              <div style={{ marginTop: "1rem" }}>
+                <h2 style={{ marginBottom: "1rem" }}>Ресурсы</h2>
                 <ul
                   style={{ listStyle: "none", padding: 0, marginTop: "1rem" }}
                 >
@@ -776,12 +776,13 @@ export function ModuleContent({
                         // Let's assume we can set to 'submitted' using the generic submit logic?
                         // Or if we need auto-approval, we might need a specific API.
                         // For now, let's submit with a note "Auto-completed via interactive tasks"
-                        submitHomework(
-                          course.id,
-                          module.id,
-                          "interactive-completion",
-                          "Completed all interactive tasks",
-                        );
+                        // Mark as approved (done) immediately for interactive homework
+                        updateProgress(course.id, module.id, {
+                          homeworkStatus: "approved",
+                          homeworkUrl: "interactive-completion", // meaningful marker
+                          status: "completed", // Also complete the module
+                          notes: "Completed all interactive tasks",
+                        });
                       }}
                     />
                   </div>

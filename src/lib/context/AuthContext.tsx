@@ -10,7 +10,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (
     email: string,
-    password?: string
+    password?: string,
   ) => Promise<{ mustChangePassword: boolean } | undefined>;
   logout: () => void;
   isAuthenticated: boolean;

@@ -468,6 +468,22 @@ export const quizzes: Record<string, QuizData> = {
     successMessage:
       'Правильно! К первому операнду "Mango" применимо преобразование в true, поэтому он и возвращается.',
   },
+  "js-functions-implicit-return": {
+    id: "js-functions-implicit-return",
+    question: "Какое значение вернет вызов функции makeMessage в коде выше?",
+    options: ["undefined", '"Hello Jacob"', "null", '"Hello username"'],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! Если функция не имеет оператора return, она возвращает undefined.",
+  },
+  "js-functions-execution-order": {
+    id: "js-functions-execution-order",
+    question: "Каким будет порядок логов в инструментах разработчика?",
+    options: ["A > B > C > D", "A > C > B > D", "A > C > D > B"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Сначала выполняется код до вызова функции, затем код внутри функции, и после — код после вызова функции.",
+  },
   "js-logical-not-zero-quiz": {
     id: "js-logical-not-zero-quiz",
     question: "Каким будет результат выражения?",
@@ -767,5 +783,104 @@ h1, h2, h3 {
     correctAnswer: 1,
     successMessage:
       "Верно! Глобальные переменные объявляются в псевдоклассе :root с префиксом --.",
+  },
+  "js-array-literal-syntax": {
+    id: "js-array-literal-syntax",
+    question: "Выберите правильный синтаксис литерала массива",
+    options: ["<>", "[]", "{}", "()"],
+    correctAnswer: 1,
+    successMessage:
+      "Абсолютно точно! В синтаксисе литерала массива используются квадратные скобки.",
+  },
+  "js-array-first-element-index": {
+    id: "js-array-first-element-index",
+    question: "Какой индекс у первого элемента массива?",
+    options: ["-1", "0", "1"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Индексация массивов в JavaScript начинается с нуля.",
+  },
+  "js-arrays-iteration-break": {
+    id: "js-arrays-iteration-break",
+    question: "Что делает оператор break в цикле?",
+    options: [
+      "Прерывает текущую итерацию",
+      "Прерывает выполнение всего цикла",
+      "Ничего не делает",
+    ],
+    correctAnswer: 1,
+    successMessage: "Верно! break полностью останавливает выполнение цикла.",
+  },
+  "js-arrays-loop-condition": {
+    id: "js-arrays-loop-condition",
+    question:
+      "Что в примере выше используется в условии для остановки цикла во время итераций по массиву?",
+    options: ["Значение длины массива", "Значение элементов массива"],
+    correctAnswer: 0,
+    successMessage:
+      "Именно так! Условием выхода из цикла во время итерации по массиву является значение длины массива. В примере выше код тела цикла будет выполняться, пока i < planets.length.",
+  },
+  "js-arrays-includes": {
+    id: "js-arrays-includes",
+    question: "Что возвращает метод includes?",
+    options: [
+      "Индекс элемента или -1",
+      "Значение элемента или undefined",
+      "Булево true или false",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Правильно! Метод includes возвращает true, если элемент найден, и false, если нет.",
+  },
+  "js-arrays-for-of-counter": {
+    id: "js-arrays-for-of-counter",
+    question: "Можно ли получить доступ к счетчику в цикле for...of?",
+    options: ["Да", "Нет"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Цикл for...of предназначен для перебора значений, а не индексов.",
+  },
+  "js-functions-call": {
+    id: "js-functions-call",
+    question:
+      "Выбери правильный синтаксис вызова уже объявленной функции function greetClient() {}",
+    options: [
+      "function greetClient[]",
+      "greetClient()",
+      "greetClient",
+      "greetClient[]",
+    ],
+    correctAnswer: 1,
+    successMessage: "Верно! Функция вызывается по имени с круглыми скобками.",
+  },
+  "js-functions-params": {
+    id: "js-functions-params",
+    question:
+      "Как называются значения 5 и 8, передаваемые функции во время её вызова?",
+    options: ["Параметры", "Аргументы"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Значения, которые передаются во время вызова функции, называются аргументами.",
+  },
+  "js-functions-arguments": {
+    id: "js-functions-arguments",
+    question:
+      "Нужно ли объявлять переменную arguments в функции для доступа к ней?",
+    options: [
+      "Нет, она есть в каждой функции по умолчанию",
+      "Да, её изначально нет в функции",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Правильно! arguments автоматически создается внутри каждой функции.",
+  },
+  "js-functions-expression": {
+    id: "js-functions-expression",
+    question:
+      "Функцию, созданную каким синтаксисом, можно вызывать до места её объявления?",
+    options: ["Функциональный выраз", "Объявление функции"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Объявление функции (function declaration) можно вызывать до места её создания в коде.",
   },
 };

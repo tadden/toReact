@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     if (!newPassword || newPassword.length < 6) {
       return NextResponse.json(
         { error: "Пароль должен быть не менее 6 символов" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -36,7 +36,7 @@ export async function POST(req: Request) {
     console.error("Password update error:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

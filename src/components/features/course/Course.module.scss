@@ -95,7 +95,7 @@
 }
 
 .standardContainer {
-  padding: 3rem;
+  padding: 1rem 2rem;
   max-width: 1000px;
   /* margin: 0 auto; Optional, if centering is desired */
 }
@@ -377,6 +377,7 @@
 :global(.img-responsive) {
   max-width: 100%;
   height: auto;
+  padding: 1rem 0;
 }
 
 :global(.img-rounded) {
