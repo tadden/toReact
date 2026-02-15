@@ -26,9 +26,9 @@ export const javascriptCourse = {
       ],
       homework: {
         id: "js-intro-hw",
-        title: "Домашнє завдання: Змінні та типи",
+        title: "Домашнее задание: Переменные и типы",
         description:
-          "Виконайте інтерактивні завдання для закріплення матеріалу.",
+          "Выполните интерактивные задания для закрепления материала.",
         acceptanceCriteria: [
           {
             type: "challenges",
@@ -1825,7 +1825,33 @@ for (let i = 0; i < number; i += 1) {
           url: "https://www.youtube.com/watch?v=TkV_O-hsU5w",
         },
       ],
-      homework: null,
+      homework: {
+        id: "js-arrays-functions-hw",
+        title: "Домашнее задание: Массивы и Функции",
+        description:
+          "Выполните интерактивные задания для закрепления материала.",
+        acceptanceCriteria: [
+          {
+            type: "challenges",
+            items: [
+              "js-check-age-early-return",
+              "js-check-password-early-return",
+              "js-check-storage-early-return",
+              "js-array-fruits",
+              "js-array-access",
+              "js-array-assignment",
+              "js-array-length",
+              "js-array-last-element",
+              "js-get-extreme-elements",
+              "js-split-message",
+              "js-calculate-engraving-price",
+              "js-make-string-from-array",
+              "js-slugify",
+              "js-slice",
+            ],
+          },
+        ],
+      },
       topics: [
         {
           id: "js-arrays",

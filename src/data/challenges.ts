@@ -4142,4 +4142,1288 @@ console.log(productName.includes("repair")); // false</code></pre>
       ];
     },
   },
+  "js-check-age-early-return": {
+    id: "js-check-age-early-return",
+    title: "Раннее возвращение",
+    type: "javascript",
+    description: `
+      <p>В функции может быть больше одного оператора <code>return</code>. Главное помнить, что выполнение функции прерывается, когда интерпретатор встречает возвращение, и весь код после него будет проигнорирован в текущем вызове функции.</p>
+
+      <p>Возьмём уже знакомую нам функцию проверки совершеннолетия. Она работает, но тут есть «лишний» код, то есть тело функции можно оптимизировать. В этом случае подойдёт способ (паттерн) «раннее возвращение».</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">function checkAge(age) {
+  let message;
+
+  if (age >= 18) {
+    message = "Вы совершеннолетний человек";
+  } else {
+    message = "Вы несовершеннолетний человек";
+  }
+
+  return message;
+}</code></pre>
+      </div>
+
+      <ul class="list-disc">
+        <li>Если условие в <code>if</code> выполняется, то есть приводится до <code>true</code>, возвращаем строку <code>"You are an adult"</code>, и код ниже уже не выполняется.</li>
+        <li>Если условие в <code>if</code> не выполняется, то есть приводится к <code>false</code>, возвращаем строку <code>"You are a minor"</code>.</li>
+      </ul>
+
+      <p>Используя паттерн «раннее возвращение» и то, что выполнение функции прерывается на операторе <code>return</code>, мы избавляемся от лишней переменной и блока <code>else</code>. То есть этот способ помогает «разгладить» ветвление.</p>
+
+      <div class="task-instruction">
+        <p>Запиши условие в инструкции <code>if</code> таким образом, чтобы функция работала правильно.</p>
+      </div>
+    `,
+    initialCode: `function checkAge(age) {
+  if (false) { // Change this line
+    return "You are an adult";
+  }
+
+  return "You are a minor";
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkAge\s*\(\s*age\s*\)/.test(cleanCode);
+      const hasGte = />=/.test(cleanCode);
+      const hasNoElse = !/\belse\b/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkAge;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(20) === "You are an adult" &&
+            userFn(8) === "You are a minor" &&
+            userFn(14) === "You are a minor" &&
+            userFn(38) === "You are an adult" &&
+            userFn(18) === "You are an adult"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkAge(age)",
+          passed: hasFunction,
+        },
+        {
+          id: "has-gte",
+          label: "В выражении проверки возраста использован оператор >=",
+          passed: hasGte,
+        },
+        {
+          id: "test-20",
+          label: 'Вызов checkAge(20) возвращает "You are an adult"',
+          passed: passesTests,
+        },
+        {
+          id: "test-8",
+          label: 'Вызов checkAge(8) возвращает "You are a minor"',
+          passed: passesTests,
+        },
+        {
+          id: "test-14",
+          label: 'Вызов checkAge(14) возвращает "You are a minor"',
+          passed: passesTests,
+        },
+        {
+          id: "test-38",
+          label: 'Вызов checkAge(38) возвращает "You are an adult"',
+          passed: passesTests,
+        },
+        {
+          id: "no-else",
+          label: "В теле функции есть только одна инструкция if",
+          passed: hasNoElse,
+        },
+        {
+          id: "no-else-if",
+          label: "В теле функции отсутствуют инструкции else или else if",
+          passed: hasNoElse,
+        },
+      ];
+    },
+  },
+  "js-check-password-early-return": {
+    id: "js-check-password-early-return",
+    title: "Рефакторинг checkPassword",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkPassword</code> получает пароль пользователя в параметр <code>password</code>, проверяет его на совпадение с паролем администратора в переменной <code>ADMIN_PASSWORD</code> и возвращает сообщение о результате сравнения.</p>
+
+      <p>Выполни рефакторинг кода функции <code>checkPassword</code>, используя паттерн «раннее возвращение»:</p>
+
+      <ul class="list-disc">
+        <li>удали переменную <code>message</code></li>
+        <li>удали <code>else</code></li>
+        <li>код должен работать так само, как и до оптимизации</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Перепиши функцию <code>checkPassword</code> используя паттерн раннего возвращения, без переменной <code>message</code> и блока <code>else</code>.</p>
+      </div>
+    `,
+    initialCode: `function checkPassword(password) {
+  const ADMIN_PASSWORD = "jqueryismyjam";
+  // Change code below this line
+
+  let message;
+
+  if (password === ADMIN_PASSWORD) {
+    message = "Welcome!";
+  } else {
+    message = "Access denied, wrong password!";
+  }
+
+  return message;
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+checkPassword\s*\(\s*password\s*\)/.test(
+        cleanCode,
+      );
+      const hasNoElse = !/\belse\b/.test(cleanCode);
+      const hasNoMessage = !/\blet\s+message\b/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkPassword;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn("mangohackzor") === "Access denied, wrong password!" &&
+            userFn("polyhax") === "Access denied, wrong password!" &&
+            userFn("jqueryismyjam") === "Welcome!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkPassword(password)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-mangohackzor",
+          label:
+            'Вызов checkPassword("mangohackzor") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-polyhax",
+          label:
+            'Вызов checkPassword("polyhax") возвращает "Access denied, wrong password!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-jqueryismyjam",
+          label: 'Вызов checkPassword("jqueryismyjam") возвращает "Welcome!"',
+          passed: passesTests,
+        },
+        {
+          id: "no-message",
+          label: "Удалена переменная message",
+          passed: hasNoMessage,
+        },
+        {
+          id: "no-else",
+          label: "Удалён блок else",
+          passed: hasNoElse,
+        },
+      ];
+    },
+  },
+  "js-check-storage-early-return": {
+    id: "js-check-storage-early-return",
+    title: "Рефакторинг checkStorage",
+    type: "javascript",
+    description: `
+      <p>Функция <code>checkStorage</code> проверяет возможность оформления заказа и возвращает сообщение о результате. Она принимает два параметра, значения которых будут задаваться при её вызове.</p>
+
+      <ul class="list-disc">
+        <li><code>available</code> — доступное количество товаров на складе</li>
+        <li><code>ordered</code> — количество единиц товара в заказе</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Выполни рефакторинг кода функции <code>checkStorage</code>, используя паттерн «раннее возвращение».</p>
+      </div>
+    `,
+    initialCode: `function checkStorage(available, ordered) {
+  // Change code below this line
+  let message;
+
+  if (ordered === 0) {
+    message = "Your order is empty!";
+  } else if (ordered > available) {
+    message = "Your order is too large, not enough goods in stock!";
+  } else {
+    message = "The order is accepted, our manager will contact you";
+  }
+
+  return message;
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+checkStorage\s*\(\s*available\s*,\s*ordered\s*\)/.test(
+          cleanCode,
+        );
+      const hasNoElse = !/\belse\b/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkStorage;")();
+        if (typeof userFn === "function") {
+          if (
+            userFn(100, 50) ===
+              "The order is accepted, our manager will contact you" &&
+            userFn(100, 130) ===
+              "Your order is too large, not enough goods in stock!" &&
+            userFn(70, 0) === "Your order is empty!" &&
+            userFn(200, 20) ===
+              "The order is accepted, our manager will contact you" &&
+            userFn(200, 250) ===
+              "Your order is too large, not enough goods in stock!" &&
+            userFn(150, 0) === "Your order is empty!"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkStorage(available, ordered)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-100-50",
+          label:
+            'Вызов checkStorage(100, 50) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-100-130",
+          label:
+            'Вызов checkStorage(100, 130) возвращает "Your order is too large, not enough goods in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-70-0",
+          label: 'Вызов checkStorage(70, 0) возвращает "Your order is empty!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-200-20",
+          label:
+            'Вызов checkStorage(200, 20) возвращает "The order is accepted, our manager will contact you"',
+          passed: passesTests,
+        },
+        {
+          id: "test-200-250",
+          label:
+            'Вызов checkStorage(200, 250) возвращает "Your order is too large, not enough goods in stock!"',
+          passed: passesTests,
+        },
+        {
+          id: "test-150-0",
+          label: 'Вызов checkStorage(150, 0) возвращает "Your order is empty!"',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-array-fruits": {
+    id: "js-array-fruits",
+    title: "Объявление массива",
+    type: "javascript",
+    description: `
+      <p>Массив используется для хранения упорядоченной коллекции элементов. Он объявляется открытой и закрытой квадратной скобкой <code>[]</code> — литералом массива. Внутри скобок каждый элемент массива разделяется запятой.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];</code></pre>
+      </div>
+
+      <blockquote style="border-left: 4px solid #4fc3f7; padding: 10px 15px; margin: 16px 0; background-color: rgba(79, 195, 247, 0.1);">
+        <strong>ℹ️ Полезно</strong><br/>
+        Объявляя переменную для объекта или массива, программисты, как правило, используют <code>const</code>. Они делают это для того, чтобы случайно не перезаписать значение, поскольку попытка перезаписи вызовет ошибку до того, как код попадёт к пользователю.
+      </blockquote>
+
+      <div class="task-instruction">
+        <p>Объяви переменную <code>fruits</code> и присвой ей массив фруктов — строк <code>"apple"</code>, <code>"plum"</code>, <code>"pear"</code> и <code>"orange"</code>.</p>
+      </div>
+    `,
+    initialCode: `// Change code below this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFruits = /const\s+fruits/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            fruits: typeof fruits !== 'undefined' ? fruits : undefined
+          };
+        `;
+        const result = new Function(evalCode)();
+
+        if (
+          Array.isArray(result.fruits) &&
+          result.fruits.length === 4 &&
+          result.fruits[0] === "apple" &&
+          result.fruits[1] === "plum" &&
+          result.fruits[2] === "pear" &&
+          result.fruits[3] === "orange"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "fruits-declared",
+          label: "Объявлена переменная fruits",
+          passed: hasFruits,
+        },
+        {
+          id: "fruits-value",
+          label:
+            'Значение переменной fruits — это массив ["apple", "plum", "pear", "orange"]',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-array-access": {
+    id: "js-array-access",
+    title: "Доступ к элементам",
+    type: "javascript",
+    description: `
+      <p>Для доступа к значению элемента массива применяют синтаксис квадратных скобок <code>массив[индекс]</code>. Между именем переменной массива и квадратными скобками не должно быть пробела.</p>
+
+      <div class="bg-red-500/10 border-l-4 border-red-500 p-4 my-4">
+        <p class="font-bold text-red-500">🔥 Внимание</p>
+        <p>Индексация элементов массива начинается с нуля.</p>
+      </div>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+planets[0]; // "Earth"
+planets[2]; // "Venus"</code></pre>
+      </div>
+
+      <p>Объяви три переменные и присвой каждой из них значение, используя нотацию квадратных скобок.</p>
+
+      <table class="w-full text-left border-collapse my-4">
+        <thead>
+          <tr>
+            <th class="border p-2">Имя переменной</th>
+            <th class="border p-2">Значение переменной</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-2"><code>firstElement</code></td>
+            <td class="border p-2">первый элемент массива</td>
+          </tr>
+          <tr>
+            <td class="border p-2"><code>secondElement</code></td>
+            <td class="border p-2">второй элемент массива</td>
+          </tr>
+          <tr>
+            <td class="border p-2"><code>lastElement</code></td>
+            <td class="border p-2">последний элемент массива</td>
+          </tr>
+        </tbody>
+      </table>
+    `,
+    initialCode: `const fruits = ["apple", "plum", "pear", "orange"];
+
+// Change code below this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFirst = /const\s+firstElement/.test(cleanCode);
+      const hasSecond = /const\s+secondElement/.test(cleanCode);
+      const hasLast = /const\s+lastElement/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            firstElement: typeof firstElement !== 'undefined' ? firstElement : undefined,
+            secondElement: typeof secondElement !== 'undefined' ? secondElement : undefined,
+            lastElement: typeof lastElement !== 'undefined' ? lastElement : undefined
+          };
+        `;
+        const result = new Function(evalCode)();
+
+        if (
+          result.firstElement === "apple" &&
+          result.secondElement === "plum" &&
+          result.lastElement === "orange"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "first-declared",
+          label: "Объявлена переменная firstElement",
+          passed: hasFirst,
+        },
+        {
+          id: "first-value",
+          label: 'Значение переменной firstElement — это строка "apple"',
+          passed:
+            passesTests &&
+            /const\s+firstElement\s*=\s*fruits\[0\]/.test(cleanCode),
+        },
+        {
+          id: "second-declared",
+          label: "Объявлена переменная secondElement",
+          passed: hasSecond,
+        },
+        {
+          id: "second-value",
+          label: 'Значение переменной secondElement — это строка "plum"',
+          passed:
+            passesTests &&
+            /const\s+secondElement\s*=\s*fruits\[1\]/.test(cleanCode),
+        },
+        {
+          id: "last-declared",
+          label: "Объявлена переменная lastElement",
+          passed: hasLast,
+        },
+        {
+          id: "last-value",
+          label: 'Значение переменной lastElement — это строка "orange"',
+          passed:
+            passesTests &&
+            /const\s+lastElement\s*=\s*fruits\[3\]/.test(cleanCode),
+        },
+      ];
+    },
+  },
+  "js-array-assignment": {
+    id: "js-array-assignment",
+    title: "Переопределение значений",
+    type: "javascript",
+    description: `
+      <p>В отличие от строк, элементы массива можно изменять, обратившись к ним по индексу и присвоив другое значение.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const numbers = [1, 2, 3, 4, 5];
+numbers[0] = 7;
+numbers[2] = 14;
+console.log(numbers); // [7, 2, 14, 4, 5];</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Выполни переопределение значения элементов с индексами <code>1</code> и <code>3</code>. Замени <code>"plum"</code> на <code>"peach"</code>, а <code>"orange"</code> на <code>"banana"</code>.</p>
+      </div>
+    `,
+    initialCode: `const fruits = ["apple", "plum", "pear", "orange"];
+
+// Write your code under this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFruits = /const\s+fruits/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            fruits: typeof fruits !== 'undefined' ? fruits : undefined
+          };
+        `;
+        const result = new Function(evalCode)();
+
+        if (
+          Array.isArray(result.fruits) &&
+          result.fruits.length === 4 &&
+          result.fruits[0] === "apple" &&
+          result.fruits[1] === "peach" &&
+          result.fruits[2] === "pear" &&
+          result.fruits[3] === "banana"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "fruits-declared",
+          label: "Объявлена переменная fruits",
+          passed: hasFruits,
+        },
+        {
+          id: "fruits-value",
+          label:
+            'Значение переменной fruits — это массив ["apple", "peach", "pear", "banana"]',
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-array-length": {
+    id: "js-array-length",
+    title: "Длина массива",
+    type: "javascript",
+    description: `
+      <p>Длина массива, то есть количество его элементов, хранится в свойстве <code>length</code>. Это динамическая величина, которая изменяется автоматически во время добавления или удаления элементов.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+console.log(planets.length); // 3</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Объяви переменную <code>fruitsArrayLength</code> и присвой ей длину массива <code>fruits</code>, используя свойство <code>length</code>.</p>
+      </div>
+    `,
+    initialCode: `const fruits = ["apple", "peach", "pear", "banana"];
+
+// Change code below this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasVariable = /const\s+fruitsArrayLength/.test(cleanCode);
+      const usesLength = /\.length/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            fruitsArrayLength: typeof fruitsArrayLength !== 'undefined' ? fruitsArrayLength : undefined
+          };
+        `;
+        const result = new Function(evalCode)();
+
+        if (result.fruitsArrayLength === 4) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "variable-declared",
+          label: "Объявлена переменная fruitsArrayLength",
+          passed: hasVariable,
+        },
+        {
+          id: "value-check",
+          label: "Значение переменной fruitsArrayLength — это число 4",
+          passed: passesTests && usesLength,
+        },
+      ];
+    },
+  },
+  "js-array-last-element": {
+    id: "js-array-last-element",
+    title: "Последний элемент массива",
+    type: "javascript",
+    description: `
+      <p>Чаще всего мы заранее в коде не знаем какая будет длина массива. Для того чтобы получить значение последнего элемента применяется следующий подход — длина массива всегда на единицу больше, чем индекс последнего элемента. Используя формулу <code>длина_массива - 1</code>, можно получить значение последнего элемента массива произвольной длины.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+const lastElementIndex = planets.length - 1;
+planets[lastElementIndex]; // "Venus"</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Объяви две переменные:</p>
+        <ul class="list-disc">
+          <li><code>lastElementIndex</code> — индекс последнего элемента массива <code>fruits</code> через <code>длина_массива - 1</code></li>
+          <li><code>lastElement</code> — значение последнего элемента массива</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `const fruits = ["apple", "peach", "pear", "banana"];
+
+// Change code below this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasIndexVar = /const\s+lastElementIndex/.test(cleanCode);
+      const hasValueVar = /const\s+lastElement/.test(cleanCode);
+      const usesLengthMinusOne = /\.length\s*-\s*1/.test(cleanCode);
+
+      let passesTests = false;
+      let result: any = {};
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            lastElementIndex: typeof lastElementIndex !== 'undefined' ? lastElementIndex : undefined,
+            lastElement: typeof lastElement !== 'undefined' ? lastElement : undefined
+          };
+        `;
+        result = new Function(evalCode)();
+
+        if (result.lastElementIndex === 3 && result.lastElement === "banana") {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "index-declared",
+          label: "Объявлена переменная lastElementIndex",
+          passed: hasIndexVar,
+        },
+        {
+          id: "index-value",
+          label: "Значение переменной lastElementIndex — это число 3",
+          passed: passesTests && result.lastElementIndex === 3,
+        },
+        {
+          id: "element-declared",
+          label: "Объявлена переменная lastElement",
+          passed: hasValueVar,
+        },
+        {
+          id: "element-value",
+          label: 'Значение переменной lastElement — это строка "banana"',
+          passed: passesTests && result.lastElement === "banana",
+        },
+      ];
+    },
+  },
+  "js-get-extreme-elements": {
+    id: "js-get-extreme-elements",
+    title: "Экстремальные элементы",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>getExtremeElements(array)</code>, которая принимает один параметр <code>array</code> — массив элементов произвольной длины. Функция должна возвращать массив из двух элементов — первого и последнего элемента параметра <code>array</code>.</p>
+
+      <div class="task-instruction">
+        <p>Реализуй функцию возврата первого и последнего элементов массива.</p>
+      </div>
+    `,
+    initialCode: `function getExtremeElements(array) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+getExtremeElements\s*\(\s*array\s*\)/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3;
+
+      try {
+        const userFn = new Function(code + "; return getExtremeElements;")();
+        if (typeof userFn === "function") {
+          result1 = userFn([1, 2, 3, 4, 5]);
+          result2 = userFn(["Earth", "Mars", "Venus"]);
+          result3 = userFn(["apple", "peach", "pear", "banana"]);
+
+          const check1 =
+            Array.isArray(result1) &&
+            result1.length === 2 &&
+            result1[0] === 1 &&
+            result1[1] === 5;
+          const check2 =
+            Array.isArray(result2) &&
+            result2.length === 2 &&
+            result2[0] === "Earth" &&
+            result2[1] === "Venus";
+          const check3 =
+            Array.isArray(result3) &&
+            result3.length === 2 &&
+            result3[0] === "apple" &&
+            result3[1] === "banana";
+
+          if (check1 && check2 && check3) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция getExtremeElements(array)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-numbers",
+          label: "Вызов getExtremeElements([1, 2, 3, 4, 5]) возвращает [1, 5]",
+          passed:
+            passesTests &&
+            Array.isArray(result1) &&
+            result1[0] === 1 &&
+            result1[1] === 5,
+        },
+        {
+          id: "test-planets",
+          label:
+            'Вызов getExtremeElements(["Earth", "Mars", "Venus"]) возвращает ["Earth", "Venus"]',
+          passed:
+            passesTests &&
+            Array.isArray(result2) &&
+            result2[0] === "Earth" &&
+            result2[1] === "Venus",
+        },
+        {
+          id: "test-fruits",
+          label:
+            'Вызов getExtremeElements(["apple", "peach", "pear", "banana"]) возвращает ["apple", "banana"]',
+          passed:
+            passesTests &&
+            Array.isArray(result3) &&
+            result3[0] === "apple" &&
+            result3[1] === "banana",
+        },
+      ];
+    },
+  },
+
+  "js-split-message": {
+    id: "js-split-message",
+    title: "Гравировка украшений",
+    type: "javascript",
+    description: `
+      <p>Метод <code>split(delimiter)</code> позволяет превратить строку в массив, "разбив" его по разделителю <code>delimiter</code>. Если разделитель — это пустая строка, получим массив отдельных символов. Разделителем может быть один или несколько символов.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const name = "Mango";
+console.log(name.split("")); // ["M", "a", "n", "g", "o"]
+
+const message = "JavaScript essentials";
+console.log(message.split(" ")); // ["JavaScript", "essentials"]</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>splitMessage(message, delimiter)</code>. Она должна разбить строку <code>message</code> по указанному разделителю <code>delimiter</code> и сохранить полученный массив строк в переменной <code>words</code>.</p>
+      </div>
+    `,
+    initialCode: `function splitMessage(message, delimiter) {
+  let words;
+  // Change code below this line
+
+  // Change code above this line
+  return words;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+splitMessage\s*\(\s*message\s*,\s*delimiter\s*\)/.test(
+          cleanCode,
+        );
+      const usesSplit = /\.split\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3;
+
+      try {
+        const userFn = new Function(code + "; return splitMessage;")();
+        if (typeof userFn === "function") {
+          result1 = userFn("Mango hurries to the train", " ");
+          result2 = userFn("Mango", "");
+          result3 = userFn("best_for_week", "_");
+
+          const check1 =
+            Array.isArray(result1) &&
+            result1.length === 5 &&
+            result1[0] === "Mango" &&
+            result1[4] === "train";
+          const check2 =
+            Array.isArray(result2) &&
+            result2.length === 5 &&
+            result2[0] === "M" &&
+            result2[4] === "o";
+          const check3 =
+            Array.isArray(result3) &&
+            result3.length === 3 &&
+            result3[0] === "best" &&
+            result3[2] === "week";
+
+          if (check1 && check2 && check3) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция splitMessage(message, delimiter)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-space",
+          label:
+            'Вызов splitMessage("Mango hurries to the train", " ") возвращает ["Mango", "hurries", "to", "the", "train"]',
+          passed:
+            passesTests &&
+            Array.isArray(result1) &&
+            result1.length === 5 &&
+            result1[0] === "Mango",
+        },
+        {
+          id: "test-empty",
+          label:
+            'Вызов splitMessage("Mango", "") возвращает ["M", "a", "n", "g", "o"]',
+          passed:
+            passesTests &&
+            Array.isArray(result2) &&
+            result2.join("") === "Mango",
+        },
+        {
+          id: "test-underscore",
+          label:
+            'Вызов splitMessage("best_for_week", "_") возвращает ["best", "for", "week"]',
+          passed:
+            passesTests &&
+            Array.isArray(result3) &&
+            result3.join("_") === "best_for_week",
+        },
+        {
+          id: "uses-split",
+          label: "Функция использует метод split",
+          passed: usesSplit,
+        },
+      ];
+    },
+  },
+  "js-calculate-engraving-price": {
+    id: "js-calculate-engraving-price",
+    title: "Гравировка украшений",
+    type: "javascript",
+    description: `
+      <p>Сервису гравировки украшений нужна функция, которая бы автоматически считала цену гравировки, в зависимости от количества слов и цены за слово.</p>
+
+      <div class="task-instruction">
+        <p>Напиши тело функции <code>calculateEngravingPrice(message, pricePerWord)</code>. Она принимает строку <code>message</code> (состоящую из слов, разделенных только пробелами) и цену гравировки одного слова <code>pricePerWord</code>. Функция должна возвращать общую стоимость гравировки всех слов в строке.</p>
+      </div>
+    `,
+    initialCode: `function calculateEngravingPrice(message, pricePerWord) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+calculateEngravingPrice\s*\(\s*message\s*,\s*pricePerWord\s*\)/.test(
+          cleanCode,
+        );
+
+      let passesTests = false;
+      let result1, result2, result3, result4;
+
+      try {
+        const userFn = new Function(
+          code + "; return calculateEngravingPrice;",
+        )();
+        if (typeof userFn === "function") {
+          result1 = userFn("JavaScript is in my blood", 10);
+          result2 = userFn("JavaScript is in my blood", 20);
+          result3 = userFn("Web-development is creative work", 40);
+          result4 = userFn("Web-development is creative work", 20);
+
+          if (
+            result1 === 50 &&
+            result2 === 100 &&
+            result3 === 160 &&
+            result4 === 80
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label:
+            "Объявлена функция calculateEngravingPrice(message, pricePerWord)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов calculateEngravingPrice("JavaScript is in my blood", 10) возвращает 50',
+          passed: passesTests && result1 === 50,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов calculateEngravingPrice("JavaScript is in my blood", 20) возвращает 100',
+          passed: passesTests && result2 === 100,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов calculateEngravingPrice("Web-development is creative work", 40) возвращает 160',
+          passed: passesTests && result3 === 160,
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов calculateEngravingPrice("Web-development is creative work", 20) возвращает 80',
+          passed: passesTests && result4 === 80,
+        },
+      ];
+    },
+  },
+  "js-make-string-from-array": {
+    id: "js-make-string-from-array",
+    title: "Метод массива join()",
+    type: "javascript",
+    description: `
+      <p>Метод массивов <code>join(delimiter)</code> позволяет соединить элементы массива в строку. В строке элементы будут разделены символом или группой символов, указанных в <code>delimiter</code>. То есть это обратная операция методу строк <code>split(delimiter)</code>.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const words = ["JavaScript", "is", "amazing"];
+console.log(words.join("")); // 'JavaScriptisamazing'
+console.log(words.join(" ")); // 'JavaScript is amazing'
+console.log(words.join("*")); // 'JavaScript*is*amazing'</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>makeStringFromArray(array, delimiter)</code> таким образом, чтобы она возвращала в переменной <code>string</code> результат соединения элементов массива <code>array</code> с разделителем <code>delimiter</code> - строку.</p>
+      </div>
+    `,
+    initialCode: `function makeStringFromArray(array, delimiter) {
+  let string;
+  // Change code below this line
+
+  // Change code above this line
+  return string;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+makeStringFromArray\s*\(\s*array\s*,\s*delimiter\s*\)/.test(
+          cleanCode,
+        );
+      const usesJoin = /\.join\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3;
+
+      try {
+        const userFn = new Function(code + "; return makeStringFromArray;")();
+        if (typeof userFn === "function") {
+          result1 = userFn(["Mango", "hurries", "to", "the", "train"], " ");
+          result2 = userFn(["M", "a", "n", "g", "o"], "");
+          result3 = userFn(["top", "picks", "for", "you"], "_");
+
+          if (
+            result1 === "Mango hurries to the train" &&
+            result2 === "Mango" &&
+            result3 === "top_picks_for_you"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция makeStringFromArray(array, delimiter)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-space",
+          label:
+            'Вызов makeStringFromArray(["Mango", "hurries", "to", "the", "train"], " ") возвращает "Mango hurries to the train"',
+          passed: passesTests && result1 === "Mango hurries to the train",
+        },
+        {
+          id: "test-empty",
+          label:
+            'Вызов makeStringFromArray(["M", "a", "n", "g", "o"], "") возвращает "Mango"',
+          passed: passesTests && result2 === "Mango",
+        },
+        {
+          id: "test-underscore",
+          label:
+            'Вызов makeStringFromArray(["top", "picks", "for", "you"], "_") возвращает "top_picks_for_you"',
+          passed: passesTests && result3 === "top_picks_for_you",
+        },
+        {
+          id: "uses-join",
+          label: "Функция использует метод join",
+          passed: usesJoin,
+        },
+      ];
+    },
+  },
+  "js-slugify": {
+    id: "js-slugify",
+    title: "Генератор слага",
+    type: "javascript",
+    description: `
+      <p>Термин <strong>slug</strong> — это человеко-понятный уникальный идентификатор, который используется в веб-разработке для создания читабельных URL-адресов.</p>
+      <p>Например, вместо того, чтобы пользователь увидел в адресной строке <code>mysite.com/posts/1q8fh74tx</code>, можно сделать <strong>slug</strong> из названия статьи. В результате адрес будет приятнее для восприятия: <code>mysite.com/posts/arrays-for-begginers</code>.</p>
+
+      <div class="bg-red-500/10 border-l-4 border-red-500 p-4 my-4">
+        <p class="font-bold text-red-500">🔥 Внимание</p>
+        <p><strong>Slug</strong> — это всегда строка в нижнем регистре, слова которой разделены тире.</p>
+      </div>
+
+      <div class="task-instruction">
+        <p>Напиши функцию <code>slugify(title)</code>, которая принимает заголовок статьи, параметр <code>title</code>, и возвращает <code>slug</code>, созданный из этой строки.</p>
+        <ul class="list-disc">
+          <li>Значением параметра <code>title</code> будут строки, слова которых разделены только пробелами.</li>
+          <li>Все символы <code>slug</code> должны быть в нижнем регистре.</li>
+          <li>Все слова <code>slug</code> должны быть разделены тире.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function slugify(title) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+slugify\s*\(\s*title\s*\)/.test(
+        cleanCode,
+      );
+      const usesToLower = /\.toLowerCase\s*\(/.test(cleanCode);
+      const usesSplit = /\.split\s*\(/.test(cleanCode);
+      const usesJoin = /\.join\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3, result4;
+
+      try {
+        const userFn = new Function(code + "; return slugify;")();
+        if (typeof userFn === "function") {
+          result1 = userFn("Arrays for begginers");
+          result2 = userFn("English for developer");
+          result3 = userFn("Ten secrets of JavaScript");
+          result4 = userFn("How to become a JUNIOR developer in TWO WEEKS");
+
+          if (
+            result1 === "arrays-for-begginers" &&
+            result2 === "english-for-developer" &&
+            result3 === "ten-secrets-of-javascript" &&
+            result4 === "how-to-become-a-junior-developer-in-two-weeks"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция slugify(title)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов slugify("Arrays for begginers") возвращает "arrays-for-begginers"',
+          passed: passesTests && result1 === "arrays-for-begginers",
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов slugify("English for developer") возвращает "english-for-developer"',
+          passed: passesTests && result2 === "english-for-developer",
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов slugify("Ten secrets of JavaScript") возвращает "ten-secrets-of-javascript"',
+          passed: passesTests && result3 === "ten-secrets-of-javascript",
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов slugify("How to become a JUNIOR developer in TWO WEEKS") возвращает "how-to-become-a-junior-developer-in-two-weeks"',
+          passed:
+            passesTests &&
+            result4 === "how-to-become-a-junior-developer-in-two-weeks",
+        },
+      ];
+    },
+  },
+  "js-slice": {
+    id: "js-slice",
+    title: "Метод массива slice()",
+    type: "javascript",
+    description: `
+      <p>Метод <code>slice(begin, end)</code> возвращает новый массив, содержащий копию части исходного массива, не изменяя его. Копия делается от <code>begin</code> и до, но не включая, <code>end</code> - индексы элементов исходного массива.</p>
+      <ul class="list-disc">
+        <li>Если <code>begin</code> и <code>end</code> не указаны, будет создана полная копия исходного массива.</li>
+        <li>Если не указан <code>end</code>, копирование будет от <code>start</code> до конца исходного массива.</li>
+        <li>Если значение <code>start</code> отрицательное, а <code>end</code> не указано, то будут скопированы последние <code>N</code> элементов.</li>
+      </ul>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter", "Saturn"];
+
+console.log(planets.slice(0, 2)); // ['Earth', 'Mars']
+console.log(planets.slice(0, 4)); // ['Earth', 'Mars', 'Venus', 'Jupiter']
+console.log(planets.slice(1, 3)); // ['Mars', 'Venus']
+console.log(planets.slice(-2)); // ['Jupiter', 'Saturn']
+console.log(planets.slice()); // ['Earth', 'Mars', 'Venus', 'Jupiter', 'Saturn']</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Дополни код таким образом, чтобы переменные содержали частичные копии исходного массива <code>fruits</code>.</p>
+        <ul class="list-disc">
+          <li><code>firstTwoEls</code> - массив из первых двух элементов</li>
+          <li><code>nonExtremeEls</code> - массив из всех элементов, кроме первого и последнего</li>
+          <li><code>lastThreeEls</code> - массив из трех последних элементов</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `const fruits = ['apple', 'plum', 'pear', 'orange', 'banana'];
+
+// Change code below this line
+const firstTwoEls = ;
+const nonExtremeEls = ;
+const lastThreeEls = ;
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const usesSlice = /\.slice\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      let result: any = {};
+
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            firstTwoEls: typeof firstTwoEls !== 'undefined' ? firstTwoEls : undefined,
+            nonExtremeEls: typeof nonExtremeEls !== 'undefined' ? nonExtremeEls : undefined,
+            lastThreeEls: typeof lastThreeEls !== 'undefined' ? lastThreeEls : undefined,
+            fruits: typeof fruits !== 'undefined' ? fruits : undefined
+          };
+        `;
+        result = new Function(evalCode)();
+
+        if (
+          Array.isArray(result.firstTwoEls) &&
+          result.firstTwoEls.length === 2 &&
+          result.firstTwoEls[0] === "apple" &&
+          result.firstTwoEls[1] === "plum" &&
+          Array.isArray(result.nonExtremeEls) &&
+          result.nonExtremeEls.length === 3 &&
+          result.nonExtremeEls[0] === "plum" &&
+          result.nonExtremeEls[2] === "orange" &&
+          Array.isArray(result.lastThreeEls) &&
+          result.lastThreeEls.length === 3 &&
+          result.lastThreeEls[0] === "pear" &&
+          result.lastThreeEls[2] === "banana"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "fruits-check",
+          label:
+            'Значение переменной fruits - это массив ["apple", "plum", "pear", "orange", "banana"]',
+          passed:
+            Array.isArray(result.fruits) &&
+            result.fruits.length === 5 &&
+            result.fruits[0] === "apple",
+        },
+        {
+          id: "firstTwoEls-check",
+          label:
+            'Значение переменной firstTwoEls - это массив ["apple", "plum"]',
+          passed:
+            passesTests &&
+            result.firstTwoEls[0] === "apple" &&
+            result.firstTwoEls[1] === "plum",
+        },
+        {
+          id: "nonExtremeEls-check",
+          label:
+            'Значение переменной nonExtremeEls - это массив ["plum", "pear", "orange"]',
+          passed:
+            passesTests &&
+            result.nonExtremeEls[0] === "plum" &&
+            result.nonExtremeEls[2] === "orange",
+        },
+        {
+          id: "lastThreeEls-check",
+          label:
+            'Значение переменной lastThreeEls - это массив ["pear", "orange", "banana"]',
+          passed:
+            passesTests &&
+            result.lastThreeEls[0] === "pear" &&
+            result.lastThreeEls[2] === "banana",
+        },
+        {
+          id: "slice-check",
+          label:
+            "Переменной lastThreeEls присвоена копия части массива fruits после применения метода slice с правильными аргументами",
+          passed: usesSlice && passesTests,
+        },
+      ];
+    },
+  },
 };
