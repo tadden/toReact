@@ -1398,6 +1398,7 @@ console.log(add(5, 10, 15));
       ];
     },
   },
+
   "js-calculate-total-price": {
     id: "js-calculate-total-price",
     title: "Базовые математические операции",
@@ -5426,4 +5427,879 @@ const lastThreeEls = ;
       ];
     },
   },
+  "js-concat": {
+    id: "js-concat",
+    title: "Метод массива concat()",
+    type: "javascript",
+    description: `
+      <p>Метод <code>concat</code> используется для объединения двух или более массивов. Он не меняет массив на котором вызывается, а возвращает новый. Порядок аргументов метода влияет на порядок элементов нового массива.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const firstArray = ["Mercury", "Venus", "Earth"];
+const secondArray = ["Mars", "Jupiter"];
+const thirdArray = ["Saturn", "Uranus", "Neptune"];
+const allPlanets = firstArray.concat(secondArray, thirdArray);
+
+console.log(firstArray); // ['Mercury', 'Venus', 'Earth'];
+console.log(allPlanets); // ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune'];</code></pre>
+      </div>
+
+      <div class="task-instruction">
+        <p>Дополни код таким образом, чтобы в переменной <code>allClients</code> образовался массив всех элементов массивов <code>oldClients</code> и <code>newClients</code>.</p>
+      </div>
+    `,
+    initialCode: `const oldClients = ['Mango', 'Ajax', 'Poly', 'Kiwi'];
+const newClients = ['Peach', 'Houston'];
+
+const allClients = ; // Change this line
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const usesConcat = /\.concat\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      let result: any = {};
+
+      try {
+        const evalCode = `
+          ${code}
+          return {
+            oldClients: typeof oldClients !== 'undefined' ? oldClients : undefined,
+            newClients: typeof newClients !== 'undefined' ? newClients : undefined,
+            allClients: typeof allClients !== 'undefined' ? allClients : undefined
+          };
+        `;
+        result = new Function(evalCode)();
+
+        if (
+          Array.isArray(result.allClients) &&
+          result.allClients.length === 6 &&
+          result.allClients[0] === "Mango" &&
+          result.allClients[4] === "Peach"
+        ) {
+          passesTests = true;
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "oldClients-check",
+          label:
+            'Значение переменной oldClients - это массив ["Mango", "Ajax", "Poly", "Kiwi"]',
+          passed:
+            Array.isArray(result.oldClients) &&
+            result.oldClients.length === 4 &&
+            result.oldClients[0] === "Mango",
+        },
+        {
+          id: "newClients-check",
+          label:
+            'Значение переменной newClients - это массив ["Peach", "Houston"]',
+          passed:
+            Array.isArray(result.newClients) &&
+            result.newClients.length === 2 &&
+            result.newClients[0] === "Peach",
+        },
+        {
+          id: "allClients-check",
+          label:
+            'Значение переменной allClients - это массив ["Mango", "Ajax", "Poly", "Kiwi", "Peach", "Houston"]',
+          passed: passesTests && result.allClients[5] === "Houston",
+        },
+        {
+          id: "concat-check",
+          label:
+            "Змінній allClients присвоений масив після застосування методу concat з правильними аргументами",
+          passed: usesConcat && passesTests,
+        },
+      ];
+    },
+  },
+  "js-make-array": {
+    id: "js-make-array",
+    title: "Задача: композиция массивов",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию под названием <code>makeArray</code>, которая принимает три параметра: <code>firstArray</code> (массив), <code>secondArray</code> (массив) и <code>maxLength</code> (число). Функция должна создавать новый массив, который содержит все элементы из <code>firstArray</code>, а потом все элементы из <code>secondArray</code>.</p>
+      <ul class="list-disc">
+        <li>Если количество элементов в новом массиве превышает <code>maxLength</code>, функция должна вернуть копию массива с длиной <code>maxLength</code> элементов.</li>
+        <li>В противном случае, функция должна вернуть весь новый массив.</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>makeArray(firstArray, secondArray, maxLength)</code>.</p>
+      </div>
+    `,
+    initialCode: `function makeArray(firstArray, secondArray, maxLength) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+makeArray\s*\(\s*firstArray\s*,\s*secondArray\s*,\s*maxLength\s*\)/.test(
+          cleanCode,
+        );
+      const usesConcat =
+        /\.concat\s*\(/.test(cleanCode) || /\[\s*\.\.\./.test(cleanCode); // Allow concat or spread
+
+      let passesTests = false;
+      let result1: any,
+        result2: any,
+        result3: any,
+        result4: any,
+        result5: any,
+        result6: any;
+
+      try {
+        const userFn = new Function(code + "; return makeArray;")();
+        if (typeof userFn === "function") {
+          result1 = userFn(["Mango", "Poly"], ["Ajax", "Chelsea"], 3);
+          result2 = userFn(
+            ["Mango", "Poly", "Houston"],
+            ["Ajax", "Chelsea"],
+            4,
+          );
+          result3 = userFn(
+            ["Mango"],
+            ["Ajax", "Chelsea", "Poly", "Houston"],
+            3,
+          );
+          result4 = userFn(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2);
+          result5 = userFn(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4);
+          result6 = userFn(
+            ["Earth", "Jupiter"],
+            ["Neptune", "Uranus", "Venus"],
+            0,
+          );
+
+          if (
+            Array.isArray(result1) &&
+            result1.length === 3 &&
+            result1[2] === "Ajax" &&
+            Array.isArray(result2) &&
+            result2.length === 4 &&
+            result2[3] === "Ajax" &&
+            Array.isArray(result3) &&
+            result3.length === 3 &&
+            result3[2] === "Chelsea" &&
+            Array.isArray(result4) &&
+            result4.length === 2 &&
+            result4[1] === "Jupiter" &&
+            Array.isArray(result5) &&
+            result5.length === 4 &&
+            result5[3] === "Uranus" &&
+            Array.isArray(result6) &&
+            result6.length === 0
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label:
+            "Объявлена функция makeArray(firstArray, secondArray, maxLength)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов makeArray(["Mango", "Poly"], ["Ajax", "Chelsea"], 3) возвращает ["Mango", "Poly", "Ajax"]',
+          passed: passesTests && result1 && result1.length === 3,
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов makeArray(["Mango", "Poly", "Houston"], ["Ajax", "Chelsea"], 4) возвращает ["Mango", "Poly", "Houston", "Ajax"]',
+          passed: passesTests && result2 && result2.length === 4,
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов makeArray(["Mango"], ["Ajax", "Chelsea", "Poly", "Houston"], 3) возвращает ["Mango", "Ajax", "Chelsea"]',
+          passed: passesTests && result3 && result3.length === 3,
+        },
+        {
+          id: "test-4",
+          label:
+            'Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 2) возвращает ["Earth", "Jupiter"]',
+          passed: passesTests && result4 && result4.length === 2,
+        },
+        {
+          id: "test-5",
+          label:
+            'Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus"], 4) возвращает ["Earth", "Jupiter", "Neptune", "Uranus"]',
+          passed: passesTests && result5 && result5.length === 4,
+        },
+        {
+          id: "test-6",
+          label:
+            'Вызов makeArray(["Earth", "Jupiter"], ["Neptune", "Uranus", "Venus"], 0) возвращает []',
+          passed: passesTests && result6 && result6.length === 0,
+        },
+      ];
+    },
+  },
+  "js-for-loop-base": {
+    id: "js-for-loop-base",
+    title: "Цикл for",
+    type: "javascript",
+    description: `
+      <p>Циклы используются для многократного повторения кода. Объявление цикла <code>for</code> состоит из трех выражений.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">for (Инициализация; Условие; Пост-выражение) {
+  // Тело цикла
+}</code></pre>
+      </div>
+
+      <ul class="list-disc">
+        <li><strong>Инициализация</strong> - выполняется один раз перед началом цикла. Используется для создания переменной-счетчика и установки её начального значения.</li>
+        <li><strong>Условие</strong> - выражение, оцениваемое перед каждой итерацией (повторением) цикла. Тело цикла выполняется только тогда, когда выражение приводится к <code>true</code>. Цикл завершается, если значение будет <code>false</code>.</li>
+        <li><strong>Пост-выражение</strong> - выполняется в конце каждого повторения цикла, перед проверкой условия. Используется для обновления переменной-счетчика.</li>
+        <li><strong>Тело</strong> - набор инструкций для выполнения при каждом повторении. Выполняется, если выражение условия приводится к <code>true</code>.</li>
+      </ul>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">for (let i = 0; i <= 20; i += 5) {
+  console.log(i);
+}</code></pre>
+      </div>
+
+      <p>В примере объявляется переменная <code>i</code>, инициализируется значением <code>0</code>, и цикл выполняется (его тело) до тех пор, пока <code>i <= 20</code>, то есть условие приводится к <code>true</code>. После каждой итерации счетчик увеличивается на <code>5</code>.</p>
+
+      <div class="task-instruction">
+        <p>Дополни цикл <code>for</code> таким образом, чтобы он логировал все целые числа в диапазоне от <code>start</code> до <code>end</code> включительно.</p>
+      </div>
+    `,
+    initialCode: `const start = 3;
+const end = 7;
+
+for (let i = ; i <= ; i += ) { // Change this line
+  console.log(i);
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasForLoop =
+        /for\s*\(\s*let\s+i\s*=\s*start\s*;\s*i\s*<=\s*end\s*;\s*i\s*\+=\s*1\s*\)/.test(
+          cleanCode,
+        ) ||
+        /for\s*\(\s*let\s+i\s*=\s*start\s*;\s*i\s*<=\s*end\s*;\s*i\+\+\s*\)/.test(
+          cleanCode,
+        );
+
+      let logs: number[] = [];
+      const consoleLog = (val: any) => logs.push(val);
+
+      try {
+        const evalCode = `
+          const console = { log: ${consoleLog.toString()} };
+          ${code}
+        `;
+        new Function("console", code)({ log: (v: any) => logs.push(v) });
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      const passesTests = logs.length === 5 && logs[0] === 3 && logs[4] === 7;
+
+      return [
+        {
+          id: "start-check",
+          label: "Объявлена переменная start",
+          passed: /const\s+start\s*=\s*3/.test(cleanCode),
+        },
+        {
+          id: "end-check",
+          label: "Объявлена переменная end",
+          passed: /const\s+end\s*=\s*7/.test(cleanCode),
+        },
+        {
+          id: "loop-check",
+          label: "Использован цикл for",
+          passed: /for\s*\(/.test(cleanCode),
+        },
+        {
+          id: "init-check",
+          label: "Начальное значение переменной i равно start",
+          passed: /let\s+i\s*=\s*start/.test(cleanCode),
+        },
+        {
+          id: "condition-check",
+          label:
+            "Условие цикла приводится к true до тех пор, пока i меньше или равно end",
+          passed: /i\s*<=\s*end/.test(cleanCode),
+        },
+        {
+          id: "post-check",
+          label:
+            "На каждой итерации значение переменной i увеличивается на единицу",
+          passed: /i\s*\+=\s*1/.test(cleanCode) || /i\+\+/.test(cleanCode),
+        },
+        {
+          id: "log-check",
+          label: "Вывод в консоль переменной i покажет числа 3, 4, 5, 6, 7",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-calculate-total": {
+    id: "js-calculate-total",
+    title: "Сумма чисел (цикл for)",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>calculateTotal(number)</code>, которая принимает целое число (параметр <code>number</code>) и возвращает сумму всех целых чисел от единицы до этого числа. Например, если <code>number</code> равно <code>3</code>, то сумма - это <code>1 + 2 + 3</code>, то есть <code>6</code>.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>calculateTotal(number)</code>.</p>
+      </div>
+    `,
+    initialCode: `function calculateTotal(number) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasForLoop = /for\s*\(/.test(cleanCode);
+      const hasFunction = /function\s+calculateTotal\s*\(\s*number\s*\)/.test(
+        cleanCode,
+      );
+
+      let passesTests = false;
+      let result1, result2, result3, result4, result5;
+
+      try {
+        const userFn = new Function(code + "; return calculateTotal;")();
+        if (typeof userFn === "function") {
+          result1 = userFn(1);
+          result2 = userFn(3);
+          result3 = userFn(7);
+          result4 = userFn(18);
+          result5 = userFn(24);
+
+          if (
+            result1 === 1 &&
+            result2 === 6 &&
+            result3 === 28 &&
+            result4 === 171 &&
+            result5 === 300
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция calculateTotal(number)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Вызов calculateTotal(1) возвращает 1",
+          passed: passesTests && result1 === 1,
+        },
+        {
+          id: "test-3",
+          label: "Вызов calculateTotal(3) возвращает 6",
+          passed: passesTests && result2 === 6,
+        },
+        {
+          id: "test-7",
+          label: "Вызов calculateTotal(7) возвращает 28",
+          passed: passesTests && result3 === 28,
+        },
+        {
+          id: "test-18",
+          label: "Вызов calculateTotal(18) возвращает 171",
+          passed: passesTests && result4 === 171,
+        },
+        {
+          id: "test-24",
+          label: "Вызов calculateTotal(24) возвращает 300",
+          passed: passesTests && result5 === 300,
+        },
+        {
+          id: "loop-check",
+          label: "Функция использует цикл for",
+          passed: hasForLoop,
+        },
+      ];
+    },
+  },
+  "js-iterate-array": {
+    id: "js-iterate-array",
+    title: "Итерация по массиву",
+    type: "javascript",
+    description: `
+      <p>Цикл <code>for</code> можно использовать для итерации по массиву, то есть «перебрать» его поэлементно.</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+for (let i = 0; i < planets.length; i += 1) {
+  console.log(planets[i]);
+}</code></pre>
+      </div>
+
+      <p>Для доступа к элементам используется синтаксис квадратных скобок <code>массив[индекс]</code>, где <code>индекс</code> - это значение счетчика цикла от <code>0</code> и до <code>последнего индекса массива</code>, который на единицу меньше длины массива.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код цикла <code>for</code> таким образом, чтобы он последовательно логировал все элементы массива <code>fruits</code>.</p>
+      </div>
+    `,
+    initialCode: `const fruits = ['apple', 'plum', 'pear', 'orange'];
+
+for (let i = 0; i < fruits.length; i += 1) { // Change this line
+  const fruit = fruits[i]; // Change this line
+  console.log(fruit);
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      let logs: string[] = [];
+      const consoleLog = (val: any) => logs.push(val);
+
+      try {
+        const evalCode = `
+          const console = { log: ${consoleLog.toString()} };
+          ${code}
+        `;
+        new Function("console", code)({ log: (v: any) => logs.push(v) });
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      const passesTests =
+        logs.length === 4 && logs[0] === "apple" && logs[3] === "orange";
+
+      return [
+        {
+          id: "const-fruit-check",
+          label: "В цикле объявлена переменная const fruit",
+          passed: /const\s+fruit\s*=/.test(cleanCode),
+        },
+        {
+          id: "fruit-value-check",
+          label: "Переменной fruit присвоено значение элемента массива",
+          passed: /fruit\s*=\s*fruits\[i\]/.test(cleanCode),
+        },
+        {
+          id: "log-fruit-check",
+          label: "Вывод в консоль переменной fruit",
+          passed: /console\.log\(fruit\)/.test(cleanCode),
+        },
+        {
+          id: "loop-execution-check",
+          label: "Цикл логирует все элементы массива fruits",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-find-longest-word": {
+    id: "js-find-longest-word",
+    title: "Поиск самого длинного слова",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>findLongestWord(string)</code>, которая принимает произвольную строку, состоящую только из слов, разделенных пробелом (параметр <code>string</code>), и возвращает самое длинное слово в этой строке.</p>
+
+      <ul class="list-disc">
+        <li>Используй метод <code>split()</code> для разбиения строки на массив слов по разделителю пробела <code>(' ')</code>.</li>
+        <li>Инициализируй переменную <code>longestWord</code> первым словом из массива.</li>
+        <li>Пройдись по массиву слов с помощью цикла и сравнивай длину каждого слова с длиной <code>longestWord</code>. Если найдено слово, которое длиннее, обнови переменную <code>longestWord</code>.</li>
+        <li>Верни <code>longestWord</code>.</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>findLongestWord(string)</code>.</p>
+      </div>
+    `,
+    initialCode: `function findLongestWord(string) {
+  // Change code below this line
+  const words = string.split(' ');
+  let longestWord = words[0];
+
+  for (let i = 1; i < words.length; i += 1) {
+    if (words[i].length > longestWord.length) {
+      longestWord = words[i];
+    }
+  }
+
+  return longestWord;
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction = /function\s+findLongestWord\s*\(\s*string\s*\)/.test(
+        cleanCode,
+      );
+
+      let passesTests = false;
+      let result1, result2, result3;
+
+      try {
+        const userFn = new Function(code + "; return findLongestWord;")();
+        if (typeof userFn === "function") {
+          result1 = userFn("The quick brown fox jumped over the lazy dog");
+          result2 = userFn("Google do a roll");
+          result3 = userFn("May the force be with you");
+
+          if (
+            result1 === "jumped" &&
+            result2 === "Google" &&
+            result3 === "force"
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция findLongestWord(string)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label:
+            'Вызов функции findLongestWord("The quick brown fox jumped over the lazy dog") возвращает jumped',
+          passed: passesTests && result1 === "jumped",
+        },
+        {
+          id: "test-2",
+          label:
+            'Вызов функции findLongestWord("Google do a roll") возвращает Google',
+          passed: passesTests && result2 === "Google",
+        },
+        {
+          id: "test-3",
+          label:
+            'Вызов функции findLongestWord("May the force be with you") возвращает force',
+          passed: passesTests && result3 === "force",
+        },
+        {
+          id: "random-test",
+          label:
+            "Вызов функции findLongestWord() со случайной строкой возвращает правильное значение",
+          passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-create-array-of-numbers": {
+    id: "js-create-array-of-numbers",
+    title: "Создание массива чисел",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>createArrayOfNumbers(min, max)</code>, которая принимает два параметра: <code>min</code> и <code>max</code>. Функция должна возвращать массив всех целых чисел от <code>min</code> до <code>max</code> включительно.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>createArrayOfNumbers(min, max)</code>.</p>
+      </div>
+    `,
+    initialCode: `function createArrayOfNumbers(min, max) {
+  const numbers = [];
+  // Change code below this line
+
+  // Change code above this line
+  return numbers;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasForLoop = /for\s*\(/.test(cleanCode);
+      const hasFunction =
+        /function\s+createArrayOfNumbers\s*\(\s*min\s*,\s*max\s*\)/.test(
+          cleanCode,
+        );
+
+      let passesTests = false;
+      let result1, result2, result3, result4;
+
+      try {
+        const userFn = new Function(code + "; return createArrayOfNumbers;")();
+        if (typeof userFn === "function") {
+          result1 = userFn(1, 3);
+          result2 = userFn(14, 17);
+          result3 = userFn(29, 34);
+          result4 = userFn(1, 1);
+
+          if (
+            JSON.stringify(result1) === JSON.stringify([1, 2, 3]) &&
+            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]) &&
+            JSON.stringify(result3) ===
+              JSON.stringify([29, 30, 31, 32, 33, 34]) &&
+            JSON.stringify(result4) === JSON.stringify([1])
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция createArrayOfNumbers(min, max)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Вызов createArrayOfNumbers(1, 3) возвращает [1, 2, 3]",
+          passed:
+            passesTests &&
+            JSON.stringify(result1) === JSON.stringify([1, 2, 3]),
+        },
+        {
+          id: "test-2",
+          label:
+            "Вызов createArrayOfNumbers(14, 17) возвращает [14, 15, 16, 17]",
+          passed:
+            passesTests &&
+            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]),
+        },
+        {
+          id: "test-3",
+          label:
+            "Вызов createArrayOfNumbers(29, 34) возвращает [29, 30, 31, 32, 33, 34]",
+          passed:
+            passesTests &&
+            JSON.stringify(result3) ===
+              JSON.stringify([29, 30, 31, 32, 33, 34]),
+        },
+        {
+          id: "test-4",
+          label: "Вызов createArrayOfNumbers(1, 1) возвращает [1]",
+          passed: passesTests && JSON.stringify(result4) === JSON.stringify([1]),
+        },
+        {
+          id: "loop-check",
+          label: "Функция использует цикл for",
+          passed: hasForLoop,
+        },
+      ];
+    },
+  },
+  "js-filter-array": {
+    id: "js-filter-array",
+    title: "Фильтрация массива чисел",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>filterArray(numbers, value)</code>, которая принимает массив чисел (<code>numbers</code>) и значение (<code>value</code>) как параметры. Внутри функции:</p>
+
+      <ul class="list-disc">
+        <li>Создай пустой массив <code>newArray</code>.</li>
+        <li>Используй цикл <code>for</code> для итерации каждого элемента массива <code>numbers</code>.</li>
+        <li>Добавь условный оператор <code>if</code> внутри цикла для проверки, является ли текущий элемент больше чем <code>value</code>.</li>
+        <li>Если да, используй метод <code>push</code> для добавления элемента в <code>newArray</code>.</li>
+        <li>Верни <code>newArray</code> как результат.</li>
+      </ul>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>filterArray(numbers, value)</code>.</p>
+      </div>
+    `,
+    initialCode: `function filterArray(numbers, value) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasForLoop = /for\s*\(/.test(cleanCode);
+      const hasPush = /\.push\s*\(/.test(cleanCode);
+      const hasFunction = /function\s+filterArray\s*\(\s*numbers\s*,\s*value\s*\)/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3, result4, result5;
+
+      try {
+        const userFn = new Function(code + "; return filterArray;")();
+        if (typeof userFn === "function") {
+          result1 = userFn([1, 2, 3, 4, 5], 3);
+          result2 = userFn([1, 2, 3, 4, 5], 4);
+          result3 = userFn([1, 2, 3, 4, 5], 5);
+          result4 = userFn([12, 24, 8, 41, 76], 38);
+          result5 = userFn([12, 24, 8, 41, 76], 20);
+
+          if (
+            JSON.stringify(result1) === JSON.stringify([4, 5]) &&
+            JSON.stringify(result2) === JSON.stringify([5]) &&
+            JSON.stringify(result3) === JSON.stringify([]) &&
+            JSON.stringify(result4) === JSON.stringify([41, 76]) &&
+            JSON.stringify(result5) === JSON.stringify([24, 41, 76])
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция filterArray(numbers, value)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Вызов filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]",
+          passed: passesTests && JSON.stringify(result1) === JSON.stringify([4, 5]),
+        },
+        {
+          id: "test-2",
+          label: "Вызов filterArray([1, 2, 3, 4, 5], 4) возвращает [5]",
+          passed: passesTests && JSON.stringify(result2) === JSON.stringify([5]),
+        },
+        {
+          id: "test-3",
+          label: "Вызов filterArray([1, 2, 3, 4, 5], 5) возвращает []",
+          passed: passesTests && JSON.stringify(result3) === JSON.stringify([]),
+        },
+        {
+          id: "test-4",
+          label: "Вызов filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]",
+          passed: passesTests && JSON.stringify(result4) === JSON.stringify([41, 76]),
+        },
+        {
+          id: "test-5",
+          label: "Вызов filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]",
+          passed: passesTests && JSON.stringify(result5) === JSON.stringify([24, 41, 76]),
+        },
+        {
+          id: "push-check",
+          label: "В цикле for использовался метод push",
+          passed: hasPush && hasForLoop,
+        },
+      ];
+    },
+  },
+  "js-check-fruit": {
+    id: "js-check-fruit",
+    title: "Проверка наличия фрукта",
+    type: "javascript",
+    description: `
+      <p>Метод <code>includes(value)</code> проверяет, присутствует ли в массиве элемент со значением <code>value</code>, и возвращает <code>true</code> или <code>false</code> соответственно. Область применения этого метода сводится к ситуациям, когда необходимо проверить, присутствует ли элемент в массиве, и не важна его позиция (индекс).</p>
+
+      <div class="bg-slate-900 rounded-lg p-4 my-4">
+        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+console.log(planets.includes("Earth")); // true
+console.log(planets.includes("Mars")); // true
+console.log(planets.includes("Venus")); // true
+console.log(planets.includes("Jupiter")); // false</code></pre>
+      </div>
+
+      <p>Функция <code>checkFruit(fruit)</code> принимает строку с названием фрукта (параметр <code>fruit</code>), и проверяет, присутствует ли такой фрукт в массиве <code>fruits</code>.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код функции таким образом, что если:</p>
+        <ul class="list-disc">
+          <li>фрукт присутствует в массиве, то функция возвращает <code>true</code>;</li>
+          <li>фрукт отсутствует в массиве, то функция возвращает <code>false</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkFruit(fruit) {
+  const fruits = ["apple", "plum", "pear", "orange"];
+
+  return fruits.includes(fruit); // Change this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
+      const hasFunction = /function\s+checkFruit\s*\(\s*fruit\s*\)/.test(cleanCode);
+
+      let passesTests = false;
+      let result1, result2, result3, result4, result5;
+
+      try {
+        const userFn = new Function(code + "; return checkFruit;")();
+        if (typeof userFn === "function") {
+          result1 = userFn("plum");
+          result2 = userFn("mandarin");
+          result3 = userFn("pear");
+          result4 = userFn("Pear");
+          result5 = userFn("apple");
+
+          if (
+            result1 === true &&
+            result2 === false &&
+            result3 === true &&
+            result4 === false &&
+            result5 === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция checkFruit(fruit)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: 'Вызов checkFruit("plum") возвращает true',
+          passed: passesTests && result1 === true,
+        },
+        {
+          id: "test-2",
+          label: 'Вызов checkFruit("mandarin") возвращает false',
+          passed: passesTests && result2 === false,
+        },
+        {
+          id: "test-3",
+          label: 'Вызов checkFruit("pear") возвращает true',
+          passed: passesTests && result3 === true,
+        },
+        {
+          id: "test-4",
+          label: 'Вызов checkFruit("Pear") возвращает false',
+          passed: passesTests && result4 === false,
+        },
+        {
+          id: "test-5",
+          label: 'Вызов checkFruit("apple") возвращает true',
+          passed: passesTests && result5 === true,
+        },
+        {
+          id: "includes-check",
+          label: "В функции использовался метод includes",
+          passed: hasIncludes,
+        },
+      ];
+    },
+  },
 };
+
