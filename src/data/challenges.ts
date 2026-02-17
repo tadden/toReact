@@ -1907,7 +1907,8 @@ console.log(planets.includes("Jupiter")); // false</code></pre>
           const r4 = userFn([10, 20, 30, 40], [4, 30, 17, 10, 40]);
           const r5 = userFn([1, 2, 3], [10, 20, 30]);
 
-          const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+          const eq = (a: unknown, b: unknown) =>
+            JSON.stringify(a) === JSON.stringify(b);
 
           if (
             eq(r1, [2]) &&
@@ -6288,102 +6289,6 @@ for (let i = 0; i < planets.length; i += 1) {
           label:
             "Вызов функции findLongestWord() со случайной строкой возвращает правильное значение",
           passed: passesTests,
-        },
-      ];
-    },
-  },
-  "js-create-array-of-numbers": {
-    id: "js-create-array-of-numbers",
-    title: "Создание массива чисел",
-    type: "javascript",
-    description: `
-      <p>Напиши функцию <code>createArrayOfNumbers(min, max)</code>, которая принимает два параметра: <code>min</code> и <code>max</code>. Функция должна возвращать массив всех целых чисел от <code>min</code> до <code>max</code> включительно.</p>
-
-      <div class="task-instruction">
-        <p>Дополни код функции <code>createArrayOfNumbers(min, max)</code>.</p>
-      </div>
-    `,
-    initialCode: `function createArrayOfNumbers(min, max) {
-  const numbers = [];
-  // Change code below this line
-
-  // Change code above this line
-  return numbers;
-}
-`,
-    checks: (code) => {
-      const cleanCode = code.replace(/\s+/g, " ");
-      const hasForLoop = /for\s*\(/.test(cleanCode);
-      const hasFunction =
-        /function\s+createArrayOfNumbers\s*\(\s*min\s*,\s*max\s*\)/.test(
-          cleanCode,
-        );
-
-      let passesTests = false;
-      let result1, result2, result3, result4;
-
-      try {
-        const userFn = new Function(code + "; return createArrayOfNumbers;")();
-        if (typeof userFn === "function") {
-          result1 = userFn(1, 3);
-          result2 = userFn(14, 17);
-          result3 = userFn(29, 34);
-          result4 = userFn(1, 1);
-
-          if (
-            JSON.stringify(result1) === JSON.stringify([1, 2, 3]) &&
-            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]) &&
-            JSON.stringify(result3) ===
-              JSON.stringify([29, 30, 31, 32, 33, 34]) &&
-            JSON.stringify(result4) === JSON.stringify([1])
-          ) {
-            passesTests = true;
-          }
-        }
-      } catch (e) {
-        console.error("Test execution failed:", e);
-      }
-
-      return [
-        {
-          id: "function-declared",
-          label: "Объявлена функция createArrayOfNumbers(min, max)",
-          passed: hasFunction,
-        },
-        {
-          id: "test-1",
-          label: "Вызов createArrayOfNumbers(1, 3) возвращает [1, 2, 3]",
-          passed:
-            passesTests &&
-            JSON.stringify(result1) === JSON.stringify([1, 2, 3]),
-        },
-        {
-          id: "test-2",
-          label:
-            "Вызов createArrayOfNumbers(14, 17) возвращает [14, 15, 16, 17]",
-          passed:
-            passesTests &&
-            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]),
-        },
-        {
-          id: "test-3",
-          label:
-            "Вызов createArrayOfNumbers(29, 34) возвращает [29, 30, 31, 32, 33, 34]",
-          passed:
-            passesTests &&
-            JSON.stringify(result3) ===
-              JSON.stringify([29, 30, 31, 32, 33, 34]),
-        },
-        {
-          id: "test-4",
-          label: "Вызов createArrayOfNumbers(1, 1) возвращает [1]",
-          passed:
-            passesTests && JSON.stringify(result4) === JSON.stringify([1]),
-        },
-        {
-          id: "loop-check",
-          label: "Функция использует цикл for",
-          passed: hasForLoop,
         },
       ];
     },
