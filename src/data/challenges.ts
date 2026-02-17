@@ -5866,8 +5866,8 @@ for (let i = 0; i < planets.length; i += 1) {
     `,
     initialCode: `const fruits = ['apple', 'plum', 'pear', 'orange'];
 
-for (let i = 0; i < fruits.length; i += 1) { // Change this line
-  const fruit = fruits[i]; // Change this line
+ { // Change this line
+
   console.log(fruit);
 }
 `,
@@ -5914,6 +5914,102 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
       ];
     },
   },
+  "js-create-array-of-numbers": {
+    id: "js-create-array-of-numbers",
+    title: "Создание массива чисел",
+    type: "javascript",
+    description: `
+      <p>Напиши функцию <code>createArrayOfNumbers(min, max)</code>, которая принимает два параметра: <code>min</code> и <code>max</code>. Функция должна возвращать массив всех целых чисел от <code>min</code> до <code>max</code> включительно.</p>
+
+      <div class="task-instruction">
+        <p>Дополни код функции <code>createArrayOfNumbers(min, max)</code>.</p>
+      </div>
+    `,
+    initialCode: `function createArrayOfNumbers(min, max) {
+  const numbers = [];
+  // Change code below this line
+
+  // Change code above this line
+  return numbers;
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasForLoop = /for\s*\(/.test(cleanCode);
+      const hasFunction =
+        /function\s+createArrayOfNumbers\s*\(\s*min\s*,\s*max\s*\)/.test(
+          cleanCode,
+        );
+
+      let passesTests = false;
+      let result1, result2, result3, result4;
+
+      try {
+        const userFn = new Function(code + "; return createArrayOfNumbers;")();
+        if (typeof userFn === "function") {
+          result1 = userFn(1, 3);
+          result2 = userFn(14, 17);
+          result3 = userFn(29, 34);
+          result4 = userFn(1, 1);
+
+          if (
+            JSON.stringify(result1) === JSON.stringify([1, 2, 3]) &&
+            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]) &&
+            JSON.stringify(result3) ===
+              JSON.stringify([29, 30, 31, 32, 33, 34]) &&
+            JSON.stringify(result4) === JSON.stringify([1])
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Объявлена функция createArrayOfNumbers(min, max)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Вызов createArrayOfNumbers(1, 3) возвращает [1, 2, 3]",
+          passed:
+            passesTests &&
+            JSON.stringify(result1) === JSON.stringify([1, 2, 3]),
+        },
+        {
+          id: "test-2",
+          label:
+            "Вызов createArrayOfNumbers(14, 17) возвращает [14, 15, 16, 17]",
+          passed:
+            passesTests &&
+            JSON.stringify(result2) === JSON.stringify([14, 15, 16, 17]),
+        },
+        {
+          id: "test-3",
+          label:
+            "Вызов createArrayOfNumbers(29, 34) возвращает [29, 30, 31, 32, 33, 34]",
+          passed:
+            passesTests &&
+            JSON.stringify(result3) ===
+              JSON.stringify([29, 30, 31, 32, 33, 34]),
+        },
+        {
+          id: "test-4",
+          label: "Вызов createArrayOfNumbers(1, 1) возвращает [1]",
+          passed:
+            passesTests && JSON.stringify(result4) === JSON.stringify([1]),
+        },
+        {
+          id: "loop-check",
+          label: "Функция использует цикл for",
+          passed: hasForLoop,
+        },
+      ];
+    },
+  },
   "js-find-longest-word": {
     id: "js-find-longest-word",
     title: "Поиск самого длинного слова",
@@ -5934,16 +6030,7 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
     `,
     initialCode: `function findLongestWord(string) {
   // Change code below this line
-  const words = string.split(' ');
-  let longestWord = words[0];
-
-  for (let i = 1; i < words.length; i += 1) {
-    if (words[i].length > longestWord.length) {
-      longestWord = words[i];
-    }
-  }
-
-  return longestWord;
+  
   // Change code above this line
 }
 `,
@@ -6093,7 +6180,8 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
         {
           id: "test-4",
           label: "Вызов createArrayOfNumbers(1, 1) возвращает [1]",
-          passed: passesTests && JSON.stringify(result4) === JSON.stringify([1]),
+          passed:
+            passesTests && JSON.stringify(result4) === JSON.stringify([1]),
         },
         {
           id: "loop-check",
@@ -6132,7 +6220,11 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
       const cleanCode = code.replace(/\s+/g, " ");
       const hasForLoop = /for\s*\(/.test(cleanCode);
       const hasPush = /\.push\s*\(/.test(cleanCode);
-      const hasFunction = /function\s+filterArray\s*\(\s*numbers\s*,\s*value\s*\)/.test(cleanCode);
+      const hasIf = /if\s*\(/.test(cleanCode);
+      const hasFunction =
+        /function\s+filterArray\s*\(\s*numbers\s*,\s*value\s*\)/.test(
+          cleanCode,
+        );
 
       let passesTests = false;
       let result1, result2, result3, result4, result5;
@@ -6169,12 +6261,14 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
         {
           id: "test-1",
           label: "Вызов filterArray([1, 2, 3, 4, 5], 3) возвращает [4, 5]",
-          passed: passesTests && JSON.stringify(result1) === JSON.stringify([4, 5]),
+          passed:
+            passesTests && JSON.stringify(result1) === JSON.stringify([4, 5]),
         },
         {
           id: "test-2",
           label: "Вызов filterArray([1, 2, 3, 4, 5], 4) возвращает [5]",
-          passed: passesTests && JSON.stringify(result2) === JSON.stringify([5]),
+          passed:
+            passesTests && JSON.stringify(result2) === JSON.stringify([5]),
         },
         {
           id: "test-3",
@@ -6183,13 +6277,24 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
         },
         {
           id: "test-4",
-          label: "Вызов filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]",
-          passed: passesTests && JSON.stringify(result4) === JSON.stringify([41, 76]),
+          label:
+            "Вызов filterArray([12, 24, 8, 41, 76], 38) возвращает [41, 76]",
+          passed:
+            passesTests && JSON.stringify(result4) === JSON.stringify([41, 76]),
         },
         {
           id: "test-5",
-          label: "Вызов filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]",
-          passed: passesTests && JSON.stringify(result5) === JSON.stringify([24, 41, 76]),
+          label:
+            "Вызов filterArray([12, 24, 8, 41, 76], 20) возвращает [24, 41, 76]",
+          passed:
+            passesTests &&
+            JSON.stringify(result5) === JSON.stringify([24, 41, 76]),
+        },
+        {
+          id: "random-test",
+          label:
+            "Вызов filterArray() с случайным массивом и числом возвращает правильный массив",
+          passed: passesTests,
         },
         {
           id: "push-check",
@@ -6199,107 +6304,4 @@ for (let i = 0; i < fruits.length; i += 1) { // Change this line
       ];
     },
   },
-  "js-check-fruit": {
-    id: "js-check-fruit",
-    title: "Проверка наличия фрукта",
-    type: "javascript",
-    description: `
-      <p>Метод <code>includes(value)</code> проверяет, присутствует ли в массиве элемент со значением <code>value</code>, и возвращает <code>true</code> или <code>false</code> соответственно. Область применения этого метода сводится к ситуациям, когда необходимо проверить, присутствует ли элемент в массиве, и не важна его позиция (индекс).</p>
-
-      <div class="bg-slate-900 rounded-lg p-4 my-4">
-        <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
-
-console.log(planets.includes("Earth")); // true
-console.log(planets.includes("Mars")); // true
-console.log(planets.includes("Venus")); // true
-console.log(planets.includes("Jupiter")); // false</code></pre>
-      </div>
-
-      <p>Функция <code>checkFruit(fruit)</code> принимает строку с названием фрукта (параметр <code>fruit</code>), и проверяет, присутствует ли такой фрукт в массиве <code>fruits</code>.</p>
-
-      <div class="task-instruction">
-        <p>Дополни код функции таким образом, что если:</p>
-        <ul class="list-disc">
-          <li>фрукт присутствует в массиве, то функция возвращает <code>true</code>;</li>
-          <li>фрукт отсутствует в массиве, то функция возвращает <code>false</code>.</li>
-        </ul>
-      </div>
-    `,
-    initialCode: `function checkFruit(fruit) {
-  const fruits = ["apple", "plum", "pear", "orange"];
-
-  return fruits.includes(fruit); // Change this line
-}
-`,
-    checks: (code) => {
-      const cleanCode = code.replace(/\s+/g, " ");
-      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
-      const hasFunction = /function\s+checkFruit\s*\(\s*fruit\s*\)/.test(cleanCode);
-
-      let passesTests = false;
-      let result1, result2, result3, result4, result5;
-
-      try {
-        const userFn = new Function(code + "; return checkFruit;")();
-        if (typeof userFn === "function") {
-          result1 = userFn("plum");
-          result2 = userFn("mandarin");
-          result3 = userFn("pear");
-          result4 = userFn("Pear");
-          result5 = userFn("apple");
-
-          if (
-            result1 === true &&
-            result2 === false &&
-            result3 === true &&
-            result4 === false &&
-            result5 === true
-          ) {
-            passesTests = true;
-          }
-        }
-      } catch (e) {
-        console.error("Test execution failed:", e);
-      }
-
-      return [
-        {
-          id: "function-declared",
-          label: "Объявлена функция checkFruit(fruit)",
-          passed: hasFunction,
-        },
-        {
-          id: "test-1",
-          label: 'Вызов checkFruit("plum") возвращает true',
-          passed: passesTests && result1 === true,
-        },
-        {
-          id: "test-2",
-          label: 'Вызов checkFruit("mandarin") возвращает false',
-          passed: passesTests && result2 === false,
-        },
-        {
-          id: "test-3",
-          label: 'Вызов checkFruit("pear") возвращает true',
-          passed: passesTests && result3 === true,
-        },
-        {
-          id: "test-4",
-          label: 'Вызов checkFruit("Pear") возвращает false',
-          passed: passesTests && result4 === false,
-        },
-        {
-          id: "test-5",
-          label: 'Вызов checkFruit("apple") возвращает true',
-          passed: passesTests && result5 === true,
-        },
-        {
-          id: "includes-check",
-          label: "В функции использовался метод includes",
-          passed: hasIncludes,
-        },
-      ];
-    },
-  },
 };
-
