@@ -95,6 +95,7 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  min-width: 0; /* Changed */
 }
 
 .tabs {
@@ -127,6 +128,7 @@
   flex: 1;
   padding: 1.5rem;
   overflow-y: auto;
+  min-width: 0; /* Changed */
   color: #334155;
   font-size: 0.95rem;
   line-height: 1.6;

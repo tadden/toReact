@@ -48,6 +48,8 @@ export const javascriptCourse = {
               "js-is-adult",
               "js-is-valid-password",
               "js-check-age",
+              "js-check-fruit",
+              "js-get-common-elements",
               "js-check-storage",
               "js-combined-assignment",
               "js-check-balance",

@@ -1401,57 +1401,39 @@ console.log(add(5, 10, 15));
 
   "js-calculate-total-price": {
     id: "js-calculate-total-price",
-    title: "Базовые математические операции",
+    title: "Подсчет суммы покупки",
     type: "javascript",
     description: `
-      <p>Функция <code>calculateTotalPrice</code> считает и возвращает общую сумму покупки на основе количества товаров в заказе и цены за единицу товара. Она принимает два параметра, значения которых будут задаваться во время её вызова.</p>
-      
-      <ul class="list-disc">
-        <li><code>orderedQuantity</code> - количество единиц товара в заказе</li>
-        <li><code>pricePerItem</code> - цена за единицу товара</li>
-      </ul>
+      <p>Напиши функцию <code>calculateTotalPrice(order)</code>, которая принимает один параметр <code>order</code> - массив чисел, и считывает общую сумму его элементов.</p>
 
       <div class="task-instruction">
-        <p>Дополни код функции так, чтобы общая сумма покупки была присвоена переменной <code>totalPrice</code>. Загальная сума покупки получается путем умножения количества заказанных товаров на цену единицы.</p>
+        <p>Дополни код функции так, чтобы в переменную <code>total</code> записывалась общая сумма элементов массива <code>order</code>.</p>
       </div>
     `,
-    initialCode: `function calculateTotalPrice (orderedQuantity, pricePerItem) {
+    initialCode: `function calculateTotalPrice(order) {
+  let total = 0;
   // Change code below this line
-  const totalPrice = orderedQuantity + pricePerItem;
 
   // Change code above this line
-  return totalPrice;
-};
+  return total;
+}
 `,
     checks: (code) => {
       const cleanCode = code.replace(/\s+/g, " ");
 
       const hasFunction =
-        /function\s+calculateTotalPrice\s*\(\s*orderedQuantity\s*,\s*pricePerItem\s*\)/.test(
-          cleanCode,
-        );
-      const hasMultiplication =
-        /orderedQuantity\s*\*\s*pricePerItem/.test(cleanCode) ||
-        /pricePerItem\s*\*\s*orderedQuantity/.test(cleanCode);
+        /function\s+calculateTotalPrice\s*\(\s*order\s*\)/.test(cleanCode);
+      const hasForLoop = /for\s*\(/.test(cleanCode);
 
       let passesTests = false;
       try {
-        // Dynamic execution to check values
         const userFn = new Function(code + "; return calculateTotalPrice;")();
         if (typeof userFn === "function") {
-          const r1 = userFn(5, 100);
-          const r2 = userFn(8, 60);
-          const r3 = userFn(3, 400);
-          const r4 = userFn(1, 3500);
-          const r5 = userFn(12, 70);
+          const r1 = userFn([12, 85, 37, 4]);
+          const r2 = userFn([164, 48, 291]);
+          const r3 = userFn([412, 371, 94, 63, 176]);
 
-          if (
-            r1 === 500 &&
-            r2 === 480 &&
-            r3 === 1200 &&
-            r4 === 3500 &&
-            r5 === 840
-          ) {
+          if (r1 === 138 && r2 === 503 && r3 === 1116) {
             passesTests = true;
           }
         }
@@ -1462,39 +1444,34 @@ console.log(add(5, 10, 15));
       return [
         {
           id: "function-declared",
-          label:
-            "Объявлена функция calculateTotalPrice(orderedQuantity, pricePerItem)",
+          label: "Объявлена функция calculateTotalPrice(order)",
           passed: hasFunction,
         },
         {
+          id: "for-loop-used",
+          label: "Использован цикл for",
+          passed: hasForLoop,
+        },
+        {
           id: "test-1",
-          label: "Вызов calculateTotalPrice(5, 100) возвращает 500",
+          label: "Вызов calculateTotalPrice([12, 85, 37, 4]) возвращает 138",
           passed: passesTests,
         },
         {
           id: "test-2",
-          label: "Вызов calculateTotalPrice(8, 60) возвращает 480",
+          label: "Вызов calculateTotalPrice([164, 48, 291]) возвращает 503",
           passed: passesTests,
         },
         {
           id: "test-3",
-          label: "Вызов calculateTotalPrice(3, 400) возвращает 1200",
-          passed: passesTests,
-        },
-        {
-          id: "test-4",
-          label: "Вызов calculateTotalPrice(1, 3500) возвращает 3500",
-          passed: passesTests,
-        },
-        {
-          id: "test-5",
-          label: "Вызов calculateTotalPrice(12, 70) возвращает 840",
+          label:
+            "Вызов calculateTotalPrice([412, 371, 94, 63, 176]) возвращает 1116",
           passed: passesTests,
         },
         {
           id: "test-random",
           label:
-            "Вызов функции со случайными, но валидными аргументами, возвращает правильное значение",
+            "Вызов функции со случайным массивом возвращает правильную сумму",
           passed: passesTests,
         },
       ];
@@ -1771,6 +1748,226 @@ console.log(1 !== true); // true</code></pre>
           id: "test-true",
           label: "Вызов isValidPassword('jqueryismyjam') возвращает true",
           passed: passesTests,
+        },
+      ];
+    },
+  },
+  "js-check-fruit": {
+    id: "js-check-fruit",
+    title: "Метод includes()",
+    type: "javascript",
+    description: `
+      <p>Метод <code>includes(value)</code> перевіряє, чи присутній в масиві елемент зі значенням <code>value</code>, і повертає <code>true</code> або <code>false</code> відповідно. Сфера застосування цього методу зводиться до ситуацій, коли необхідно перевірити, чи присутній елемент в масиві, і не важлива його позиція (індекс).</p>
+
+      <pre class="challenge-code-block"><code class="language-javascript">const planets = ["Earth", "Mars", "Venus"];
+
+console.log(planets.includes("Earth")); // true
+console.log(planets.includes("Mars")); // true
+console.log(planets.includes("Venus")); // true
+console.log(planets.includes("Jupiter")); // false</code></pre>
+
+      <div class="task-instruction">
+        <p>Функція <code>checkFruit(fruit)</code> приймає рядок з назвою фрукта (параметр <code>fruit</code>), і перевіряє, чи присутній такий фрукт в масиві <code>fruits</code>.</p>
+
+        <p>Доповни код функції таким чином, що якщо:</p>
+        <ul class="list-disc">
+          <li>фрукт присутній в масиві, то функція повертає <code>true</code>;</li>
+          <li>фрукт відсутній в масиві, то функція повертає <code>false</code>.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function checkFruit(fruit) {
+  const fruits = ["apple", "plum", "pear", "orange"];
+
+  return ; // Change this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+
+      const hasFunction = /function\s+checkFruit\s*\(\s*fruit\s*\)/.test(
+        cleanCode,
+      );
+      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return checkFruit;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn("plum");
+          const r2 = userFn("mandarin");
+          const r3 = userFn("pear");
+          const r4 = userFn("Pear");
+          const r5 = userFn("apple");
+
+          if (
+            r1 === true &&
+            r2 === false &&
+            r3 === true &&
+            r4 === false &&
+            r5 === true
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Оголошена функція checkFruit(fruit)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-plum",
+          label: 'Виклик checkFruit("plum") повертає true',
+          passed: passesTests,
+        },
+        {
+          id: "test-mandarin",
+          label: 'Виклик checkFruit("mandarin") повертає false',
+          passed: passesTests,
+        },
+        {
+          id: "test-pear",
+          label: 'Виклик checkFruit("pear") повертає true',
+          passed: passesTests,
+        },
+        {
+          id: "test-Pear",
+          label: 'Виклик checkFruit("Pear") повертає false',
+          passed: passesTests,
+        },
+        {
+          id: "test-apple",
+          label: 'Виклик checkFruit("apple") повертає true',
+          passed: passesTests,
+        },
+        {
+          id: "test-random",
+          label:
+            "Виклик функції checkFruit() з випадковим словом повертає правильне значення boolean",
+          passed: passesTests,
+        },
+        {
+          id: "includes-used",
+          label: "У функції використовувався метод includes",
+          passed: hasIncludes,
+        },
+      ];
+    },
+  },
+  "js-get-common-elements": {
+    id: "js-get-common-elements",
+    title: "Спільні елементи",
+    type: "javascript",
+    description: `
+      <p>Спільними елементами масивів називають ті елементи, які присутні у всіх масивах.</p>
+
+      <p>Наприклад, у двох масивах <code>[1, 3, 5]</code> і <code>[0, 8, 5, 3]</code> спільними будуть числа <code>3</code> і <code>5</code>, оскільки вони присутні в обох вихідних масивах. А числа <code>0</code>, <code>1</code> і <code>8</code> присутні тільки в одному з масивів.</p>
+
+      <div class="task-instruction">
+        <p>Доповни код функції <code>getCommonElements(array1, array2)</code>, яка приймає два масиви (<code>array1</code> та <code>array2</code>) довільної довжини в якості параметрів.</p>
+
+        <p>Усередині функції:</p>
+        <ul class="list-disc">
+          <li>Створи порожній масив з назвою <code>newArray</code>.</li>
+          <li>Використай цикл <code>for</code> для ітерації кожного елемента у <code>array1</code>.</li>
+          <li>У середині циклу перевір, чи поточний елемент існує у <code>array2</code> за допомогою методу <code>includes</code>.</li>
+          <li>Якщо він існує, додай елемент до <code>newArray</code> за допомогою методу <code>push</code>.</li>
+          <li>Поверни <code>newArray</code> як результат.</li>
+        </ul>
+      </div>
+    `,
+    initialCode: `function getCommonElements(array1, array2) {
+  // Change code below this line
+
+  // Change code above this line
+}
+`,
+    checks: (code) => {
+      const cleanCode = code.replace(/\s+/g, " ");
+      const hasFunction =
+        /function\s+getCommonElements\s*\(\s*array1\s*,\s*array2\s*\)/.test(
+          cleanCode,
+        );
+      const hasForLoop = /for\s*\(/.test(cleanCode);
+      const hasIncludes = /\.includes\s*\(/.test(cleanCode);
+      const hasPush = /\.push\s*\(/.test(cleanCode);
+
+      let passesTests = false;
+      try {
+        const userFn = new Function(code + "; return getCommonElements;")();
+        if (typeof userFn === "function") {
+          const r1 = userFn([1, 2, 3], [2, 4]);
+          const r2 = userFn([1, 2, 3], [2, 1, 17, 19]);
+          const r3 = userFn([24, 12, 27, 3], [12, 8, 3, 36, 27]);
+          const r4 = userFn([10, 20, 30, 40], [4, 30, 17, 10, 40]);
+          const r5 = userFn([1, 2, 3], [10, 20, 30]);
+
+          const eq = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+
+          if (
+            eq(r1, [2]) &&
+            eq(r2, [1, 2]) &&
+            eq(r3, [12, 27, 3]) &&
+            eq(r4, [10, 30, 40]) &&
+            eq(r5, [])
+          ) {
+            passesTests = true;
+          }
+        }
+      } catch (e) {
+        console.error("Test execution failed:", e);
+      }
+
+      return [
+        {
+          id: "function-declared",
+          label: "Оголошена функція getCommonElements(array1, array2)",
+          passed: hasFunction,
+        },
+        {
+          id: "test-1",
+          label: "Виклик getCommonElements([1, 2, 3], [2, 4]) повертає [2]",
+          passed: passesTests,
+        },
+        {
+          id: "test-2",
+          label:
+            "Виклик getCommonElements([1, 2, 3], [2, 1, 17, 19]) повертає [1, 2]",
+          passed: passesTests,
+        },
+        {
+          id: "test-3",
+          label:
+            "Виклик getCommonElements([24, 12, 27, 3], [12, 8, 3, 36, 27]) повертає [12, 27, 3]",
+          passed: passesTests,
+        },
+        {
+          id: "test-4",
+          label:
+            "Виклик getCommonElements([10, 20, 30, 40], [4, 30, 17, 10, 40]) повертає [10, 30, 40]",
+          passed: passesTests,
+        },
+        {
+          id: "test-5",
+          label:
+            "Виклик getCommonElements([1, 2, 3], [10, 20, 30]) повертає []",
+          passed: passesTests,
+        },
+        {
+          id: "test-random",
+          label:
+            "Виклик функції getCommonElements() з випадковими двома масивами повертає правильний масив",
+          passed: passesTests,
+        },
+        {
+          id: "methods-used",
+          label: "В циклі for використовувалися методи includes і push",
+          passed: hasForLoop && hasIncludes && hasPush,
         },
       ];
     },
