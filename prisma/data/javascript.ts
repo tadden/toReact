@@ -2767,5 +2767,28 @@ foo();</code></pre>
         },
       ],
     },
+    {
+      slug: "module-3-objects",
+      title: "Модуль 3. Объекты",
+      description: "Объекты",
+      order: 2,
+      videoUrl: null,
+      resources: [],
+      homework: {
+        id: "js-objects-hw",
+        title: "Домашнее задание: Объекты",
+        description:
+          "Выполните интерактивные задания для закрепления материала.",
+        acceptanceCriteria: [],
+      },
+      topics: [
+        {
+          id: "js-objects-topic",
+          title: "Объекты",
+          order: 0,
+          content: "",
+        },
+      ],
+    },
   ],
 };
