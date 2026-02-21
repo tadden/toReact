@@ -7,7 +7,7 @@ export const javascriptCourse = {
   modules: [
     {
       slug: "module-1-js-intro",
-      title: "1. Модуль - Переменные и типы, Разветвление, Циклы",
+      title: "Модуль 1. Переменные и типы, Разветвление, Циклы",
       description: "Знакомство с языком, переменные и типы данных.",
       order: 0,
       videoUrl: null,
@@ -2769,17 +2769,205 @@ foo();</code></pre>
     },
     {
       slug: "module-3-objects",
-      title: "3. Модуль - Объекты",
+      title: "Модуль 3. Объекты",
       description: "Объекты, свойства, методы, перебор.",
       order: 2,
       videoUrl: null,
-      resources: [],
+      resources: [
+        {
+          id: "res-module-3-1",
+          title: "Объекты",
+          type: "video",
+          url: "https://www.youtube.com/watch?v=LP6KAq0-9Ho",
+        },
+        {
+          id: "res-module-3-2",
+          title: "Массив объектов",
+          type: "video",
+          url: "https://www.youtube.com/watch?v=4FHukJT_3Rs",
+        },
+      ],
       homework: {
         id: "js-objects-hw",
         title: "Домашнее задание: Объекты",
-        description:
-          "Выполните интерактивные задания для закрепления материала.",
-        acceptanceCriteria: [],
+        description: `<h2 style="margin-bottom: 1.5rem;">Критерии приема</h2>
+
+<p>Время быстро летит, правда же?</p>
+
+<p>Недавно ты и представления не имел, что такое объекты, а теперь уже знаешь как:</p>
+
+<ul class="list-disc">
+  <li>создать объект в JavaScript</li>
+  <li>добавить и изменить значения свойств объекта</li>
+  <li>реализовать перебор объекта</li>
+  <li>работать с массивом однотипных объектов</li>
+  <li>обращаться к свойству объекта в его методах</li>
+  <li>использовать spread и rest</li>
+</ul>
+
+<p>Самое время выполнить задания и окончательно закрепить эти умения!</p>
+
+<h2 style="margin-bottom: 1.5rem;">Домашнее задание №3</h2>
+
+<ul class="list-disc">
+  <li>Создай репозиторий <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-03</code> и склонируй его себе на компьютер.</li>
+  <li>В папке <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-03</code> создай структуру проекта, как показано на схеме ниже.</li>
+</ul>
+
+<div class="attention-block" style="background-color: rgba(255, 0, 0, 0.1); padding: 10px; border-left: 5px solid red;">
+  <p><strong>🔥 ОБРАТИ ВНИМАНИЕ!</strong></p>
+  <p>Имена файлов и папок, а также их структура вложенности, должны соответствовать указанной схеме. В противном случае работа не будет принята.</p>
+</div>
+
+<img src="/images/module-3/hw-04-tree.png" alt="Структура файлов" class="img-responsive" style="max-width: 500px; margin: 2rem auto; display: block;" />
+
+<ul class="list-disc">
+  <li>Прочитай каждое задание и выполни его в соответствующем файле.</li>
+  <li>Убедись, что код отформатирован с помощью <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Prettier</code>, а в консоли отсутствуют ошибки и предупреждения при открытии живой страницы задания.</li>
+  <li>Сдай домашнее задание на проверку.</li>
+</ul>
+
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит две ссылки: на исходные файлы и рабочую страницу на <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">GitHub Pages</code>.</p>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 1. Упаковка товаров</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ ВЫПОЛНЯЙ ЭТО ЗАДАНИЕ В ФАЙЛЕ task-1.js</strong></p>
+</div>
+
+<p>Напиши функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity(products, containerSize)</code>, которая вычисляет, поместятся ли все товары в контейнер при упаковке.</p>
+
+<p>Функция оглашает два параметра:</p>
+
+<ul class="list-disc">
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">products</code> — объект, в котором ключи содержат названия товаров, а их значения — количество этих товаров. Например, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{ apples: 2, grapes: 4 }</code>.</li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">containerSize</code> — число, максимальное количество единиц товаров, которое может вместить контейнер.</li>
+</ul>
+
+<p>Функция должна вернуть результат проверки, поместятся ли все товары в контейнер. Для этого нужно подсчитать общее количество товаров в объекте <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">products</code> и вернуть <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code>, если оно меньше или равно <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">containerSize</code>, и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code>, если нет.</p>
+
+<p>Возьми код ниже и вставь после оглашения своей функции для проверки корректности её работы. В консоль будут выведены результаты и вызовы.</p>
+
+<pre><code class="language-javascript">console.log(
+  isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)
+); // false
+
+console.log(
+  isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)
+); // true
+
+console.log(
+  isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)
+); // false</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена функция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity(products, containerSize)</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity({ apples: 2, grapes: 3, carrots: 1 }, 8)</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity({ apples: 4, grapes: 6, lime: 16 }, 12)</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity({ apples: 1, lime: 5, tomatoes: 3 }, 14)</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">isEnoughCapacity({ apples: 18, potatoes: 5, oranges: 2 }, 7)</code> возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">false</code></li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 2. Расчет калорий</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ ВЫПОЛНЯЙ ЭТО ЗАДАНИЕ В ФАЙЛЕ task-2.js</strong></p>
+</div>
+
+<p>Напиши функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">calcAverageCalories(days)</code>, которая возвращает среднедневное значение количества калорий, на основании сложения калорий за каждый день. Функция ожидает один параметр: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">days</code> — массив объектов. Каждый объект описывает день и количество калорий <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{ day, calories }</code>.</p>
+
+<p>Возьми код ниже и вставь после оглашения своей функции для проверки корректности её работы. В консоль будут выведены результаты 3 вызовов.</p>
+
+<pre><code class="language-javascript">console.log(
+  calcAverageCalories([
+    { day: "monday", calories: 3010 },
+    { day: "tuesday", calories: 3200 },
+    { day: "wednesday", calories: 3120 },
+    { day: "thursday", calories: 2900 },
+    { day: "friday", calories: 3450 },
+    { day: "saturday", calories: 3280 },
+    { day: "sunday", calories: 3300 }
+  ])
+); // 3180
+
+console.log(
+  calcAverageCalories([
+    { day: "monday", calories: 2040 },
+    { day: "tuesday", calories: 2270 },
+    { day: "wednesday", calories: 2420 },
+    { day: "thursday", calories: 1900 },
+    { day: "friday", calories: 2370 },
+    { day: "saturday", calories: 2280 },
+    { day: "sunday", calories: 2610 }
+  ])
+); // 2270
+
+console.log(
+  calcAverageCalories([])
+); // 0</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена функция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">calcAverageCalories(days)</code></li>
+  <li>Вызов функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">calcAverageCalories</code> с массивом из 7 дней (~3000 калорий) возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">3180</code></li>
+  <li>Вызов функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">calcAverageCalories</code> с массивом из 7 дней (~2000 калорий) возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">2270</code></li>
+  <li>Вызов функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">calcAverageCalories([])</code> без переданных калорий возвращает <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">0</code></li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 3. Профиль игрока</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ ВЫПОЛНЯЙ ЭТО ЗАДАНИЕ В ФАЙЛЕ task-3.js</strong></p>
+</div>
+
+<p>Объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">profile</code> описывает профиль пользователя на игровой платформе. У него свойства хранят имя в профиле <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">username</code> и количество активного игрового времени <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">playTime</code>, проведённого в игре.</p>
+
+<pre><code class="language-javascript">const profile = {
+  username: "Jacob",
+  playTime: 300,
+};</code></pre>
+
+<p>Дополни объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">profile</code> методами для работы с его свойствами.</p>
+
+<ul class="list-disc">
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">changeUsername(newName)</code> должен принимать строку (новое имя) в параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">newName</code> и заменять значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">username</code> на новое. Ничего не возвращает.</li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">updatePlayTime(hours)</code> должен принимать число (количество часов) в параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">hours</code> и обновлять на нового значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">playTime</code>. Ничего не возвращает.</li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getInfo()</code> должен возвращать строку формата <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"&lt;username&gt; has &lt;quantity&gt; active hours!"</code>, где <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">&lt;username&gt;</code> — имя профиля, а <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">&lt;quantity&gt;</code> — количество игровых часов.</li>
+</ul>
+
+<p>Возьми код ниже и вставь после оглашения своей функции для проверки корректности её работы.</p>
+
+<pre><code class="language-javascript">console.log(profile.getInfo()); // "Jacob has 300 active hours!"
+
+profile.changeUsername("Marco");
+console.log(profile.getInfo()); // "Marco has 300 active hours!"
+
+profile.updatePlayTime(20);
+console.log(profile.getInfo()); // "Marco has 320 active hours!"</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">profile</code></li>
+  <li>Значение переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">profile</code> — это объект со свойствами <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">username</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">playTime</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getInfo</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">changeUsername</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">updatePlayTime</code></li>
+  <li>Значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getInfo</code> — это функция</li>
+  <li>Значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">changeUsername</code> — это функция</li>
+  <li>Значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">updatePlayTime</code> — это функция</li>
+  <li>Для обращения к свойствам объекта внутри его методов используется <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code></li>
+</ul>`,
       },
       topics: [
         {
@@ -2896,9 +3084,879 @@ console.log(bookPrice); // undefined</code></pre>
 [QUIZ: js-object-dot-notation-quiz]
 
 [NEXT]
+
+<h3>Доступ к вложенным свойствам</h3>
+
+<p>Для доступа к вложенным свойствам используется цепочка обращений «через точку».</p>
+
+<p><strong>Значение свойства — это вложенный объект.</strong></p>
+
+<p>Если необходимо получить значение страны пользователя, записываем <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.location.country</code>, где:</p>
+
+<ul class="list-disc">
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.location</code> — это обращение (путь) к объекту в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">location</code>,</li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.location.country</code> — обращение к свойству <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">country</code> в этом объекте.</li>
+</ul>
+
+<p>То есть «точка» указывает следующую вложенность.</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  location: {
+    country: "Jamaica",
+    city: "Ocho Rios",
+  },
+  hobbies: ["swimming", "music", "sci-fi"],
+};
+
+const location = user.location;
+console.log(location); // {country: "Jamaica", city: "Ocho Rios"}
+
+const country = user.location.country;
+console.log(country); // "Jamaica"</code></pre>
+
+<p><strong>Значение свойства — это массив.</strong></p>
+
+<p>Если значение свойства — это массив, то в нашем примере выше обращение к этому массиву будет: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.hobbies</code></p>
+
+<pre><code class="language-javascript">const hobbies = user.hobbies;
+console.log(hobbies); // ["swimming", "music", "sci-fi"]</code></pre>
+
+<p>Получить доступ к <strong>элементам массива</strong> можно через квадратные скобки и индекс: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.hobbies[0];</code></p>
+
+<pre><code class="language-javascript">const firstHobby = user.hobbies[0];
+console.log(firstHobby); // "swimming"</code></pre>
+
+<p>Также можно использовать свойства и <strong>методы массива</strong>, например получить значение его длины со свойством length: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">user.hobbies.length;</code></p>
+
+<pre><code class="language-javascript">const numberOfHobbies = user.hobbies.length;
+console.log(numberOfHobbies); // 3</code></pre>
+
+[NEXT]
+
+<h3>Доступ к свойствам через квадратные скобки</h3>
+
+<p>Второй способ получить доступ к свойству объекта — это синтаксис <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">objectName["key"]</code>.</p>
+
+<p>Похоже на обращение к элементу массива с отличием. Отличие заключается в том, что в квадратных скобках указывается не индекс элемента, а строка с ключом (именем свойства).</p>
+
+<p>Синтаксис «квадратных скобок» используется значительно реже. Как правило, в случаях, когда имя свойства заранее не известно или оно хранится в переменной, например, как значение параметра функции.</p>
+
+<ul class="list-disc">
+  <li>На место обращения будет возвращено значение свойства с таким именем.</li>
+  <li>Если в объекте отсутствует свойство с таким именем, на место обращения вернется <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">undefined</code>.</li>
+</ul>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+console.log(book.title); // "The Last Kingdom"
+console.log(book["title"]); // "The Last Kingdom"
+
+console.log(book.genres); // ["historical prose", "adventure"]
+console.log(book["genres"]); // ["historical prose", "adventure"]
+
+const propKey = "author";
+console.log(book.propKey); // undefined
+console.log(book[propKey]); // "Bernard Cornwell"</code></pre>
+
+<p>В примере выше:</p>
+
+<ul class="list-disc">
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">console.log(book.propKey);</code> — это <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">undefined</code>, поскольку в объекте <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">book</code> нет свойства с ключом <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">propKey</code>.</li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">console.log(book[propKey]);</code> — это <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"Bernard Cornwell"</code>, поскольку значением переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">propKey</code> является строка <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"author"</code>, и в объекте <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">book</code> есть свойство с ключом <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">author</code>, то эта запись вернет значение свойства author.</li>
+</ul>
+
+<h4>Прочитай фрагмент кода</h4>
+
+<pre><code class="language-javascript">const user = {
+  firstName: "Jacob",
+  lastName: "Mercer"
+}</code></pre>
+
+[QUIZ: js-object-bracket-notation-quiz]
+
+[NEXT]
+
+<h3>Изменение значения свойств</h3>
+
+<p>После того как объект создан, значение его свойств можно изменить. Для этого необходимо обратиться к ним по ключу, например, «через точку», и присвоить новое значение.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+book.rating = 9;
+book.isPublic = false;
+book.genres.push("drama");
+
+console.log(book.rating); // 9
+console.log(book.isPublic); // false
+console.log(book.genres); // ["historical prose", "adventure", "drama"]</code></pre>
+
+[NEXT]
+
+<h3>Добавление свойств</h3>
+
+<p>Операция добавления нового свойства после создания объекта ничем не отличается от изменения значения уже существующего свойства.</p>
+
+<p>Если во время записи значения по ключу такое свойство отсутствует в объекте, оно будет создано.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+book.pageCount = 836;
+book.originalLanguage = "en";
+book.translations = ["ua", "ru"];
+book.price = {
+  hardcover: 39,
+  softcover: 29,
+};
+
+console.log(book.pageCount); // 836
+console.log(book.originalLanguage); // "en"
+console.log(book.translations); // ["ua", "ru"]</code></pre>
+
+[NEXT]
+
+<h3>Короткие свойства</h3>
+
+<p>Иногда при создании объекта значение свойства необходимо взять из переменной или параметра функции с таким же именем, как и само свойство.</p>
+
+<p>Синтаксис в следующем примере слишком громоздкий, ведь приходится дублировать имя свойства и имя переменной, в которой хранится необходимое значение: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">name: name</code>, и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">age: age</code>.</p>
+
+<pre><code class="language-javascript">const name = "Henry Sibola";
+const age = 25;
+
+const user = {
+  name: name,
+  age: age,
+};
+
+console.log(user.name); // "Henry Sibola"
+console.log(user.age); // 25</code></pre>
+
+<p>Синтаксис <strong>коротких свойств</strong> (shorthand properties) решает эту проблему, позволяя использовать имя переменной как имя свойства, а ее значение как значение свойства.</p>
+
+<pre><code class="language-javascript">const name = "Henry Sibola";
+const age = 25;
+
+const user = {
+  name,
+  age,
+};
+
+console.log(user.name); // "Henry Sibola"
+console.log(user.age); // 25</code></pre>
+
+<p>Вместо <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">name: name</code>, использовали <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">name</code>.</p>
+<p>А вместо <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">age: age</code> — <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">age</code>.</p>
+
+<p>То есть во время объявления объекта достаточно указать только имя свойства, а значение будет взято из переменной с аналогичным именем.</p>
+
+[NEXT]
+
+<h3>Вычисляемые свойства</h3>
+
+<p>Бывают ситуации, когда во время объявления объекта необходимо добавить свойство с именем, которое мы заранее не знаем, потому что оно хранится как значение переменной или как результат выполнения функции.</p>
+
+<p>Раньше для этого необходимо было сначала создать объект, а потом добавлять свойства через квадратные скобки, что не совсем удобно.</p>
+
+<pre><code class="language-javascript">const propName = "name";
+const user = {
+  age: 25,
+};
+
+user[propName] = "Henry Sibola";
+console.log(user.name); // "Henry Sibola"</code></pre>
+
+<p>Синтаксис <strong>вычисляемых свойств</strong> (computed properties) помогает избежать лишнего кода и в некоторых случаях упростить его.</p>
+
+<p>Значением вычисляемого свойства может быть любое валидное выражение.</p>
+
+<pre><code class="language-javascript">const propName = "name";
+const user = {
+  age: 25,
+  // ключ этого свойства будет взят из значения переменной propName
+  [propName]: "Henry Sibola",
+};
+
+console.log(user.name); // "Henry Sibola"</code></pre>
+
+[NEXT]
+`,
+        },
+        {
+          id: "js-objects-iteration",
+          title: "Перебор объекта",
+          order: 2,
+          content: `
+<h3>Цикл for...in</h3>
+
+<p>В отличие от массива или строки, объект — это <strong>не итерируемая сущность</strong>, то есть его нельзя перебрать циклами <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> или <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>.</p>
+
+<p>Для перебора объектов используется специальный цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...in</code>, который перебирает ключи объекта <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">object</code>.</p>
+
+<pre><code class="language-javascript">for (key in object) {
+  // инструкции
+}</code></pre>
+
+<p>Переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">key</code> доступна только в теле цикла. На каждой итерации в нее будет записано значение ключа (имени) свойства.</p>
+
+<p>Для того чтобы получить значение свойства с таким ключом (именем), используется синтаксис квадратных скобок.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+
+for (const key in book) {
+  console.log(key); // Ключ
+  console.log(book[key]); // Значение свойства с таким ключом
+}</code></pre>
+
+[QUIZ: js-for-in-quiz]
+
+[NEXT]
+
+<h3>Метод Object.keys()</h3>
+
+<p>У встроенного класса <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object</code> есть несколько полезных методов для работы с объектами. Первый из них — это <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object.keys(object)</code>, который принимает объект и возвращает массив ключей его свойств. Если в объекте нет свойств, метод вернет пустой массив.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+console.log(keys); // ['title', 'author', 'genres', 'rating']</code></pre>
+
+<p>Скомбинировав результат <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object.keys()</code> и цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>, можно удобно перебрать свойства объекта, не прибегая к использованию цикла <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...in</code>.</p>
+
+<pre><code class="language-javascript">const book = {
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+
+for (const key of keys) {
+  console.log(key); // Ключ
+  console.log(book[key]); // Значение свойства
+}</code></pre>
+
+<p>Мы перебираем массив ключей объекта и на каждой итерации получаем ключ и значение свойства.</p>
+
+[QUIZ: js-object-keys-quiz]
+
+[NEXT]
+
+<h3>Метод Object.values()</h3>
+
+<p>Если метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object.keys(object)</code> возвращает массив имен свойств объекта (т.е. ключи), то метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object.values(object)</code> возвращает <strong>массив значений его свойств</strong>.</p>
+
+<p>Если в объекте отсутствуют свойства, метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Object.values(object)</code> вернет пустой массив.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  rating: 8.38,
+};
+const keys = Object.keys(book);
+console.log(keys); // ["title", "author", "rating"]
+
+const values = Object.values(book);
+console.log(values); // ["The Last Kingdom", "Bernard Cornwell", 8.38]</code></pre>
+
+<p>Массив значений свойств также можно перебрать циклом <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>, например для получения общей суммы числовых значений.</p>
+
+[QUIZ: js-object-values-quiz]
+
+[NEXT]
+`,
+        },
+        {
+          id: "js-objects-array",
+          title: "Массив объектов",
+          order: 3,
+          content: `
+<p>Объекты позволяют сгруппировать описательные характеристики сущности, например, пользователя, книги, автомобиля, шоколадного батончика и т.д.</p>
+
+<p>Для описания группы сущностей используется <strong>массив объектов</strong>.</p>
+
+<p>Представь, что нужно описать библиотеку. Каждая книга — это отдельный объект, который содержит информацию о названии, авторе, количестве страниц, рейтинге и т.д. Если книга — это один объект, то библиотека — это коллекция книг, то есть массив объектов.</p>
+
+<pre><code class="language-javascript">const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+  {
+    title: "The Tell-Tale Heart",
+    author: "Edgar Allan Poe",
+    rating: 7.75,
+  }
+];</code></pre>
+
+<p>В стандартный набор повседневных задач разработчика входит манипуляция массивом однотипных объектов. Это означает, что все объекты в массиве гарантированно будут иметь одинаковый набор свойств, но с разными значениями.</p>
+
+<p>Для перебора такого массива используется стандартный цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>. Значения свойств каждого объекта можно получить, используя синтаксис «через точку» (см. тему <strong>Объекты</strong>. <em>Доступ к свойствам через точку</em>), поскольку в каждом объекте набор свойств и их имена будут одинаковыми, отличаться будут только значения.</p>
+
+<pre><code class="language-javascript">for (const book of books) {
+  console.log(book); // Объект книги
+  console.log(book.title); // Название
+  console.log(book.author); // Автор
+  console.log(book.rating); // Рейтинг
+}</code></pre>
+
+[NEXT]
+
+<h3>Поиск объекта по значению свойства</h3>
+
+<p>Стандартная задача при работе с массивом объектов — это поиск объекта по значению свойства. Например, нужно найти книгу по ее автору. Для этого необходимо:</p>
+
+<ul class="list-disc">
+  <li>перебрать массив в цикле;</li>
+  <li>добавить условие, выполнение которого будет означать успешный результат поиска.</li>
+</ul>
+
+<pre><code class="language-javascript">const books = [
+  { title: "The Last Kingdom", author: "Bernard Cornwell" },
+  { title: "Beside Still Waters", author: "Robert Sheckley" },
+  { title: "The Tell-Tale Heart", author: "Edgar Allan Poe" }
+];
+
+const authorToSearchFor = "Robert Sheckley";
+
+for (const book of books) {
+  if (book.author === authorToSearchFor) {
+    console.log(book);
+    console.log(book.title);
+    console.log(book.rating);
+  }
+}</code></pre>
+
+<p>В примере выше цикл <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for</code> перебирает объекты в массиве, пока не найдет тот, у которого сравнение значения свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">author</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">authorToSearchFor</code> вернет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">true</code>. Как только объект с нужным автором найден, выполняется тело <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code>, где мы уже можем работать с найденным объектом.</p>
+
+[NEXT]
+
+<h3>Коллекция значений свойства</h3>
+
+<p>Типичная задача при работе с конлекцией объектов — это получение массива всех значений определенного свойства объектов. Например, взять из массива объектов, которые описывают книги, все названия или рейтинг.</p>
+
+<p>Для этого необходимо:</p>
+
+<ol class="list-decimal">
+  <li>Создать новый пустой массив для хранения значений свойств.</li>
+  <li>Перебрать массив объектов в цикле.</li>
+  <li>На каждой итерации добавлять в новый массив значение необходимого свойства.</li>
+</ol>
+
+<p>Например, получим список названий всех книг в коллекции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code>.</p>
+
+<pre><code class="language-javascript">const books = [
+  { title: "The Last Kingdom", author: "Bernard Cornwell", rating: 8.2 },
+  { title: "Beside Still Waters", author: "Robert Sheckley", rating: 9 },
+  { title: "The Tell-Tale Heart", author: "Edgar Allan Poe", rating: 6.8 }
+];
+
+const titles = [];
+
+for (const book of books) {
+  titles.push(book.title)
+}
+
+console.log(titles); // ["The Last Kingdom", "Beside Still Waters", "The Tell-Tale Heart"]</code></pre>
+
+<p>В результате получится массив значений определенного свойства из всех объектов.</p>
+
+<p>Узнаем средний рейтинг всей нашей коллекции. Для этого надо сложить все рейтинги и разделить полученное значение на количество книг.</p>
+
+<pre><code class="language-javascript">const books = [
+  { title: "The Last Kingdom", author: "Bernard Cornwell", rating: 8.2 },
+  { title: "Beside Still Waters", author: "Robert Sheckley", rating: 9 },
+  { title: "The Tell-Tale Heart", author: "Edgar Allan Poe", rating: 6.8 }
+];
+
+let totalRating = 0;
+
+for (const book of books) {
+  totalRating += book.rating;
+}
+
+const averageRating = totalRating / books.length;
+console.log(averageRating); // 8</code></pre>
+
+[NEXT]
+`,
+        },
+        {
+          id: "js-objects-methods",
+          title: "Методы объекта",
+          order: 4,
+          content: `
+<p>До сих пор мы рассматривали объекты только как хранилища взаимосвязанных данных (например, данные о книге). <strong>Объекты-хранилища</strong> обычно содержатся в массиве таких же объектов. Этот массив является коллекцией однотипных элементов.</p>
+
+<p>А что, если нам нужно создать функции для выполнения операций над массивом данных? Например, добавление или удаление книги. И эти функции должны выполняться много раз.</p>
+
+<pre><code class="language-javascript">// ❌ Слабосвязанные, независимые сущности
+const books = ["The Last Kingdom", "Dream Guardian"];
+function getBooks() {}
+function addBook() {}</code></pre>
+
+<p>Один из вариантов — объявить переменную <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> и две функции <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getBooks()</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addBook(bookName)</code>.</p>
+
+<p>Этот способ имеет недостатки. Ведь мы имеем три независимые сущности без явной синтаксической связи и со слабой логической связью. Есть решение лучше. Объекты могут хранить не только данные, но и функции для работы с этими данными. Если значение свойства — это функция, такое свойство называется <strong>методом объекта</strong>.</p>
+
+<pre><code class="language-javascript">const obj = {
+  method(value) {
+    console.log(\`I'm a method with \${value}!\`);
+  }
+};
+
+obj.method(5); // "I'm a method with 5!"
+obj.method(10); // "I'm a method with 10!"</code></pre>
+
+<ul class="list-disc">
+  <li>Метод — это обычная функция, объявленная как свойство объекта (см. пример выше), а не как отдельная переменная (см. первый пример в разделе).</li>
+  <li>Для обращения к методу объекта используется стандартный синтаксис с точкой.</li>
+</ul>
+
+<p>Объекты, которые связывают данные и методы для работы с этими данными, можно назвать «моделями».</p>
+
+<p>Создадим объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookShelf</code> для коллекции книг <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> и методов взаимодействия с коллекцией <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getBooks</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addBook</code>.</p>
+
+<pre><code class="language-javascript">// ✅ Логически и синтаксически сгруппированные сущности
+const bookShelf = {
+  books: ["The Last Kingdom", "Dream Guardian"],
+  // Это метод объекта
+  getBooks() {
+    return "Returning all books";
+  },
+  // Это метод объекта
+  addBook(bookName) {
+    return \`Adding book \${bookName}\`;
+  },
+};
+
+// Вызовы методов
+bookShelf.getBooks(); // вернет "Returning all books"
+bookShelf.addBook("New book 1"); // вернет "Adding book New book 1"
+bookShelf.addBook("New book 2"); // вернет "Adding book New book 2"</code></pre>
+
+[NEXT]
+
+<h3>Доступ к свойствам объекта</h3>
+
+<p>Методы используются для работы со свойствами объекта и их изменения. Для <strong>доступа к объекту</strong> в методе используется не имя переменной этого объекта, например <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookShelf</code>, а ключевое слово <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code>.</p>
+
+<p>Ключевое слово <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> — это контекст выполнения функции.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: ["The Last Kingdom", "The Mist"],
+  getBooks() {
+    console.log(this);
+  }
+};
+
+bookShelf.getBooks(); // {books: ["The Last Kingdom", "The Mist"], getBooks: f}</code></pre>
+
+<p>Значением <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> будет ссылка на объект перед «точкой», то есть объект, который вызвал этот метод, в нашем случае — это ссылка на объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookShelf</code>.</p>
+
+<img src="/images/module-3/this-arrow-1.png" alt="Доступ к this" class="img-responsive" />
+
+<p>Для <strong>доступа к свойствам объекта</strong> в методах обращаемся к нему через <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> и дальше, стандартно, «через точку» к свойствам.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: ["The Last Kingdom", "The Mist"],
+  getBooks() {
+    return this.books;
+  }
+};
+
+console.log(bookShelf.getBooks()); // ["The Last Kingdom", "The Mist"]</code></pre>
+
+<img src="/images/module-3/this-arrow-2.png" alt="Доступ к свойству через this" class="img-responsive" />
+
+<p>Логично задуматься, почему бы не использовать имя объекта в обращении к свойствам?</p>
+
+<p>Ведь мы явно не собираемся его менять.</p>
+
+<p>Дело в том, что имя объекта — вещь ненадежная. Методы одного объекта можно копировать в другой (с другим именем), а в будущем узнаем, что часто при создании объекта мы заранее совсем не знаем имени. Использование <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> гарантирует, что метод работает именно с тем объектом, который его вызвал.</p>
+
+[QUIZ: js-object-this-quiz]
+
+[NEXT]
+
+<h3>Изменение по ссылке</h3>
+
+<p>В свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> объекта <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookShelf</code> хранится массив.</p>
+
+<p>Следовательно, мы можем изменять массив по ссылке, обращаясь к свойству <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookShelf.books</code>, потому что это ссылка на массив.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: ["The Last Kingdom"],
+};
+
+bookShelf.books.push("The Mist");
+console.log(bookShelf.books); // ["The Last Kingdom", "The Mist"]</code></pre>
+
+<p>В примере ниже в ключевом слове <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> хранится ссылка на объект, который вызвал соответствующий метод.</p>
+
+<p>Во время обращения к <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this.books</code> внутри метода, мы ссылаемся на массив, который хранится в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code>. Это значит, что его можно изменять по ссылке, например, использовав метод массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">push()</code> для добавления нового элемента.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: ["The Last Kingdom"],
+  getBooks() {
+    return this.books;
+  },
+  addBook(bookName) {
+    this.books.push(bookName);
+  }
+};
+
+console.log(bookShelf.getBooks()); // ["The Last Kingdom"]
+bookShelf.addBook("The Mist");
+bookShelf.addBook("Dream Guardian");
+console.log(bookShelf.getBooks()); // ["The Last Kingdom", "The Mist", "Dream Guardian"]</code></pre>
+
+<p>При этом из метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addBook</code> не нужно ничего возвращать, если этого не требует задача. Во время его вызова мы просто меняем значение массива по ссылке — и элементы массива в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> изменяются.</p>
+
+[NEXT]
+
+<h3>Массив объектов</h3>
+
+<p>Вы уже знаете, что объект позволяет сгруппировать характеристики сущности, например, книги.</p>
+
+<p>Поэтому чаще всего мы будем работать с массивом объектов. Для этого будем хранить в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> не строки, а объекты с названием книги и рейтингом, а в будущем, возможно, и другими характеристиками.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 }
+  ],
+  getBooks() {
+    return this.books;
+  }
+};</code></pre>
+
+<p>Теперь метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getBooks</code> будет возвращать массив объектов. А метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addBook</code> ожидает в параметре не строку, а объект книги и добавляет его в массив в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code>.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 }
+  ],
+  getBooks() {
+    return this.books;
+  },
+  addBook(newBook) {
+    this.books.push(newBook);
+  }
+};
+
+bookShelf.addBook({ title: "Dream Guardian", rating: 9 });</code></pre>
+
+<p>При переборе массива в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">books</code> надо помнить, что это массив объектов. Например, добавим метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getAverageRating()</code>, который будет возвращать средний рейтинг книг. Для этого:</p>
+
+<ul class="list-disc">
+  <li>Объявим новый метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getAverageRating</code> в объекте.</li>
+  <li>Объявим переменную <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">totalRating</code> для хранения общего рейтинга.</li>
+  <li>Переберем массив книг по ссылке <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this.books</code> в цикле <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>.</li>
+  <li>На каждой итерации добавим к общему рейтингу — рейтинг книги.</li>
+  <li>После завершения цикла вернем результат деления общего рейтинга на количество книг.</li>
+</ul>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 },
+  ],
+  getAverageRating() {
+    let totalRating = 0;
+
+    for (const book of this.books) {
+      totalRating += book.rating;
+    }
+
+    return totalRating / this.books.length;
+  },
+};
+
+bookShelf.getAverageRating(); // 7</code></pre>
+
+[NEXT]
+
+<h3>Изменение объекта в массиве</h3>
+
+<p>Целая группа задач сводится к изменению значения свойства определенного объекта в массиве. Например, изменение рейтинга книги. Поиск необходимого объекта в массиве выполняется по уникальному значению свойства, например, по названию книги.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 },
+  ],
+  changeRating(bookName, newRating) {
+  }
+};</code></pre>
+
+<p>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">changeRating</code> ожидает на название книги, которой необходимо изменить рейтинг, и новое значение рейтинга, которое нужно подставить в объект. Процесс изменения свойств объекта в массиве начинается со следующих шагов:</p>
+
+<ul class="list-disc">
+  <li>Перебор массива объектов в цикле, например <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">for...of</code>.</li>
+  <li>Добавление проверки совпадения значения свойства объекта на текущей итерации и заданного значения.</li>
+</ul>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 },
+  ],
+  changeRating(bookName, newRating) {
+    for(const book of this.books) {
+      if(book.title === bookName) {
+        // Нашли необходимый объект по названию книги
+      }
+    }
+  }
+};</code></pre>
+
+<p>При выполнении <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">if</code> мы можем быть уверены, что на данной итерации в переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">book</code> находится ссылка на необходимый нам объект, поскольку объекты передаются по ссылке. Теперь достаточно обратиться к свойству этого объекта и присвоить ему новое значение.</p>
+
+<pre><code class="language-javascript">const bookShelf = {
+  books: [
+    { title: "The Last Kingdom", rating: 8 },
+    { title: "The Mist", rating: 6 },
+  ],
+  changeRating(bookName, newRating) {
+    for(const book of this.books) {
+      if(book.title === bookName) {
+        book.rating = newRating;
+      }
+    }
+  }
+};
+
+bookShelf.changeRating("The Mist", 9);
+bookShelf.changeRating("The Last Kingdom", 4);</code></pre>
+
+<p>После вызова метода <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">changeRating</code> свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">rating</code> объекта с названием, которое совпадает с <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bookName</code>, будет обновлено на <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">newRating</code>.</p>
+
+[NEXT]
+`,
+        },
+        {
+          id: "js-spread-rest",
+          title: "Синтаксис spread и rest",
+          order: 5,
+          content: `
+<h3>Остаточные параметры</h3>
+
+<p>Мы уже знаем, что вызвать функцию можно <strong>с любым количеством аргументов</strong> независимо от того, как она была определена. Лишние аргументы не вызовут ошибку.</p>
+
+<pre><code class="language-javascript">function multiply(a, b) {
+  console.log(a, b)
+}
+
+multiply(1, 2); // 1 2
+multiply(1, 2, 3); // 1 2
+multiply(1, 2, 3, 4); // 1 2</code></pre>
+
+<p>В примере выше проблема в том, что аргументов больше, чем параметров. И будут использованы только первые два аргумента — по количеству объявленных параметров.</p>
+
+<p>Мы уже умеем решать такие задачи, используя псевдомассив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">arguments</code>, в который собираются все переданные аргументы.</p>
+
+<pre><code class="language-javascript">function multiply() {
+  console.log(arguments)
+}
+
+multiply(1, 2); // псевдомассив [1, 2]
+multiply(1, 2, 3); // псевдомассив [1, 2, 3]
+multiply(1, 2, 3, 4); // псевдомассив [1, 2, 3, 4]</code></pre>
+
+<p>Начиная со стандарта ES6, появилась концепция остаточных параметров (<code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...rest</code>). Это специальный синтаксис, который позволяет собрать группу независимых элементов в массив.</p>
+
+<pre><code class="language-javascript">function multiply(...args) {
+  console.log(args);
+}
+
+multiply(1, 2); // [1, 2]
+multiply(1, 2, 3); // [1, 2, 3]
+multiply(1, 2, 3, 4); // [1, 2, 3, 4]</code></pre>
+
+<p>Остаточные параметры могут быть обозначены через три точки <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...</code>. Буквально это означает: "собери параметры, которые остались, и положи их в массив". Имя параметра может быть произвольным. Чаще всего его называют <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">args</code> или <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">rest</code>.</p>
+
+[QUIZ: js-rest-parameters-quiz]
+
+[NEXT]
+
+<h3>Сбор части аргументов</h3>
+
+<p>Операция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...rest</code> также позволяет собрать в массив только ту часть аргументов, которая необходима. Для этого нужно объявить параметры до "сбора". Можно положить первые несколько параметров в переменные, а остальные — собрать в массив.</p>
+
+<pre><code class="language-javascript">function multiply(first, second, ...args) {
+  console.log(first, second, args);
+}
+
+multiply(1, 2); // 1 2 []
+multiply(1, 2, 3); // 1 2 [3]
+multiply(1, 2, 3, 4); // 1 2 [3, 4]</code></pre>
+
+<p>Все аргументы, для которых будут объявлены параметры, передадут им свои значения, остальные аргументы будут содержаться в массиве.</p>
+
+<ul class="list-disc">
+  <li>В параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">first</code> будет помещен первый аргумент.</li>
+  <li>В параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">second</code> будет помещен второй аргумент.</li>
+  <li>В параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">args</code> будет помещен массив из остальных аргументов.</li>
+</ul>
+
+<p>Операция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">rest</code> собирает остаток всех аргументов, а потому должна всегда быть последней в подписи функции, иначе возникнет ошибка <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">SyntaxError: Rest parameter must be last formal parameter</code>.</p>
+
+<p>Это вызовет ошибку:</p>
+
+<pre><code class="language-javascript">function multiply(first, ...args, second) {
+}</code></pre>
+
+<p>Это также вызовет ошибку:</p>
+
+<pre><code class="language-javascript">function multiply(...args, first, second) {
+}</code></pre>
+
+[NEXT]
+
+<h3>Вхождение параметров</h3>
+
+<p>Ты уже знаешь, как получить массив из списка аргументов.</p>
+
+<p>Иногда нужно сделать обратное — передать массив поэлементно в функцию, которая вызывается. Например, есть встроенная функция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Math.max()</code>, которая ищет и возвращает наибольший из аргументов (чисел), то есть ожидает не массив значений, а произвольное количество аргументов.</p>
+
+<pre><code class="language-javascript">Math.max(14, -4, 25, 8, 11);</code></pre>
+
+<p>Представь, что есть массив температур в виде чисел <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">[14, -4, 25, 8, 11]</code>.</p>
+
+<p>Как вызвать для него <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Math.max</code>? Ведь он ожидает получить список чисел, а не один массив.</p>
+
+<pre><code class="language-javascript">const temps = [14, -4, 25, 8, 11];
+
+console.log(temps); // [14, -4, 25, 8, 11]
+
+// ❌ Так не сработает, потому что передаем целый массив
+console.log(Math.max(temps)); // NaN</code></pre>
+
+<p>Тут целесообразно использовать оператор распыления <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...spread</code>.</p>
+
+<p>Он похож на остаточные параметры — тоже использует <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...</code>, но делает абсолютно противоположное. Когда функционал <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...spread</code> используется при вызове функции, он преобразует массив в список аргументов.</p>
+
+<pre><code class="language-javascript">const temps = [14, -4, 25, 8, 11];
+
+console.log(...temps); // 14 -4 25 8 11 набор отдельных чисел
+
+// ✅ Передаем коллекцию элементов в качестве отдельных аргументов
+console.log(Math.max(...temps)); // 25</code></pre>
+
+[NEXT]
+
+<h3>Создание массива</h3>
+
+<p>Операция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">...spread</code> позволяет создать копию массива или «склеить» произвольное количество массивов в один новый. До сих пор для этого использовались методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">slice()</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">concat()</code>, но операция распыления позволяет сделать то же самое в более короткой форме.</p>
+
+<p>Рассмотрим пример ниже, где создана копия массива.</p>
+
+<pre><code class="language-javascript">const temps = [14, -4, 25, 8, 11];
+
+// Это точная, но независимая копия массива temps
+const copyOfTemps = [...temps];
+console.log(copyOfTemps); // [14, -4, 25, 8, 11]</code></pre>
+
+<p>Представь, что <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">temps</code> — это ящик яблок, и мы хотим создать его точную копию. Берем пустой ящик и пересыпаем в него яблоки из исходного ящика <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">temps</code> — распределяем его в другую коллекцию. При таком условии ящик <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">temps</code> не изменится, в нем все еще будут яблоки, а в новом ящике — их точные копии.</p>
+
+<p>В следующем примере мы ссыпаем яблоки из двух ящиков в один новый.</p>
+
+<p>Оригинальные ящики (массивы) не изменятся, а в новом будут копии всех их яблок (элементов). Порядок распределения важен — он влияет на порядок элементов в новой коллекции.</p>
+
+<pre><code class="language-javascript">const lastWeekTemps = [14, 25, 11];
+const currentWeekTemps = [23, 17, 18];
+const allTemps = [...lastWeekTemps, ...currentWeekTemps];
+console.log(allTemps); // [14, 25, 11, 23, 17, 18]</code></pre>
+
+[NEXT]
+
+<h3>Создание объекта</h3>
+
+<p>Операция <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">spread</code> позволяет распылить свойства произвольного количества объектов в один новый.</p>
+
+<pre><code class="language-javascript">const first = { propA: 5, propB: 10 };
+const second = { propC: 15 };
+const third = { ...first, ...second };
+console.log(third); // { propA: 5, propB: 10, propC: 15 }</code></pre>
+
+<p>Порядок распределения имеет значение. Имена свойств объекта — уникальны, поэтому свойства объекта, которые распыляются, могут перезаписать значения уже существующего свойства, если их имена совпадают.</p>
+
+<pre><code class="language-javascript">const first = { propA: 5, propB: 10, propC: 50 };
+const second = { propC: 15, propD: 20 };
+
+const third = { ...first, ...second };
+console.log(third); // { propA: 5, propB: 10, propC: 15, propD: 20 }
+
+const fourth = { ...second, ...first };
+console.log(fourth); // { propA: 5, propB: 10, propC: 50, propD: 20 }</code></pre>
+
+<p>Если бы яблоки в ящике имели наклейки с пометками, то в одном ящике не могло бы быть двух яблок с одинаковыми пометками. Поэтому, пересыпая второй ящик, все яблоки, метки которых будут совпадать с теми, что уже находятся в новом ящике, заменят существующие.</p>
+
+<p>Во время распыления можно добавлять свойства в произвольное место. Главное помнить об уникальности имени свойства и о том, что его значение может быть перезаписано.</p>
+
+<pre><code class="language-javascript">const first = { propA: 5, propB: 10, propC: 50 };
+const second = { propC: 15 };
+
+const third = { propB: 20, ...first, ...second };
+console.log(third); // { propA: 5, propB: 10, propC: 15 }
+
+const fourth = { ...first, ...second, propB: 20 };
+console.log(fourth); // { propA: 5, propB: 20, propC: 15 }
+
+const fifth = { ...first, propB: 20, ...second };
+console.log(fifth); // { propA: 5, propB: 20, propC: 15 }</code></pre>
+
+[QUIZ: js-spread-object-quiz]
+
+[NEXT]
 `,
         },
       ],
+    },
+    {
+      slug: "module-4-array-methods",
+      title: "Модуль 4. Перебирающие методы массивов",
+      description:
+        "Изучаем перебирающие методы массивов: forEach, map, filter, find, reduce и другие.",
+      order: 3,
+      videoUrl: null,
+      resources: [],
+      topics: [],
     },
   ],
 };

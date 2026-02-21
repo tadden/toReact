@@ -251,7 +251,7 @@ export const quizzes: Record<string, QuizData> = {
       "Создать в проекте папку css. Добавить стили в HTML-файл, а потом создать файл со стилями.",
     ],
     correctAnswer: 1,
-    successMessage: "Узнать ответ",
+    successMessage: "Правильно!",
   },
   "selectors-quiz-1": {
     id: "selectors-quiz-1",
@@ -918,6 +918,63 @@ h1, h2, h3 {
       "user*firstName*",
     ],
     correctAnswer: 1,
-    successMessage: "Узнать ответ",
+    successMessage: "Правильно!",
+  },
+  "js-object-bracket-notation-quiz": {
+    id: "js-object-bracket-notation-quiz",
+    question:
+      "Выбери правильный синтаксис обращения к свойству firstName объекта user",
+    options: ["user[firstName]", 'user"firstName"', 'user["firstName"]'],
+    correctAnswer: 2,
+    successMessage: "Правильно!",
+  },
+  "js-for-in-quiz": {
+    id: "js-for-in-quiz",
+    question: "С помощью каких циклов можно перебрать объект?",
+    options: ["for", "for...of", "while", "for...in"],
+    correctAnswer: 3,
+    successMessage: "Правильно!",
+  },
+  "js-object-keys-quiz": {
+    id: "js-object-keys-quiz",
+    question: "Что возвращает метод Object.keys()?",
+    options: ["Массив имен свойств объекта", "Массив значений свойств объекта"],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
+  },
+  "js-object-values-quiz": {
+    id: "js-object-values-quiz",
+    question: "Что возвращает метод Object.values()?",
+    options: ["Массив имен свойств объекта", "Массив значений свойств объекта"],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-object-this-quiz": {
+    id: "js-object-this-quiz",
+    question:
+      "Какое ключевое слово внутри метода объекта содержит ссылку на объект, который его вызвал?",
+    options: ["obj", "that", "this", "here"],
+    correctAnswer: 2,
+    successMessage: "Правильно!",
+  },
+  "js-rest-parameters-quiz": {
+    id: "js-rest-parameters-quiz",
+    question:
+      'Что будет выведено в консоль при вызове функции?\n\nfunction foo(...args) {\n  console.log(args);\n}\nfoo("a", "b");',
+    options: ["'a', 'b'", "['a', 'b']", "Ошибка"],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-spread-object-quiz": {
+    id: "js-spread-object-quiz",
+    question:
+      "Каким будет значение переменной result?\n\nconst objA = {\n  x: 1,\n  y: 2,\n};\n\nconst objB = {\n  y: 3,\n};\n\nconst result = {\n  x: 5,\n  ...objA,\n  y: 10,\n  ...objB,\n  z: 15\n}",
+    options: [
+      "{ x: 1, y: 3, z: 15 }",
+      "{ x: 5, y: 10, z: 15 }",
+      "{ x: 1, y: 2, z: 10 }",
+    ],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
   },
 };
