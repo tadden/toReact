@@ -883,4 +883,41 @@ h1, h2, h3 {
     successMessage:
       "Правильно! Объявление функции (function declaration) можно вызывать до места её создания в коде.",
   },
+  "js-object-literal-quiz": {
+    id: "js-object-literal-quiz",
+    question: "Выбери синтаксис литерала объекта",
+    options: ["[]", "{}", "()"],
+    correctAnswer: 1,
+    successMessage:
+      "Да, ты все знаешь! Для объявления объекта используются фигурные скобки {}. Круглые скобки — для вызова функции, а квадратные — для массива.",
+  },
+  "js-object-property-separator-quiz": {
+    id: "js-object-property-separator-quiz",
+    question: "Выбери символ, которым разделяются имя и значение свойства",
+    options: ["=", ";", ":", ","],
+    correctAnswer: 2,
+    successMessage:
+      "Увы, нет. Имя и значение свойства разделяются : (двоеточием). Разные свойства разделяются , (запятой). После блока кода ставится ; (точка с запятой). А = используется для присваивания значения.",
+  },
+  "js-object-property-type-quiz": {
+    id: "js-object-property-type-quiz",
+    question:
+      "Выбери типы данных, которые могут быть значениями свойства объекта",
+    options: ["Массив", "Объект", "Строка", "Все варианты выше"],
+    correctAnswer: 3,
+    successMessage:
+      "Не только он! Значением свойства могут быть любые типы: примитивы, массивы, объекты, були, функции и т.д.",
+  },
+  "js-object-dot-notation-quiz": {
+    id: "js-object-dot-notation-quiz",
+    question: "Выбери синтаксис доступа к свойству firstName объекта user",
+    options: [
+      "user-firstName",
+      "user.firstName",
+      "user[firstName]",
+      "user*firstName*",
+    ],
+    correctAnswer: 1,
+    successMessage: "Узнать ответ",
+  },
 };

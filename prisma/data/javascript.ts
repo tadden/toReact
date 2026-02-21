@@ -2801,6 +2801,103 @@ foo();</code></pre>
 </ul>
 `,
         },
+        {
+          id: "js-objects-intro",
+          title: "Объекты",
+          order: 1,
+          content: `
+<h2>Создание объекта</h2>
+
+<p>Объекты позволяют описать и сгруппировать характеристики объектов реального мира, например, пользователь, книга, продукт магазина — что угодно. Объекты еще называют словарями, то есть они содержат <strong>термины</strong> (свойства) и их <strong>определения</strong> (значения).</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  public: true,
+  rating: 8.38,
+};</code></pre>
+
+<ul class="list-disc">
+  <li>Для объявления объекта используются фигурные скобки <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">{}</code> — литерал объекта.</li>
+  <li>При создании объекта в него сразу можно добавить <strong>свойства</strong>, но это не обязательно. Каждое свойство обязательно состоит из пары <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">ключ: значение</code>.</li>
+  <li><strong>Ключ</strong> также называют именем свойства и это обычно <strong>строка</strong>.</li>
+  <li><strong>Значениями</strong> свойства могут быть <strong>любые типы</strong>: примитивы, массивы, объекты, були, функции и т.д.</li>
+  <li>Свойства между собой разделяются <strong>запятой</strong>.</li>
+</ul>
+
+[QUIZ: js-object-literal-quiz]
+
+[QUIZ: js-object-property-separator-quiz]
+
+[NEXT]
+
+<h3>Вложенные свойства</h3>
+
+<p>Значением свойства может быть другой объект. Это используется для хранения вложенных и сгруппированных данных.</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  location: {
+    country: "Jamaica",
+    city: "Ocho Rios",
+  },
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};</code></pre>
+
+<p>Например, статистика пользователя социальной сети <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">stats</code> состоит из количества подписчиков, просмотров и лайков, и хранить эти данные удобнее всего в виде объекта. То же самое с местоположением <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">location</code>, отдельно страна и город.</p>
+
+<p>В будущем это можно будет использовать для поиска пользователей по стране, городу, минимальному или максимальному количеству подписчиков и т.д.</p>
+
+[QUIZ: js-object-property-type-quiz]
+
+[NEXT]
+
+<h3>Доступ к свойствам через точку</h3>
+
+<p>Первый способ получить доступ к свойству объекта — это синтаксис <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">objectName.key</code>.</p>
+
+<ul class="list-disc">
+  <li>На место обращения будет возвращено значение свойства с таким ключом.</li>
+  <li>Если в объекте отсутствует свойство с таким ключом, на место обращения вернется <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">undefined</code>.</li>
+</ul>
+
+<p>В большинстве случаев синтаксис «через точку» используется тогда, когда мы заранее знаем имя (ключ) свойства, к которому хотим получить доступ.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const bookTitle = book.title;
+console.log(bookTitle); // "The Last Kingdom"
+
+const bookGenres = book.genres;
+console.log(bookGenres); // ["historical prose", "adventure"]
+
+const bookPrice = book.price;
+console.log(bookPrice); // undefined</code></pre>
+
+<h4>Прочитай пример кода</h4>
+
+<pre><code class="language-javascript">const user = {
+  firstName: "Jacob",
+  lastName: "Mercer"
+}</code></pre>
+
+[QUIZ: js-object-dot-notation-quiz]
+
+[NEXT]
+`,
+        },
       ],
     },
   ],
