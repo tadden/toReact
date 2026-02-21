@@ -16,10 +16,13 @@ import {
   Target,
   Mail,
   Lightbulb,
+  Menu,
+  X,
 } from "lucide-react";
 
 export function LandingPage() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const scrollToSection = (
     e: React.MouseEvent<HTMLAnchorElement>,
@@ -28,6 +31,7 @@ export function LandingPage() {
     e.preventDefault();
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
+    setIsMenuOpen(false);
   };
 
   return (
@@ -35,32 +39,55 @@ export function LandingPage() {
       <div className={styles.container}>
         {/* Navigation / Header */}
         <header className={styles.header}>
-          <nav className={styles.navLinks}>
-            <a href="#features" onClick={(e) => scrollToSection(e, "features")}>
-              О курсе
-            </a>
-            <a href="#audience" onClick={(e) => scrollToSection(e, "audience")}>
-              Для кого
-            </a>
-            <a href="#mission" onClick={(e) => scrollToSection(e, "mission")}>
-              Программа
-            </a>
-            <a href="#process" onClick={(e) => scrollToSection(e, "process")}>
-              Как проходит
-            </a>
-            <a href="#faq" onClick={(e) => scrollToSection(e, "faq")}>
-              FAQ
-            </a>
-            <a href="#reviews" onClick={(e) => scrollToSection(e, "reviews")}>
-              Отзывы
-            </a>
-          </nav>
-          <button
-            onClick={() => setIsLoginOpen(true)}
-            className={styles.loginButton}
+          <div className={styles.mobileNavToggle}>
+            <button
+              className={styles.hamburger}
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
+          </div>
+
+          <div
+            className={`${styles.navWrapper} ${isMenuOpen ? styles.isOpen : ""}`}
           >
-            Войти
-          </button>
+            <nav className={styles.navLinks}>
+              <a
+                href="#features"
+                onClick={(e) => scrollToSection(e, "features")}
+              >
+                О курсе
+              </a>
+              <a
+                href="#audience"
+                onClick={(e) => scrollToSection(e, "audience")}
+              >
+                Для кого
+              </a>
+              <a href="#mission" onClick={(e) => scrollToSection(e, "mission")}>
+                Программа
+              </a>
+              <a href="#process" onClick={(e) => scrollToSection(e, "process")}>
+                Как проходит
+              </a>
+              <a href="#faq" onClick={(e) => scrollToSection(e, "faq")}>
+                FAQ
+              </a>
+              <a href="#reviews" onClick={(e) => scrollToSection(e, "reviews")}>
+                Отзывы
+              </a>
+            </nav>
+            <button
+              onClick={() => {
+                setIsLoginOpen(true);
+                setIsMenuOpen(false);
+              }}
+              className={styles.loginButton}
+            >
+              Войти
+            </button>
+          </div>
         </header>
 
         {/* Hero Section */}
