@@ -40,7 +40,7 @@ async function main() {
       id: "user_student",
     },
     { name: "Roman", email: "roman@toreact.com", id: "user_roman" },
-    { name: "Dima", email: "dima@toreact.com", id: "user_dima" },
+    { name: "Dima", email: "venediktov9797@gmail.com", id: "user_dima" },
     { name: "Vadim", email: "vadimka.ramkovich@gmail.com", id: "user_vadim" },
     { name: "Olga", email: "olga@toreact.com", id: "user_olga" },
     {

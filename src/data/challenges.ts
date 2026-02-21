@@ -162,8 +162,7 @@ fruit in pretty much any form.`,
     id: "html-tag-a",
     title: "Тег ссылки",
     description: `
-      <p>На веб-сайте у каждого рецепта есть автор. Добавь ссылку на профиль автора на странице рецепта, сразу под описанием.</p>
-    `,
+      <p>На сайте у каждого рецепта есть автор. Добавь на страницу рецепта, сразу под описанием, ссылку на профиль автора. Ссылка должна вести на страницу https://instagram.com/toreact. <b>Текст ссылки Author's profile</b>.</p>`,
     initialCode: `<!-- Recipe page markup -->
 <h1>Sweet cheese pancakes</h1>
 <p>

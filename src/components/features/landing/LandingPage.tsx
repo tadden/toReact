@@ -14,8 +14,8 @@ import {
   Users,
   Trophy,
   Target,
-  Star,
   Mail,
+  Lightbulb,
 } from "lucide-react";
 
 export function LandingPage() {
@@ -39,8 +39,17 @@ export function LandingPage() {
             <a href="#features" onClick={(e) => scrollToSection(e, "features")}>
               О курсе
             </a>
+            <a href="#audience" onClick={(e) => scrollToSection(e, "audience")}>
+              Для кого
+            </a>
             <a href="#mission" onClick={(e) => scrollToSection(e, "mission")}>
               Программа
+            </a>
+            <a href="#process" onClick={(e) => scrollToSection(e, "process")}>
+              Как проходит
+            </a>
+            <a href="#faq" onClick={(e) => scrollToSection(e, "faq")}>
+              FAQ
             </a>
             <a href="#reviews" onClick={(e) => scrollToSection(e, "reviews")}>
               Отзывы
@@ -138,6 +147,44 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* Who is this for? */}
+        <section id="audience" className={styles.targetAudienceSection}>
+          <h2>Для кого этот курс?</h2>
+          <p className="text-dim">Программа адаптируется под твой уровень.</p>
+          <div className={styles.audienceGrid}>
+            <div className={styles.audienceCard}>
+              <div className={styles.iconWrapper}>
+                <Target size={24} />
+              </div>
+              <h3>Новички с нуля</h3>
+              <p className="text-dim">
+                Никогда не писал код? Мы начнем с самых основ и постепенно
+                доведем до уровня Junior.
+              </p>
+            </div>
+            <div className={styles.audienceCard}>
+              <div className={styles.iconWrapper}>
+                <Lightbulb size={24} />
+              </div>
+              <h3>Студенты и выпускники</h3>
+              <p className="text-dim">
+                Получи актуальные навыки, которые реально нужны работодателям, и
+                начни карьеру еще во время учебы.
+              </p>
+            </div>
+            <div className={styles.audienceCard}>
+              <div className={styles.iconWrapper}>
+                <Rocket size={24} />
+              </div>
+              <h3>Свичары</h3>
+              <p className="text-dim">
+                Хочешь сменить профессию на IT? Наш курс — это прямой путь к
+                первой работе разработчиком.
+              </p>
+            </div>
+          </div>
+        </section>
+
         {/* Mission Map (Curriculum) */}
         <section id="mission" className={styles.missionSection}>
           <h2>Твоя Карта Полета</h2>
@@ -166,14 +213,61 @@ export function LandingPage() {
           </div>
         </section>
 
+        {/* How it works (Process) */}
+        <section id="process" className={styles.processSection}>
+          <h2>Как проходит обучение?</h2>
+          <div className={styles.processSteps}>
+            <div className={styles.processStep}>
+              <div className={styles.stepNumber}>1</div>
+              <div className={styles.stepContent}>
+                <h3>Изучай теорию</h3>
+                <p>
+                  Короткие и понятные уроки без воды, доступные 24/7. Вся теория
+                  закрепляется квизами.
+                </p>
+              </div>
+            </div>
+            <div className={styles.processStep}>
+              <div className={styles.stepNumber}>2</div>
+              <div className={styles.stepContent}>
+                <h3>Выполняй практику</h3>
+                <p>
+                  Пиши код прямо в браузере. Решай реальные задачи и собирай
+                  портфолио в процессе.
+                </p>
+              </div>
+            </div>
+            <div className={styles.processStep}>
+              <div className={styles.stepNumber}>3</div>
+              <div className={styles.stepContent}>
+                <h3>Получай фидбек от ментора</h3>
+                <p>
+                  Каждое задание проходит строгий Code Review. Ментор укажет на
+                  ошибки и поможет улучшить код.
+                </p>
+              </div>
+            </div>
+            <div className={styles.processStep}>
+              <div className={styles.stepNumber}>4</div>
+              <div className={styles.stepContent}>
+                <h3>Готовься к трудоустройству</h3>
+                <p>
+                  Помогаем составить резюме, оформляем GitHub и проводим
+                  тестовые собеседования.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Reviews (Cadet Logs) */}
         <section id="reviews" className={styles.reviewsSection}>
           <h2>Бортовой Журнал Кадетов</h2>
           <div className={styles.reviewsGrid}>
             <div className={styles.reviewCard}>
               <p className="quote">
-                "Я пытался учить React по видео на YouTube, но только здесь
-                понял как это работает на самом деле. Ментор Илья — топ!"
+                &quot;Я пытался учить React по видео на YouTube, но только здесь
+                понял как это работает на самом деле. Ментор Илья — топ!&quot;
               </p>
               <div className={styles.author}>
                 <div className={styles.avatar}>A</div>
@@ -184,6 +278,41 @@ export function LandingPage() {
             </div>
             <div className={styles.reviewCard}></div>
             <div className={styles.reviewCard}></div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section id="faq" className={styles.faqSection}>
+          <h2>Часто задаваемые вопросы</h2>
+          <div className={styles.faqGrid}>
+            <div className={styles.faqItem}>
+              <h3>Нужны ли базовые знания?</h3>
+              <p>
+                Нет, курс рассчитан на обучение с полного нуля. Главное —
+                желание учиться и компьютер с интернетом.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Сколько времени нужно уделять?</h3>
+              <p>
+                Мы рекомендуем выделять 10-15 часов в неделю. Вы учитесь в своем
+                темпе, без жестких дедлайнов.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Есть ли помощь с трудоустройством?</h3>
+              <p>
+                Да, мы помогаем с резюме, портфолио и подготовкой к
+                собеседованиям. Лучших студентов рекомендуем партнерам.
+              </p>
+            </div>
+            <div className={styles.faqItem}>
+              <h3>Что делать, если я застряну?</h3>
+              <p>
+                У тебя будет доступ к ментору и закрытому чату студентов, где
+                всегда можно задать вопрос и получить помощь.
+              </p>
+            </div>
           </div>
         </section>
 

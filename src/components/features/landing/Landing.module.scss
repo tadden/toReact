@@ -244,6 +244,229 @@
   }
 }
 
+/* --- Target Audience Section --- */
+.targetAudienceSection {
+  margin: 6rem 0;
+  text-align: center;
+}
+
+.audienceGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.audienceCard {
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(5px);
+  border: 1px solid var(--color-border);
+  padding: 2.5rem 1.5rem;
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--color-primary),
+      transparent
+    );
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-primary);
+    box-shadow: var(--shadow-glow-blue);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  .iconWrapper {
+    width: 60px;
+    height: 60px;
+    background: rgba(79, 134, 246, 0.1);
+    color: var(--color-primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    color: var(--color-text-main);
+  }
+}
+
+/* --- Process Section (How it works) --- */
+.processSection {
+  margin: 8rem 0;
+  text-align: center;
+}
+
+.processSteps {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 4rem;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 30px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--color-border);
+    z-index: 0;
+
+    @media (max-width: 768px) {
+      left: 20px;
+    }
+  }
+}
+
+.processStep {
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-border);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: var(--color-accent);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: var(--shadow-glow-yellow);
+
+    .stepNumber {
+      background: var(--color-accent);
+      color: var(--color-accent-text);
+      border-color: var(--color-accent);
+      box-shadow: var(--shadow-glow-yellow);
+    }
+  }
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+
+  .stepNumber {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-bg-deep);
+    border: 2px solid var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-primary);
+    font-weight: bold;
+    font-size: 1.5rem;
+    position: relative;
+    left: -32px; /* Pull it slightly to align with the line */
+    transition: all 0.3s ease;
+
+    @media (max-width: 768px) {
+      left: 0;
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+  }
+
+  .stepContent {
+    flex: 1;
+
+    h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-text-main);
+    }
+
+    p {
+      color: var(--color-text-dim);
+      line-height: 1.6;
+    }
+  }
+}
+
+/* --- FAQ Section --- */
+.faqSection {
+  margin: 8rem 0;
+  text-align: center;
+}
+
+.faqGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+  text-align: left;
+}
+
+.faqItem {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid var(--color-border);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  transition: all 0.3s;
+
+  &:hover {
+    border-color: var(--color-primary);
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--color-primary-glow);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    &::before {
+      content: "Q:";
+      color: var(--color-accent);
+      font-weight: 800;
+    }
+  }
+
+  p {
+    color: var(--color-text-dim);
+    line-height: 1.6;
+  }
+}
+
 /* --- Mission Map (Curriculum) --- */
 .missionSection {
   margin: 8rem 0;
