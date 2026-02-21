@@ -9,9 +9,13 @@ import {
 } from "react";
 import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
+type TabView = "theory" | "materials" | "homework";
+
 interface CourseViewContextType {
   activeTopicId: string | null;
   setActiveTopic: (topicId: string) => void;
+  activeView: TabView;
+  setActiveView: (view: TabView) => void;
 }
 
 const CourseViewContext = createContext<CourseViewContextType | undefined>(
@@ -23,29 +27,48 @@ export function CourseViewProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const urlTopicId = searchParams.get("topic");
+  const urlView = (searchParams.get("view") as TabView) || "theory";
 
   const [activeTopicId, setActiveTopicId] = useState<string | null>(urlTopicId);
+  const [activeView, setActiveViewState] = useState<TabView>(urlView);
 
   // Sync state FROM URL (e.g. initial load or back button)
   useEffect(() => {
     setActiveTopicId(urlTopicId);
   }, [urlTopicId]);
 
+  useEffect(() => {
+    setActiveViewState(urlView);
+  }, [urlView]);
+
   const setActiveTopic = (topicId: string) => {
     // 1. Instant UI Update
     setActiveTopicId(topicId);
+    setActiveViewState("theory");
 
     // 2. Background URL Update
-    // Construct new URL params
     const params = new URLSearchParams(searchParams);
     params.set("topic", topicId);
+    params.set("view", "theory");
 
-    // Use replace/push. scroll: false prevents jumping
     router.replace(`${pathname}?${params.toString()}`, { scroll: false });
   };
 
+  const setActiveView = (view: TabView) => {
+    // 1. Instant UI Update
+    setActiveViewState(view);
+
+    // 2. Background URL Update
+    const params = new URLSearchParams(searchParams);
+    params.set("view", view);
+
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+  };
+
   return (
-    <CourseViewContext.Provider value={{ activeTopicId, setActiveTopic }}>
+    <CourseViewContext.Provider
+      value={{ activeTopicId, setActiveTopic, activeView, setActiveView }}
+    >
       {children}
     </CourseViewContext.Provider>
   );

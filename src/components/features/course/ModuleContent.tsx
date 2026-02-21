@@ -75,19 +75,11 @@ export function ModuleContent({
   const { user } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { activeTopicId, setActiveTopic } = useCourseView();
+  const { activeTopicId, setActiveTopic, activeView, setActiveView } =
+    useCourseView();
+  const activeTab = activeView;
 
   const [showCongratulationModal, setShowCongratulationModal] = useState(false);
-
-  // Optimistic tab state — updates instantly on click, synced from URL on mount
-  const urlTab = (searchParams.get("view") as TabView) || "theory";
-  const [optimisticTab, setOptimisticTab] = useState<TabView>(urlTab);
-  const activeTab = optimisticTab;
-
-  // Sync from URL when searchParams change (e.g. back/forward navigation)
-  useEffect(() => {
-    setOptimisticTab(urlTab);
-  }, [urlTab]);
 
   // Use context for topic ID (instant switching)
   // Fallback to URL if context is null (init) - though context init handles it
@@ -287,9 +279,9 @@ export function ModuleContent({
   ) => {
     // Logic to determine next view
     if (module.videoUrl || module.resources.length > 0) {
-      router.push(`?view=materials`);
+      setActiveView("materials");
     } else if (module.homework) {
-      router.push(`?view=homework`);
+      setActiveView("homework");
     } else {
       // If no materials/homework, mark module complete? or just stay
       // Let's finish module if nothing else
@@ -330,10 +322,7 @@ export function ModuleContent({
           }}
         >
           <button
-            onClick={() => {
-              setOptimisticTab("theory");
-              router.push(`?view=theory`);
-            }}
+            onClick={() => setActiveView("theory")}
             className={`${styles.tabLink} ${
               activeTab === "theory" ? styles.activeTab : ""
             }`}
@@ -342,10 +331,7 @@ export function ModuleContent({
           </button>
           {(module.videoUrl || module.resources.length > 0) && (
             <button
-              onClick={() => {
-                setOptimisticTab("materials");
-                router.push(`?view=materials`);
-              }}
+              onClick={() => setActiveView("materials")}
               className={`${styles.tabLink} ${
                 activeTab === "materials" ? styles.activeTab : ""
               }`}
@@ -355,10 +341,7 @@ export function ModuleContent({
           )}
           {module.homework && (
             <button
-              onClick={() => {
-                setOptimisticTab("homework");
-                router.push(`?view=homework`);
-              }}
+              onClick={() => setActiveView("homework")}
               className={`${styles.tabLink} ${
                 activeTab === "homework" ? styles.activeTab : ""
               }`}
