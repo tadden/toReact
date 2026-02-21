@@ -189,11 +189,9 @@ export function Sidebar({ courseId }: { courseId: string }) {
                             activeTopicId || searchParams.get("topic");
 
                           const isTopicActive =
-                            currentTopic === topic.id ||
-                            (isFirstOverall &&
-                              !currentTopic &&
-                              currentView === "theory" &&
-                              isActive);
+                            currentView === "theory" &&
+                            (currentTopic === topic.id ||
+                              (isFirstOverall && !currentTopic && isActive));
 
                           const isTopicCompleted =
                             progress?.completedTopics?.includes(topic.id);
