@@ -17,7 +17,6 @@ import {
   CheckCircle,
   AlertCircle,
 } from "lucide-react";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 
 interface ModuleContentProps {
@@ -80,8 +79,15 @@ export function ModuleContent({
 
   const [showCongratulationModal, setShowCongratulationModal] = useState(false);
 
-  // We still use searchParams for 'view' tab, as that's less frequent/critical
-  const activeTab = (searchParams.get("view") as TabView) || "theory";
+  // Optimistic tab state — updates instantly on click, synced from URL on mount
+  const urlTab = (searchParams.get("view") as TabView) || "theory";
+  const [optimisticTab, setOptimisticTab] = useState<TabView>(urlTab);
+  const activeTab = optimisticTab;
+
+  // Sync from URL when searchParams change (e.g. back/forward navigation)
+  useEffect(() => {
+    setOptimisticTab(urlTab);
+  }, [urlTab]);
 
   // Use context for topic ID (instant switching)
   // Fallback to URL if context is null (init) - though context init handles it
@@ -323,27 +329,36 @@ export function ModuleContent({
             marginBottom: "0",
           }}
         >
-          <Link
-            href={`?view=theory`}
+          <button
+            onClick={() => {
+              setOptimisticTab("theory");
+              router.push(`?view=theory`);
+            }}
             className={`${styles.tabLink} ${
               activeTab === "theory" ? styles.activeTab : ""
             }`}
           >
             <BookOpen size={18} /> Теория
-          </Link>
+          </button>
           {(module.videoUrl || module.resources.length > 0) && (
-            <Link
-              href={`?view=materials`}
+            <button
+              onClick={() => {
+                setOptimisticTab("materials");
+                router.push(`?view=materials`);
+              }}
               className={`${styles.tabLink} ${
                 activeTab === "materials" ? styles.activeTab : ""
               }`}
             >
               <Youtube size={18} /> Материалы
-            </Link>
+            </button>
           )}
           {module.homework && (
-            <Link
-              href={`?view=homework`}
+            <button
+              onClick={() => {
+                setOptimisticTab("homework");
+                router.push(`?view=homework`);
+              }}
               className={`${styles.tabLink} ${
                 activeTab === "homework" ? styles.activeTab : ""
               }`}
@@ -356,7 +371,7 @@ export function ModuleContent({
                   style={{ marginLeft: "0.5rem" }}
                 />
               )}
-            </Link>
+            </button>
           )}
         </div>
       </div>
