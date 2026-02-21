@@ -58,11 +58,12 @@ export function CourseViewProvider({ children }: { children: ReactNode }) {
     // 1. Instant UI Update
     setActiveViewState(view);
 
-    // 2. Background URL Update
-    const params = new URLSearchParams(searchParams);
+    // 2. Update URL without triggering Next.js server navigation
+    //    Tab switching is client-side only — no server fetch needed
+    const params = new URLSearchParams(window.location.search);
     params.set("view", view);
 
-    router.push(`${pathname}?${params.toString()}`, { scroll: false });
+    window.history.replaceState(null, "", `${pathname}?${params.toString()}`);
   };
 
   return (

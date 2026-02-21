@@ -69,9 +69,11 @@ export function InteractiveHomework({
         if (firstUncompletedId) {
           setActiveChallengeId(firstUncompletedId);
         } else {
-          // All completed? Go to last.
-          if (initialCompletedIds.length === challengeIds.length) {
+          // All completed? Go to last and ensure module is marked complete.
+          if (initialCompletedIds.length >= challengeIds.length) {
             setActiveChallengeId(challengeIds[challengeIds.length - 1]);
+            // Trigger completion in case it wasn't saved before
+            onComplete();
           }
         }
       }
