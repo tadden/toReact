@@ -977,4 +977,102 @@ h1, h2, h3 {
     correctAnswer: 0,
     successMessage: "Правильно!",
   },
+  "js-callback-syntax-quiz": {
+    id: "js-callback-syntax-quiz",
+    question:
+      "Выбери правильный синтаксис передачи колбек-функции `updateEmail` для функции `makeAction`",
+    options: [
+      "makeAction(updateEmail())",
+      "updateEmail(makeAction)",
+      "makeAction(updateEmail)",
+      "updateEmail(makeAction())",
+    ],
+    correctAnswer: 2,
+    successMessage: "Правильно!",
+  },
+  "js-foreach-return-quiz": {
+    id: "js-foreach-return-quiz",
+    question: "Что возвращает метод forEach?",
+    options: [
+      "Новый массив",
+      "Возвращает undefined",
+      "То, что указано в колбек-функции",
+    ],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-arrow-arguments-quiz": {
+    id: "js-arrow-arguments-quiz",
+    question:
+      "Можно ли использовать переменную arguments в стрелочной функции?",
+    options: ["Да", "Нет"],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-arrow-callbacks-quiz": {
+    id: "js-arrow-callbacks-quiz",
+    question: "Почему стрелочные функции удобны для использования как колбеки?",
+    options: [
+      "Благодаря их более короткому синтаксису",
+      "Потому что они работают быстрее, чем обычные",
+    ],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
+  },
+  "js-iterating-methods-params-quiz": {
+    id: "js-iterating-methods-params-quiz",
+    question:
+      "Каким по порядку параметром будет в колбек-функции счетчик (индекс) текущей итерации?",
+    options: ["Первым", "Вторым", "Третьим"],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-map-return-quiz": {
+    id: "js-map-return-quiz",
+    question: "Что возвращает метод map(callback)?",
+    options: ["Массив", "Объект", "Произвольное значение"],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
+  },
+  "js-filter-return-quiz": {
+    id: "js-filter-return-quiz",
+    question: "Что возвращает метод filter()?",
+    options: ["Объект", "Массив", "Произвольное значение"],
+    correctAnswer: 1,
+    successMessage: "Точно так! Метод filter() возвращает новый массив.",
+  },
+  "js-filter-length-quiz": {
+    id: "js-filter-length-quiz",
+    question: "Массив какой длины возвращает метод filter()?",
+    options: [
+      "Всегда такой же, как и массив, к которому он был применен",
+      "Произвольной, зависит от условия колбек-функции",
+      "На единицу меньше длины массива, к которому он был применен",
+    ],
+    correctAnswer: 1,
+    successMessage: "Правильно!",
+  },
+  "js-find-return-quiz": {
+    id: "js-find-return-quiz",
+    question: "Что возвращает метод find()?",
+    options: ["Массив", "Объект", "Элемент, который ищем"],
+    correctAnswer: 2,
+    successMessage: "Правильно!",
+  },
+  "js-find-undefined-quiz": {
+    id: "js-find-undefined-quiz",
+    question:
+      "Что вернет метод find(), если ни один элемент не удовлетворил критерий поиска?",
+    options: ["undefined", "null", "[]", "false"],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
+  },
+  "js-sort-comparator-quiz": {
+    id: "js-sort-comparator-quiz",
+    question: "Какой из колбеков используется для сортировки чисел?",
+    options: ["(a, b) => a.localeCompare(b)", "(a, b) => a - b"],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Для числовой сортировки используется (a, b) => a - b. Метод localeCompare() используется для сортировки строк.",
+  },
 };

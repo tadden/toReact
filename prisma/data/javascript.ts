@@ -3953,8 +3953,1395 @@ console.log(fifth); // { propA: 5, propB: 20, propC: 15 }</code></pre>
         "Изучаем перебирающие методы массивов: forEach, map, filter, find, reduce и другие.",
       order: 3,
       videoUrl: null,
-      resources: [],
-      topics: [],
+      resources: [
+        {
+          type: "video",
+          title: "Модуль 4. Занятие 1. Перебирающие методы массивов",
+          url: "https://www.youtube.com/watch?v=Tn0VcQLhR6g",
+        },
+        {
+          type: "video",
+          title: "Модуль 4. Занятие 2. Перебирающие методы массивов",
+          url: "https://www.youtube.com/watch?v=tJjxVHDQuwQ",
+        },
+      ],
+      homework: {
+        id: "js-array-methods-hw",
+        title: "Домашнее задание: Перебирающие методы массивов",
+        description: `<h2 style="margin-bottom: 1.5rem;">Критерии приема</h2>
+
+<p>Время быстро летит, не так ли?</p>
+
+<p><strong>Модуль 4 почти пройден! 💪</strong></p>
+
+<p>После изучения материалов этого модуля ты:</p>
+
+<ul class="list-disc">
+  <li>понимаешь принцип работы колбек-функций и стрелочных функций</li>
+  <li>умеешь применять эти функции на практике</li>
+  <li>знаешь, как работать с массивом объектов</li>
+  <li>знаешь такие методы массивов, как: <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">forEach</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">map</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">flatMap</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">filter</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">find</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">every</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">some</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">reduce</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">toSorted</code></li>
+  <li>умеешь настраивать свой порядок сортировки чисел и строк</li>
+  <li>знаешь, как использовать методы массива в ланцюжках</li>
+</ul>
+
+<p>А теперь давай перейдем к практике!</p>
+<p>На тебя чекают 4 задачи, в каждой из которых нужно использовать изученные методы массивов!</p>
+
+<div class="attention-block" style="background-color: rgba(255, 165, 0, 0.1); padding: 10px; border-left: 5px solid orange;">
+  <p>⚠️ После внесения изменений в свой репозиторий, подождите, пожалуйста, 5 минут перед отправкой работы на проверку. Ведь гитхабу необходимо время, чтобы обновить версию</p>
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Домашнее задание №4</h2>
+
+<ul class="list-disc">
+  <li>Создай репозиторий <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-04</code> та склонируй его себе на компьютер.</li>
+  <li>В папке <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-04</code> создай структуру проекта, как показано на схеме ниже.</li>
+</ul>
+
+<ul class="list-disc">
+  <li>Прочитай каждое задание и выполни его в соответствующем файле.</li>
+  <li>Убедись, что код отформатирован с помощью <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Prettier</code>, а в консоли отсутствуют ошибки и предупреждения при открытии живой страницы задания.</li>
+  <li>Сдай домашнее задание на проверку.</li>
+</ul>
+
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит два ссылки: на исходные файлы и рабочую страницу на <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">GitHub Pages</code>.</p>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 1. Имена пользователей</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-1.js</strong></p>
+</div>
+
+<p>Напиши стрелочную функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUserNames(users)</code>, которая принимает один параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> — массив объектов пользователей. Функция должна возвращать массив имён всех пользователей (свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">name</code>) из массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code>.</p>
+
+<p>Возьми код ниже и вставь после объявления своей функции для проверки корректности её работы. В консоль будут выведены результаты её вызовов.</p>
+
+<pre><code class="language-javascript">console.log(
+  getUserNames([
+    {
+      name: "Moore Hensley",
+      email: "moorehensley@indexia.com",
+      balance: 2811
+    },
+    {
+      name: "Sharlene Bush",
+      email: "sharlenebush@tubesys.com",
+      balance: 3821
+    },
+    {
+      name: "Ross Vazquez",
+      email: "rossvazquez@xinware.com",
+      balance: 3793
+    },
+    {
+      name: "Elma Head",
+      email: "elmahead@omatom.com",
+      balance: 2278
+    },
+    {
+      name: "Carey Barr",
+      email: "careybarr@nurali.com",
+      balance: 3951
+    },
+    {
+      name: "Blackburn Dotson",
+      email: "blackburndotson@furnigeer.com",
+      balance: 1498
+    },
+    {
+      name: "Sheree Anthony",
+      email: "shereeanthony@kog.com",
+      balance: 2764
+    },
+  ])
+); // ["Moore Hensley", "Sharlene Bush", "Ross Vazquez", "Elma Head", "Carey Barr", "Blackburn Dotson", "Sheree Anthony"]</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUserNames</code></li>
+  <li>Значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUserNames</code> — это присвоена стрелочная функция с параметром <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">(users)</code>.</li>
+  <li>Для перебора параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> используется метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">map()</code></li>
+  <li>Вызов функции из зазначению массива пользователей возвращает массив ["Moore Hensley", "Sharlene Bush", "Ross Vazquez", "Elma Head", "Carey Barr", "Blackburn Dotson", "Sheree Anthony"]</li>
+  <li>Вызов функции с випадковими, но валидными аргументами возвращает правильные значения</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 2. Пользователь с другом</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-2.js</strong></p>
+</div>
+
+<p>Напиши стрелочную функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUsersWithFriend(users, friendName)</code>, которая принимает два параметра:</p>
+
+<ul class="list-disc">
+  <li>первый параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> — массив объектов пользователя</li>
+  <li>второй параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code> — имя друга для поиска</li>
+</ul>
+
+<p>Функция должна возвращать массив всех пользователей из массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code>, у которых есть друг с именем <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code>. Друзья каждого пользователя хранятся в свойстве <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friends</code>. Если пользователей с таким другом нет, функция должна возвращать пустой массив.</p>
+
+<p>Подсказки:</p>
+<ul class="list-disc">
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">filter()</code> можно использовать для создания нового массива с элементами, которые удовлетворяют нужному условию.</li>
+  <li>Используй метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">includes()</code> для проверки, содержит ли массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friends</code> значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code>.</li>
+</ul>
+
+<p>Возьми код ниже и вставь после объявления своей функции для проверки корректности её работы. В консоль будут выведены результаты её вызовов.</p>
+
+<pre><code class="language-javascript">const allUsers = [
+  {
+    name: "Moore Hensley",
+    friends: ["Sharron Pace"],
+  },
+  {
+    name: "Sharlene Bush",
+    friends: ["Briana Decker", "Sharron Pace"],
+  },
+  {
+    name: "Ross Vazquez",
+    friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+  },
+  {
+    name: "Elma Head",
+    friends: ["Goldie Gentry", "Aisha Tran"],
+  },
+  {
+    name: "Carey Barr",
+    friends: ["Jordan Sampson", "Eddie Strong"],
+  },
+  {
+    name: "Blackburn Dotson",
+    friends: ["Jacklyn Lucas", "Linda Chapman"],
+  },
+  {
+    name: "Sheree Anthony",
+    friends: ["Goldie Gentry", "Briana Decker"],
+  }
+];
+
+console.log(getUsersWithFriend(allUsers, "Briana Decker"));
+// [{ name: "Sharlene Bush", ... }, { name: "Sheree Anthony", ... }]
+
+console.log(getUsersWithFriend(allUsers, "Goldie Gentry"));
+// [{ name: "Elma Head", ... }, { name: "Sheree Anthony", ... }]
+
+console.log(getUsersWithFriend(allUsers, "Adrian Cross")); // []</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUsersWithFriend</code></li>
+  <li>Значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getUsersWithFriend</code> — это стрелочная функция с параметрами <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">(users, friendName)</code></li>
+  <li>Для перебора параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> используется метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">filter()</code></li>
+  <li>Если значение параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code> — это строка "Briana Decker", функция возвращает массив объектов пользователей Sharlene Bush і Sheree Anthony</li>
+  <li>Если значение параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code> — это строка "Goldie Gentry", функция возвращает массив объектов пользователей Elma Head і Sheree Anthony</li>
+  <li>Если значение параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friendName</code> — это строка "Adrian Cross", функция возвращает пустой массив</li>
+  <li>Вызов функции с випадковими, але валидными аргументами возвращает правильные значения</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 3. Сортировка по количеству друзей</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-3.js</strong></p>
+</div>
+
+<p>Напиши стрелочную функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">sortByDescendingFriendCount(users)</code>, которая принимает один параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> — массив объектов пользователя.</p>
+
+<p>Функция должна полностью вернуть объекты из массива <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code>, отсортированные, но в убывающем порядке количества их друзей (свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">friends</code>).</p>
+
+<p>Возьми код ниже и вставь после объявления своей функции для проверки корректности её работы. В консоль будут выведены все рузультати её работы.</p>
+
+<pre><code class="language-javascript">console.log(
+  sortByDescendingFriendCount([
+    {
+      name: "Moore Hensley",
+      friends: ["Sharron Pace"],
+      gender: "male"
+    },
+    {
+      name: "Sharlene Bush",
+      friends: ["Briana Decker", "Sharron Pace"],
+      gender: "female"
+    },
+    {
+      name: "Ross Vazquez",
+      friends: ["Marilyn Mcintosh", "Padilla Garrison", "Naomi Buckner"],
+      gender: "male"
+    },
+    {
+      name: "Elma Head",
+      friends: ["Goldie Gentry", "Aisha Tran"],
+      gender: "female"
+    },
+    {
+      name: "Carey Barr",
+      friends: ["Jordan Sampson", "Eddie Strong"],
+      gender: "male"
+    },
+    {
+      name: "Blackburn Dotson",
+      friends: ["Jacklyn Lucas", "Linda Chapman"],
+      gender: "male"
+    },
+    {
+      name: "Sheree Anthony",
+      friends: ["Goldie Gentry", "Briana Decker"],
+      gender: "female"
+    },
+    {
+      name: "Moore Hensley",
+      friends: ["Sharron Pace"],
+      gender: "male"
+    }
+  ])
+);
+// Результат: сортировка по убыванию числа друзей</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">sortByDescendingFriendCount</code></li>
+  <li>Значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">sortByDescendingFriendCount</code> — это стрелочная функция с параметром <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">(users)</code></li>
+  <li>Для перебора параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> используется метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">toSorted()</code></li>
+  <li>Вызов функции возвращает новый массив пользователей, отсортированных по убыванию количества их друзей</li>
+  <li>Вызов функции с випадковими, але валидными аргументами возвращает правильные значения</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 4. Общий баланс</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-4.js</strong></p>
+</div>
+
+<p>Напиши стрелочную функцию <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getTotalBalanceByGender(users, gender)</code>, которая принимает два параметра:</p>
+
+<ul class="list-disc">
+  <li>первый параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> — массив объектов пользователей,</li>
+  <li>второй параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">gender</code> — строка, что сохраняет стать.</li>
+</ul>
+
+<p>Функция должна использовать ланцюжок вызова методов и возвращать общий баланс пользователей (свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">balance</code>), стать которых (свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">gender</code>) сбігається со значением параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">gender</code>.</p>
+
+<p>Возьми код ниже и вставь после объявления своей функции для проверки корректности её работы. В консоль будут выведены результаты её вызовов.</p>
+
+<pre><code class="language-javascript">const clients = [
+  {
+    name: "Moore Hensley",
+    gender: "male",
+    balance: 2811
+  },
+  {
+    name: "Sharlene Bush",
+    gender: "female",
+    balance: 3821
+  },
+  {
+    name: "Ross Vazquez",
+    gender: "male",
+    balance: 3793
+  },
+  {
+    name: "Elma Head",
+    gender: "female",
+    balance: 2278
+  },
+  {
+    name: "Carey Barr",
+    gender: "male",
+    balance: 3951
+  },
+  {
+    name: "Blackburn Dotson",
+    gender: "male",
+    balance: 1498
+  },
+  {
+    name: "Sheree Anthony",
+    gender: "female",
+    balance: 2764
+  }
+];
+
+console.log(getTotalBalanceByGender(clients, "male")); // 12053
+
+console.log(getTotalBalanceByGender(clients, "female")); // 8863</code></pre>
+
+<p>Запиши этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getTotalBalanceByGender</code></li>
+  <li>Значение <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getTotalBalanceByGender</code> — это стрелочная функция с параметрами <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">(users, gender)</code></li>
+  <li>В теле функции используется ланцюжок методов в правильном порядке</li>
+  <li>Значения параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">users</code> не изменяются</li>
+  <li>Если значение параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">gender</code> — это строка "male", функция возвращает число 12053</li>
+  <li>Если значение параметра <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">gender</code> — это строка "female", функция возвращает число 8863</li>
+  <li>Вызов функции с випадковими, але валидными аргументами возвращает правильные значения</li>
+</ul>`,
+      },
+      topics: [
+        {
+          id: "js-callback-functions",
+          title: "Колбек-функции",
+          order: 0,
+          content: `
+
+<p>Значение функции (ссылка на неё) можно хранить в переменной или передавать в качестве аргумента в другую функцию. В этом смысле функции не отличаются от чисел, строк или массивов.</p>
+
+<pre><code class="language-javascript">function greet(name) {
+  return \`Welcome \${name}!\`;
+}
+
+// Вызываем функцию greet и выводим результат в консоль
+console.log(greet("Mango")); // "Welcome Mango!"
+
+// Выводим функцию greet в консоль, не вызывая её
+console.log(greet); // f greet() {return \`Welcome \${name}!\`}</code></pre>
+
+<p>В первом логе мы вызываем функцию <code>greet</code> с помощью круглых скобок, и в консоль выводится результат её выполнения.</p>
+
+<p>Во втором логе передаётся ссылка на функцию, а не результат её вызова (отсутствуют круглые скобки), поэтому в консоль выводится внутреннее представление нашей функции. Это означает, что ссылку на функцию можно записать в переменную или передать как аргумент другой функции.</p>
+
+[NEXT]
+
+<p>Объявим две функции <code>greet</code> и <code>notify</code>, которые принимают имя пользователя и выводят разные сообщения.</p>
+
+<pre><code class="language-javascript">function greet(name) {
+  console.log(\`Welcome \${name}!\`);
+}
+
+function notify(name) {
+  console.log(\`Dear \${name}, your room will be ready in 30 minutes\`);
+}</code></pre>
+
+<p>Далее объявим еще одну функцию <code>registerGuest</code>, которая будет принимать два параметра.</p>
+
+<pre><code class="language-javascript">function registerGuest(name, callback) {
+  console.log(\`Registering \${name}!\`);
+  callback(name);
+}</code></pre>
+
+<ul class="list-disc">
+  <li><code>name</code> — имя пользователя</li>
+  <li><code>callback</code> — ссылка на функцию, которую нужно вызвать в теле <code>registerGuest</code> и передать ей имя пользователя</li>
+</ul>
+
+<p>Теперь используем объявленные функции при вызове <code>registerGuest</code>.</p>
+
+<pre><code class="language-javascript">function greet(name) {
+  console.log(\`Welcome \${name}!\`);
+}
+
+function notify(name) {
+  console.log(\`Dear \${name}, your room will be ready in 30 minutes\`);
+}
+
+function registerGuest(name, callback) {
+  console.log(\`Registering \${name}!\`);
+  callback(name);
+}
+
+registerGuest("Mango", greet);
+// "Registering Mango!"
+// "Welcome Mango!"
+
+registerGuest("Mango", notify);
+// "Registering Mango!"
+// "Dear Mango, your room will be ready in 30 minutes"</code></pre>
+
+<p>Мы передали ссылку на функцию <code>greet</code> или <code>notify</code> как аргумент, поэтому они будут присвоены в параметр <code>callback</code> и вызваны внутри функции <code>registerGuest</code> с помощью круглых скобок.</p>
+
+<p><strong>Функция обратного вызова (callback, колбек)</strong> — это функция, которая передаётся другой функции как аргумент, а та в свою очередь использует переданную функцию.</p>
+<p>В примере функции <code>greet</code> и <code>notify</code> — это колбек-функции, потому что мы передаем их как аргумент в функцию <code>registerGuest</code>. Имя параметра для колбека может быть произвольным, главное помнить, что значением будет функция.</p>
+
+<p><strong>Функция высшего порядка (higher order function)</strong> — функция, которая принимает в качестве параметров другие функции или возвращает функцию в качестве результата.</p>
+<p>В примере это функция <code>registerGuest</code>, потому что она ожидает другую функцию как параметр и вызывает её.</p>
+
+[QUIZ: js-callback-syntax-quiz]
+
+[NEXT]
+
+<h3>Инлайн-колбеки</h3>
+
+<p>Если колбек-функция маленькая и нужна только для передачи аргументом, её можно объявить непосредственно при вызове функции, в которую мы передаем колбек. Такие функции называются инлайн-колбеки. Они будут доступны только как значение параметра и больше нигде в коде.</p>
+
+<pre><code class="language-javascript">function registerGuest(name, callback) {
+  console.log(\`Registering \${name}!\`);
+  callback(name);
+}
+
+// Передаем инлайн-функцию greet в качестве колбека
+registerGuest("Mango", function greet(name) {
+  console.log(\`Welcome \${name}!\`);
+});
+
+// Передаем инлайн-функцию notify в качестве колбека
+registerGuest("Poly", function notify(name) {
+  console.log(\`Dear \${name}, your room will be ready in 30 minutes\`);
+});</code></pre>
+
+[NEXT]
+
+<h3>Метод forEach(callback)</h3>
+
+<p>Метод <code>forEach(callback)</code> — это метод массива, который используется для замены циклов <code>for</code> и <code>for...of</code> при работе с коллекцией.</p>
+
+<pre><code class="language-javascript">array.forEach(function callback(element, index, array) {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Поэлементно перебирает массив <code>array</code>.</li>
+  <li>Вызывает колбек-функцию для каждого элемента массива.</li>
+  <li>Возвращает <code>undefined</code>, даже если явно задать выражение после <code>return</code>.</li>
+</ul>
+
+<p>Колбек-функция метода <code>forEach()</code> всегда получает такие параметры: значение текущего элемента массива <code>element</code>, его индекс <code>index</code> и собственно ссылку на исходный массив <code>array</code>. Обрати внимание, что имена параметров произвольные, но очень важна их <strong>последовательность(!)</strong>. Также не все параметры обязательно объявлять. Если тебе нужен только первый параметр <code>element</code> (это самый частый случай), то следующие параметры <code>index</code> и <code>array</code> можно не объявлять.</p>
+
+<pre><code class="language-javascript">const numbers = [5, 10, 15, 20, 25];
+
+// Классический for
+for (let i = 0; i < numbers.length; i += 1) {
+  console.log(\`Index \${i}, value \${numbers[i]}\`);
+}
+
+// Перебирающий метод forEach
+numbers.forEach(function (number, index) {
+  console.log(\`Index \${index}, value \${number}\`);
+});</code></pre>
+
+<p>Единственный случай, когда стоит использовать циклы <code>for</code> или <code>for...of</code> для перебора массива, — это задачи с прерыванием выполнения цикла. Прервать выполнение метода <code>forEach</code> нельзя, он всегда перебирает массив до конца.</p>
+
+[QUIZ: js-foreach-return-quiz]
+`,
+        },
+        {
+          id: "js-arrow-functions",
+          title: "Стрелочные функции",
+          order: 1,
+          content: `
+<h3>Стрелочные функции: синтаксис</h3>
+
+<p>Стрелочные функции (сленг — "стрелки") имеют укороченный, более лаконичный синтаксис, что уменьшает объем кода, особенно когда функция маленькая или если она используется как колбек.</p>
+
+<p>Все стрелки создаются как функциональное выражение, и их необходимо присваивать переменной.</p>
+
+<pre><code class="language-javascript">// Обычное объявление функции
+function classicAdd(a, b, c) {
+  return a + b + c;
+}
+
+// То же самое стрелочной функцией
+const arrowAdd = (a, b, c) => {
+  return a + b + c;
+};</code></pre>
+
+<ul class="list-disc">
+  <li>Ключевое слово <code>function</code> <strong>не используется</strong></li>
+  <li>Сразу указывается объявление параметров</li>
+  <li>После параметров используется символ <code>=&gt;</code> и тело функции в фигурных скобках</li>
+</ul>
+
+<p>Если параметров несколько, то они перечисляются через запятую в круглых скобках, между знаком равенства <code>=</code> и стрелкой <code>=&gt;</code>.</p>
+
+<pre><code class="language-javascript">const add = (a, b, c) => {
+  return a + b + c;
+};</code></pre>
+
+<p>Если параметр один, его можно объявлять без круглых скобок.</p>
+
+<pre><code class="language-javascript">const add = a => {
+  return a + 5;
+};</code></pre>
+
+<p>Если параметры отсутствуют, то обязательно должны быть пустые круглые скобки.</p>
+
+<pre><code class="language-javascript">const greet = () => {
+  console.log("Hello!");
+};</code></pre>
+
+[NEXT]
+
+<h3>Неявный возврат</h3>
+
+<p>В стрелочной функции после символа <code>=&gt;</code> находится её тело. Существует два способа записи: с фигурными скобками и без них.</p>
+
+<h4>Запись с фигурными скобками</h4>
+
+<p>Если есть фигурные скобки и функция должна возвращать какое-то значение, необходимо явно поставить <code>return</code>. Это называется <strong>явный возврат</strong> (explicit return).</p>
+
+<pre><code class="language-javascript">const add = (a, b, c) => {
+  console.log(a, b, c);
+  return a + b + c;
+};</code></pre>
+
+<p>Такой синтаксис используется в том случае, если в теле функции нужно выполнить ещё какие-то инструкции, кроме возврата значения.</p>
+
+<h4>Запись без фигурных скобок</h4>
+
+<p>Если фигурные скобки отсутствуют, то возвращается результат выражения, которое стоит после <code>=&gt;</code>. Это называется <strong>неявный возврат</strong> (implicit return). В примере вернётся результат выражения сложения параметров <code>a, b и c</code>.</p>
+
+<pre><code class="language-javascript">const add = (a, b, c) => a + b + c;</code></pre>
+
+<p>Синтаксис неявного возврата существенно сокращает «шум» объявления функции с телом и возвращаемым выражением. Тем не менее, он уместен только тогда, когда в теле функции не нужно выполнять никаких дополнительных инструкций, кроме возврата значения.</p>
+
+<pre><code class="language-javascript">// До
+function classicAdd(a, b, c) {
+  return a + b + c;
+}
+
+// После
+const arrowAdd = (a, b, c) => a + b + c;</code></pre>
+
+[NEXT]
+
+<h3>Псевдомассив arguments</h3>
+
+<p>У стрелочных функций нет локальной переменной <code>arguments</code>, которая содержит все аргументы. Если необходимо собрать все аргументы в массив, используется операция <code>rest</code>.</p>
+
+<pre><code class="language-javascript">const add = (...args) => {
+  console.log(args);
+};
+
+add(1, 2, 3); // [1, 2, 3]</code></pre>
+
+[QUIZ: js-arrow-arguments-quiz]
+
+[NEXT]
+
+<h3>Колбеки</h3>
+
+<p>Анонимные стрелочные функции отлично подходят для колбеков перебирающих методов массива благодаря краткому синтаксису объявления, особенно если код в теле функции не громоздкий.</p>
+
+<pre><code class="language-javascript">const numbers = [5, 10, 15, 20, 25];
+
+// Обычная анонимная функция
+numbers.forEach(function (number, index) {
+  console.log(\`Index \${index}, value \${number}\`);
+});
+
+// Стрелочная анонимная функция
+numbers.forEach((number, index) => {
+  console.log(\`Index \${index}, value \${number}\`);
+});</code></pre>
+
+<p>Стрелочную колбек-функцию также можно объявлять отдельно и передавать на неё ссылку. Это стоит делать, если одна функция используется в нескольких местах программы или если она громоздкая.</p>
+
+<pre><code class="language-javascript">const numbers = [5, 10, 15, 20, 25];
+
+const logMessage = (number, index) => {
+  console.log(\`Index \${index}, value \${number}\`);
+};
+
+numbers.forEach(logMessage);</code></pre>
+
+[QUIZ: js-arrow-callbacks-quiz]
+`,
+        },
+        {
+          id: "js-map-and-flatmap-methods",
+          title: "Методы map и flatMap",
+          order: 2,
+          content: `
+<h3>Чистые функции</h3>
+
+<p><strong>Функция с побочными эффектами</strong> — это функция, которая в процессе выполнения может:</p>
+
+<ul class="list-disc">
+  <li>изменять или использовать глобальные переменные</li>
+  <li>изменять значения аргументов ссылочного типа</li>
+  <li>выполнять операции ввода-вывода и т.д.</li>
+</ul>
+
+<pre><code class="language-javascript">const dirtyMultiply = (array, value) => {
+  for (let i = 0; i < array.length; i += 1) {
+    array[i] = array[i] * value;
+  }
+};
+
+const numbers = [1, 2, 3, 4, 5];
+dirtyMultiply(numbers, 2);
+// Произошла мутация исходных данных - массива numbers
+console.log(numbers); // [2, 4, 6, 8, 10]</code></pre>
+
+<p>Функция <code>dirtyMultiply(array, value)</code> умножает каждый элемент массива <code>array</code> на число <code>value</code>. Она изменяет (мутирует) исходный массив по ссылке.</p>
+
+<p><strong>Чистая функция (pure function)</strong> — это функция, результат которой зависит только от значений переданных аргументов. При условии одинаковых аргументов она всегда возвращает один и тот же результат и не имеет побочных эффектов, то есть не изменяет значения аргументов.</p>
+
+<p>Напишем реализацию чистой функции умножения элементов массива, которая возвращает новый массив, не изменяя исходный.</p>
+
+<pre><code class="language-javascript">const pureMultiply = (array, value) => {
+  const newArray = [];
+
+  array.forEach(element => {
+    newArray.push(element * value);
+  });
+
+  return newArray;
+};
+
+const numbers = [1, 2, 3, 4, 5];
+const doubledNumbers = pureMultiply(numbers, 2);
+
+// Мутация исходных данных не произошла
+console.log(numbers); // [1, 2, 3, 4, 5]
+// Функция вернула новый массив с измененными данными
+console.log(doubledNumbers); // [2, 4, 6, 8, 10]</code></pre>
+
+[NEXT]
+
+<h3>Перебирающие методы</h3>
+
+<p>В JavaScript есть методы массивов, которые пришли из функциональных языков. Большинство из перебирающих методов массивов — это чистые функции. Они создают новый массив, заполняют его, применяя к значению каждого элемента указанную колбек-функцию, после чего возвращают этот новый массив.</p>
+
+<p>Все перебирающие методы массивов имеют схожий синтаксис. На исходном массиве <code>array</code> вызывается перебирающий метод <code>method</code>, в который аргументом передаётся колбек-функция <code>callback</code>.</p>
+
+<pre><code class="language-javascript">array.method(callback(currentValue, index, array))</code></pre>
+
+<p>У большинства методов колбек-функции, которые являются их аргументом, получают три следующих параметра:</p>
+
+<ul class="list-disc">
+  <li>первым параметром будет значение текущего элемента массива <code>currentValue</code></li>
+  <li>вторым параметром будет индекс текущего элемента массива <code>index</code></li>
+  <li>третьим параметром будет ссылка на сам исходный массив <code>array</code></li>
+</ul>
+
+<pre><code class="language-javascript">array.method((item, idx, arr) => {
+  // логика, которая будет выполняться на каждой итерации
+});</code></pre>
+
+<p>Все параметры, кроме значения текущего элемента массива <code>item</code>, необязательны. Названия параметров могут быть любыми, главное, чтобы они были понятны тебе и другим разработчикам.</p>
+
+<pre><code class="language-javascript">array.method(item => {
+  // логика, которая будет выполняться на каждой итерации
+});</code></pre>
+
+[QUIZ: js-iterating-methods-params-quiz]
+
+[NEXT]
+
+<h3>Метод map()</h3>
+
+<p>Большинство перебирающих методов массива — это чистые функции. Они создают новый массив, заполняют его, применяя к значению каждого элемента указанную колбек-функцию, после чего возвращают этот новый массив.</p>
+
+<p>Метод <code>map(callback)</code> используется для трансформации массива. Он вызывает колбек-функцию для каждого элемента исходного массива, а результат её работы записывает в новый массив, который и будет результатом выполнения метода.</p>
+
+<pre><code class="language-javascript">array.map((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Поэлементно перебирает оригинальный массив</li>
+  <li>Не изменяет оригинальный массив</li>
+  <li>Результат работы колбек-функции записывается в новый массив</li>
+  <li>Возвращает новый массив такой же длины, как и массив, к которому он был применен</li>
+</ul>
+
+<p>Его можно использовать для того, чтобы изменить каждый элемент массива. Оригинальный массив используется как эталон, на основе которого можно сделать другую коллекцию.</p>
+
+<pre><code class="language-javascript">const planets = ["Earth", "Mars", "Venus", "Jupiter"];
+
+const planetsInUpperCase = planets.map(planet => planet.toUpperCase());
+console.log(planetsInUpperCase); // ["EARTH", "MARS", "VENUS", "JUPITER"]
+
+const planetsInLowerCase = planets.map(planet => planet.toLowerCase());
+console.log(planetsInLowerCase); // ["earth", "mars", "venus", "jupiter"]
+
+// Оригинальный массив не изменился
+console.log(planets); // ["Earth", "Mars", "Venus", "Jupiter"]</code></pre>
+
+<p>Использование анонимных стрелочных функций с неявным возвратом существенно сокращает «шум» объявления колбек-функции, что делает код чище и проще для восприятия.</p>
+
+[QUIZ: js-map-return-quiz]
+
+[NEXT]
+
+<h3>Массив объектов</h3>
+
+<p>Мы уже знаем, что типичная задача — это манипуляция массивом объектов. Например, получить массив значений свойства из всех объектов. У нас есть массив студентов, а нужно получить отдельный массив их имен.</p>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+  { name: "Houston", score: 64 },
+];
+
+const names = students.map(student => student.name);
+console.log(names); // ["Mango", "Poly", "Ajax", "Kiwi", "Houston"]</code></pre>
+
+<p>Используя метод <code>map()</code>, можно перебрать массив объектов, и в колбек-функции вернуть значение свойства каждого из них.</p>
+
+[NEXT]
+
+<h3>Метод flatMap()</h3>
+
+<p>Метод <code>flatMap(callback)</code> аналогичен методу <code>map()</code>, но применяется в случаях, когда результат — это многомерный массив, который необходимо «сгладить».</p>
+
+<pre><code class="language-javascript">array.flatMap((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<p>В массиве <code>students</code> хранится коллекция студентов со списком предметов, которые посещает студент в свойстве <code>courses</code>. Несколько студентов могут посещать один и тот же предмет. Необходимо составить список всех предметов, которые посещает эта группа студентов, пока что даже повторяющихся.</p>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Mango", courses: ["mathematics", "physics"] },
+  { name: "Poly", courses: ["science", "mathematics"] },
+  { name: "Kiwi", courses: ["physics", "biology"] },
+];
+
+const mappedCourses = students.map(student => student.courses);
+console.log(mappedCourses) // [["mathematics", "physics"], ["science", "mathematics"], ["physics", "biology"]]
+
+const flattenedCourses = students.flatMap(student => student.courses);
+console.log(flattenedCourses) // ["mathematics", "physics", "science", "mathematics", "physics", "biology"]</code></pre>
+
+<p>Метод <code>flatMap</code> вызывает колбек-функцию для каждого элемента исходного массива, а результат её работы записывает в новый массив. Отличие от <code>map()</code> состоит в том, что новый массив «сглаживается» на глубину, равную единице (одна вложенность). Этот сглаженный (плоский) массив и является результатом работы <code>flatMap()</code>.</p>
+`,
+        },
+        {
+          id: "js-filter-and-find-methods",
+          title: "Методы filter и find",
+          order: 3,
+          content: `
+<h3>Метод filter()</h3>
+
+<p>Метод <code>filter(callback)</code> используется для единственной операции — фильтрации массива. Под фильтрацией массива понимается отбор всех элементов из коллекции по определенному критерию.</p>
+
+<pre><code class="language-javascript">array.filter((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Не изменяет оригинальный массив.</li>
+  <li>Поэлементно перебирает оригинальный массив.</li>
+  <li>Возвращает новый массив.</li>
+  <li>Добавляет в возвращаемый массив элементы, которые удовлетворяют условию колбек-функции.</li>
+  <li>Если колбек вернул <code>true</code>, элемент добавляется в возвращаемый массив.</li>
+  <li>Если колбек вернул <code>false</code>, элемент не добавляется в возвращаемый массив.</li>
+  <li>Если ни один элемент не удовлетворил условию, возвращает пустой массив.</li>
+</ul>
+
+<pre><code class="language-javascript">const values = [51, -3, 27, 21, -68, 42, -37];
+
+const positiveValues = values.filter(value => value >= 0);
+console.log(positiveValues); // [51, 27, 21, 42]
+// В positiveValues попали все элементы массива values, которые удовлетворили условию колбека, то есть были >= 0
+
+const negativeValues = values.filter(value => value < 0);
+console.log(negativeValues); // [-3, -68, -37]
+// В negativeValues попали все элементы массива values, которые удовлетворили условию колбека, то есть были < 0
+
+const bigValues = values.filter(value => value > 1000);
+console.log(bigValues); // []
+// В bigValues попали все элементы массива values, которые удовлетворили условию колбека, то есть были > 1000
+
+console.log(values); // [51, -3, 27, 21, -68, 42, -37]
+// Оригинальный массив values не изменился</code></pre>
+
+<p>Итак, метод <code>filter</code> вызывает колбек-функцию для каждого элемента исходного массива. Если результат её выполнения <code>true</code>, текущий элемент добавляется в новый массив.</p>
+
+[QUIZ: js-filter-return-quiz]
+
+[QUIZ: js-filter-length-quiz]
+
+[NEXT]
+
+<h3>Метод filter() на массиве объектов</h3>
+
+<p>При работе с массивом объектов выполняется фильтрация по значению определенного свойства. В результате получается новый массив отфильтрованных объектов.</p>
+
+<p>Рассмотрим пример, где есть массив студентов с баллами за тест. Необходимо отфильтровать студентов, у которых:</p>
+
+<ul class="list-disc">
+  <li>высокие баллы (от 80 включительно)</li>
+  <li>низкие баллы (ниже 50)</li>
+  <li>средние баллы (от 50 включительно до 80)</li>
+</ul>
+
+<pre><code class="language-javascript">const LOW_SCORE = 50;
+const HIGH_SCORE = 80;
+const students = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+  { name: "Houston", score: 64 },
+];
+
+const best = students.filter(student => student.score >= HIGH_SCORE);
+console.log(best); // Массив объектов с именами Mango и Kiwi
+
+const worst = students.filter(student => student.score < LOW_SCORE);
+console.log(worst); // Массив с одним объектом Ajax
+
+const average = students.filter(
+  (student) => student.score >= LOW_SCORE && student.score < HIGH_SCORE
+);
+console.log(average); // Массив объектов с именами Poly и Houston</code></pre>
+
+<p>В примере выше метод <code>filter()</code> создает новый массив с теми объектами из массива <code>students</code>, которые удовлетворяют условию, установленному на основе свойства <code>score</code>. Условия определяются в колбек-функции, которая передается в <code>filter()</code> как аргумент.</p>
+
+<p>В переменную <code>best</code> отфильтрованы объекты, в которых значение свойства <code>score</code> больше или равно <code>HIGH_SCORE</code>. Результатом будет массив объектов с именами <code>"Mango"</code> и <code>"Kiwi"</code>.</p>
+
+<p>В переменную <code>worst</code> — объекты, в которых значение свойства <code>score</code> меньше <code>LOW_SCORE</code>. Результатом будет массив с одним объектом с именем <code>"Ajax"</code>.</p>
+
+<p>В переменную <code>average</code> — объекты, в которых значение свойства <code>score</code> больше или равно <code>LOW_SCORE</code> и меньше <code>HIGH_SCORE</code>. Результатом будет массив объектов с именами <code>"Poly"</code> и <code>"Houston"</code>.</p>
+
+[NEXT]
+
+<h3>Метод find()</h3>
+
+<p>Ты уже знаешь, что метод <code>filter(callback)</code> используется для поиска всех элементов, которые удовлетворяют условию.</p>
+
+<p>Метод <code>find(callback)</code> позволяет найти и вернуть первый подходящий элемент, после чего перебирание массива прекращается. То есть он, в отличие от метода <code>filter(callback)</code>, ищет <strong>до первого совпадения</strong>.</p>
+
+<pre><code class="language-javascript">array.find((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Не изменяет оригинальный массив</li>
+  <li>Поэлементно перебирает оригинальный массив</li>
+  <li>Возвращает первый элемент, который удовлетворяет условию, то есть когда колбек возвращает <code>true</code></li>
+  <li>Если ни один элемент не удовлетворил условию, то есть для всех элементов колбек вернул <code>false</code>, метод возвращает <code>undefined</code></li>
+</ul>
+
+<p>Метод <code>find()</code> используется для одной задачи — поиска первого элемента, удовлетворяющего условию. Например, поиск пользователя по почте, автомобиля — по серийному номеру, книги — по названию и так далее.</p>
+
+<pre><code class="language-javascript">const colorPickerOptions = [
+  { label: "red", color: "#F44336" },
+  { label: "green", color: "#4CAF50" },
+  { label: "blue", color: "#2196F3" },
+  { label: "pink", color: "#E91E63" },
+  { label: "indigo", color: "#3F51B5" },
+];
+
+colorPickerOptions.find((option) => option.label === "blue");
+// { label: "blue", color: "#2196F3" }
+colorPickerOptions.find((option) => option.label === "pink");
+// { label: "pink", color: "#E91E63" }
+colorPickerOptions.find((option) => option.label === "white");
+// undefined</code></pre>
+
+[QUIZ: js-find-return-quiz]
+
+[QUIZ: js-find-undefined-quiz]
+`,
+        },
+        {
+          id: "js-every-some-reduce-methods",
+          title: "Методы every, some и reduce",
+          order: 4,
+          content: `
+<h3>Метод every()</h3>
+
+<p>Метод <code>every(callback)</code> проверяет, удовлетворяют ли <strong>все элементы</strong> условию колбек-функции.</p>
+
+<pre><code class="language-javascript">array.every((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Не изменяет оригинальный массив</li>
+  <li>Поэлементно перебирает оригинальный массив</li>
+  <li>Возвращает <code>true</code>, если все элементы массива удовлетворяют условию</li>
+  <li>Возвращает <code>false</code>, если хотя бы один элемент массива не удовлетворяет условию</li>
+  <li>Перебор массива прекращается, если колбек возвращает <code>false</code></li>
+</ul>
+
+<pre><code class="language-javascript">// Все элементы больше или равны нулю? - да
+[1, 2, 3, 4, 5].every((value) => value >= 0); // true
+
+// Все элементы больше или равны нулю? - нет
+[1, 2, 3, -10, 4, 5].every((value) => value >= 0); // false</code></pre>
+
+<p>При работе с массивом объектов проверяется значение какого-то их свойства. Например, перебирая массив объектов товаров, мы можем проверить, все ли товары есть в наличии.</p>
+
+<pre><code class="language-javascript">const products = [
+  { name: "apple", quantity: 2 },
+  { name: "orange", quantity: 5 },
+  { name: "plum", quantity: 0 },
+];
+
+const hasEveryProduct = products.every(product => product.quantity > 0);
+console.log(hasEveryProduct); // false</code></pre>
+
+[NEXT]
+
+<h3>Метод some()</h3>
+
+<p>Метод <code>some(callback)</code> проверяет, удовлетворяет ли <strong>хотя бы один элемент</strong> условию колбек-функции.</p>
+
+<pre><code class="language-javascript">array.some((element, index, array) => {
+  // Тело колбек-функции
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Не изменяет оригинальный массив</li>
+  <li>Поэлементно перебирает оригинальный массив</li>
+  <li>Возвращает <code>true</code>, если хотя бы один элемент массива удовлетворяет условию</li>
+  <li>Возвращает <code>false</code>, если ни один элемент массива не удовлетворяет условию</li>
+  <li>Перебор массива прекращается, если колбек возвращает <code>true</code></li>
+</ul>
+
+<pre><code class="language-javascript">// Есть ли хотя бы один элемент, который больше или равен нулю? - да
+[1, 2, 3, 4, 5].some(value => value >= 0); // true
+
+// Есть ли хотя бы один элемент, который больше или равен нулю? - да
+[-7, -20, 3, -10, -14].some(value => value >= 0); // true
+
+// Есть ли хотя бы один элемент, который меньше нуля? - нет
+[1, 2, 3, 4, 5].some(value => value < 0); // false
+
+// Есть ли хотя бы один элемент, который меньше нуля? - да
+[1, 2, 3, -10, 4, 5].some(value => value < 0); // true</code></pre>
+
+<p>Обрати внимание на отличие между методом <code>every</code> и методом <code>some</code>: метод <code>every()</code> проверяет, удовлетворяют ли все элементы условию колбек-функции. Метод <code>some()</code> проверяет, удовлетворяет ли хотя бы один элемент условию колбек-функции.</p>
+
+[NEXT]
+
+<h3>Метод reduce()</h3>
+
+<p>Метод <code>reduce(callback, initialValue)</code> используется для последовательной обработки каждого элемента массива с сохранением промежуточного результата. Немного сложнее других методов для усвоения, но результат того стоит.</p>
+
+<pre><code class="language-javascript">array.reduce((previousValue, element, index, array) => {
+  // Тело колбек-функции
+}, initialValue);</code></pre>
+
+<ul class="list-disc">
+  <li>Не изменяет оригинальный массив</li>
+  <li>Поэлементно перебирает оригинальный массив</li>
+  <li>Возвращает все, что угодно (объект, массив, строку, число и т.д.)</li>
+  <li>Может заменить функционал любого другого перебирающего метода массива и даже их комбинацию</li>
+</ul>
+
+<p>Метод <code>reduce()</code> ожидает 2 параметра:</p>
+<p>1-й параметр (обязательный) — <strong>колбек-функция</strong>, которая "обрабатывает" каждый элемент массива;<br>
+2-й параметр (не обязательный) — <code>initialValue</code> начальное значение аккумулятора.</p>
+
+<p><strong>Колбек-функция</strong> из параметра редьюса ожидает в свою очередь четыре параметра. Эти параметры, так же как и в колбеках других перебирающих методов массива, можно не объявлять, если они вам не нужны, но нельзя нарушать их последовательность:</p>
+
+<p>1-й параметр (<code>previousValue</code>) — это аккумулятор, то есть промежуточный результат. Значение, которое вернет колбек-функция на текущей итерации, будет значением этого параметра на следующей итерации;<br>
+2-й параметр — текущий элемент массива;<br>
+3-й параметр — индекс текущей итерации;<br>
+4-й параметр — ссылка на исходный массив.<br>
+Легче всего представить его работу на примере подсчета суммы элементов массива.</p>
+
+<pre><code class="language-javascript">const total = [2, 7, 3].reduce((previousValue, number) => {
+  return previousValue + number;
+}, 0);
+
+console.log(total); // 12</code></pre>
+
+<p>Рассмотрим детальнее работу редьюса в примере выше:</p>
+<ul class="list-disc">
+  <li>Начальное значение аккумулятора 0</li>
+  <li>первая итерация колбек-функции 0 + 2 вернет 2</li>
+  <li>вторая итерация колбек-функции 2 + 7 вернет 9</li>
+  <li>третья итерация колбек-функции 9 + 3 вернет 12</li>
+</ul>
+
+<p>Результатом кода выше будет 12.</p>
+
+<p>То есть метод <code>reduce()</code> используется, когда необходимо взять «много» и привести к «одному». В повседневных задачах его применение сводится к работе с числами.</p>
+
+[NEXT]
+
+<h3>Метод reduce() и массив объектов</h3>
+
+<p>При работе с массивом объектов выполняется редуцирование по значению определенного свойства. Например, у нас есть массив студентов с баллами за тест. Необходимо получить средний балл.</p>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+  { name: "Houston", score: 64 },
+];
+
+// Название аккумулятора может быть произвольным, это просто параметр функции
+const totalScore = students.reduce((total, student) => {
+  return total + student.score;
+}, 0);
+
+const averageScore = totalScore / students.length;</code></pre>
+
+<p>В примере выше метод <code>reduce()</code> используется для вычисления суммы значений свойства <code>score</code> для всех объектов массива <code>students</code>.</p>
+
+<p>Начиная со значения <code>0</code>, колбек-функция вычисляет сумму значений свойства <code>score</code> для каждого объекта массива <code>students</code>. Результат (сумма) сохраняется в переменной <code>totalScore</code>.</p>
+
+<p><code>const averageScore</code> вычисляет среднее значение <code>score</code> для всех объектов массива <code>students</code> путем деления суммы всех баллов на количество студентов.</p>
+`,
+        },
+        {
+          id: "js-sort-method",
+          title: "Метод sort",
+          order: 5,
+          content: `
+<h3>Метод sort()</h3>
+
+<p>Метод <code>sort()</code> сортирует элементы массива <strong>на месте</strong>, то есть мутирует исходный массив, и возвращает его.</p>
+
+<pre><code class="language-javascript">array.sort((a, b) => {
+  // Тело функции сравнения
+});</code></pre>
+
+<ul class="list-disc">
+  <li>Сортирует исходный массив (мутация)</li>
+  <li>Возвращает отсортированный массив</li>
+  <li>По умолчанию сортирует по Unicode (как строки)</li>
+</ul>
+
+<p>По умолчанию метод <code>sort()</code> приводит все элементы массива к строкам и сортирует их в лексикографическом (алфавитном) порядке Unicode. Из-за этого числовая сортировка без функции сравнения работает некорректно.</p>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+
+// ❌ Без функции сравнения — лексикографический порядок
+console.log(scores.sort()); // [19, 35, 56, 61, 74, 92]
+// Может показаться правильным, но для чисел это не всегда так:
+
+const scores2 = [27, 2, 61, 4, 7, 3, 75];
+console.log(scores2.sort()); // [2, 27, 3, 4, 61, 7, 75] ❌</code></pre>
+
+<p>При таком сортировании строки сравниваются посимвольно слева направо. Первый символ у 2 и у 27 одинаковый, но строка 2 содержит лишь 1 символ, поэтому она меньше, чем 27. Затем сравниваются строки 27 и 3. Первый символ «2» в строке 27 меньше, чем «3» в строке 3, поэтому 27 идёт перед 3.</p>
+
+[NEXT]
+
+<h3>Функция сравнения</h3>
+
+<p>Для корректной сортировки чисел необходимо передать <strong>функцию сравнения</strong> (comparator). Она принимает два аргумента и должна вернуть:</p>
+
+<ul class="list-disc">
+  <li>отрицательное число, если первый аргумент должен идти <strong>раньше</strong> второго</li>
+  <li>положительное число, если первый аргумент должен идти <strong>после</strong> второго</li>
+  <li><code>0</code>, если порядок не важен</li>
+</ul>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+
+// ✅ По возрастанию
+const ascending = [...scores].sort((a, b) => a - b);
+console.log(ascending); // [19, 35, 56, 61, 74, 92]
+
+// ✅ По убыванию
+const descending = [...scores].sort((a, b) => b - a);
+console.log(descending); // [92, 74, 61, 56, 35, 19]
+
+// Оригинальный массив не трогаем — используем копию через spread
+console.log(scores); // [61, 19, 74, 35, 92, 56]</code></pre>
+
+<p>Чтобы не мутировать оригинальный массив, перед сортировкой создают его копию с помощью оператора <code>...spread</code> или метода <code>slice()</code>.</p>
+
+[NEXT]
+
+<h3>Массив строк</h3>
+
+<p>Массив строк сортируется по алфавиту, но нужно учитывать регистр: стандартный Unicode-порядок ставит заглавные буквы раньше строчных.</p>
+
+<pre><code class="language-javascript">const students = ["Jacob", "Artemis", "Solomon", "Adrian", "Kai", "Ganymede"];
+
+console.log(students.sort()); // ["Adrian", "Artemis", "Ganymede", "Jacob", "Kai", "Solomon"]
+
+const letters = ["b", "B", "a", "A", "c", "C"];
+console.log(letters.sort()); // ["A", "B", "C", "a", "b", "c"]</code></pre>
+
+<p>Порядковый номер заглавных букв меньше, чем у строчных, поэтому заглавные идут первее строчных.</p>
+
+[NEXT]
+
+<h3>Метод localeCompare()</h3>
+
+<p>Для корректного сравнения строк с учётом языковых особенностей (например, кириллицы или диакритических знаков) используется метод <code>localeCompare()</code>.</p>
+
+<pre><code class="language-javascript">string.localeCompare(compareString)</code></pre>
+
+<ul class="list-disc">
+  <li>Возвращает отрицательное число, если строка должна идти <strong>перед</strong> <code>compareString</code></li>
+  <li>Возвращает положительное число, если строка должна идти <strong>после</strong> <code>compareString</code></li>
+  <li>Возвращает <code>0</code>, если строки равны</li>
+</ul>
+
+<pre><code class="language-javascript">const students = ["Богдан", "Андрій", "Злата", "Іванна"];
+
+// ✅ Корректная сортировка кириллицы
+const sorted = [...students].sort((a, b) => a.localeCompare(b));
+console.log(sorted); // ["Андрій", "Богдан", "Іванна", "Злата"]</code></pre>
+
+<p>Метод <code>localeCompare()</code> возвращает результат, который функция сравнения <code>sort()</code> ожидает: отрицательное, нулевое или положительное число, поэтому его удобно использовать напрямую.</p>
+
+[NEXT]
+
+<h3>Метод toSorted()</h3>
+
+<p>Метод <code>toSorted()</code> сортирует элементы массива.</p>
+
+<pre><code class="language-javascript">array.toSorted();</code></pre>
+
+<ul class="list-disc">
+  <li>Сортирует исходный массив</li>
+  <li>Возвращает новый массив</li>
+  <li>По замовчуванню сортирует за зростанням</li>
+</ul>
+
+<p>В отличие от метода <code>sort()</code>, он <strong>не мутирует исходный массив</strong> — а возвращает новый отсортированный массив. Это делает его предпочтительным вариантом при работе с неизменяемыми данными.</p>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+const ascendingScores = scores.toSorted();
+
+console.log(scores);          // [61, 19, 74, 35, 92, 56]
+console.log(ascendingScores); // [19, 35, 56, 61, 74, 92]</code></pre>
+
+<p>Исходный массив <code>scores</code> остаётся неизменным. Новый массив <code>ascendingScores</code> содержит массив чисел, отсортированных по возрастанию.</p>
+
+<p>Поскольку по умолчанию перед сортировкой метод <code>toSorted()</code> приводит все элементы массива к строкам, фактически элементы сортируются как строки, на основе кодов их символов в таблице Unicode. Стандартная сортировка чисел выглядит необычно, когда мы думаем о числах, но разумеется, если знать, что числа были преобразованы на строки.</p>
+
+<pre><code class="language-javascript">const scores = [27, 2, 61, 4, 7, 3, 75];
+
+console.log(scores.toSorted()); // [2, 27, 3, 4, 61, 7, 75]</code></pre>
+
+<p>При таком сортировании строки сравниваются посимвольно слева направо, то есть сначала сравниваются строки 2 и 27. Первый символ у них одинаковый, но строка 2 содержит лишь 1 символ, поэтому она меньше, чем 27. Затем сравниваются строки 27 и 3. Первый символ «2» в строке 27 меньший, чем «3» в строке 3, поэтому 27 идёт перед 3.</p>
+
+[NEXT]
+
+<h3>Массив строк</h3>
+
+<p>Массив строк сортируется по алфавиту.</p>
+
+<pre><code class="language-javascript">const students = ["Jacob", "Artemis", "Solomon", "Adrian",
+"Kai", "Ganymede"];
+
+console.log(students.toSorted()); // [ "Adrian", "Artemis",
+"Ganymede", "Jacob", "Kai", "Solomon" ]</code></pre>
+
+<p>Водночас порядковий номер великих літер менший, ніж у малих.</p>
+
+<pre><code class="language-javascript">const letters = ["b", "B", "a", "A", "c", "C"];
+
+console.log(letters.toSorted()); // ["A", "B", "C", "a", "b",
+"c"]</code></pre>
+
+[NEXT]
+
+<h3>Функция сравнения toSorted()</h3>
+
+<p>Метод <code>toSorted()</code> также принимает необязательную функцию сравнения, которая позволяет задать собственный порядок сортировки.</p>
+
+<pre><code class="language-javascript">array.toSorted((a, b) => {
+  // Тело функции сравнения
+});</code></pre>
+
+<p>Функция сравнения принимает два параметра — два соседних элемента массива — и должна возвращать:</p>
+
+<ul class="list-disc">
+  <li>отрицательное число, чтобы <code>a</code> шёл перед <code>b</code></li>
+  <li>положительное число, чтобы <code>b</code> шёл перед <code>a</code></li>
+  <li><code>0</code>, если порядок не важен</li>
+</ul>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+
+// По возрастанию
+const ascending = scores.toSorted((a, b) => a - b);
+console.log(ascending); // [19, 35, 56, 61, 74, 92]
+
+// По убыванию
+const descending = scores.toSorted((a, b) => b - a);
+console.log(descending); // [92, 74, 61, 56, 35, 19]
+
+// Оригинальный массив scores не изменился
+console.log(scores); // [61, 19, 74, 35, 92, 56]</code></pre>
+
+<p>Если функция сравнения возвращает число меньше нуля, <code>a</code> будет стоять перед <code>b</code>. Если больше нуля — <code>b</code> перед <code>a</code>. Если ноль — порядок между ними не меняется.</p>
+
+[NEXT]
+
+<h3>Свой порядок сортировки чисел</h3>
+
+<p>Для задания своего порядка сортировки методу <code>toSorted(compareFunction)</code> необходимо передать колбек-функцию с двумя параметрами.</p>
+
+<p>Это функция сравнения (compare function), порядок сортировки зависит от её результата. Метод <code>toSorted()</code> будет вызывать её для двух произвольных элементов.</p>
+
+<pre><code class="language-javascript">array.toSorted((a, b) => {
+  // Callback function body
+});</code></pre>
+
+<ul class="list-disc">
+  <li><code>a</code> — первый элемент для сравнения</li>
+  <li><code>b</code> — второй элемент для сравнения</li>
+</ul>
+
+<h4>Сортировка по возрастанию</h4>
+
+<p>Если вызов <code>compareFunction(a, b)</code> возвращает <strong>любое отрицательное значение</strong>, то есть <code>a</code> меньше <code>b</code>, сортировка поставит <code>a</code> перед <code>b</code>.</p>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+const ascendingScores = scores.toSorted((a, b) => a - b);
+console.log(ascendingScores); // [19, 35, 56, 61, 74, 92]</code></pre>
+
+<h4>Сортировка по убыванию</h4>
+
+<p>Если вызов <code>compareFunction(a, b)</code> возвращает любое положительное значение, то есть <code>b</code> больше <code>a</code>, сортировка поставит <code>b</code> перед <code>a</code>.</p>
+
+<pre><code class="language-javascript">const scores = [61, 19, 74, 35, 92, 56];
+const descendingScores = scores.toSorted((a, b) => b - a);
+console.log(descendingScores); // [92, 74, 61, 56, 35, 19]</code></pre>
+
+<p>Если вызов <code>compareFunction(a, b)</code> вернёт <code>0</code>, сортировка оставит <code>a</code> и <code>b</code> неизменными по отношению один к другому, но отсортирует их по отношению ко всем другим элементам.</p>
+
+<p>Обрати внимание, что при сортировке массива чисел и передаче в метод <code>toSorted()</code> колбек-функции, числа уже не будут приводиться к строкам, то есть их сортировка будет ожидаемой и привычной.</p>
+
+[NEXT]
+
+<h3>Свой порядок сортировки строк</h3>
+
+<p>Для сортировки строк в алфавитном порядке, по возрастанию или убыванию, используется метод строк <code>localeCompare()</code>.</p>
+
+<pre><code class="language-javascript">firstString.localeCompare(secondString)</code></pre>
+
+<p>Он вызывается на строке, которую нужно сравнить (<code>firstString</code>) с тем, что было передано ему как аргумент (<code>secondString</code>).</p>
+
+<pre><code class="language-javascript">"a".localeCompare("b"); // -1
+"b".localeCompare("a"); // 1
+"a".localeCompare("a"); // 0
+"b".localeCompare("b"); // 0</code></pre>
+
+<ul class="list-disc">
+  <li>Возвращает отрицательное значение, если <code>firstString</code> должна быть перед <code>secondString</code></li>
+  <li>Возвращает положительное значение, если <code>firstString</code> должна быть после <code>secondString</code></li>
+  <li>Если строки одинаковы, возвращается ноль и их последовательность по отношению одна к другой не изменяется</li>
+</ul>
+
+<p>Метод <code>localeCompare()</code> удобно использовать для сортировки строк, поскольку метод <code>toSorted()</code> ожидает такие же значения от колбек-функции.</p>
+
+<pre><code class="language-javascript">const students = ["Jacob", "Artemis", "Solomon", "Adrian",
+"Kai", "Ganymede"];
+
+const inAlphabetOrder = students.toSorted((a, b) =>
+  a.localeCompare(b));
+console.log(inAlphabetOrder); // [ "Adrian", "Artemis",
+"Ganymede", "Jacob", "Kai", "Solomon" ]
+
+const inReversedOrder = students.toSorted((a, b) =>
+  b.localeCompare(a));
+console.log(inReversedOrder); // [ "Solomon", "Kai", "Jacob",
+"Ganymede", "Artemis", "Adrian" ]</code></pre>
+
+[QUIZ: js-sort-comparator-quiz]
+
+[NEXT]
+
+<h3>Сортировка объектов</h3>
+
+<p>При работе с массивом объектов сортировка выполняется по числовому или строковому значению определённого свойства. Например, у нас есть группа студентов с баллами за тест. Необходимо отсортировать массив объектов по трём разным сценариям:</p>
+
+<ul class="list-disc">
+  <li>по возрастанию количества баллов</li>
+  <li>по убыванию количества баллов</li>
+  <li>по имени студента в алфавитном порядке</li>
+</ul>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Mango", score: 83 },
+  { name: "Poly", score: 59 },
+  { name: "Ajax", score: 37 },
+  { name: "Kiwi", score: 94 },
+];
+
+const inAscendingScoreOrder = students.toSorted(
+  (firstStudent, secondStudent) => firstStudent.score -
+secondStudent.score
+);
+
+const inDescendingScoreOrder = students.toSorted(
+  (firstStudent, secondStudent) => secondStudent.score -
+firstStudent.score
+);
+
+const inAlphabeticalOrder = students.toSorted((firstStudent,
+secondStudent) =>
+  firstStudent.name.localeCompare(secondStudent.name)
+);</code></pre>
+
+[NEXT]
+
+<h3>Цепочки методов</h3>
+
+<p>У нас есть массив объектов с именами, баллами и посещаемыми предметами каждого студента.</p>
+
+<pre><code class="language-javascript">const students = [
+  { name: "Mango", score: 83, courses: ["mathematics",
+"physics"] },
+  { name: "Poly", score: 59, courses: ["science",
+"mathematics"] },
+  { name: "Ajax", score: 37, courses: ["physics", "biology"] },
+  { name: "Kiwi", score: 94, courses: ["literature", "science"] }
+];</code></pre>
+
+<p>Необходимо получить массив всех имён, отсортированных по возрастанию баллов за тест. Для этого:</p>
+
+<ol>
+  <li>Отсортируем массив методом <code>toSorted()</code>.</li>
+  <li>После чего методом <code>map()</code> создадим массив значений свойства <code>name</code> из отсортированного массива.</li>
+</ol>
+
+<pre><code class="language-javascript">const sortedByAscendingScore = students.toSorted((a, b) =>
+  a.score - b.score);
+const names = sortedByAscendingScore.map(student =>
+  student.name);
+
+console.log(names); // ["Ajax", "Poly", "Mango", "Kiwi"]</code></pre>
+
+<p>Проблема в том, что у нас появляются промежуточные переменные после каждой операции, кроме финальной. Переменная <code>sortedByAscendingScore</code> — лишняя. Она нужна только для хранения промежуточного результата.</p>
+
+<p>Избавиться от таких «мёртвых» переменных можно при помощи группирования вызова методов в цепочки. Каждый следующий метод будет выполняться на основе результата работы предыдущего.</p>
+
+<pre><code class="language-javascript">const names = students
+  .toSorted((a, b) => a.score - b.score)
+  .map(student => student.name);
+
+console.log(names); // ["Ajax", "Poly", "Mango", "Kiwi"]</code></pre>
+
+<ol>
+  <li>На массиве вызываем метод <code>toSorted()</code>.</li>
+  <li>К результату работы метода <code>toSorted()</code> применяем метод <code>map()</code>.</li>
+  <li>В переменной <code>names</code> присваивается результат работы метода <code>map()</code>.</li>
+</ol>
+
+<p>Получим массив уникальных посещаемых предметов, отсортированных по алфавиту.</p>
+
+<pre><code class="language-javascript">const uniqueSortedCourses = students
+  .flatMap(student => student.courses)
+  .filter((course, index, array) => array.indexOf(course) ===
+index)
+  .toSorted((a, b) => a.localeCompare(b));
+
+console.log(uniqueSortedCourses); // ["biology", "science",
+"literature", "mathematics", "physics"]</code></pre>
+
+<ol>
+  <li>На исходном массиве вызываем <code>flatMap()</code> и получаем сглаженный массив всех курсов.</li>
+  <li>К результату метода <code>flatMap()</code> применяем метод <code>filter()</code> для фильтрации уникальных элементов.</li>
+  <li>На результат метода <code>filter()</code> вызываем <code>toSorted()</code>.</li>
+  <li>Переменной <code>uniqueSortedCourses</code> присваивается результат работы метода <code>toSorted()</code>.</li>
+</ol>
+
+<p>Цепочка методов может быть произвольной длины, но желательно не более 2-3 операций.</p>
+
+<p>Во-первых, перебирающие методы используются для перебора простых операций над коллекцией. Во-вторых, вызов каждого следующего метода — это дополнительный перебор массива, что при большом количестве может сказаться на производительности.</p>
+`,
+        },
+      ],
     },
   ],
 };
