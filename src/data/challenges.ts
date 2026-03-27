@@ -1403,10 +1403,10 @@ console.log(add(5, 10, 15));
     title: "Подсчет суммы покупки",
     type: "javascript",
     description: `
-      <p>Напиши функцию <code>calculateTotalPrice(order)</code>, которая принимает один параметр <code>order</code> - массив чисел, и считывает общую сумму его элементов.</p>
+      <p>Функция <code>calculateTotalPrice(order)</code> принимает один параметр <code>order</code> — массив чисел. Она объявляет переменную <code>total</code>, в которой будет храниться общая сумма элементов массива.</p>
 
       <div class="task-instruction">
-        <p>Дополни код функции так, чтобы в переменную <code>total</code> записывалась общая сумма элементов массива <code>order</code>.</p>
+        <p>Дополни код функции так, чтобы она возвращала общую сумму всех чисел из массива <code>order</code>.</p>
       </div>
     `,
     initialCode: `function calculateTotalPrice(order) {

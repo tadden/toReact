@@ -5343,5 +5343,188 @@ console.log(uniqueSortedCourses); // ["biology", "science",
         },
       ],
     },
+    {
+      slug: "module-5-oop-classes",
+      title: "Модуль 5. ООП. Классы",
+      description: "Объектно-ориентированное программирование. Классы, прототипы, наследование.",
+      order: 4,
+      videoUrl: null,
+      items: [],
+      resources: [],
+      topics: [
+        {
+          id: "js-function-execution-context",
+          title: "Контекст выполнения функции",
+          order: 0,
+          content: `
+<h3>Ключевое слово this</h3>
+
+<p>Контекст функции в JavaScript подобен контексту в предложении.<br>
+Рассмотрим следующие примеры для лучшего понимания:</p>
+
+<ol>
+  <li>Виктор бежит быстро, потому что Виктор пытается поймать поезд.</li>
+  <li>Виктор бежит быстро, потому что он пытается поймать поезд.</li>
+</ol>
+
+<p>Второе предложение звучит более лаконично и естественно, не так ли?</p>
+
+<p>Использование местоимения «он» позволяет избежать повторения подлежащего «Виктор». Предложение задает контекст, в котором Виктор — это объект в центре внимания, который выполняет действия. Нет никаких сомнений, что местоимение «он» в рамках этого предложения указывает именно на подлежащее «Виктор», следовательно, нет смысла повторять имя еще раз.</p>
+
+<p>Точно так же объект может быть текущим контекстом во время выполнения функции.</p>
+
+<p>Использование имени самого объекта для доступа к его свойствам внутри методов является плохим подходом. Это то же самое, что и каждый раз повторять «Виктор» вместо «он» в предложении.</p>
+
+<pre><code class="language-javascript">const user = {
+  username: "Victor",
+  showName() {
+    // ❌ Виктор бежит быстро, потому что Виктор пытается поймать поезд
+    console.log(user.username);
+  },
+};
+
+user.showName();</code></pre>
+
+<p>Вместо имени объекта мы используем зарезервированное ключевое слово <code>this</code>. Во время вызова функции в <code>this</code> записывается ссылка на объект, в контексте которого она была вызвана. Таким образом, в теле функции мы можем получить доступ к свойствам и методам этого объекта.</p>
+
+<pre><code class="language-javascript">const user = {
+  username: "Victor",
+  showName() {
+    // ✅ Виктор бежит быстро, потому что он (this) пытается поймать поезд.
+    console.log(this.username);
+  },
+};
+
+user.showName();</code></pre>
+
+<p>Метод <code>showName</code> — это функция, которая вызывается в контексте объекта <code>user</code>. Во время ее вызова в <code>this</code> записывается ссылка на объект <code>user</code>, и мы можем обращаться к его свойствам и методам.</p>
+
+[QUIZ: js-this-context-quiz]
+
+[NEXT]
+
+<h3>Глобальный контекст</h3>
+
+<p>В определении значения <code>this</code> есть важный нюанс. Значение <code>this</code> определяется не на момент объявления функции (за исключением стрелочных функций), а <strong>на момент ее вызова</strong>. Иными словами, <code>this</code> определяется тем, <strong>как именно функцию вызвали</strong>, а не где она была объявлена.</p>
+
+<pre><code class="language-javascript">function foo() {
+  console.log(this);
+}
+
+foo(); // window</code></pre>
+
+<p>В глобальном контексте, если функция выполняется <strong>не в строгом режиме</strong>, <code>this</code> ссылается на объект <code>window</code>. Объект <code>window</code> предоставляет доступ к браузерным свойствам и функциям и является глобальным контекстом выполнения для скриптов в браузере.</p>
+
+<p><strong>В строгом</strong> режиме значение <code>this</code> в глобальном контексте всегда будет <code>undefined</code>.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+function foo() {
+  console.log(this);
+}
+
+foo(); // undefined</code></pre>
+
+[QUIZ: js-this-determination-quiz]
+
+[NEXT]
+
+<h3>Контекст метода объекта</h3>
+
+<p>Если функция была вызвана как метод объекта, то контекст будет указывать на сам объект, которому принадлежит этот метод.</p>
+
+<pre><code class="language-javascript">const user = {
+  username: "Poly",
+  showThis() {
+    console.log(this);
+  }
+};
+
+user.showThis(); // {username: "Poly", showThis: f}</code></pre>
+
+<p>Рассмотрим более сложный пример.</p>
+
+<p>Сначала создаем функцию в глобальном контексте и вызываем её. Обрати внимание на использование строгого режима.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+function showThis() {
+  console.log("this in showThis: ", this);
+}
+
+// Вызываем в глобальном контексте
+showThis(); // "this in showThis: undefined"</code></pre>
+
+<p>Затем присваиваем эту функцию свойству объекта и вызываем её как метод этого объекта.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+function showThis() {
+  console.log("this in showThis: ", this);
+}
+
+const user = {
+  username: "Poly",
+};
+
+user.showContext = showThis;
+
+// Вызываем в контексте объекта
+user.showContext(); // this in showThis: {username: "Poly", showContext: f}
+
+// Вызываем в глобальном контексте
+showThis(); // "this in showThis: undefined"</code></pre>
+
+<ol>
+  <li>Создали объект <code>user</code> со свойством <code>username</code></li>
+  <li>Объекту <code>user</code> методу <code>showContext</code> присвоили значение функции <code>showThis</code>. Обрати внимание, что это не вызов — нет <code>()</code></li>
+  <li>Теперь вызываем метод <code>showContext</code>, в котором находится ссылка на функцию <code>showThis</code>, то есть вызываем функцию в контексте объекта. <code>this</code> будет указывать на текущий объект, в котором осуществляется вызов</li>
+</ol>
+
+<p>Этот пример иллюстрирует, что контекст выполнения функции (<code>this</code>) определяется в момент ее вызова, а не в момент объявления.</p>
+
+[NEXT]
+
+<h3>Метод call()</h3>
+
+<p>Бывают ситуации, когда функцию нужно вызвать в контексте объекта, даже если функция не является методом этого объекта. Для этого в JavaScript существуют специальные методы: <code>call</code>, <code>apply</code> и <code>bind</code>, которые позволяют указать контекст вызова функции.</p>
+
+<p>Изучим сигнатуру этого метода. Сигнатура — это имя метода и его параметры. Сигнатура метода <code>call()</code> выглядит так:</p>
+
+<pre><code class="language-javascript">foo.call(thisArg, arg1, arg2, ...)</code></pre>
+
+<ul class="list-disc">
+  <li><code>thisArg</code> — объект, который мы хотим установить как контекст (значение <code>this</code>) для функции</li>
+  <li><code>arg1, arg2, ...</code> — необязательные аргументы, которые будут переданы функции</li>
+</ul>
+
+<p>Метод <code>call</code> вызывает функцию <code>foo</code> так, что значение <code>this</code> в функции будет ссылаться на объект <code>thisArg</code>, и также передает ей аргументы <code>arg1, arg2</code> и так далее.</p>
+
+<p>Рассмотрим пример: давай создадим функцию <code>greet</code>, которая приветствует разных пользователей отеля, каждый из которых представлен объектом со свойствами <code>username</code> и <code>room</code>. Функция принимает один параметр, <code>str</code> — строку приветствия.</p>
+
+<pre><code class="language-javascript">function greet(str) {
+  console.log(\`\${str}, \${this.username}, your room is \${this.room}!\`);
+}
+
+const mango = {
+  username: "Mango",
+  room: 27
+};
+
+const poly = {
+  username: "Poly",
+  room: 191
+};</code></pre>
+
+<p>С помощью метода <code>call</code> мы можем вызвать функцию <code>greet</code> так, чтобы значение <code>this</code> указывало на нужный объект и использовало значения его свойств.</p>
+
+<pre><code class="language-javascript">greet.call(mango, "Welcome"); // "Welcome, Mango, your room is 27!"
+greet.call(poly, "Aloha"); // "Aloha, Poly, your room is 191!"</code></pre>
+
+[QUIZ: js-call-method-quiz]
+`,
+        },
+      ],
+    },
   ],
 };
