@@ -1109,4 +1109,48 @@ h1, h2, h3 {
     correctAnswer: 1,
     successMessage: "Правильно!",
   },
+  "js-object-create-prototype-quiz": {
+    id: "js-object-create-prototype-quiz",
+    question: "Что делает метод Object.create(obj)?",
+    options: [
+      "Клонирует объект obj",
+      "Создает новый объект с копией всех свойств obj",
+      "Создает новый объект и устанавливает ему прототип obj",
+      "Создает пустой объект без прототипа",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Правильно! Object.create(obj) создает новый объект и связывает его с obj через прототип.",
+  },
+  "js-prototype-link-quiz": {
+    id: "js-prototype-link-quiz",
+    question: "Как называется служебное свойство, которое хранит ссылку на прототип?",
+    options: ["Prototype", "[Prototype]", "[[Prototype]]", "proto"],
+    correctAnswer: 2,
+    successMessage:
+      "Правильно! Именно [[Prototype]] используется движком для связи объекта с его прототипом.",
+  },
+  "js-is-prototype-of-quiz": {
+    id: "js-is-prototype-of-quiz",
+    question: "Что возвращает выражение x.isPrototypeOf(y)?",
+    options: [
+      "true, если x является прототипом для y, и false в противном случае",
+      "true, если y является прототипом для x, и false в противном случае",
+      "true, если x и y — ссылки на один и тот же объект",
+    ],
+    correctAnswer: 0,
+    successMessage: "Правильно!",
+  },
+  "js-inherited-property-quiz": {
+    id: "js-inherited-property-quiz",
+    question: "Что такое унаследованное свойство объекта obj?",
+    options: [
+      "Свойство любого другого объекта, кроме obj",
+      "Свойство из прототипа объекта obj",
+      "Любое свойство объекта obj",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Правильно! Унаследованное свойство находится не в самом объекте, а в его прототипе.",
+  },
 };

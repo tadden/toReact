@@ -1,0 +1,37 @@
+<svg width="760" height="360" viewBox="0 0 760 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="360" rx="24" fill="#DCE9FF"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5F79E8"/>
+    </marker>
+    <style>
+      .node { fill: #FFF8C7; stroke: #5F79E8; stroke-width: 3; }
+      .line { stroke: #5F79E8; stroke-width: 3; marker-end: url(#arrow); }
+      .label { font: 700 28px Arial, sans-serif; fill: #3E4A5A; }
+    </style>
+  </defs>
+  <line x1="233" y1="69" x2="381" y2="93" class="line"/>
+  <line x1="229" y1="77" x2="291" y2="168" class="line"/>
+  <line x1="219" y1="82" x2="196" y2="258" class="line"/>
+  <line x1="312" y1="178" x2="381" y2="111" class="line"/>
+  <line x1="320" y1="180" x2="515" y2="180" class="line"/>
+  <line x1="301" y1="195" x2="406" y2="266" class="line"/>
+  <line x1="212" y1="257" x2="288" y2="190" class="line"/>
+  <line x1="214" y1="265" x2="514" y2="186" class="line"/>
+  <line x1="399" y1="112" x2="515" y2="168" class="line"/>
+  <line x1="403" y1="116" x2="421" y2="259" class="line"/>
+
+  <circle cx="220" cy="70" r="24" class="node"/>
+  <circle cx="400" cy="100" r="24" class="node"/>
+  <circle cx="290" cy="180" r="24" class="node"/>
+  <circle cx="520" cy="180" r="24" class="node"/>
+  <circle cx="190" cy="270" r="24" class="node"/>
+  <circle cx="420" cy="270" r="24" class="node"/>
+
+  <text x="220" y="79" text-anchor="middle" class="label">f()</text>
+  <text x="400" y="109" text-anchor="middle" class="label">f()</text>
+  <text x="290" y="189" text-anchor="middle" class="label">f()</text>
+  <text x="520" y="189" text-anchor="middle" class="label">f()</text>
+  <text x="190" y="279" text-anchor="middle" class="label">f()</text>
+  <text x="420" y="279" text-anchor="middle" class="label">f()</text>
+</svg>

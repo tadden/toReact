@@ -5350,7 +5350,23 @@ console.log(uniqueSortedCourses); // ["biology", "science",
       order: 4,
       videoUrl: null,
       items: [],
-      resources: [],
+      resources: [
+        {
+          type: "video",
+          title: "Модуль 5. Занятие 1. Контекст выполнения, прототипы, ООП",
+          url: "https://www.youtube.com/watch?v=IMhrOZv4Cf4",
+        },
+        {
+          type: "video",
+          title: "Модуль 5. Занятие 2. Классы в JavaScript",
+          url: "https://www.youtube.com/watch?v=snuVmKJ1gBg",
+        },
+        {
+          type: "video",
+          title: "Модуль 5. Занятие 3. Наследование и классы",
+          url: "https://www.youtube.com/watch?v=Z-w9kLvu18A",
+        },
+      ],
       topics: [
         {
           id: "js-function-execution-context",
@@ -5522,6 +5538,864 @@ const poly = {
 greet.call(poly, "Aloha"); // "Aloha, Poly, your room is 191!"</code></pre>
 
 [QUIZ: js-call-method-quiz]
+
+[NEXT]
+
+<h3>Метод apply()</h3>
+
+<p>Метод <code>apply</code> является аналогом метода <code>call</code>. Главное отличие в том, что метод <code>apply()</code> принимает аргументы функции не по одному, а в виде массива.</p>
+
+<p>Сигнатура метода <code>apply()</code> выглядит так:</p>
+
+<pre><code class="language-javascript">foo.apply(thisArg, [arg1, arg2, ...])</code></pre>
+
+<ul class="list-disc">
+  <li><code>thisArg</code> — объект, который мы хотим установить как контекст (значение <code>this</code>) для функции</li>
+  <li><code>[arg1, arg2, ...]</code> — массив аргументов, которые будут переданы функции</li>
+</ul>
+
+<p>Метод <code>apply</code> вызывает функцию <code>foo</code> так, что значение <code>this</code> внутри функции будет ссылаться на объект <code>thisArg</code>, а элементы массива будут переданы как отдельные аргументы.</p>
+
+<p>Возьмем ту же функцию <code>greet</code>, которую мы использовали с методом <code>call</code>, и вызовем её через <code>apply</code>.</p>
+
+<pre><code class="language-javascript">function greet(str) {
+  console.log(\`\${str}, \${this.username}, your room is \${this.room}!\`);
+}
+
+const mango = {
+  username: "Mango",
+  room: 27
+};
+
+const poly = {
+  username: "Poly",
+  room: 191
+};</code></pre>
+
+<pre><code class="language-javascript">greet.apply(mango, ["Welcome"]); // "Welcome, Mango, your room is 27!"
+greet.apply(poly, ["Aloha"]); // "Aloha, Poly, your room is 191!"</code></pre>
+
+<p>Таким образом, разница между <code>call</code> и <code>apply</code> заключается только в способе передачи аргументов. В <code>call</code> они перечисляются через запятую, а в <code>apply</code> передаются одним массивом.</p>
+
+[NEXT]
+
+<h3>Метод bind() и потеря контекста</h3>
+
+<p>Методы <code>call</code> и <code>apply</code> вызывают функцию сразу. Метод <code>bind</code> работает иначе: он не вызывает функцию немедленно, а создает и возвращает новую функцию с заранее привязанным контекстом.</p>
+
+<p>Сигнатура метода <code>bind()</code> выглядит так:</p>
+
+<pre><code class="language-javascript">const boundFoo = foo.bind(thisArg, arg1, arg2, ...)</code></pre>
+
+<ul class="list-disc">
+  <li><code>thisArg</code> — объект, который мы хотим установить как контекст (значение <code>this</code>) для функции</li>
+  <li><code>arg1, arg2, ...</code> — необязательные аргументы, которые будут переданы функции при её вызове</li>
+</ul>
+
+<p>Попробуем сохранить ссылку на метод объекта в переменную и вызвать его отдельно.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+const customer = {
+  username: "Jacob",
+  sayHello() {
+    console.log(\`Hello, \${this.username}!\`);
+  }
+};
+
+customer.sayHello(); // "Hello, Jacob!"
+
+const greet = customer.sayHello;
+
+greet(); // TypeError: Cannot read properties of undefined (reading 'username')</code></pre>
+
+<p>Мы сохранили ссылку на метод <code>sayHello</code> в переменную <code>greet</code>. Но при вызове <code>greet()</code> контекст теряется, потому что функция запускается отдельно от объекта. В строгом режиме значение <code>this</code> в таком случае равно <code>undefined</code>.</p>
+
+<p>Эту проблему можно решить с помощью метода <code>bind</code>, заранее привязав правильный контекст.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+const customer = {
+  username: "Jacob",
+  sayHello() {
+    console.log(\`Hello, \${this.username}!\`);
+  }
+};
+
+customer.sayHello(); // "Hello, Jacob!"
+
+const greet = customer.sayHello.bind(customer);
+
+greet(); // "Hello, Jacob!"</code></pre>
+
+<p>После вызова <code>bind()</code> создается новая функция <code>greet</code>, у которой значение <code>this</code> всегда будет ссылаться на объект <code>customer</code>.</p>
+
+[NEXT]
+
+<h3>Метод bind() и колбэки</h3>
+
+<p>Метод <code>bind()</code> особенно полезен при работе с колбэками. Если передать метод объекта как обычную функцию, он может потерять свой контекст.</p>
+
+<pre><code class="language-javascript">"use strict";
+
+const customer = {
+  firstName: "Jacob",
+  lastName: "Mercer",
+  getFullName() {
+    return \`\${this.firstName} \${this.lastName}\`;
+  }
+};
+
+function makeMessage(callback) {
+  const username = callback();
+  console.log(\`Processing an application from \${username}\`);
+}
+
+makeMessage(customer.getFullName); // TypeError: Cannot read properties of undefined (reading 'firstName')</code></pre>
+
+<p>Здесь метод <code>getFullName</code> передается как колбэк-функция. Во время вызова внутри <code>makeMessage</code> он уже не связан с объектом <code>customer</code>, поэтому значение <code>this</code> теряется.</p>
+
+<p>Чтобы сохранить контекст, нужно передать не сам метод, а новую функцию, созданную через <code>bind()</code>.</p>
+
+<pre><code class="language-javascript">const customer = {
+  firstName: "Jacob",
+  lastName: "Mercer",
+  getFullName() {
+    return \`\${this.firstName} \${this.lastName}\`;
+  }
+};
+
+function makeMessage(callback) {
+  const username = callback();
+  console.log(\`Processing an application from \${username}\`);
+}
+
+makeMessage(customer.getFullName.bind(customer)); // "Processing an application from Jacob Mercer"</code></pre>
+
+<p>Теперь колбэк вызывается с правильным контекстом, потому что <code>bind</code> вернул новую функцию, привязанную к объекту <code>customer</code>.</p>
+
+<p><strong>Прочитай пример кода</strong></p>
+
+<pre><code class="language-javascript">const library = {
+  books: 1923,
+  logBookCount() {
+    console.log(this.books);
+  }
+};
+
+const showBooks = library.logBookCount.bind({ books: 724 });
+
+showBooks();</code></pre>
+
+[NEXT]
+
+<h3>Стрелочные функции</h3>
+
+<p>Контекст внутри стрелочной функции определяется местом её объявления, а не способом вызова. Это значит, что стрелочная функция не создает собственное значение <code>this</code>, а берет его из внешней области видимости.</p>
+
+<pre><code class="language-javascript">const showThis = () => {
+  console.log("this in showThis: ", this);
+};
+
+showThis(); // this in showThis: window</code></pre>
+
+<p>Даже если присвоить стрелочную функцию свойству объекта и вызвать её как метод, значение <code>this</code> не изменится.</p>
+
+<pre><code class="language-javascript">const showThis = () => {
+  console.log("this in showThis: ", this);
+};
+
+const user = {
+  username: "Mango",
+};
+
+user.showContext = showThis;
+
+user.showContext(); // this in showThis: window</code></pre>
+
+<p>Стрелочные функции не получают новый контекст при вызове. Они запоминают <code>this</code> из того места, где были объявлены.</p>
+
+<p>Рассмотрим пример, который показывает это поведение внутри метода объекта.</p>
+
+<pre><code class="language-javascript">const hotel = {
+  username: "Resort hotel",
+  showThis() {
+    const foo = () => {
+      console.log("this in foo: ", this);
+    };
+
+    foo();
+    console.log("this in showThis: ", this);
+  },
+};
+
+hotel.showThis();
+// this in foo: {username: 'Resort hotel', showThis: f}
+// this in showThis: {username: 'Resort hotel', showThis: f}</code></pre>
+
+<p>Хотя функция <code>foo()</code> является стрелочной, она использует тот же <code>this</code>, что и метод <code>showThis()</code>, внутри которого была создана. Поэтому в обоих случаях контекстом будет объект <code>hotel</code>.</p>
+
+<div class="info-highlight">
+  <p><strong>ВАЖНО</strong></p>
+  <p>Такие примеры не всегда часто встречаются в реальной разработке, но очень полезны для понимания того, как работает контекст в JavaScript.</p>
+</div>
+
+<p>Еще одна важная особенность: методы <code>call</code>, <code>apply</code> и <code>bind</code> не могут изменить значение <code>this</code> внутри стрелочной функции.</p>
+
+<pre><code class="language-javascript">const showThis = () => {
+  console.log("this in showThis: ", this);
+};
+
+showThis.call({ username: "Mango" }); // this in showThis: window
+showThis.apply({ username: "Mango" }); // this in showThis: window
+
+const boundShowThis = showThis.bind({ username: "Mango" });
+boundShowThis(); // this in showThis: window</code></pre>
+
+<div class="info-highlight">
+  <p><strong>Что нужно запомнить про this у стрелочных функций?</strong></p>
+  <p>1. Значение <code>this</code> внутри стрелочной функции определяется местом её объявления.</p>
+  <p>2. Стрелочная функция не получает собственный контекст и использует <code>this</code> из внешней области видимости.</p>
+  <p>3. Методы <code>call</code>, <code>apply</code> и <code>bind</code> не изменяют значение <code>this</code> у стрелочных функций.</p>
+  <p>4. Поэтому стрелочные функции удобно использовать там, где нужно сохранить внешний контекст.</p>
+</div>
+
+[NEXT]
+
+<h3>Алгоритм определения this</h3>
+
+<p>Ключевое слово <code>this</code> часто вызывает сложности у начинающих, потому что его значение зависит не от места объявления функции, а от того, как именно она была вызвана.</p>
+
+<p>Но если запомнить простой алгоритм, определить значение <code>this</code> становится гораздо легче.</p>
+
+<h4>Шаг 1</h4>
+<p>Это стрелочная функция?</p>
+<ul class="list-disc">
+  <li>Если да, значение <code>this</code> будет таким же, как во внешней области видимости</li>
+  <li>Если нет, переходим к шагу 2</li>
+</ul>
+
+<h4>Шаг 2</h4>
+<p>Используются ли методы <code>call</code>, <code>apply</code> или <code>bind</code>?</p>
+<ul class="list-disc">
+  <li>Если да, значение <code>this</code> равно объекту, который был передан при вызове</li>
+  <li>Если нет, переходим к шагу 3</li>
+</ul>
+
+<h4>Шаг 3</h4>
+<p>Функция вызвана как метод объекта, например <code>obj.method()</code>?</p>
+<ul class="list-disc">
+  <li>Если да, значение <code>this</code> — это объект слева от точки</li>
+  <li>Если нет, переходим к шагу 4</li>
+</ul>
+
+<h4>Шаг 4</h4>
+<p>Скрипт выполняется в строгом режиме?</p>
+<ul class="list-disc">
+  <li>Если да, значение <code>this</code> будет <code>undefined</code></li>
+  <li>Если нет, значение <code>this</code> будет <code>window</code></li>
+</ul>
+
+<p>Ниже та же логика в виде короткой схемы, чтобы было проще быстро вспомнить порядок проверки.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/this-algorithm-diagram.svg" alt="Схема определения значения this" class="img-responsive img-rounded" />
+</div>
+
+<div class="info-highlight">
+  <p><strong>Схема</strong></p>
+  <p>1. Стрелочная функция? → Да: <code>this</code> берется из внешней области видимости.</p>
+  <p>2. Нет? Проверяем <code>call</code>, <code>apply</code>, <code>bind</code> → Если используются, <code>this</code> равен переданному объекту.</p>
+  <p>3. Нет? Проверяем вызов как метода объекта → <code>obj.method()</code> означает, что <code>this</code> это <code>obj</code>.</p>
+  <p>4. Если ничего из этого нет, смотрим на строгий режим → в строгом режиме <code>undefined</code>, иначе <code>window</code>.</p>
+</div>
+`,
+        },
+        {
+          id: "js-prototypes",
+          title: "Прототипы",
+          order: 1,
+          content: `
+<h3>Прототип объекта</h3>
+
+<p>Откуда в массивах берутся встроенные методы вроде <code>push</code>, <code>map</code>, <code>reduce</code> и другие?</p>
+
+<p>Почему у функций есть методы <code>call</code>, <code>apply</code> и <code>bind</code>?</p>
+
+<p>До этого момента мы просто пользовались этими возможностями. Теперь пора разобраться, откуда они появляются.</p>
+
+<p>Все это работает благодаря механизму прототипного наследования. Он позволяет связывать объекты в цепочку так, чтобы при поиске свойства или метода JavaScript автоматически продолжал поиск не только в самом объекте, но и в его прототипе.</p>
+
+<p>Схематично это выглядит так:</p>
+
+<div class="image-container">
+  <img src="/images/javascript/prototype-link-diagram.svg" alt="Схема связи объекта и прототипа" class="img-responsive img-rounded" />
+</div>
+
+<p>Связующим звеном служит специальное внутреннее свойство <code>[[Prototype]]</code>. Мы не используем его напрямую в обычном коде, но именно оно помогает движку связывать объекты между собой.</p>
+
+<p>Метод <code>Object.create(obj)</code> создает и возвращает новый объект, устанавливая объект <code>obj</code> его прототипом. Рассмотрим пример:</p>
+
+<pre><code class="language-javascript">const animal = {
+  legs: 4,
+};
+
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // { name: "Mango", [[Prototype]]: animal }</code></pre>
+
+<p>Объект, на который указывает ссылка в свойстве <code>[[Prototype]]</code>, называется прототипом. В этом примере объект <code>animal</code> является прототипом для объекта <code>dog</code>.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/prototype-animal-dog-diagram.svg" alt="Прототип объекта dog" class="img-responsive img-rounded" />
+</div>
+
+<pre><code class="language-javascript">console.log(dog.name); // "Mango"
+console.log(dog.legs); // 4</code></pre>
+
+<p>Когда мы обращаемся к <code>dog.name</code>, JavaScript сразу находит это свойство в объекте <code>dog</code>. Но при обращении к <code>dog.legs</code> сначала проверяется сам объект <code>dog</code>. Так как такого свойства в нем нет, движок продолжает поиск в объекте <code>animal</code>, который является его прототипом.</p>
+
+<p>Именно поэтому прототип можно воспринимать как резервное хранилище свойств и методов, которое используется при поиске, если нужное свойство не найдено в самом объекте.</p>
+
+[QUIZ: js-object-create-prototype-quiz]
+
+[QUIZ: js-prototype-link-quiz]
+
+[NEXT]
+
+<h3>Проверка прототипа</h3>
+
+<p>Если нужно проверить, является ли один объект прототипом другого, используется метод <code>isPrototypeOf()</code>.</p>
+
+<pre><code class="language-javascript">objA.isPrototypeOf(objB)</code></pre>
+
+<ul class="list-disc">
+  <li>Метод проверяет, является ли объект <code>objA</code> прототипом для объекта <code>objB</code></li>
+  <li>Если это так, он возвращает <code>true</code>, иначе возвращает <code>false</code></li>
+</ul>
+
+<p>Рассмотрим пример использования:</p>
+
+<pre><code class="language-javascript">const customer = {
+  username: "Jacob"
+};
+
+const animal = {
+  legs: 4
+};
+
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // { name: "Mango", [[Prototype]]: animal }
+
+console.log(animal.isPrototypeOf(dog)); // true
+console.log(dog.isPrototypeOf(animal)); // false
+console.log(customer.isPrototypeOf(dog)); // false</code></pre>
+
+<ul class="list-disc">
+  <li>В первом случае возвращается <code>true</code>, потому что объект <code>animal</code> действительно является прототипом для <code>dog</code></li>
+  <li>Во втором случае возвращается <code>false</code>, потому что прототипная связь не работает в обратную сторону</li>
+  <li>В третьем случае возвращается <code>false</code>, потому что объект <code>customer</code> никак не связан с <code>dog</code> через прототип</li>
+</ul>
+
+[QUIZ: js-is-prototype-of-quiz]
+
+[NEXT]
+
+<h3>Собственные и унаследованные свойства</h3>
+
+<p>Используем уже знакомый пример с объектом <code>dog</code>, у которого прототипом является объект <code>animal</code>.</p>
+
+<pre><code class="language-javascript">const animal = {
+  legs: 4,
+};
+
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(dog); // {name: "Mango", [[Prototype]]: animal}
+console.log(dog.name); // "Mango"
+console.log(dog.legs); // 4</code></pre>
+
+<ul class="list-disc">
+  <li>Свойство <code>name</code> принадлежит самому объекту <code>dog</code>, поэтому это собственное свойство</li>
+  <li>Свойство <code>legs</code> не находится в объекте <code>dog</code>, а берется из его прототипа <code>animal</code>, поэтому это унаследованное свойство</li>
+</ul>
+
+<p>Чтобы проверить, есть ли у объекта собственное свойство, используют метод <code>hasOwnProperty(key)</code>.</p>
+
+<pre><code class="language-javascript">console.log(dog.hasOwnProperty("name")); // true
+console.log(dog.hasOwnProperty("legs")); // false</code></pre>
+
+<p>Метод возвращает <code>true</code>, если свойство с именем <code>key</code> принадлежит самому объекту, и <code>false</code>, если оно найдено только в прототипе.</p>
+
+[QUIZ: js-inherited-property-quiz]
+
+[NEXT]
+
+<h3>Перебор собственных свойств</h3>
+
+<p>Оператор <code>in</code>, который используется в цикле <code>for...in</code>, перебирает не только собственные, но и унаследованные свойства объекта.</p>
+
+<pre><code class="language-javascript">const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+for (const key in dog) {
+  console.log(key); // "name", "legs"
+}</code></pre>
+
+<p>Если нужно перебрать только собственные свойства, на каждой итерации следует делать проверку через <code>hasOwnProperty()</code>.</p>
+
+<pre><code class="language-javascript">const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+for (const key in dog) {
+  if (dog.hasOwnProperty(key)) {
+    console.log(key); // "name"
+  }
+}</code></pre>
+
+<ul class="list-disc">
+  <li>Если свойство собственное, выполняется тело условия <code>if</code></li>
+  <li>Если свойство унаследованное, оно пропускается</li>
+</ul>
+
+<p>На практике часто удобнее использовать методы <code>Object.keys(obj)</code> и <code>Object.values(obj)</code>, потому что они сразу возвращают массив только собственных свойств объекта.</p>
+
+<pre><code class="language-javascript">const animal = { legs: 4 };
+const dog = Object.create(animal);
+dog.name = "Mango";
+
+console.log(Object.keys(dog)); // ["name"]
+console.log(Object.values(dog)); // ["Mango"]
+
+for (const key of Object.keys(dog)) {
+  console.log(key); // "name"
+}</code></pre>
+
+[NEXT]
+
+<h3>Цепочки прототипов</h3>
+
+<p>Объект, который является прототипом для другого объекта, сам тоже может иметь собственный прототип. Так формируется цепочка прототипов.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/prototype-chain-diagram.svg" alt="Схема цепочки прототипов" class="img-responsive img-rounded" />
+</div>
+
+<p>Реализуем такую цепочку в коде. Она строится справа налево: сначала создается базовый объект, затем объект с прототипом, и после этого следующий объект, который наследуется от предыдущего.</p>
+
+<pre><code class="language-javascript">const objC = { c: "objC prop" };
+
+const objB = Object.create(objC);
+objB.b = "objB prop";
+
+const objA = Object.create(objB);
+objA.a = "objA prop";
+
+console.log(objA); // { a: "objA prop", [[Prototype]]: objB }
+console.log(objB); // { b: "objB prop", [[Prototype]]: objC }
+console.log(objC); // { c: "objC prop" }</code></pre>
+
+<ul class="list-disc">
+  <li>Сначала создается объект <code>objC</code></li>
+  <li>Затем создается объект <code>objB</code>, для которого прототипом становится <code>objC</code></li>
+  <li>После этого создается объект <code>objA</code>, для которого прототипом становится <code>objB</code></li>
+</ul>
+
+<p>Поэтому объект <code>objA</code> может получить доступ и к своим свойствам, и к свойствам объектов <code>objB</code> и <code>objC</code>.</p>
+
+<pre><code class="language-javascript">console.log(objA.hasOwnProperty("a")); // true
+console.log(objA.a); // "objA prop"
+
+console.log(objA.hasOwnProperty("b")); // false
+console.log(objA.b); // "objB prop"
+
+console.log(objA.hasOwnProperty("c")); // false
+console.log(objA.c); // "objC prop"
+
+console.log(objA.hasOwnProperty("x")); // false
+console.log(objA.x); // undefined</code></pre>
+
+<p>Поиск свойства всегда идет до первого совпадения. Если свойство не найдено в самом объекте, JavaScript переходит к его прототипу, затем к прототипу прототипа и так далее по всей цепочке. Если свойство не найдено нигде, результатом будет <code>undefined</code>.</p>
+
+[NEXT]
+
+<h3>Конец цепочки прототипов</h3>
+
+<p>Теперь рассмотрим, где именно заканчивается цепочка прототипов. Создадим простую цепочку из двух объектов.</p>
+
+<pre><code class="language-javascript">const objB = {
+  b: "objB prop"
+};
+
+const objA = Object.create(objB);
+objA.a = "objA prop";
+
+console.log(objA);</code></pre>
+
+<p>Здесь объект <code>objB</code> является прототипом для объекта <code>objA</code>. Если развернуть структуру <code>objA</code> в консоли разработчика, мы увидим, что внутри его <code>[[Prototype]]</code> находится ссылка на <code>objB</code>.</p>
+
+<p>Но цепочка на этом не заканчивается. У самого объекта <code>objB</code> тоже есть собственный прототип. Для обычных объектов, созданных литералом или через <code>Object.create()</code>, в конце цепочки будет находиться базовый объект <code>Object</code>.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/prototype-chain-end-diagram.svg" alt="Конец цепочки прототипов" class="img-responsive img-rounded" />
+</div>
+
+<p>Это значит, что поиск свойства идет по такой схеме:</p>
+
+<ol>
+  <li>Сначала JavaScript ищет свойство в самом объекте <code>objA</code>.</li>
+  <li>Если свойства нет, он переходит к объекту <code>objB</code>, который является его прототипом.</li>
+  <li>Если свойства нет и там, поиск продолжается в базовом объекте <code>Object</code>.</li>
+  <li>Если свойство не найдено даже там, результатом будет <code>undefined</code>.</li>
+</ol>
+
+<p>Именно поэтому у обычных объектов доступны методы вроде <code>hasOwnProperty()</code>, <code>toString()</code> и другие: они приходят из базового объекта <code>Object</code>, который находится в конце цепочки прототипов.</p>
+`,
+        },
+        {
+          id: "js-oop-intro",
+          title: "ООП",
+          order: 2,
+          content: `
+<h3>ООП</h3>
+
+<p>В чем разница между хорошим и плохим кодом?</p>
+
+<p>Раньше часто считалось, что хороший код просто работает без ошибок. Но на практике этого недостаточно. Современные приложения могут содержать десятки и сотни тысяч строк кода, поэтому важна не только работоспособность, но и то, насколько удобно этот код развивать и поддерживать.</p>
+
+<p>Обычно выделяют несколько важных критериев качества кода:</p>
+
+<ol>
+  <li>Надежность — даже большая и сложная программа должна работать стабильно.</li>
+  <li>Масштабируемость — код должно быть легко адаптировать к росту проекта и нагрузки.</li>
+  <li>Гибкость — продукт должен позволять быстро изменять функциональность и интерфейс.</li>
+  <li>Экономичность — важно снижать затраты на разработку и поддержку, не теряя качества.</li>
+</ol>
+
+<p>Чтобы писать код, который соответствует этим требованиям, недостаточно просто знать синтаксис языка. Нужно понимать подходы к организации программы. Поэтому дальше мы рассмотрим основные парадигмы программирования и сравним их сильные и слабые стороны.</p>
+
+<h3>Процедурное программирование</h3>
+
+<p><strong>Процедурное программирование</strong> — это парадигма, в которой программа строится как набор функций, выполняющих определенные действия над данными.</p>
+
+<p>Для такого подхода характерны следующие идеи:</p>
+
+<ol>
+  <li><strong>Функции как основные единицы программы.</strong> Каждая функция решает отдельную задачу: принимает данные, обрабатывает их и при необходимости возвращает результат.</li>
+  <li><strong>Локальные и глобальные переменные.</strong> Часть данных может храниться внутри функций, а часть — быть доступной в разных местах программы.</li>
+</ol>
+
+<div class="image-container">
+  <img src="/images/javascript/procedural-programming-diagram.svg" alt="Схема процедурного программирования" class="img-responsive img-rounded" />
+</div>
+
+<p>Процедурный код обычно представляет собой набор функций и переменных, которые не объединены в отдельные сущности. Данные и логика их обработки существуют раздельно.</p>
+
+<div class="info-highlight">
+  <p><strong>ВАЖНО</strong></p>
+  <p>Этот подход простой и прямолинейный. Он хорошо подходит для небольших задач, где нет большого количества связанных между собой сущностей.</p>
+</div>
+
+<p>Рассмотрим простой пример процедурного кода, где есть несколько переменных и функция для вычисления зарплаты.</p>
+
+<pre><code class="language-javascript">const baseSalary = 30000;
+const overtime = 10;
+const rate = 20;
+
+const getWage = (baseSalary, overtime, rate) => {
+  return baseSalary + overtime * rate;
+};
+
+getWage(baseSalary, overtime, rate);</code></pre>
+
+<div class="info-highlight">
+  <p><strong>Итог</strong></p>
+  <p>Именно в таком стиле вы писали код до этого момента. Процедурный подход удобен для небольших программ, но по мере роста проекта может становиться менее эффективным, потому что связь между данными и функциями их обработки выражена слабо.</p>
+</div>
+
+[NEXT]
+
+<h3>Объектно-ориентированное программирование</h3>
+
+<p><strong>Объектно-ориентированное программирование (ООП)</strong> — это парадигма, в которой программа строится вокруг объектов. Объекты представляют сущности предметной области: пользователя, заказ, магазин, автомобиль и так далее.</p>
+
+<p>Каждый объект объединяет внутри себя данные и функции для работы с этими данными. Данные называют свойствами, а функции объекта — методами.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/oop-object-diagram.svg" alt="Объект объединяет свойства и методы" class="img-responsive img-rounded" />
+</div>
+
+<p>Перепишем пример из предыдущего раздела, но уже в объектно-ориентированном стиле.</p>
+
+<pre><code class="language-javascript">const employee = {
+  baseSalary: 30000,
+  overtime: 10,
+  rate: 20,
+  getWage() {
+    return this.baseSalary + this.overtime * this.rate;
+  },
+};
+
+employee.getWage();</code></pre>
+
+<div class="info-highlight">
+  <p><strong>ВАЖНО</strong></p>
+  <p>При таком подходе данные и функции их обработки находятся рядом. Метод использует свойства своего объекта, поэтому код становится более связанным, понятным и удобным для расширения.</p>
+</div>
+
+<p>Именно поэтому ООП помогает лучше структурировать программу и становится особенно полезным по мере роста проекта.</p>
+
+[NEXT]
+
+<h3>Класс</h3>
+
+<p>Чтобы понять основы ООП, удобно использовать аналогии из реального мира. Представим, что нам нужно спроектировать автомобиль.</p>
+
+<p>У автомобиля есть составные части: кузов, колеса, фары, бензобак, стекла и другие элементы. Кроме того, автомобиль умеет выполнять действия: заводиться, ускоряться, тормозить, поворачивать.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/class-car-diagram.svg" alt="Схема устройства автомобиля" class="img-responsive img-rounded" />
+</div>
+
+<p>Когда мы проектируем такую сущность, нам нужно описать:</p>
+
+<ul class="list-disc">
+  <li>из каких частей она состоит</li>
+  <li>как эти части и данные связаны между собой</li>
+  <li>какие действия можно выполнять с этой сущностью</li>
+</ul>
+
+<p>Результатом такого проектирования становится шаблон, по которому позже можно создавать сколько угодно похожих объектов. В ООП такой шаблон называется <strong>классом</strong>.</p>
+
+<p><strong>Класс</strong> — это описание сущности, которое задает структуру данных и поведение будущих объектов, а также определяет правила работы с ними.</p>
+
+<p>В нашем примере класс описывает сущность «автомобиль».</p>
+
+<p><strong>Свойствами класса</strong> будут характеристики автомобиля: двигатель, колеса, фары и другие части.</p>
+
+<p><strong>Методами класса</strong> будут действия: завести двигатель, увеличить скорость, остановить автомобиль, включить фары и так далее.</p>
+
+[NEXT]
+
+<h3>Экземпляр класса</h3>
+
+<p>После того как у нас есть шаблон, по нему можно создавать конкретные объекты. Каждый такой объект будет построен по правилам класса, но при этом получит собственные значения свойств.</p>
+
+<p>Если продолжить пример с автомобилем, то класс — это общий чертеж, а конкретные машины, созданные по нему, — это экземпляры класса.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/class-instances-cars.svg" alt="Несколько экземпляров одного класса" class="img-responsive img-rounded" />
+</div>
+
+<p><strong>Экземпляр класса</strong> — это конкретный объект, созданный по описанию класса. Он получает свойства и методы, определенные в классе, но хранит собственные данные.</p>
+
+<p>Иными словами:</p>
+
+<ul class="list-disc">
+  <li>класс — это абстрактное описание сущности</li>
+  <li>экземпляр — это конкретный объект, созданный на основе этого описания</li>
+</ul>
+
+[NEXT]
+
+<h3>Интерфейс класса</h3>
+
+<p>Когда мы работаем с экземпляром класса, нас обычно интересует не его внутреннее устройство, а то, что с ним можно сделать. Именно это и описывает интерфейс.</p>
+
+<p><strong>Интерфейс</strong> — это набор свойств и методов класса, доступных для использования извне.</p>
+
+<p>Если вернуться к примеру с автомобилем, интерфейсом можно считать органы управления водителя: руль, педали, переключатели, приборную панель. Мы не обязаны знать устройство двигателя, чтобы управлять машиной.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/class-interface-dashboard.svg" alt="Интерфейс класса на примере панели управления автомобиля" class="img-responsive img-rounded" />
+</div>
+
+<p>Хороший интерфейс должен быть понятным и удобным. Слишком простой интерфейс может не дать нужной гибкости, а слишком сложный — затруднит использование объекта и повысит вероятность ошибок.</p>
+
+<p>Поэтому при проектировании классов важно находить баланс: оставлять снаружи только действительно нужные свойства и методы, а внутреннюю реализацию по возможности скрывать.</p>
+`,
+        },
+        {
+          id: "js-classes",
+          title: "Классы",
+          order: 3,
+          content: `
+<h3>Классы в JavaScript</h3>
+
+<p>Теперь перейдем от общей идеи ООП к тому, как классы выглядят именно в JavaScript.</p>
+
+<p>Класс в JavaScript — это удобный способ описать шаблон для создания однотипных объектов. Мы заранее определяем, какие свойства будут у объектов и какие методы они смогут вызывать.</p>
+
+<p>Например, если нам нужно создавать пользователей интернет-магазина, мы можем описать класс <code>User</code>, а затем создавать на его основе конкретных пользователей с разными данными.</p>
+
+[NEXT]
+
+<h3>Объявление класса</h3>
+
+<p>Класс объявляется с помощью ключевого слова <code>class</code>, после которого указывается имя класса.</p>
+
+<pre><code class="language-javascript">class User {
+}</code></pre>
+
+<p>По соглашению имя класса пишут с большой буквы. Это помогает сразу отличать класс от обычной переменной или функции.</p>
+
+<p>Сам по себе такой класс пока ничего не делает. Это только шаблон, который мы будем наполнять свойствами и методами.</p>
+
+[NEXT]
+
+<h3>Конструктор класса</h3>
+
+<p>Чтобы при создании объекта сразу записывать в него начальные данные, в классе используют специальный метод <code>constructor</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+}</code></pre>
+
+<p>Метод <code>constructor</code> вызывается автоматически в момент создания нового экземпляра класса.</p>
+
+<p>Здесь происходит следующее:</p>
+
+<ul class="list-disc">
+  <li>параметр <code>name</code> получает имя пользователя</li>
+  <li>параметр <code>email</code> получает его электронную почту</li>
+  <li><code>this.name</code> и <code>this.email</code> создают свойства будущего объекта</li>
+</ul>
+
+<p>Именно через <code>this</code> мы записываем данные в конкретный создаваемый объект.</p>
+
+[NEXT]
+
+<h3>Создание экземпляра класса</h3>
+
+<p>Чтобы создать объект на основе класса, используется оператор <code>new</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com");
+console.log(mango); // { name: "Mango", email: "mango@mail.com" }</code></pre>
+
+<p>Когда выполняется <code>new User(...)</code>, происходит несколько шагов:</p>
+
+<ol>
+  <li>Создается новый пустой объект.</li>
+  <li>Этот объект связывается с классом <code>User</code>.</li>
+  <li>Вызывается метод <code>constructor</code>.</li>
+  <li>В <code>this</code> внутри конструктора будет ссылка на новый объект.</li>
+  <li>После этого новый объект возвращается в результат выражения <code>new User(...)</code>.</li>
+</ol>
+
+<div class="info-highlight">
+  <p><strong>ВАЖНО</strong></p>
+  <p>Без оператора <code>new</code> класс вызывать нельзя. Если попробовать просто написать <code>User("Mango", "mango@mail.com")</code>, это приведет к ошибке.</p>
+</div>
+
+[NEXT]
+
+<h3>Методы класса</h3>
+
+<p>Кроме данных, класс может описывать поведение объектов. Для этого внутри класса объявляют методы.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}</code></pre>
+
+<p>Теперь экземпляры класса смогут вызывать эти методы.</p>
+
+<pre><code class="language-javascript">const mango = new User("Mango", "mango@mail.com");
+
+console.log(mango.getEmail()); // "mango@mail.com"
+
+mango.changeEmail("new-mango@mail.com");
+console.log(mango.getEmail()); // "new-mango@mail.com"</code></pre>
+
+<p>Обрати внимание: внутри методов снова используется <code>this</code>. Оно указывает на тот экземпляр класса, который вызвал метод.</p>
+
+[NEXT]
+
+<h3>Свойства экземпляра и методы класса</h3>
+
+<p>Важно понимать разницу между свойствами экземпляра и методами класса.</p>
+
+<p>Свойства экземпляра — это данные, которые у каждого объекта свои. Например, у одного пользователя одно имя и одна почта, а у другого — другие.</p>
+
+<p>Методы класса — это функции, общие для всех экземпляров. Они описывают, что объект умеет делать.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com");
+const poly = new User("Poly", "poly@mail.com");
+
+console.log(mango.name); // "Mango"
+console.log(poly.name); // "Poly"
+
+console.log(mango.getEmail()); // "mango@mail.com"
+console.log(poly.getEmail()); // "poly@mail.com"</code></pre>
+
+<p>Здесь значения свойств отличаются у разных объектов, но метод <code>getEmail()</code> у них один и тот же по смыслу.</p>
+
+[NEXT]
+
+<h3>Зачем использовать классы</h3>
+
+<p>Классы особенно полезны, когда нужно создавать много однотипных объектов.</p>
+
+<p>Без класса нам пришлось бы каждый раз вручную создавать объект и заново описывать его методы. С классом мы один раз задаем шаблон, а потом просто создаем нужные экземпляры.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+}
+
+const firstUser = new User("Mango", "mango@mail.com");
+const secondUser = new User("Poly", "poly@mail.com");
+const thirdUser = new User("Ajax", "ajax@mail.com");</code></pre>
+
+<p>Такой подход делает код короче, понятнее и удобнее для поддержки.</p>
+
+<div class="info-highlight">
+  <p><strong>Итог</strong></p>
+  <p>Класс в JavaScript — это шаблон для создания объектов. <code>constructor</code> помогает задавать начальные данные, <code>new</code> создает экземпляр, а методы описывают общее поведение всех объектов этого класса.</p>
+</div>
 `,
         },
       ],

@@ -1,0 +1,32 @@
+<svg width="760" height="320" viewBox="0 0 760 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="320" rx="24" fill="#EDF4F9"/>
+  <defs>
+    <style>
+      .line { stroke: #5A6FD8; stroke-width: 3; }
+      .text { font: 700 18px Arial, sans-serif; fill: #425168; }
+    </style>
+  </defs>
+  <g transform="translate(210 96)">
+    <rect x="44" y="26" width="188" height="54" rx="20" fill="#7CC9E8" stroke="#4B6CB7" stroke-width="3"/>
+    <rect x="78" y="4" width="84" height="34" rx="12" fill="#7CC9E8" stroke="#4B6CB7" stroke-width="3"/>
+    <circle cx="86" cy="88" r="24" fill="#2F3A56"/>
+    <circle cx="86" cy="88" r="12" fill="#E8EEF7"/>
+    <circle cx="198" cy="88" r="24" fill="#2F3A56"/>
+    <circle cx="198" cy="88" r="12" fill="#E8EEF7"/>
+    <path d="M86 24L118 24L132 6L168 8L192 24" class="line" fill="none"/>
+    <path d="M110 30L148 30" class="line"/>
+  </g>
+  <line x1="215" y1="78" x2="285" y2="118" class="line"/>
+  <line x1="154" y1="130" x2="248" y2="144" class="line"/>
+  <line x1="178" y1="224" x2="282" y2="190" class="line"/>
+  <line x1="474" y1="66" x2="432" y2="108" class="line"/>
+  <line x1="572" y1="124" x2="462" y2="138" class="line"/>
+  <line x1="530" y1="226" x2="438" y2="186" class="line"/>
+  <text x="112" y="72" class="text">Парктроники</text>
+  <text x="88" y="140" class="text">Бензобак</text>
+  <text x="110" y="244" class="text">Колеса</text>
+  <text x="476" y="58" class="text">Лобовое стекло</text>
+  <text x="576" y="132" class="text">Фары</text>
+  <text x="522" y="244" class="text">Радиатор</text>
+  <text x="332" y="292" class="text">Кузов</text>
+</svg>

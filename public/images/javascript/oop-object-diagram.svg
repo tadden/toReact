@@ -1,0 +1,23 @@
+<svg width="760" height="240" viewBox="0 0 760 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="760" height="240" rx="24" fill="#DCE9FF"/>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6E63D9"/>
+    </marker>
+    <style>
+      .label { font: 700 24px Arial, sans-serif; fill: #FFFFFF; }
+      .small { font: 700 24px Arial, sans-serif; fill: #425168; }
+    </style>
+  </defs>
+  <rect x="122" y="58" width="186" height="94" rx="18" fill="#BFD5FF"/>
+  <circle cx="168" cy="105" r="24" fill="#FFF8C7" stroke="#6E63D9" stroke-width="3"/>
+  <text x="168" y="114" text-anchor="middle" class="small">f()</text>
+  <circle cx="238" cy="105" r="24" fill="#FFF8C7" stroke="#6E63D9" stroke-width="3"/>
+  <text x="238" y="114" text-anchor="middle" class="small">x</text>
+  <path d="M260 82C305 46 378 46 436 82" stroke="#6E63D9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+  <path d="M184 126C255 188 362 188 436 136" stroke="#6E63D9" stroke-width="4" fill="none" marker-end="url(#arrow)"/>
+  <rect x="448" y="48" width="168" height="46" rx="10" fill="#7D5BD6"/>
+  <text x="532" y="78" text-anchor="middle" class="label">Property</text>
+  <rect x="448" y="116" width="168" height="46" rx="10" fill="#7D5BD6"/>
+  <text x="532" y="146" text-anchor="middle" class="label">Method</text>
+</svg>
