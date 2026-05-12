@@ -63,6 +63,11 @@ async function main() {
       email: "b69771638@gmail.com",
       id: "user_boris",
     },
+    {
+      name: "Arsenij",
+      email: "kjiu685482@gmail.com",
+      id: "user_arsenij",
+    },
   ];
 
   for (const s of students) {
