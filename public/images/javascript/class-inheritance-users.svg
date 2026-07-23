@@ -1,0 +1,46 @@
+<svg width="960" height="540" viewBox="0 0 960 540" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="540" fill="#F3F3F3"/>
+  <path d="M339 159C254 166 232 209 231 248" stroke="#30313B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <path d="M621 159C706 166 728 209 729 248" stroke="#30313B" stroke-width="3" fill="none" marker-end="url(#arrow)"/>
+  <rect x="332" y="26" width="296" height="186" rx="10" fill="white" stroke="#D7DAE0"/>
+  <path d="M342 26H618C623.523 26 628 30.4772 628 36V70H332V36C332 30.4772 336.477 26 342 26Z" fill="#FFF69B"/>
+  <text x="480" y="57" text-anchor="middle" font-family="Arial, sans-serif" font-size="31" font-weight="700" fill="#30313B">Parent</text>
+  <circle cx="375" cy="103" r="10" fill="#30313B"/>
+  <path d="M351 140C355 124 366 117 375 117C384 117 395 124 399 140H351Z" fill="#30313B"/>
+  <text x="419" y="111" font-family="Arial, sans-serif" font-size="18" fill="#30313B">Name:</text>
+  <text x="419" y="136" font-family="Arial, sans-serif" font-size="18" fill="#30313B">Email:</text>
+  <text x="419" y="161" font-family="Arial, sans-serif" font-size="18" fill="#30313B">Password:</text>
+  <rect x="157" y="246" width="298" height="266" rx="10" fill="white" stroke="#D7DAE0"/>
+  <path d="M167 246H445C450.523 246 455 250.477 455 256V292H157V256C157 250.477 161.477 246 167 246Z" fill="#FFF69B"/>
+  <text x="306" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#30313B">Administrator</text>
+  <circle cx="205" cy="329" r="16" fill="#30313B"/>
+  <circle cx="195" cy="333" r="5" fill="#30313B"/>
+  <circle cx="215" cy="333" r="5" fill="#30313B"/>
+  <path d="M184 370C189 351 198 344 205 344C212 344 221 351 226 370H184Z" fill="#30313B"/>
+  <text x="245" y="333" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Name:</text>
+  <text x="245" y="358" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Email:</text>
+  <text x="245" y="383" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Password:</text>
+  <line x1="181" y1="405" x2="432" y2="405" stroke="#B9BBC3"/>
+  <text x="181" y="440" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#B06CC8">Department:</text>
+  <text x="181" y="465" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#B06CC8">Academic degree:</text>
+  <text x="181" y="490" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#B06CC8">Work experience:</text>
+  <rect x="505" y="246" width="298" height="266" rx="10" fill="white" stroke="#D7DAE0"/>
+  <path d="M515 246H793C798.523 246 803 250.477 803 256V292H505V256C505 250.477 509.477 246 515 246Z" fill="#FFF69B"/>
+  <text x="654" y="279" text-anchor="middle" font-family="Arial, sans-serif" font-size="30" font-weight="700" fill="#30313B">ContentEditor</text>
+  <circle cx="553" cy="329" r="16" fill="#30313B"/>
+  <circle cx="542" cy="334" r="5" fill="#30313B"/>
+  <circle cx="564" cy="334" r="5" fill="#30313B"/>
+  <path d="M532 370C537 351 546 344 553 344C560 344 569 351 574 370H532Z" fill="#30313B"/>
+  <text x="593" y="333" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Name:</text>
+  <text x="593" y="358" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Email:</text>
+  <text x="593" y="383" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#30313B">Password:</text>
+  <line x1="529" y1="405" x2="780" y2="405" stroke="#B9BBC3"/>
+  <text x="529" y="440" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#5D73E6">Year of study:</text>
+  <text x="529" y="465" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#5D73E6">Group number:</text>
+  <text x="529" y="490" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#5D73E6">Faculty:</text>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10" fill="#30313B"/>
+    </marker>
+  </defs>
+</svg>

@@ -222,6 +222,7 @@ fruit in pretty much any form.`,
     title: "Тег изображения",
     description: `
       <p>Используй тег <code>&lt;img&gt;</code> и добавь изображение готового блюда между заголовком страницы и описанием рецепта.</p>
+      <p>Адрес изображения: <code>https://ac.goit.global/fullstack/html-css-v2/module-1/autocheck/pancakes.jpg</code>.</p>
     `,
     initialCode: `<!-- Recipe page markup -->
 <h1>Sweet cheese pancakes</h1>

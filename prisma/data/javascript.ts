@@ -6251,7 +6251,42 @@ employee.getWage();</code></pre>
 
 <h3>Конструктор класса</h3>
 
-<p>Чтобы при создании объекта сразу записывать в него начальные данные, в классе используют специальный метод <code>constructor</code>.</p>
+<p>Способ создания класса зависит от задачи. В нашем примере класс <code>User</code> представляет пользователя, поэтому мы добавим в него поля для имени и почты.</p>
+
+<p>Для инициализации экземпляра класса используется специальный метод <code>constructor</code>.</p>
+
+<p>Если не определить его явно, JavaScript создаст конструктор по умолчанию — пустую функцию, которая не изменяет экземпляр класса.</p>
+
+<pre><code class="language-javascript">class User {
+  // Синтаксис объявления метода класса
+  constructor() {
+    // ...
+  }
+}</code></pre>
+
+<p>Вызов класса с оператором <code>new</code> приводит к созданию нового объекта и автоматическому вызову метода <code>constructor</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor() {
+    console.log("constructor call");
+  }
+}
+
+const mango = new User(); // "constructor call"
+console.log(mango); // {}</code></pre>
+
+<p>Аргументы, которые передаются при вызове <code>new User()</code>, становятся значениями параметров метода <code>constructor</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(name, email) {
+    console.log(name, email);
+  }
+}
+
+const mango = new User("Mango", "mango@mail.com"); // "Mango mango@mail.com"
+console.log(mango); // {}</code></pre>
+
+<p>Чтобы при создании объекта сразу записывать в него начальные данные, эти параметры сохраняют в свойства экземпляра через <code>this</code>.</p>
 
 <pre><code class="language-javascript">class User {
   constructor(name, email) {
@@ -6272,47 +6307,64 @@ employee.getWage();</code></pre>
 
 <p>Именно через <code>this</code> мы записываем данные в конкретный создаваемый объект.</p>
 
+<p>Свойства <code>name</code> и <code>email</code> называются публичными свойствами, потому что они принадлежат объекту-экземпляру и доступны снаружи.</p>
+
 [NEXT]
 
-<h3>Создание экземпляра класса</h3>
+<h3>Объект параметров</h3>
 
-<p>Чтобы создать объект на основе класса, используется оператор <code>new</code>.</p>
+<p>Класс может принимать большое количество входных данных для свойств будущего объекта.</p>
+
+<p>К ним тоже можно применить паттерн «объект параметров»: передавать один объект с логично именованными свойствами вместо несвязанного набора аргументов.</p>
 
 <pre><code class="language-javascript">class User {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
   }
 }
 
-const mango = new User("Mango", "mango@mail.com");
-console.log(mango); // { name: "Mango", email: "mango@mail.com" }</code></pre>
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
 
-<p>Когда выполняется <code>new User(...)</code>, происходит несколько шагов:</p>
-
-<ol>
-  <li>Создается новый пустой объект.</li>
-  <li>Этот объект связывается с классом <code>User</code>.</li>
-  <li>Вызывается метод <code>constructor</code>.</li>
-  <li>В <code>this</code> внутри конструктора будет ссылка на новый объект.</li>
-  <li>После этого новый объект возвращается в результат выражения <code>new User(...)</code>.</li>
-</ol>
-
-<div class="info-highlight">
-  <p><strong>ВАЖНО</strong></p>
-  <p>Без оператора <code>new</code> класс вызывать нельзя. Если попробовать просто написать <code>User("Mango", "mango@mail.com")</code>, это приведет к ошибке.</p>
-</div>
+console.log(mango);
+// { name: "Mango", email: "mango@mail.com" }</code></pre>
 
 [NEXT]
 
 <h3>Методы класса</h3>
 
-<p>Кроме данных, класс может описывать поведение объектов. Для этого внутри класса объявляют методы.</p>
+<p>Для работы со свойствами будущего экземпляра используются методы класса.</p>
+
+<p><strong>Методы класса</strong> — это функции, которые будут доступны экземпляру в его прототипе. Они объявляются в произвольном порядке после конструктора. В отличие от синтаксиса методов объекта, методы класса не разделяются запятыми.</p>
+
+<p>Рассмотрим пример использования методов в классе <code>User</code>.</p>
 
 <pre><code class="language-javascript">class User {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
+  }
+
+  // Метод getEmail
+  getEmail() {
+    // ...
+  }
+
+  // Метод changeEmail
+  changeEmail(newEmail) {
+    // ...
+  }
+}</code></pre>
+
+<p>Для доступа к свойствам в методах используется ключевое слово <code>this</code>, потому что методы будут вызываться в контексте объекта-экземпляра.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
   }
 
   getEmail() {
@@ -6324,78 +6376,562 @@ console.log(mango); // { name: "Mango", email: "mango@mail.com" }</code></pre>
   }
 }</code></pre>
 
-<p>Теперь экземпляры класса смогут вызывать эти методы.</p>
+<p>После создания экземпляра можно использовать объявленные методы класса, которые будут обращаться к свойствам объекта, вызвавшего метод.</p>
 
-<pre><code class="language-javascript">const mango = new User("Mango", "mango@mail.com");
+<pre><code class="language-javascript">const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
 
 console.log(mango.getEmail()); // "mango@mail.com"
 
-mango.changeEmail("new-mango@mail.com");
-console.log(mango.getEmail()); // "new-mango@mail.com"</code></pre>
+mango.changeEmail("new@mail.com");
 
-<p>Обрати внимание: внутри методов снова используется <code>this</code>. Оно указывает на тот экземпляр класса, который вызвал метод.</p>
+console.log(mango.getEmail()); // "new@mail.com"</code></pre>
 
 [NEXT]
 
-<h3>Свойства экземпляра и методы класса</h3>
+<h3>Прототип экземпляра</h3>
 
-<p>Важно понимать разницу между свойствами экземпляра и методами класса.</p>
-
-<p>Свойства экземпляра — это данные, которые у каждого объекта свои. Например, у одного пользователя одно имя и одна почта, а у другого — другие.</p>
-
-<p>Методы класса — это функции, общие для всех экземпляров. Они описывают, что объект умеет делать.</p>
+<p>Рассмотрим для примера код класса <code>User</code>, который сейчас имеет такой вид:</p>
 
 <pre><code class="language-javascript">class User {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
   }
 
   getEmail() {
     return this.email;
   }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
 }
 
-const mango = new User("Mango", "mango@mail.com");
-const poly = new User("Poly", "poly@mail.com");
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"</code></pre>
+
+<p>Если посмотреть на структуру экземпляра класса <code>User</code> в инструментах разработчика, можно заметить: методы, которые мы вызываем, не лежат прямо внутри объекта.</p>
+
+<pre><code class="language-javascript">User {
+  name: "Mango",
+  email: "mango@mail.com",
+  [[Prototype]]: Object
+}</code></pre>
+
+<p>Объектно-ориентированное программирование в JavaScript построено на прототипном наследовании. Методы класса <strong>не становятся собственными свойствами экземпляра</strong>. Это правильно, потому что методы одинаковые для всех объектов класса и их не нужно копировать в каждый экземпляр.</p>
+
+<p>Методы класса добавляются в специальный объект, который хранится в свойстве <code>prototype</code> самого класса.</p>
+
+<pre><code class="language-javascript">class User {
+  constructor(params) {
+    this.name = params.name;
+    this.email = params.email;
+  }
+
+  getEmail() {
+    return this.email;
+  }
+
+  changeEmail(newEmail) {
+    this.email = newEmail;
+  }
+}
+
+console.log(User.prototype);
+// { constructor: f, getEmail: f, changeEmail: f }</code></pre>
+
+<p>При создании экземпляра через <code>new</code> объект, сохраненный в свойстве <code>prototype</code> класса, автоматически становится его прототипом. Это значит, что свойство <code>[[Prototype]]</code> экземпляра получает ссылку на свойство <code>prototype</code> класса.</p>
+
+<pre><code class="language-javascript">User {
+  name: "Mango",
+  email: "mango@mail.com",
+  [[Prototype]]: {
+    changeEmail: f changeEmail(newEmail),
+    constructor: class User,
+    getEmail: f getEmail()
+  }
+}</code></pre>
+
+<p>Благодаря этому объект-экземпляр может использовать методы класса, то есть свойства своего прототипа. Так в объекте хранится ссылка на метод <code>constructor</code> класса, но это нужно только для внутренних механизмов класса и сейчас не имеет значения для нас.</p>
+
+[NEXT]
+
+<h3>Приватные свойства</h3>
+
+<p>Водитель автомобиля нажимает на педаль газа — и машина набирает скорость. Ему удобно управлять климатом, видеть текущую скорость на спидометре и так далее. Но для того, чтобы машина работала, внутри нее происходит много процессов.</p>
+
+<p><strong>Инкапсуляция</strong> — это парадигма ООП, которая передает пользователю детали внутренней реализации класса только через публичный интерфейс. Так внутренние данные и логика защищаются от случайного изменения извне.</p>
+
+<p>Иногда другой разработчик должен получать доступ только к публичному интерфейсу: набору публичных свойств и методов класса. Например, почта пользователя не должна быть доступна для прямого изменения извне, поэтому ее можно сделать приватной.</p>
+
+<p>Приватные свойства начинаются с символа <code>#</code>. Объявление приватного свойства до инициализации в конструкторе обязательно.</p>
+
+<pre><code class="language-javascript">class User {
+  // Необязательное объявление публичных свойств
+  name;
+  // Обязательное объявление приватных свойств
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
 
 console.log(mango.name); // "Mango"
-console.log(poly.name); // "Poly"
+console.log(mango.#email); // Возникнет ошибка, это приватное свойство</code></pre>
 
-console.log(mango.getEmail()); // "mango@mail.com"
-console.log(poly.getEmail()); // "poly@mail.com"</code></pre>
-
-<p>Здесь значения свойств отличаются у разных объектов, но метод <code>getEmail()</code> у них один и тот же по смыслу.</p>
-
-[NEXT]
-
-<h3>Зачем использовать классы</h3>
-
-<p>Классы особенно полезны, когда нужно создавать много однотипных объектов.</p>
-
-<p>Без класса нам пришлось бы каждый раз вручную создавать объект и заново описывать его методы. С классом мы один раз задаем шаблон, а потом просто создаем нужные экземпляры.</p>
+<p>Чтобы получить или изменить значение приватного свойства, используют публичные методы.</p>
 
 <pre><code class="language-javascript">class User {
-  constructor(name, email) {
-    this.name = name;
-    this.email = email;
+  name;
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
   }
 
   getEmail() {
-    return this.email;
+    return this.#email;
+  }
+
+  changeEmail(newEmail) {
+    this.#email = newEmail;
   }
 }
 
-const firstUser = new User("Mango", "mango@mail.com");
-const secondUser = new User("Poly", "poly@mail.com");
-const thirdUser = new User("Ajax", "ajax@mail.com");</code></pre>
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
 
-<p>Такой подход делает код короче, понятнее и удобнее для поддержки.</p>
+console.log(mango.getEmail()); // "mango@mail.com"
+mango.changeEmail("mango@supermail.com");
+console.log(mango.getEmail()); // "mango@supermail.com"</code></pre>
 
-<div class="info-highlight">
-  <p><strong>Итог</strong></p>
-  <p>Класс в JavaScript — это шаблон для создания объектов. <code>constructor</code> помогает задавать начальные данные, <code>new</code> создает экземпляр, а методы описывают общее поведение всех объектов этого класса.</p>
+[QUIZ: js-private-property-symbol-quiz]
+
+[NEXT]
+
+<h3>Приватные методы</h3>
+
+<p>Ты уже знаешь, как работают публичные методы. Рассмотрим это на примере класса <code>User</code> с приватным свойством <code>#email</code> и публичным свойством <code>name</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  name;
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
+  }
+
+  // Публичный метод для получения электронной почты
+  getEmail() {
+    return this.#email;
+  }
+
+  // Публичный метод для изменения электронной почты
+  changeEmail(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+console.log(mango.getEmail()); // "mango@mail.com"
+mango.changeEmail("mango@supermail.com");
+console.log(mango.getEmail()); // "mango@supermail.com"</code></pre>
+
+<p>Иногда нужно не просто получать или изменять адрес электронной почты, а выполнять действия, которые должны быть скрыты от внешнего кода. Например, перед сохранением нового адреса можно проверить его формат.</p>
+
+<p>Это можно сделать с помощью приватных методов. Чтобы сделать метод приватным, нужно добавить символ <code>#</code> в начало его имени.</p>
+
+<pre><code class="language-javascript">class User {
+  name;
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
+  }
+
+  getEmail() {
+    return this.#email;
+  }
+
+  changeEmail(newEmail) {
+    if (this.#validateEmail(newEmail)) {
+      this.#email = newEmail;
+    } else {
+      console.log("Invalid email format");
+    }
+  }
+
+  // Приватный метод для валидации электронной почты
+  #validateEmail(email) {
+    return email.includes("@");
+  }
+}
+
+const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+mango.changeEmail("newmail.com"); // "Invalid email format"
+mango.changeEmail("new@mail.com");
+console.log(mango.getEmail()); // "new@mail.com"
+
+mango.#validateEmail("test"); // Ошибка</code></pre>
+
+<p>Приватный метод <code>#validateEmail</code> обеспечивает дополнительную логику для валидации электронной почты. Он недоступен снаружи класса, поэтому другой код не может вызвать его напрямую.</p>
+
+<p>Так мы инкапсулируем внутреннюю логику и сохраняем работу класса более безопасной и стабильной.</p>
+
+[NEXT]
+
+<h3>Геттеры и сеттеры</h3>
+
+<p>Геттеры и сеттеры — это специальный синтаксис объявления методов для взаимодействия со свойствами. Они имитируют обычное публичное свойство класса, но позволяют работать с данными удобнее.</p>
+
+<pre><code class="language-javascript">class User {
+  #email;
+
+  constructor(params) {
+    this.name = params.name;
+    this.#email = params.email;
+  }
+
+  // Геттер email
+  get email() {
+    return this.#email;
+  }
+
+  // Сеттер email
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}</code></pre>
+
+<p>В примере выше объявлены геттер и сеттер <code>email</code>. Для этого перед именем свойства используются ключевые слова <code>get</code> и <code>set</code>.</p>
+
+<ul class="list-disc">
+  <li>геттер возвращает значение приватного свойства <code>#email</code></li>
+  <li>сеттер изменяет его значение</li>
+</ul>
+
+<p>Хорошей практикой считается называть геттеры и сеттеры так же, как свойства, с которыми они работают. Например, для приватного свойства <code>#email</code> логично использовать имя <code>email</code>.</p>
+
+<div class="info-note">
+  <p>Геттеры и сеттеры должны называться одинаково. При этом геттер может существовать без сеттера, а сеттер — без геттера.</p>
 </div>
+
+<p>Геттер срабатывает при попытке прочитать значение свойства, а сеттер — при попытке записать новое значение.</p>
+
+<pre><code class="language-javascript">const mango = new User({
+  name: "Mango",
+  email: "mango@mail.com",
+});
+
+console.log(mango.email); // "mango@mail.com"
+
+mango.email = "mango@supermail.com";
+
+console.log(mango.email); // "mango@supermail.com"</code></pre>
+
+<ul class="list-disc">
+  <li>обращение к <code>mango.email</code> вызывает геттер <code>get email()</code> и выполняет его код</li>
+  <li>запись <code>mango.email = "mango@supermail.com"</code> вызывает сеттер <code>set email(newEmail)</code>, где строка <code>"mango@supermail.com"</code> становится значением параметра <code>newEmail</code></li>
+</ul>
+
+<p>Преимущество в том, что при чтении и записи можно выполнять дополнительный код, а внешне операция выглядит как обычная работа со свойством.</p>
+
+<pre><code class="language-javascript">set email(newEmail) {
+  if (newEmail === "") {
+    console.log("Ошибка! Почта не может быть пустой строкой!");
+    return;
+  }
+
+  this.#email = newEmail;
+}</code></pre>
+
+<div class="info-note">
+  <p>Геттеры и сеттеры удобно использовать для простых операций чтения и изменения свойств, особенно приватных. Для работы со свойством, которое хранит массив или объект, они не подойдут.</p>
+</div>
+
+[NEXT]
+
+<h3>Статические свойства</h3>
+
+<p>Кроме публичных и приватных свойств будущего экземпляра, у класса могут быть собственные свойства. Свойства, доступные только классу, а не его экземплярам, называются <strong>статическими свойствами</strong>. Они полезны для хранения информации, которая относится к классу в целом.</p>
+
+<p>Статические свойства объявляются в теле класса с помощью ключевого слова <code>static</code>. Их можно использовать как в методах класса, так и вне класса.</p>
+
+<pre><code class="language-javascript">class MyClass {
+  static myProp = "value";
+}
+
+console.log(MyClass.myProp); // "value"</code></pre>
+
+<p>У экземпляра нет доступа к статическим свойствам класса.</p>
+
+<pre><code class="language-javascript">class MyClass {
+  static myProp = "value";
+}
+
+const inst = new MyClass();
+console.log(inst.myProp); // undefined</code></pre>
+
+<p>Добавим классу пользователя приватное свойство <code>#role</code> — роль, которая определяет набор прав: администратор, редактор или обычный пользователь. Возможные роли будем хранить как статическое свойство <code>roles</code>.</p>
+
+<pre><code class="language-javascript">class User {
+  static roles = {
+    admin: "admin",
+    editor: "editor",
+    basic: "basic",
+  };
+
+  #email;
+  #role;
+
+  constructor(params) {
+    this.#email = params.email;
+    this.#role = params.role || User.roles.basic;
+  }
+
+  get role() {
+    return this.#role;
+  }
+
+  set role(newRole) {
+    this.#role = newRole;
+  }
+}
+
+const mango = new User({
+  email: "mango@mail.com",
+  role: User.roles.admin,
+});
+
+console.log(mango.role); // "admin"
+mango.role = User.roles.editor;
+console.log(mango.role); // "editor"</code></pre>
+
+<p><strong>Прочитай пример кода</strong></p>
+
+<pre><code class="language-javascript">class MyClass {
+  static b = 5;
+
+  constructor(value) {
+    this.a = value;
+  }
+}
+
+const instance = new MyClass(10);
+console.log(instance.b);</code></pre>
+
+[QUIZ: js-static-property-instance-access-quiz]
+
+[NEXT]
+
+<h3>Статические методы</h3>
+
+<p>В классе можно объявлять не только методы будущего экземпляра, но и статические методы. <strong>Статические методы</strong> доступны только классу. Они могут быть публичными и приватными.</p>
+
+<p>Синтаксис объявления статических методов почти такой же, как у статических свойств. Главное отличие в том, что значением будет метод.</p>
+
+<pre><code class="language-javascript">class MyClass {
+  static myMethod() {
+    console.log("A static method");
+  }
+}
+
+MyClass.myMethod(); // "A static method"</code></pre>
+
+<p>Добавим в класс <code>User</code> статическое приватное свойство <code>#takenEmails</code> для хранения занятых почт и статический метод <code>isEmailTaken</code>, который проверяет, доступна ли почта.</p>
+
+<p>Во время инициализации экземпляра будем добавлять почту пользователя в список занятых.</p>
+
+<pre><code class="language-javascript">class User {
+  static #takenEmails = [];
+
+  static isEmailTaken(email) {
+    return User.#takenEmails.includes(email);
+  }
+
+  #email;
+
+  constructor(params) {
+    this.#email = params.email;
+    User.#takenEmails.push(params.email);
+  }
+}
+
+const mango = new User({ email: "mango@mail.com" });
+
+console.log(User.isEmailTaken("poly@mail.com")); // false
+console.log(User.isEmailTaken("mango@mail.com")); // true</code></pre>
+
+<div class="info-note">
+  <p><strong>Особенность статических методов</strong></p>
+  <p>Во время вызова ключевое слово <code>this</code> ссылается на сам класс. Поэтому статический метод имеет доступ к статическим свойствам класса, но не к свойствам экземпляра.</p>
+</div>
+
+[NEXT]
+
+<h3>Наследование классов</h3>
+
+<p>Ключевое слово <code>extends</code> позволяет реализовать наследование классов, когда один класс наследует свойства и методы другого класса.</p>
+
+<p>Рассмотрим пример:</p>
+
+<pre><code class="language-javascript">class Parent {}
+
+class Child extends Parent {
+  // ...
+}</code></pre>
+
+<p>В выражении <code>class Child extends Parent</code> дочерний класс <code>Child</code> наследует родительский класс <code>Parent</code>.</p>
+
+<p>Это позволяет создать базовый класс с общими свойствами и методами, а затем наследовать их в других классах и добавлять собственную уникальную логику.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/class-inheritance-users.svg" alt="Схема наследования классов пользователей" class="img-responsive img-rounded" />
+</div>
+
+<p>Представим пользователей с разными ролями: администратор, копирайтер, контент-менеджер. У каждого типа есть общие данные, например почта и пароль, а также уникальные свойства.</p>
+
+<p>Если создать независимый класс для каждого типа пользователя, общую логику придется дублировать. Вместо этого можно создать базовый класс <code>User</code>, а затем описать дочерние классы, которые наследуют его свойства и методы.</p>
+
+<pre><code class="language-javascript">class User {
+  #email;
+
+  constructor(email) {
+    this.#email = email;
+  }
+
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+class ContentEditor extends User {
+  // Тело класса ContentEditor
+}
+
+const editor = new ContentEditor("mango@mail.com");
+console.log(editor); // { #email: "mango@mail.com" }
+console.log(editor.email); // "mango@mail.com"</code></pre>
+
+<p>Класс <code>ContentEditor</code> наследует от класса <code>User</code> его конструктор, геттер и сеттер <code>email</code>. Приватное свойство <code>#email</code> создается базовым классом и доступно только его собственным методам.</p>
+
+[NEXT]
+
+<h3>Конструктор дочернего класса</h3>
+
+<p>В конструкторе дочернего класса нужно вызывать специальную функцию <code>super(args)</code>. Это псевдоним конструктора родительского класса.</p>
+
+<div class="info-note">
+  <p>Иначе при попытке обратиться к <code>this</code> в конструкторе дочернего класса возникнет ошибка.</p>
+</div>
+
+<p>При вызове конструктора родительского класса передают аргументы, необходимые для инициализации его свойств.</p>
+
+<pre><code class="language-javascript">class User {
+  #email;
+
+  constructor(email) {
+    this.#email = email;
+  }
+
+  get email() {
+    return this.#email;
+  }
+
+  set email(newEmail) {
+    this.#email = newEmail;
+  }
+}
+
+class ContentEditor extends User {
+  constructor(params) {
+    // Вызов конструктора родительского класса User
+    super(params.email);
+
+    this.posts = params.posts;
+  }
+}
+
+const editor = new ContentEditor({
+  email: "mango@mail.com",
+  posts: [],
+});
+
+console.log(editor); // { #email: "mango@mail.com", posts: [] }
+console.log(editor.email); // "mango@mail.com"</code></pre>
+
+[QUIZ: js-child-constructor-super-quiz]
+
+[NEXT]
+
+<h3>Методы дочернего класса</h3>
+
+<p>Дочерний класс может использовать методы и свойства родительского класса. Кроме того, в дочернем классе можно объявлять методы, которые будут доступны только его экземплярам.</p>
+
+<pre><code class="language-javascript">// Представим, что выше объявлен класс User
+
+class ContentEditor extends User {
+  constructor(params) {
+    super(params.email);
+    this.posts = params.posts;
+  }
+
+  addPost(post) {
+    this.posts.push(post);
+  }
+}
+
+const editor = new ContentEditor({
+  email: "mango@mail.com",
+  posts: [],
+});
+
+console.log(editor);
+// { #email: "mango@mail.com", posts: [], addPost: f }
+
+editor.addPost("post-1");
+editor.addPost("post-2");
+console.log(editor.posts); // ["post-1", "post-2"]</code></pre>
+
+<p>В примере видно, что <code>ContentEditor</code> наследует класс <code>User</code>.</p>
+
+<ul class="list-disc">
+  <li><code>User</code> — базовый класс с приватным свойством <code>#email</code></li>
+  <li><code>ContentEditor</code> расширяет класс <code>User</code>, имеет собственное свойство <code>posts</code> и метод <code>addPost</code></li>
+</ul>
+
+<p>Метод <code>addPost</code> — это метод дочернего класса <code>ContentEditor</code>. Он будет доступен только экземплярам <code>ContentEditor</code>.</p>
 `,
         },
       ],

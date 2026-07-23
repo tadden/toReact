@@ -1153,4 +1153,33 @@ h1, h2, h3 {
     successMessage:
       "Правильно! Унаследованное свойство находится не в самом объекте, а в его прототипе.",
   },
+  "js-private-property-symbol-quiz": {
+    id: "js-private-property-symbol-quiz",
+    question: "С какого символа должно начинаться имя приватного свойства?",
+    options: ["*", "#", "_", "$"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Имя приватного свойства начинается с символа #.",
+  },
+  "js-static-property-instance-access-quiz": {
+    id: "js-static-property-instance-access-quiz",
+    question: "Что будет выведено в консоль при обращении к instance.b?",
+    options: ["5", "10", "ошибка", "undefined"],
+    correctAnswer: 3,
+    successMessage:
+      "Верно! Статическое свойство доступно классу, но не его экземпляру.",
+  },
+  "js-child-constructor-super-quiz": {
+    id: "js-child-constructor-super-quiz",
+    question:
+      "Что будет, если не вызвать super в конструкторе дочернего класса?",
+    options: [
+      "Будет ошибка при попытке доступа к this в его конструкторе",
+      "Будет ошибка при попытке доступа к this в его методах",
+      "Будет ошибка при наследовании класса",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! В конструкторе дочернего класса сначала нужно вызвать super, а уже потом использовать this.",
+  },
 };
