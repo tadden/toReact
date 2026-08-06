@@ -1,0 +1,24 @@
+<svg width="720" height="420" viewBox="0 0 720 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="420" fill="#F8F8F8"/>
+  <path d="M177 69L209 50L280 60L249 80L177 69Z" fill="#2DD071" stroke="#26313A" stroke-width="2"/>
+  <path d="M249 80L280 60V347L249 367V80Z" fill="#21B965" stroke="#26313A" stroke-width="2"/>
+  <path d="M177 69L249 80V367L177 356V69Z" fill="#29C66B" stroke="#26313A" stroke-width="2"/>
+  <text x="219" y="232" transform="rotate(-90 219 232)" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="white">JavaScript</text>
+  <path d="M280 178H333" stroke="#208246" stroke-width="2"/>
+  <path d="M280 241H333" stroke="#208246" stroke-width="2"/>
+  <path d="M280 178V241" stroke="#208246" stroke-width="2"/>
+  <path d="M280 241V304" stroke="#208246" stroke-width="2"/>
+  <path d="M280 304H333" stroke="#208246" stroke-width="2"/>
+  <path d="M333 131L362 112L584 149L554 168L333 131Z" fill="#E7DC14" stroke="#26313A" stroke-width="2"/>
+  <path d="M554 168L584 149V202L554 221V168Z" fill="#D1C700" stroke="#26313A" stroke-width="2"/>
+  <path d="M333 131L554 168V221L333 184V131Z" fill="#E4D90D" stroke="#26313A" stroke-width="2"/>
+  <text x="443" y="175" transform="rotate(10 443 175)" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="white">ECMAScript</text>
+  <path d="M333 213L362 194L584 231L554 250L333 213Z" fill="#6B86DC" stroke="#26313A" stroke-width="2"/>
+  <path d="M554 250L584 231V284L554 303V250Z" fill="#5873CF" stroke="#26313A" stroke-width="2"/>
+  <path d="M333 213L554 250V303L333 266V213Z" fill="#607BDA" stroke="#26313A" stroke-width="2"/>
+  <text x="443" y="258" transform="rotate(10 443 258)" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="white">DOM</text>
+  <path d="M333 295L362 276L584 313L554 332L333 295Z" fill="#FF5668" stroke="#26313A" stroke-width="2"/>
+  <path d="M554 332L584 313V366L554 385V332Z" fill="#F54156" stroke="#26313A" stroke-width="2"/>
+  <path d="M333 295L554 332V385L333 348V295Z" fill="#FF455A" stroke="#26313A" stroke-width="2"/>
+  <text x="443" y="340" transform="rotate(10 443 340)" text-anchor="middle" font-family="Arial, sans-serif" font-size="25" font-weight="700" fill="white">BOM</text>
+</svg>

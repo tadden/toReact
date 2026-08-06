@@ -1,0 +1,49 @@
+<svg width="720" height="340" viewBox="0 0 720 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="340" fill="#F8F8F8"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10" fill="#8F98A3"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, sans-serif" text-anchor="middle">
+    <path d="M92 52H145L169 76V158H92V52Z" fill="#244553"/>
+    <path d="M145 52V76H169" fill="#6C8792"/>
+    <text x="130" y="112" font-size="18" font-weight="700" fill="white">HTML</text>
+    <path d="M92 200H145L169 224V306H92V200Z" fill="#F2C74B"/>
+    <path d="M145 200V224H169" fill="#F8DD82"/>
+    <text x="130" y="260" font-size="18" font-weight="700" fill="white">JS</text>
+    <rect x="300" y="74" width="102" height="72" rx="8" fill="#9BD6E5"/>
+    <rect x="280" y="92" width="44" height="36" rx="5" fill="#B8E7F0"/>
+    <rect x="378" y="92" width="44" height="36" rx="5" fill="#B8E7F0"/>
+    <circle cx="350" cy="110" r="18" fill="#71BBD0"/>
+    <path d="M340 110H360M350 100V120" stroke="#4D8FA3" stroke-width="4" stroke-linecap="round"/>
+    <rect x="311" y="143" width="80" height="22" rx="4" fill="#304757"/>
+    <text x="351" y="158" font-size="11" fill="white">HTML PARSER</text>
+    <rect x="300" y="218" width="102" height="72" rx="8" fill="#9BD6E5"/>
+    <rect x="280" y="236" width="44" height="36" rx="5" fill="#B8E7F0"/>
+    <rect x="378" y="236" width="44" height="36" rx="5" fill="#B8E7F0"/>
+    <circle cx="350" cy="254" r="18" fill="#71BBD0"/>
+    <path d="M340 254H360M350 244V264" stroke="#4D8FA3" stroke-width="4" stroke-linecap="round"/>
+    <rect x="313" y="287" width="76" height="22" rx="4" fill="#F2C74B"/>
+    <text x="351" y="302" font-size="11" font-weight="700" fill="white">JS ENGINE</text>
+    <rect x="548" y="65" width="64" height="28" rx="4" fill="#244553"/>
+    <text x="580" y="85" font-size="13" font-weight="700" fill="white">DOM</text>
+    <rect x="501" y="122" width="64" height="28" rx="4" fill="#244553"/>
+    <text x="533" y="142" font-size="13" fill="white">object</text>
+    <rect x="595" y="122" width="64" height="28" rx="4" fill="#244553"/>
+    <text x="627" y="142" font-size="13" fill="white">node</text>
+    <rect x="472" y="180" width="52" height="24" rx="4" fill="#244553"/>
+    <rect x="540" y="180" width="52" height="24" rx="4" fill="#244553"/>
+    <rect x="608" y="180" width="52" height="24" rx="4" fill="#244553"/>
+    <path d="M175 110H258" stroke="#8F98A3" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M404 110C462 96 498 82 538 80" stroke="#8F98A3" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M580 93V122" stroke="#244553" stroke-width="2"/>
+    <path d="M580 93L533 122" stroke="#244553" stroke-width="2"/>
+    <path d="M580 93L627 122" stroke="#244553" stroke-width="2"/>
+    <path d="M533 150L498 180" stroke="#244553" stroke-width="2"/>
+    <path d="M533 150L566 180" stroke="#244553" stroke-width="2"/>
+    <path d="M627 150L634 180" stroke="#244553" stroke-width="2"/>
+    <path d="M175 258H258" stroke="#8F98A3" stroke-width="3" marker-end="url(#arrow)"/>
+    <path d="M402 254C476 230 514 206 550 173" stroke="#8F98A3" stroke-width="3" marker-end="url(#arrow)"/>
+  </g>
+</svg>

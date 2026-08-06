@@ -1,0 +1,48 @@
+<svg width="720" height="420" viewBox="0 0 720 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="420" fill="#F8F8F8"/>
+  <g font-family="Arial, sans-serif" font-size="18" fill="#333743">
+    <rect x="301" y="22" width="118" height="34" rx="6" fill="#DDE2FF" stroke="#8694F0" stroke-width="2"/>
+    <text x="360" y="45" text-anchor="middle">document</text>
+    <rect x="318" y="78" width="84" height="34" rx="6" fill="#FFE0E5" stroke="#FF7E91" stroke-width="2"/>
+    <text x="360" y="101" text-anchor="middle">html</text>
+    <rect x="214" y="158" width="84" height="34" rx="6" fill="#DDF8E8" stroke="#4ED684" stroke-width="2"/>
+    <text x="256" y="181" text-anchor="middle">head</text>
+    <rect x="422" y="158" width="84" height="34" rx="6" fill="#DDF8E8" stroke="#4ED684" stroke-width="2"/>
+    <text x="464" y="181" text-anchor="middle">body</text>
+    <rect x="72" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="114" y="261" text-anchor="middle">meta</text>
+    <rect x="172" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="214" y="261" text-anchor="middle">meta</text>
+    <rect x="272" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="314" y="261" text-anchor="middle">title</text>
+    <rect x="372" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="414" y="261" text-anchor="middle">link</text>
+    <rect x="440" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="482" y="261" text-anchor="middle">div</text>
+    <rect x="540" y="238" width="84" height="34" rx="6" fill="#FFF8B8" stroke="#E5D628" stroke-width="2"/>
+    <text x="582" y="261" text-anchor="middle">script</text>
+    <rect x="322" y="324" width="78" height="34" rx="6" fill="white" stroke="#C4C8D0" stroke-width="2"/>
+    <text x="361" y="347" text-anchor="middle">img</text>
+    <rect x="420" y="324" width="64" height="34" rx="6" fill="white" stroke="#C4C8D0" stroke-width="2"/>
+    <text x="452" y="347" text-anchor="middle">h1</text>
+    <rect x="502" y="324" width="64" height="34" rx="6" fill="white" stroke="#C4C8D0" stroke-width="2"/>
+    <text x="534" y="347" text-anchor="middle">p</text>
+    <rect x="584" y="324" width="64" height="34" rx="6" fill="white" stroke="#C4C8D0" stroke-width="2"/>
+    <text x="616" y="347" text-anchor="middle">div</text>
+  </g>
+  <g stroke="#333743" stroke-width="2">
+    <path d="M360 56V78"/>
+    <path d="M360 112L256 158"/>
+    <path d="M360 112L464 158"/>
+    <path d="M256 192L114 238"/>
+    <path d="M256 192L214 238"/>
+    <path d="M256 192L314 238"/>
+    <path d="M256 192L414 238"/>
+    <path d="M464 192L482 238"/>
+    <path d="M464 192L582 238"/>
+    <path d="M482 272L361 324"/>
+    <path d="M482 272L452 324"/>
+    <path d="M482 272L534 324"/>
+    <path d="M482 272L616 324"/>
+  </g>
+</svg>

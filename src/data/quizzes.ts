@@ -1182,4 +1182,70 @@ h1, h2, h3 {
     successMessage:
       "Верно! В конструкторе дочернего класса сначала нужно вызвать super, а уже потом использовать this.",
   },
+  "js-dom-root-element-quiz": {
+    id: "js-dom-root-element-quiz",
+    question: "Какой элемент является корневым в DOM-дереве?",
+    options: ["window", "document", "html", "body"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! В DOM-дереве document является корневым элементом.",
+  },
+  "js-text-content-value-quiz": {
+    id: "js-text-content-value-quiz",
+    question: "Что хранит свойство textContent?",
+    options: [
+      "URL-адрес текущей страницы",
+      "HTML-код содержимого элемента",
+      "Текстовое содержимое элемента без HTML-тегов",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! textContent хранит текстовое содержимое элемента без HTML-тегов.",
+  },
+  "js-class-list-add-quiz": {
+    id: "js-class-list-add-quiz",
+    question: "Как можно добавить новый класс к списку классов элемента element?",
+    options: [
+      'element.addClass("new-class");',
+      'element.classList.add("new-class");',
+      'element.updateClass("new-class");',
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Метод classList.add(className) добавляет класс к списку классов элемента.",
+  },
+  "js-class-list-remove-quiz": {
+    id: "js-class-list-remove-quiz",
+    question: "Как можно удалить класс из списка классов элемента element?",
+    options: [
+      'element.removeClass("some-class");',
+      'element.classList.remove("some-class");',
+      'element.classList.delete("some-class");',
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Метод classList.remove(className) удаляет класс из списка классов элемента.",
+  },
+  "js-dom-has-attribute-quiz": {
+    id: "js-dom-has-attribute-quiz",
+    question: "Какой метод проверяет наличие определенного атрибута у элемента?",
+    options: ["hasAttribute", "getAttribute", "setAttribute", "removeAttribute"],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Метод hasAttribute(nameAttribute) проверяет, есть ли атрибут на элементе.",
+  },
+  "js-dom-dataset-access-quiz": {
+    id: "js-dom-dataset-access-quiz",
+    question:
+      "Как получить доступ к значению data-атрибута data-type элемента element?",
+    options: [
+      "element.dataset.type",
+      'element.data["type"]',
+      'element["type"]',
+      "element.dataset.dataType",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Для data-атрибутов используется dataset, а имя атрибута пишется без data-.",
+  },
 };

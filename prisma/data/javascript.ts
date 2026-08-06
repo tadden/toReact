@@ -5367,6 +5367,198 @@ console.log(uniqueSortedCourses); // ["biology", "science",
           url: "https://www.youtube.com/watch?v=Z-w9kLvu18A",
         },
       ],
+      homework: {
+        id: "js-oop-classes-hw",
+        title: "Домашнее задание: ООП. Классы",
+        description: `<h2 style="margin-bottom: 1.5rem;">Критерии приема</h2>
+
+<p>Ты почти на экваторе JavaScript! 💪</p>
+
+<p><strong>После проработки материалов модуля 5, ты:</strong></p>
+
+<ul class="list-disc">
+  <li>понимаешь, что такое ключевое слово <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> в контексте отдельной функции</li>
+  <li>умеешь определять <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> в глобальной области видимости, в методе объекта, в стрелочных и callback-функциях</li>
+  <li>знаешь методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">call</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">apply</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">bind</code></li>
+  <li>понимаешь сущность ООП, понятия класса, экземпляра и интерфейса</li>
+  <li>знаешь, что такое прототипное наследование и специфику его использования</li>
+  <li>используешь прототипное наследование и классы для создания однотипных объектов с одинаковым набором свойств, но разными значениями</li>
+</ul>
+
+<h3>Что дальше?</h3>
+
+<p>Последний шаг — выполнить 3 задачи, где нужно правильно использовать ключевое слово <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code>, создать класс для управления складом товаров и настроить конструктор строк. Погнали!</p>
+
+<div class="attention-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p>ℹ️ После изменений, которые вносите в своем репозитории, подождите, пожалуйста, 5 минут перед отправкой работы на проверку. GitHub нужно время, чтобы обновить версию.</p>
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Домашнее задание №5</h2>
+
+<ul class="list-disc">
+  <li>Создай репозиторий <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-05</code> и склонируй его себе на компьютер.</li>
+  <li>В папке <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">goit-js-hw-05</code> создай структуру проекта, как показано на схеме ниже.</li>
+</ul>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Обрати внимание!</strong> Имена файлов и папок, а также их структура вложенности должны соответствовать указанной схеме. Иначе работа не будет принята.</p>
+</div>
+
+<div class="image-container">
+  <img src="/images/javascript/hw-05-tree.svg" alt="Структура файлов домашнего задания 5" class="img-responsive" style="max-width: 500px; margin: 2rem auto; display: block;" />
+</div>
+
+<ul class="list-disc">
+  <li>Прочитай каждое задание и выполни его в соответствующем файле.</li>
+  <li>Убедись, что код отформатирован с помощью <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Prettier</code>, а в консоли отсутствуют ошибки и предупреждения при открытии живой страницы задания.</li>
+  <li>Сдай домашнее задание на проверку.</li>
+</ul>
+
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит две ссылки: на исходные файлы и рабочую страницу на <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">GitHub Pages</code>.</p>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 1. Аккаунт пользователя</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-1.js</strong></p>
+</div>
+
+<p>Перед увольнением разработчик сломал исходный код управления аккаунтами пользователей сервиса доставки еды. Выполни рефакторинг методов объекта <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer</code>, расставив отсутствующие <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code> при обращении к свойствам объекта.</p>
+
+<p>Используй этот стартовый код и выполни рефакторинг. После объявления объекта мы добавили вызовы методов. В консоль будут выведены результаты их работы. Пожалуйста, ничего там не меняй.</p>
+
+<pre><code class="language-javascript">const customer = {
+  username: "Mango",
+  balance: 24000,
+  discount: 0.1,
+  orders: ["Burger", "Pizza", "Salad"],
+  // Change code below this line
+  getBalance() {
+    return balance;
+  },
+  getDiscount() {
+    return discount;
+  },
+  setDiscount(value) {
+    discount = value;
+  },
+  getOrders() {
+    return orders;
+  },
+  addOrder(cost, order) {
+    balance -= cost - cost * discount;
+    orders.push(order);
+  },
+  // Change code above this line
+};
+
+customer.setDiscount(0.15);
+console.log(customer.getDiscount()); // 0.15
+customer.addOrder(5000, "Steak");
+console.log(customer.getBalance()); // 19750
+console.log(customer.getOrders()); // ["Burger", "Pizza", "Salad", "Steak"]</code></pre>
+
+<p>Оставь этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлена переменная <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer</code></li>
+  <li>Значение переменной <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer</code> — это объект со свойствами и методами</li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer.getDiscount()</code> возвращает текущее значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">discount</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer.setDiscount(0.15)</code> обновляет значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">discount</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer.getBalance()</code> возвращает текущее значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">balance</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer.getOrders()</code> возвращает текущее значение свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">orders</code></li>
+  <li>Вызов <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">customer.addOrder(5000, "Steak")</code> добавляет <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"Steak"</code> в массив <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">orders</code> и обновляет баланс</li>
+  <li>Методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getBalance</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getDiscount</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">setDiscount</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getOrders</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addOrder</code> используют <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">this</code></li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 2. Склад</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-2.js</strong></p>
+</div>
+
+<p>Создай класс <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Storage</code>, который будет создавать объекты для управления складом товаров. Класс ожидает один аргумент — начальный массив товаров, который записывается в приватное свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code>.</p>
+
+<p>Объяви следующие методы класса:</p>
+
+<ul class="list-disc">
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getItems()</code> — возвращает массив текущих товаров из приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code></li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addItem(newItem)</code> — принимает новый товар <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">newItem</code> и добавляет его в массив товаров</li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">removeItem(itemToRemove)</code> — принимает название товара и удаляет его из массива товаров</li>
+</ul>
+
+<p>Возьми код ниже с инициализацией экземпляра и вызовами методов и вставь его после объявления класса. В консоль будут выведены результаты их работы. Пожалуйста, ничего там не меняй.</p>
+
+<pre><code class="language-javascript">const storage = new Storage(["Nanitoids", "Prolonger", "Antigravitator"]);
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator"]
+
+storage.addItem("Droid");
+console.log(storage.getItems()); // ["Nanitoids", "Prolonger", "Antigravitator", "Droid"]
+
+storage.removeItem("Prolonger");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]
+
+storage.removeItem("Scanner");
+console.log(storage.getItems()); // ["Nanitoids", "Antigravitator", "Droid"]</code></pre>
+
+<p>Оставь этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлен класс <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Storage</code></li>
+  <li>У класса <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">Storage</code> объявлены методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getItems</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addItem</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">removeItem</code></li>
+  <li>Свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code> объявлено приватным</li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getItems</code> возвращает значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code> экземпляра класса</li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">addItem</code> изменяет значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code></li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">removeItem</code> изменяет значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code></li>
+  <li>Объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">storage</code> не содержит публичного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">items</code></li>
+  <li>Вызовы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">storage.getItems()</code> после каждой операции возвращают ожидаемые массивы товаров</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задача 3. Конструктор строк</h2>
+
+<div class="info-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p><strong>ℹ️ Выполняй это задание в файле task-3.js</strong></p>
+</div>
+
+<p>Напиши класс <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">StringBuilder</code>, который принимает один параметр <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">initialValue</code> — произвольную строку, которая записывается в приватное свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code> создаваемого объекта.</p>
+
+<p>Объяви следующие методы класса:</p>
+
+<ul class="list-disc">
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getValue()</code> — возвращает текущее значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padEnd(str)</code> — добавляет строку <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">str</code> в конец значения приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padStart(str)</code> — добавляет строку <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">str</code> в начало значения приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li><code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padBoth(str)</code> — добавляет строку <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">str</code> в начало и конец значения приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+</ul>
+
+<p>Возьми код ниже с инициализацией экземпляра и вызовами методов и вставь его после объявления класса для проверки корректности работы. В консоль будут выведены результаты их работы. Пожалуйста, ничего там не меняй.</p>
+
+<pre><code class="language-javascript">const builder = new StringBuilder(".");
+console.log(builder.getValue()); // "."
+builder.padStart("^");
+console.log(builder.getValue()); // "^."
+builder.padEnd("^");
+console.log(builder.getValue()); // "^.^"
+builder.padBoth("=");
+console.log(builder.getValue()); // "=^.^="</code></pre>
+
+<p>Оставь этот код для проверки ментором.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Объявлен класс <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">StringBuilder</code></li>
+  <li>Свойство <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code> объявлено приватным</li>
+  <li>У класса <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">StringBuilder</code> объявлены методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getValue</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padEnd</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padStart</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padBoth</code></li>
+  <li>Метод <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">getValue</code> возвращает значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li>Методы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padEnd</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padStart</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">padBoth</code> изменяют значение приватного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li>Объект <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">builder</code> не содержит публичного свойства <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">value</code></li>
+  <li>Последовательные вызовы <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">builder.getValue()</code> возвращают строки <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"."</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"^."</code>, <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"^.^"</code> и <code style="background-color: rgba(255, 255, 255, 0.2); padding: 2px 5px; border-radius: 4px;">"=^.^="</code></li>
+</ul>`,
+      },
       topics: [
         {
           id: "js-function-execution-context",
@@ -6932,6 +7124,379 @@ console.log(editor.posts); // ["post-1", "post-2"]</code></pre>
 </ul>
 
 <p>Метод <code>addPost</code> — это метод дочернего класса <code>ContentEditor</code>. Он будет доступен только экземплярам <code>ContentEditor</code>.</p>
+`,
+        },
+      ],
+    },
+    {
+      slug: "module-6-dom-events",
+      title: "Модуль 6. DOM. События",
+      description:
+        "Работа с объектной моделью документа, DOM-элементами и событиями браузера.",
+      order: 5,
+      videoUrl: null,
+      items: [],
+      resources: [],
+      topics: [
+        {
+          id: "js-document-object-model",
+          title: "Объектная модель документа",
+          order: 0,
+          content: `
+<h3>JavaScript в браузере</h3>
+
+<p class="my-md">Когда JavaScript выполняется в браузере, у него есть дополнительный функционал для работы с вкладкой. Этот функционал состоит из таких модулей: ECMAScript, DOM и BOM.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/js-browser-modules.svg" alt="Модули JavaScript в браузере: ECMAScript, DOM и BOM" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md"><strong>ECMAScript (сокращенно ES)</strong> — это стандарт, который описывает язык программирования JavaScript. Он определяет синтаксис и семантику языка, а также набор встроенных объектов и функций для работы с данными, текстом, датами и другими аспектами программирования.</p>
+
+<p class="my-md">ECMAScript дает основную структуру языка, на которой базируется JavaScript. Разные версии JavaScript реализуются через разные версии стандарта ECMAScript: ES5, ES6 или ES2015, ES2016, ES2017 и так далее.</p>
+
+<p class="my-md"><strong>Объектная модель документа (Document Object Model)</strong> — независимый интерфейс <strong>для работы с HTML-документом</strong>. Эта модель содержит набор свойств и методов, которые позволяют искать, создавать и удалять элементы, реагировать на действия пользователя и связывать страницу с языком программирования.</p>
+
+<p class="my-md">DOM — это отображение HTML-документа. Он выглядит как древовидная структура, где каждый узел — это JavaScript-объект со свойствами и методами, который является частью HTML-документа.</p>
+
+<p class="my-md">Каждый элемент документа, весь документ целиком, заголовок, ссылка или абзац — это части DOM этого документа. Поэтому все они могут быть изменены из JavaScript-кода.</p>
+
+<p class="my-md"><strong>Объектная модель браузера (Browser Object Model)</strong> — независимый от языка интерфейс <strong>для работы с браузером</strong>. Он содержит набор свойств и методов, которые позволяют получить доступ к функциям браузера: размеру окна, URL, истории навигации, местоположению и другим возможностям.</p>
+
+[NEXT]
+
+<h3>HTML-документ и DOM</h3>
+
+<p class="my-md">Согласно DOM-модели, каждый тег образует отдельный <code>элемент-узел</code> (element node), а каждый фрагмент текста внутри элемента — <code>текстовый узел</code> (text node).</p>
+
+<p class="my-md">HTML-документ — это иерархическое дерево, где каждый элемент, кроме корневого, вложен в один родительский элемент.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/dom-document-tree.svg" alt="Дерево DOM-документа" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">На схеме видно, что элемент <code>html</code> расположен внутри <code>document</code>. Значит, <code>document</code> — родительский элемент для <code>html</code>. Аналогично, <code>html</code> — родительский элемент для <code>head</code> и <code>body</code>.</p>
+
+<p class="my-md">У <code>document</code> нет родительского элемента, потому что <code>document</code> — корневой элемент. За счет вложенной структуры тегов и текстовых элементов образуется иерархическое дерево.</p>
+
+<h4>Как складывается DOM-дерево?</h4>
+
+<p class="my-md">Чтобы отобразить HTML-документ, браузер сначала преобразует его в формат, который понимает, — DOM. У браузера есть специальный фрагмент кода, <code>HTML-парсер</code>, который используется для преобразования HTML в DOM.</p>
+
+<p class="my-md">Браузер строит DOM постепенно: как только появляются первые фрагменты кода, он начинает парсить HTML и добавлять узлы в древовидную структуру.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/html-parser-flow.svg" alt="HTML-документ преобразуется HTML-парсером" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">После того как DOM-дерево построено, в нем можно найти элемент с помощью JavaScript. Поскольку каждый элемент имеет интерфейс со свойствами и методами, с ним можно выполнять нужные действия.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/html-js-dom-flow.svg" alt="HTML и JavaScript взаимодействуют с DOM" class="img-responsive img-rounded" />
+</div>
+
+[QUIZ: js-dom-root-element-quiz]
+
+[NEXT]
+
+<h3>Поиск элементов</h3>
+
+<p class="my-md">DOM-элемент — это объект со свойствами и методами. Поэтому важно уметь быстро находить нужный элемент по произвольному CSS-селектору.</p>
+
+<p class="my-md">Группа методов <code>elem.querySelector*</code> — современный стандарт для поиска элементов. Они позволяют найти один элемент или группу элементов по CSS-селектору.</p>
+
+<pre><code class="language-javascript">element.querySelector(selector)</code></pre>
+
+<p class="my-md">Метод <code>querySelector</code> используется, когда нужно найти только один, чаще всего уникальный, элемент.</p>
+
+<ul class="list-disc">
+  <li>возвращает первый найденный элемент внутри <code>element</code>, который соответствует CSS-селектору <code>selector</code></li>
+  <li>если ничего не найдено, возвращает <code>null</code></li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/javascript/query-selector-first.svg" alt="querySelector возвращает первый подходящий элемент" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Доступ к DOM начинается с объекта <code>document</code>. Из него можно добраться до любых элементов страницы. Объект <code>document</code> — часть глобального объекта <code>window</code>, доступного скрипту в браузере.</p>
+
+<pre><code class="language-javascript">element.querySelectorAll(selector)</code></pre>
+
+<p class="my-md">Метод <code>querySelectorAll</code> используется, когда нужно найти коллекцию элементов, то есть получить массив ссылок на элементы с одинаковым селектором. Например, все элементы списка с классом <code>list-item</code>.</p>
+
+<ul class="list-disc">
+  <li>возвращает псевдомассив всех элементов внутри <code>element</code>, которые соответствуют CSS-селектору <code>selector</code></li>
+  <li>если ничего не найдено, возвращает пустую коллекцию</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/javascript/query-selector-all.svg" alt="querySelectorAll возвращает все подходящие элементы" class="img-responsive img-rounded" />
+</div>
+
+[NEXT]
+
+<h3>Навигация по DOM</h3>
+
+<p class="my-md">Элементы DOM-дерева имеют иерархические отношения друг с другом. Для описания этих отношений используются термины: предок (ancestor), потомок (descendant), родитель (parent), ребенок (child) и сосед (sibling).</p>
+
+<ul class="list-disc">
+  <li>самый верхний элемент называется корневым (root node)</li>
+  <li>каждый элемент, кроме корневого, имеет только один родительский элемент</li>
+  <li>у элемента может быть сколько угодно детей</li>
+  <li>соседи — это элементы с общим родительским элементом</li>
+  <li>дочерние элементы — это элементы, непосредственно вложенные в текущий элемент</li>
+  <li>потомки — все элементы внутри текущего элемента, включая детей, детей их детей и так далее</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/javascript/dom-navigation.svg" alt="Навигация по DOM-дереву" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">На схеме <code>ul</code> — родительский элемент. Три элемента <code>li</code> — его дети и соседи между собой. Элементы <code>span</code>, <code>a</code> и <code>p</code> тоже соседи. Все они — дети для <code>li</code> и потомки для <code>ul</code>.</p>
+`,
+        },
+        {
+          id: "js-dom-properties-and-attributes",
+          title: "Свойства и атрибуты",
+          order: 1,
+          content: `
+<h3>Доступ к свойствам</h3>
+
+<p class="my-md">Во время построения DOM-дерева некоторые стандартные HTML-атрибуты становятся свойствами элементов, то есть свойствами DOM-объектов. Разберем пример.</p>
+
+<ul class="list-disc">
+  <li>если в HTML есть тег ссылки</li>
+</ul>
+
+<pre><code class="language-html">&lt;a class="link" href="https://goit.global"&gt;GoIT&lt;/a&gt;</code></pre>
+
+<ul class="list-disc">
+  <li>то в JavaScript можно прочитать значение атрибута <code>href</code>, получив ссылку на элемент, то есть объект, с помощью <code>querySelector</code> и обратившись к его свойству <code>href</code></li>
+</ul>
+
+<pre><code class="language-javascript">const link = document.querySelector(".link");
+console.log(link.href); // "https://goit.global"</code></pre>
+
+<p class="my-md">Значения атрибутов можно изменять, присвоив им новое значение прямо из JavaScript-кода. Во время выполнения скрипта значение в HTML, а значит и в DOM-дереве, изменится.</p>
+
+<pre><code class="language-javascript">const link = document.querySelector(".link");
+console.log(link.href); // "https://goit.global"
+
+link.href = "https://neo.goit.global";
+console.log(link.href); // "https://neo.goit.global"</code></pre>
+
+[NEXT]
+
+<h3>Свойство <code>textContent</code></h3>
+
+<p class="my-md">Свойство <code>textContent</code> возвращает весь текстовый контент внутри элемента, включая текст вложенных элементов.</p>
+
+<pre><code class="language-html">&lt;p class="text"&gt;Username: &lt;span class="sub-text"&gt;Mango&lt;/span&gt;&lt;/p&gt;</code></pre>
+
+<p class="my-md">Чтобы получить текстовый контент элемента, как обычно, получаем ссылку на элемент и обращаемся к свойству через точку.</p>
+
+<pre><code class="language-javascript">const el = document.querySelector(".text");
+const nested = document.querySelector(".sub-text");
+
+console.log(el.textContent); // "Username: Mango"
+console.log(nested.textContent); // "Mango"</code></pre>
+
+<p class="my-md">Свойство <code>textContent</code> можно как читать, так и изменять. Неважно, что будет передано в <code>textContent</code>, данные всегда будут записаны как текст.</p>
+
+<pre><code class="language-javascript">const el = document.querySelector(".text");
+console.log(el.textContent); // "Username: Mango"
+
+el.textContent = "Username: Poly";</code></pre>
+
+[QUIZ: js-text-content-value-quiz]
+
+[NEXT]
+
+<h3>Свойство <code>classList</code></h3>
+
+<p class="my-md">Чтобы из JavaScript-кода прочитать, добавить, удалить или проверить наличие CSS-класса у элемента, в свойстве <code>classList</code> хранится объект с методами для работы с CSS-классами элемента.</p>
+
+<pre><code class="language-html">&lt;a class="link is-active" href="https://goit.global"&gt;GoIT&lt;/a&gt;</code></pre>
+
+<p class="my-md">Свойство <code>classList</code> — это специальный объект, похожий на массив. Он хранит перечень классов DOM-элемента, свойство <code>length</code> и свойство <code>value</code>.</p>
+
+<ul class="list-disc">
+  <li>свойство <code>value</code> содержит точное значение атрибута <code>class</code></li>
+  <li>свойство <code>length</code> — количество классов элемента</li>
+</ul>
+
+<pre><code class="language-javascript">const link = document.querySelector(".link");
+console.log(link.classList);
+// ["link", "is-active", length: 2, value: "link is-active"]</code></pre>
+
+<h4>Метод <code>classList.contains(className)</code></h4>
+
+<p class="my-md">Метод ожидает аргументом строку с именем класса и возвращает <code>true</code> или <code>false</code>, в зависимости от наличия класса <code>className</code> в элементе.</p>
+
+<pre><code class="language-javascript">const hasActiveClass = link.classList.contains("is-active"); // true
+const hasTitleClass = link.classList.contains("title"); // false</code></pre>
+
+<h4>Метод <code>classList.add(className)</code></h4>
+
+<p class="my-md">Метод ожидает аргументом строку с именем класса и добавляет класс <code>className</code> к списку классов элемента.</p>
+
+<pre><code class="language-javascript">link.classList.add("special");
+console.log(link.classList);
+// ["link", "is-active", "special", length: 3, value: "link is-active special"]</code></pre>
+
+<div class="info-highlight">
+  <p>Можно добавить больше одного класса, указав несколько аргументов через запятую.</p>
+</div>
+
+<h4>Метод <code>classList.remove(className)</code></h4>
+
+<p class="my-md">Метод ожидает аргументом строку с именем класса и удаляет класс <code>className</code> из списка классов элемента.</p>
+
+<pre><code class="language-javascript">link.classList.remove("is-active");
+console.log(link.classList);
+// ["link", "special", length: 2, value: "link special"]</code></pre>
+
+<div class="info-highlight">
+  <p>Если попробовать удалить класс, которого нет на элементе, ошибки не будет. Просто ничего не удалится.</p>
+</div>
+
+<h4>Метод <code>classList.toggle(className)</code></h4>
+
+<p class="my-md">Метод работает как переключатель.</p>
+
+<ul class="list-disc">
+  <li>если класс <code>className</code> отсутствует, то добавляет его в конец списка классов</li>
+  <li>если класс <code>className</code> присутствует, то удаляет его</li>
+</ul>
+
+<pre><code class="language-javascript">link.classList.toggle("is-active");
+console.log(link.classList);
+// ["link", "special", "is-active", length: 3, value: "link special is-active"]</code></pre>
+
+<h4>Метод <code>classList.replace(oldClassName, newClassName)</code></h4>
+
+<p class="my-md">Метод ожидает два аргумента: старую и новую названия класса. Он заменяет существующий класс <code>oldClassName</code> на <code>newClassName</code>.</p>
+
+<pre><code class="language-javascript">link.classList.replace("special", "regular");
+console.log(link.classList);
+// ["link", "regular", "is-active", length: 3, value: "link regular is-active"]</code></pre>
+
+<div class="info-highlight">
+  <p>Если попробовать заменить класс, которого нет на элементе, ошибки не будет. Просто ничего не изменится.</p>
+</div>
+
+[QUIZ: js-class-list-add-quiz]
+
+[QUIZ: js-class-list-remove-quiz]
+
+[NEXT]
+
+<h3>Свойство <code>style</code></h3>
+
+<p class="my-md">Свойство <code>style</code> используется для чтения и изменения встроенных стилей DOM-элемента. Оно возвращает объект, который содержит список только встроенных свойств элемента, а не весь CSS.</p>
+
+<p class="my-md">При записи свойства записываются в <code>camelCase</code>-нотации вместо дефисов, которые обычно используются в CSS. То есть <code>background-color</code> превращается в <code>backgroundColor</code>.</p>
+
+<pre><code class="language-javascript">const button = document.querySelector(".btn");
+
+button.style.backgroundColor = "teal";
+button.style.fontSize = "24px";
+button.style.textAlign = "center";
+
+console.log(button.style); // inline styles object</code></pre>
+
+<p class="my-md">На практике стилизация элементов обычно выполняется путем добавления CSS-классов.</p>
+
+<div class="info-highlight">
+  <p>Свойство <code>style</code> удобно использовать для динамических стилей, например, если ссылка на фоновое изображение заранее неизвестна и приходит с бекенда.</p>
+</div>
+
+[NEXT]
+
+<h3>Доступ к атрибутам</h3>
+
+<p class="my-md">DOM-элементам соответствуют HTML-теги, которые содержат текстовые атрибуты. Доступ к атрибутам осуществляется с помощью стандартных методов. Эти методы работают со значением, которое находится в HTML.</p>
+
+<pre><code class="language-html">&lt;img
+  class="image"
+  src="https://picsum.photos/id/15/320/240"
+  alt="Rocks and waterfall"
+  width="300"
+/&gt;</code></pre>
+
+<h4>Метод <code>element.hasAttribute(nameAttribute)</code></h4>
+
+<p class="my-md">Метод принимает один аргумент — строку <code>nameAttribute</code> с именем атрибута для проверки. Он возвращает результат проверки наличия атрибута на элементе <code>element</code> — <code>true</code> или <code>false</code>.</p>
+
+<pre><code class="language-javascript">const image = document.querySelector(".image");
+
+console.log(image.hasAttribute("src")); // true
+console.log(image.hasAttribute("href")); // false</code></pre>
+
+<h4>Метод <code>element.getAttribute(nameAttribute)</code></h4>
+
+<p class="my-md">Метод принимает один аргумент — строку <code>nameAttribute</code> с именем атрибута. Он возвращает значение этого атрибута для указанного HTML-элемента <code>element</code>. Если атрибут не найден, метод возвращает <code>null</code>.</p>
+
+<pre><code class="language-javascript">console.log(image.getAttribute("alt")); // "Rocks and waterfall"</code></pre>
+
+<h4>Метод <code>element.setAttribute(nameAttribute, value)</code></h4>
+
+<p class="my-md">Метод принимает два аргумента: строку <code>nameAttribute</code> с именем атрибута, который нужно установить или изменить, и <code>value</code> со значением, которое нужно присвоить этому атрибуту. Метод устанавливает или изменяет значение указанного атрибута для элемента <code>element</code>.</p>
+
+<pre><code class="language-javascript">image.setAttribute("alt", "Amazing nature");
+console.log(image.getAttribute("alt")); // "Amazing nature"</code></pre>
+
+<h4>Метод <code>element.removeAttribute(nameAttribute)</code></h4>
+
+<p class="my-md">Метод принимает один аргумент — строку <code>nameAttribute</code> с именем атрибута, который нужно удалить с элемента <code>element</code>. Если указанного атрибута нет на элементе, метод не вызывает ошибку и ничего не делает.</p>
+
+<pre><code class="language-javascript">image.removeAttribute("alt");
+console.log(image.hasAttribute("alt")); // false</code></pre>
+
+<div class="info-highlight">
+  <p>Получить доступ или изменить значения некоторых атрибутов элемента можно напрямую, обращаясь к ним как к свойствам DOM-объекта. Такой способ обычно требует меньше кода.</p>
+</div>
+
+[QUIZ: js-dom-has-attribute-quiz]
+
+[NEXT]
+
+<h3>Собственные атрибуты</h3>
+
+<p class="my-md">Спецификация HTML определяет список атрибутов, которые можно добавлять к тегам. Но иногда нужно сохранить дополнительную информацию на элементе: тип кнопки, идентификатор действия или другие данные, которые потом понадобятся в JavaScript.</p>
+
+<p class="my-md">Для этого используют собственные <code>data-атрибуты</code>. Они позволяют добавить к тегу произвольный атрибут и получить его значение в JavaScript.</p>
+
+<pre><code class="language-html">&lt;button type="button" data-action="save"&gt;Save text&lt;/button&gt;
+&lt;button type="button" data-action="close"&gt;Close editor&lt;/button&gt;</code></pre>
+
+<h4>Получение значений</h4>
+
+<p class="my-md">Для получения значения <code>data-атрибута</code> используется свойство <code>dataset</code>. После него через точку пишется имя атрибута без <code>data-</code>. То есть <code>data-action</code> превращается в свойство <code>action</code> объекта <code>dataset</code>.</p>
+
+<pre><code class="language-javascript">const saveBtn = document.querySelector('button[data-action="save"]');
+console.log(saveBtn.dataset.action); // "save"
+
+const closeBtn = document.querySelector('button[data-action="close"]');
+console.log(closeBtn.dataset.action); // "close"</code></pre>
+
+<h4>Изменение значений</h4>
+
+<p class="my-md">Изменить значение существующего <code>data-атрибута</code> или добавить новый можно так же, как и любое другое свойство объекта в JavaScript. Для этого нужно получить доступ к DOM-элементу, а затем изменить или задать значение свойства в объекте <code>dataset</code>.</p>
+
+<pre><code class="language-javascript">// Изменяем значение data-action для кнопки saveBtn
+saveBtn.dataset.action = "update";
+
+// Добавляем новый data-атрибут data-role
+saveBtn.dataset.role = "admin";
+
+// Проверяем новые значения
+console.log(saveBtn.dataset.action); // "update"
+console.log(saveBtn.dataset.role); // "admin"</code></pre>
+
+<p class="my-md">Теперь <code>data-action</code> у кнопки <code>saveBtn</code> имеет значение <code>"update"</code> вместо <code>"save"</code>.</p>
+
+[QUIZ: js-dom-dataset-access-quiz]
 `,
         },
       ],

@@ -1,0 +1,28 @@
+<svg width="500" height="520" viewBox="0 0 500 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="95" y="30" width="310" height="410" rx="14" fill="#292943"/>
+  <path d="M95 44C95 36.268 101.268 30 109 30H391C398.732 30 405 36.268 405 44V88H95V44Z" fill="#3A395D"/>
+  <text x="150" y="62" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#F5F7FF">GOIT-JS-HW-05</text>
+  <path d="M120 54L132 66L144 54" stroke="#D8DAF1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M150 108L162 120L174 108" stroke="#D8DAF1" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="190" y="124" font-family="Arial, sans-serif" font-size="24" fill="#D8DAF1">js</text>
+  <path d="M178 132V232" stroke="#565777" stroke-width="2"/>
+  <path d="M178 162H198" stroke="#565777" stroke-width="2"/>
+  <path d="M178 196H198" stroke="#565777" stroke-width="2"/>
+  <path d="M178 230H198" stroke="#565777" stroke-width="2"/>
+  <text x="206" y="164" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#F7DF1E">JS</text>
+  <text x="248" y="164" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">task-1.js</text>
+  <text x="206" y="198" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#F7DF1E">JS</text>
+  <text x="248" y="198" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">task-2.js</text>
+  <text x="206" y="232" font-family="Arial, sans-serif" font-size="22" font-weight="700" fill="#F7DF1E">JS</text>
+  <text x="248" y="232" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">task-3.js</text>
+  <path d="M190 270L205 255L220 270L205 285L190 270Z" fill="#A0A2B8"/>
+  <circle cx="205" cy="270" r="5" fill="#292943"/>
+  <text x="236" y="278" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">.gitignore</text>
+  <text x="194" y="322" font-family="Arial, sans-serif" font-size="28" font-weight="700" fill="#F7DF1E">{}</text>
+  <text x="236" y="322" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">.prettierrc</text>
+  <text x="190" y="366" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#FF7A3C">&lt;&gt;</text>
+  <text x="236" y="366" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">index.html</text>
+  <circle cx="205" cy="408" r="16" stroke="#3A8BFF" stroke-width="3"/>
+  <text x="201" y="417" font-family="Arial, sans-serif" font-size="24" font-weight="700" fill="#3A8BFF">i</text>
+  <text x="236" y="416" font-family="Arial, sans-serif" font-size="22" fill="#BFC0D6">README.md</text>
+</svg>

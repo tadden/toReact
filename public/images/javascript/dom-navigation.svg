@@ -1,0 +1,93 @@
+<svg width="960" height="377" viewBox="0 0 960 377" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="377" fill="white"/>
+
+  <defs>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ff3737"/>
+    </marker>
+    <marker id="arrow-black" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2f3340"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#3aa35d"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="8.5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#8f66ff"/>
+    </marker>
+  </defs>
+
+  <style>
+    .node {
+      fill: #dfe6ff;
+      stroke: #6479d8;
+      stroke-width: 2.5;
+    }
+
+    .code {
+      fill: #2f3340;
+      font-family: Menlo, Consolas, monospace;
+      font-size: 22px;
+      text-anchor: middle;
+      dominant-baseline: middle;
+    }
+
+    .text {
+      fill: #3b3f4a;
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+    }
+  </style>
+
+  <path d="M 181 152 L 427 49" stroke="#ff3737" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+  <path d="M 779 152 L 533 49" stroke="#ff3737" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+  <path d="M 480 152 L 480 73" stroke="#ff3737" stroke-width="2.5" marker-end="url(#arrow-red)"/>
+
+  <text class="text" x="252" y="92" transform="rotate(-25 252 92)">parentNode</text>
+  <text class="text" x="641" y="78" transform="rotate(25 641 78)">parentNode</text>
+  <text class="text" x="373" y="121">parentNode</text>
+
+  <path d="M 426 164 L 237 164" stroke="#2f3340" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+  <path d="M 237 188 L 426 188" stroke="#2f3340" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+  <path d="M 724 164 L 535 164" stroke="#2f3340" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+  <path d="M 535 188 L 724 188" stroke="#2f3340" stroke-width="2.5" marker-end="url(#arrow-black)"/>
+
+  <text class="text" x="281" y="155">previousSibling</text>
+  <text class="text" x="288" y="181">nextSibling</text>
+  <text class="text" x="578" y="155">previousSibling</text>
+  <text class="text" x="587" y="181">nextSibling</text>
+
+  <path d="M 480 200 L 480 278" stroke="#3aa35d" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <path d="M 480 230 L 360 230 L 360 278" stroke="#3aa35d" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+  <path d="M 480 230 L 642 230 L 642 278" stroke="#3aa35d" stroke-width="2.5" marker-end="url(#arrow-green)"/>
+
+  <text class="text" x="218" y="257">childNodes[0]</text>
+  <text class="text" x="390" y="257">childNodes[1]</text>
+  <text class="text" x="538" y="257">childNodes[2]</text>
+
+  <path d="M 195 306 L 300 306" stroke="#8f66ff" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+  <path d="M 765 306 L 688 306" stroke="#8f66ff" stroke-width="2.5" marker-end="url(#arrow-purple)"/>
+
+  <text class="text" x="211" y="296">firstChild</text>
+  <text class="text" x="716" y="296">lastChild</text>
+
+  <rect class="node" x="426" y="24" width="108" height="48" rx="8"/>
+  <text class="code" x="480" y="49">&lt;ul&gt;</text>
+
+  <rect class="node" x="124" y="152" width="112" height="48" rx="8"/>
+  <text class="code" x="180" y="177">&lt;li&gt;</text>
+
+  <rect class="node" x="426" y="152" width="108" height="48" rx="8"/>
+  <text class="code" x="480" y="177">&lt;li&gt;</text>
+
+  <rect class="node" x="724" y="152" width="112" height="48" rx="8"/>
+  <text class="code" x="780" y="177">&lt;li&gt;</text>
+
+  <rect class="node" x="300" y="278" width="112" height="48" rx="8"/>
+  <text class="code" x="356" y="303">&lt;span&gt;</text>
+
+  <rect class="node" x="426" y="278" width="108" height="48" rx="8"/>
+  <text class="code" x="480" y="303">&lt;a&gt;</text>
+
+  <rect class="node" x="580" y="278" width="108" height="48" rx="8"/>
+  <text class="code" x="634" y="303">&lt;p&gt;</text>
+</svg>

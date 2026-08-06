@@ -1,0 +1,28 @@
+<svg width="720" height="330" viewBox="0 0 720 330" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="720" height="330" fill="#F8F8F8"/>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0 0L10 5L0 10" fill="#3B82F6"/>
+    </marker>
+  </defs>
+  <g font-family="Menlo, Consolas, monospace" font-size="18" text-anchor="middle" fill="#333743">
+    <rect x="285" y="38" width="150" height="46" rx="10" fill="white" stroke="#333743" stroke-width="2"/>
+    <text x="360" y="68">ul.list</text>
+    <rect x="82" y="136" width="165" height="46" rx="10" fill="white" stroke="#333743" stroke-width="2"/>
+    <text x="164" y="166">li.list-item</text>
+    <rect x="278" y="136" width="165" height="46" rx="10" fill="white" stroke="#333743" stroke-width="2"/>
+    <text x="360" y="166">li.list-item</text>
+    <rect x="474" y="136" width="165" height="46" rx="10" fill="white" stroke="#333743" stroke-width="2"/>
+    <text x="556" y="166">li.list-item</text>
+    <text x="360" y="286" font-size="17">const listItems = document.querySelectorAll(".list-item")</text>
+  </g>
+  <g stroke="#333743" stroke-width="2">
+    <path d="M360 84V108"/>
+    <path d="M360 108L164 136"/>
+    <path d="M360 108V136"/>
+    <path d="M360 108L556 136"/>
+  </g>
+  <path d="M304 256L174 183" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M340 256L356 183" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrow)"/>
+  <path d="M376 256L546 183" stroke="#3B82F6" stroke-width="3" marker-end="url(#arrow)"/>
+</svg>
