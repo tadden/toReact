@@ -1248,4 +1248,117 @@ h1, h2, h3 {
     successMessage:
       "Верно! Для data-атрибутов используется dataset, а имя атрибута пишется без data-.",
   },
+  "js-dom-create-element-tag-quiz": {
+    id: "js-dom-create-element-tag-quiz",
+    question:
+      "При создании нового <div>-элемента с помощью document.createElement(), какое имя элемента нужно передать аргументом?",
+    options: ['"paragraph"', '"div"', '"p"', '"text"'],
+    correctAnswer: 1,
+    successMessage:
+      'Верно! Для создания <div>-элемента нужно передать строку "div".',
+  },
+  "js-dom-append-position-quiz": {
+    id: "js-dom-append-position-quiz",
+    question:
+      "Куда будет добавлен элемент newElem при выполнении elem.append(newElem)?",
+    options: [
+      "Перед элементом elem",
+      "После элемента elem",
+      "В начало elem перед всеми его детьми",
+      "В конец elem после всех его детей",
+    ],
+    correctAnswer: 3,
+    successMessage:
+      "Верно! append() добавляет элемент в конец выбранного элемента, после всех его детей.",
+  },
+  "js-dom-remove-element-quiz": {
+    id: "js-dom-remove-element-quiz",
+    question: "Какой код удалит элемент element из DOM-дерева?",
+    options: [
+      "element.delete()",
+      "element.remove()",
+      "document.remove(element)",
+      "document.delete(element)",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Метод element.remove() удаляет элемент из DOM-дерева.",
+  },
+  "js-dom-inner-html-purpose-quiz": {
+    id: "js-dom-inner-html-purpose-quiz",
+    question: "Что делает свойство innerHTML в JavaScript?",
+    options: [
+      "Устанавливает или получает атрибуты элемента.",
+      "Устанавливает или получает HTML-содержимое элемента.",
+      "Изменяет CSS-стили элемента.",
+      "Запрещает взаимодействие с HTML-элементами.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Свойство innerHTML устанавливает или получает HTML-содержимое элемента.",
+  },
+  "js-dom-inner-html-type-quiz": {
+    id: "js-dom-inner-html-type-quiz",
+    question: "Какой тип данных возвращает свойство innerHTML?",
+    options: [
+      "Число (number)",
+      "Строку (string)",
+      "Массив (array)",
+      "Объект (object)",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Свойство innerHTML возвращает строку (string).",
+  },
+  "js-dom-add-event-listener-quiz": {
+    id: "js-dom-add-event-listener-quiz",
+    question:
+      'Как назначить функцию myFunction обработчиком события "click" для элемента myElement?',
+    options: [
+      'addEventListener(myElement, "click", myFunction)',
+      'myElement.addEventListener("click", myFunction)',
+      'click.addEventListener(myElement, myFunction)',
+    ],
+    correctAnswer: 1,
+    successMessage:
+      'Верно! Метод addEventListener() вызывается на элементе, первым аргументом принимает имя события, вторым — обработчик.',
+  },
+  "js-dom-remove-event-listener-quiz": {
+    id: "js-dom-remove-event-listener-quiz",
+    question:
+      'Как удалить обработчик события myFunction с элемента myElement для события "click"?',
+    options: [
+      'removeEventListener(myElement, "click", myFunction)',
+      'myElement.removeEventListener("click", myFunction)',
+      "click.removeEventListener(myElement, myFunction)",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      'Верно! Метод removeEventListener() вызывается на элементе с тем же событием и той же функцией-обработчиком.',
+  },
+  "js-dom-event-object-quiz": {
+    id: "js-dom-event-object-quiz",
+    question: "Что представляет собой объект события?",
+    options: [
+      "Он содержит данные об объекте, к которому привязано событие.",
+      "Он содержит информацию о самом событии, например тип события и элемент, который его вызвал.",
+      "Он содержит все объекты на веб-странице.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Объект события содержит информацию о событии и автоматически передается в обработчик.",
+  },
+  "js-dom-keydown-practice-quiz": {
+    id: "js-dom-keydown-practice-quiz",
+    question:
+      "Почему на практике при работе с событиями клавиатуры чаще слушают событие keydown?",
+    options: [
+      "Потому что это главное событие клавиатуры.",
+      "Оно срабатывает чаще, поэтому ввод можно обработать точнее.",
+      "Оно срабатывает раньше, и можно быстрее обработать ввод пользователя.",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! keydown срабатывает при нажатии клавиши, поэтому результат можно обработать раньше.",
+  },
 };

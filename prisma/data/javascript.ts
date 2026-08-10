@@ -5346,7 +5346,8 @@ console.log(uniqueSortedCourses); // ["biology", "science",
     {
       slug: "module-5-oop-classes",
       title: "Модуль 5. ООП. Классы",
-      description: "Объектно-ориентированное программирование. Классы, прототипы, наследование.",
+      description:
+        "Объектно-ориентированное программирование. Классы, прототипы, наследование.",
       order: 4,
       videoUrl: null,
       items: [],
@@ -7497,6 +7498,335 @@ console.log(saveBtn.dataset.role); // "admin"</code></pre>
 <p class="my-md">Теперь <code>data-action</code> у кнопки <code>saveBtn</code> имеет значение <code>"update"</code> вместо <code>"save"</code>.</p>
 
 [QUIZ: js-dom-dataset-access-quiz]
+`,
+        },
+        {
+          id: "js-dom-create-remove-elements",
+          title: "Создание и удаление элементов",
+          order: 2,
+          content: `
+<h3>Создание элементов</h3>
+
+<p class="my-md">DOM API (Document Object Model Application Programming Interface) имеет широкий функционал. С его помощью можно:</p>
+
+<ul class="list-disc">
+  <li>выбирать или изменять уже существующие элементы</li>
+  <li>удалять элементы</li>
+  <li>создавать новые элементы и добавлять их в документ</li>
+</ul>
+
+<p class="my-md">Рассмотрим, как создать новый элемент:</p>
+
+<pre><code class="language-javascript">document.createElement(tagName)</code></pre>
+
+<ul class="list-disc">
+  <li>создает элемент с именем <code>tagName</code> и возвращает ссылку на его объект как результат выполнения</li>
+  <li><code>tagName</code> — это строка, которая указывает тип создаваемого элемента</li>
+  <li>элемент создается в памяти, в DOM его еще нет</li>
+</ul>
+
+<pre><code class="language-javascript">const heading = document.createElement("h1");</code></pre>
+
+<p class="my-md">После создания элемента <code>heading</code> получаем ссылку на его объект в памяти. С этого момента можно обращаться к свойствам этого объекта и изменять их еще до того, как вставим этот элемент в DOM.</p>
+
+<pre><code class="language-javascript">const heading = document.createElement("h1");
+heading.classList.add("title");
+heading.textContent = "This is a heading";
+console.log(heading); // &lt;h1 class="title"&gt;This is a heading&lt;/h1&gt;
+
+const image = document.createElement("img");
+image.src = "https://picsum.photos/id/11/320/240";
+image.alt = "Nature";
+console.log(image); // &lt;img src="https://picsum.photos/id/11/320/240" alt="Nature" /&gt;</code></pre>
+
+[QUIZ: js-dom-create-element-tag-quiz]
+
+[NEXT]
+
+<h3>Добавление элементов</h3>
+
+<p class="my-md">Чтобы созданный элемент отображался на странице, его нужно добавить к уже существующему элементу в DOM-дереве. Допустим, добавляем элемент внутрь <code>elem</code>. Для этого существуют такие методы:</p>
+
+<ul class="list-disc">
+  <li><code>elem.append(el1, el2, ...)</code> — добавляет один или несколько элементов после всех детей элемента <code>elem</code></li>
+  <li><code>elem.prepend(el1, el2, ...)</code> — добавляет один или несколько элементов перед всеми детьми элемента <code>elem</code></li>
+</ul>
+
+<p class="my-md">В этих методах <code>el</code> — это элементы или строки в любом сочетании и количестве. Строки добавляются как текстовые узлы.</p>
+
+<div class="codepen-container">
+  <iframe title="Добавление элементов" src="https://codepen.io/goit-academy/embed/WNpzoZQ?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<div class="info-highlight">
+  <p>Если элемент для добавления уже находится в DOM, он удаляется со своего старого места и добавляется в новое. Один и тот же элемент не может одновременно находиться в двух местах.</p>
+</div>
+
+[QUIZ: js-dom-append-position-quiz]
+
+[NEXT]
+
+<h3>Удаление элементов</h3>
+
+<p class="my-md">Для удаления элемента используется метод <code>element.remove()</code>.</p>
+
+<pre><code class="language-html">&lt;p class="text"&gt;Random text content&lt;/p&gt;</code></pre>
+
+<p class="my-md">Метод вызывается на элементе <code>element</code>, который нужно удалить.</p>
+
+<pre><code class="language-javascript">const text = document.querySelector(".text");
+text.remove();</code></pre>
+
+<p class="my-md">После вызова <code>remove()</code> элемент исчезает из DOM-дерева и больше не отображается на странице.</p>
+
+<p class="my-md">В живом примере удаляем элемент текста из статьи.</p>
+
+<div class="codepen-container">
+  <iframe title="Удаление элементов" src="https://codepen.io/goit-academy/embed/mdWKWoM?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-dom-remove-element-quiz]
+
+[NEXT]
+
+<h3>Свойство <code>innerHTML</code></h3>
+
+<p class="my-md">Есть еще один способ создавать DOM-элементы и помещать их в DOM-дерево. Для этого браузеру передают строку с тегами и разрешают ему выполнить всю тяжелую работу. У такого подхода есть свои плюсы и минусы.</p>
+
+<h4>Чтение</h4>
+
+<p class="my-md">Свойство <code>innerHTML</code> хранит содержимое элемента вместе с тегами в виде строки. Значение, которое возвращается, всегда является валидным HTML-кодом.</p>
+
+<div class="codepen-container">
+  <iframe title="Чтение innerHTML" src="https://codepen.io/goit-academy/embed/ZEeRegd?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<h4>Изменение</h4>
+
+<p class="my-md">Свойство <code>innerHTML</code> доступно и для чтения, и для записи. Если записать в него строку с HTML-тегами, браузер во время парсинга превратит ее в валидные элементы и добавит в DOM-дерево.</p>
+
+<div class="codepen-container">
+  <iframe title="Изменение innerHTML" src="https://codepen.io/goit-academy/embed/JjWZNKb?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<div class="info-highlight">
+  <p>Если в свойство <code>innerHTML</code> записать пустую строку, содержимое элемента будет очищено. Это простой и быстрый способ удалить весь контент внутри элемента.</p>
+</div>
+
+<p class="my-md">Однотипная разметка часто создается из массива данных. Для этого массив перебирают методом <code>map()</code>, а затем объединяют полученные строки методом <code>join()</code>.</p>
+
+<div class="codepen-container">
+  <iframe title="Создание разметки из массива" src="https://codepen.io/goit-academy/embed/qBrKmJP?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<p class="my-md">Новое значение для <code>element.innerHTML</code> полностью удаляет и повторно создает всех потомков элемента. Если элемент сначала не был пустым, это вызывает дополнительные расходы на повторное создание уже существующей разметки.</p>
+
+<div class="codepen-container">
+  <iframe title="Полная замена innerHTML" src="https://codepen.io/goit-academy/embed/QWpxvqR?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<div class="info-highlight">
+  <p>Используй свойство <code>element.innerHTML</code> для добавления только тогда, когда элемент пустой или когда нужно полностью заменить его содержимое.</p>
+</div>
+
+[QUIZ: js-dom-inner-html-purpose-quiz]
+
+[QUIZ: js-dom-inner-html-type-quiz]
+
+[NEXT]
+
+<h3>Метод <code>insertAdjacentHTML()</code></h3>
+
+<p class="my-md"><strong>Метод <code>insertAdjacentHTML()</code></strong> — это современный метод для добавления строки с HTML-тегами перед, после или внутрь элемента. Он решает проблему <code>innerHTML</code> с повторной сериализацией содержимого элемента при добавлении разметки к уже существующей.</p>
+
+<pre><code class="language-javascript">element.insertAdjacentHTML(position, string)</code></pre>
+
+<p class="my-md">Аргумент <code>position</code> — это строка, которая определяет позицию относительно элемента <code>element</code>. Он принимает одно из четырех значений.</p>
+
+<div class="image-container">
+  <img src="/images/javascript/insert-adjacent-html-positions.png" alt="Позиции insertAdjacentHTML" class="img-responsive img-rounded" />
+</div>
+
+<ul class="list-disc">
+  <li><code>"beforebegin"</code> — перед <code>element</code></li>
+  <li><code>"afterbegin"</code> — внутри <code>element</code>, перед всеми детьми</li>
+  <li><code>"beforeend"</code> — внутри <code>element</code>, после всех детей</li>
+  <li><code>"afterend"</code> — после <code>element</code></li>
+</ul>
+
+<p class="my-md">Значения <code>"beforebegin"</code> и <code>"afterend"</code> работают только тогда, когда <code>element</code> уже находится в DOM-дереве. Ограничение связано с тем, что нельзя определить, куда вставить разметку, пока элемент не находится внутри DOM.</p>
+
+<p class="my-md">В живом примере сначала в HTML есть список из трех элементов. Еще три элемента и заголовок списка добавляются через JavaScript с помощью метода <code>insertAdjacentHTML()</code>.</p>
+
+<div class="codepen-container">
+  <iframe title="Метод insertAdjacentHTML" src="https://codepen.io/goit-academy/embed/mdWKMOE?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+`,
+        },
+        {
+          id: "js-dom-events",
+          title: "События",
+          order: 3,
+          content: `
+<h3>Метод <code>addEventListener()</code></h3>
+
+<p class="my-md"><strong>Событие</strong> — это сигнал от браузера о том, что на странице что-то произошло. Есть много видов событий: события мыши, клавиатуры, элементов формы, изменения размеров окна, загрузки изображений, буфера обмена, смены CSS-анимации или перехода и другие.</p>
+
+<p class="my-md">События используются для реакции на действия пользователя и выполнения кода, связанного с определенным событием.</p>
+
+<p class="my-md">Чтобы элемент реагировал на действие пользователя, к нему нужно добавить слушателя события и определить обработчик.</p>
+
+<p class="my-md">Слушатель события — это механизм, который «слушает» или ожидает возникновения определенного события. Метод <code>addEventListener()</code> добавляет слушателя события на элемент.</p>
+
+<pre><code class="language-javascript">element.addEventListener(event, handler, options)</code></pre>
+
+<p class="my-md">Аргументы метода:</p>
+
+<ul class="list-disc">
+  <li><code>event</code> — строка с именем события, например <code>"click"</code></li>
+  <li><code>handler</code> — колбек-функция, которая будет вызвана при наступлении события</li>
+  <li><code>options</code> — необязательный объект параметров с расширенными настройками</li>
+</ul>
+
+<p class="my-md">Рассмотрим пример: на сайте есть кнопка для переключения изображения галереи.</p>
+
+<p class="my-md">В HTML есть кнопка с классом <code>my-button</code>.</p>
+
+<pre><code class="language-html">&lt;button class="my-button"&gt;Next&lt;/button&gt;</code></pre>
+
+<p class="my-md">Чтобы галерея переключалась, нужно получить ссылку на кнопку в JavaScript и добавить на нее слушателя события клика.</p>
+
+<pre><code class="language-javascript">const button = document.querySelector(".my-button");
+
+button.addEventListener("click", () =&gt; {
+  console.log("The button was pressed and now the next image will appear");
+});</code></pre>
+
+<p class="my-md">В вызове <code>addEventListener()</code> первым аргументом передали имя события <code>"click"</code>, а вторым — функцию-обработчик, которая будет выполняться при каждом клике.</p>
+
+<p class="my-md">Для колбека можно использовать не анонимную, а отдельную функцию. Такой вариант делает код более читабельным.</p>
+
+<pre><code class="language-javascript">const button = document.querySelector(".my-button");
+
+const handleClick = () =&gt; {
+  console.log("The button was pressed and now the next image will appear");
+};
+
+button.addEventListener("click", handleClick);</code></pre>
+
+<div class="info-highlight">
+  <p>На одном элементе может быть любое количество обработчиков событий, даже одного типа. Колбек-функции будут вызываться в порядке их регистрации в коде.</p>
+</div>
+
+<div class="codepen-container">
+  <iframe title="Метод addEventListener" src="https://codepen.io/goit-academy/embed/QWpxOvE?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-dom-add-event-listener-quiz]
+
+[NEXT]
+
+<h3>Метод <code>removeEventListener()</code></h3>
+
+<p class="my-md">Метод <code>removeEventListener()</code> удаляет слушателя события с элемента. Аргументы аналогичны методу <code>addEventListener()</code>.</p>
+
+<pre><code class="language-javascript">element.removeEventListener(event, handler, options)</code></pre>
+
+<p class="my-md">Чтобы иметь возможность удалить слушателя события через <code>removeEventListener()</code>, важно использовать ту же функцию-обработчик, которая была передана в <code>addEventListener()</code>. Поэтому для обработчиков событий часто используют именованные функции, которые удобно передавать как аргументы.</p>
+
+<pre><code class="language-javascript">const button = document.querySelector(".my-button");
+
+const handleClick = () =&gt; {
+  console.log("The button was pressed and now the next image will appear");
+};
+
+button.addEventListener("click", handleClick);
+button.removeEventListener("click", handleClick);</code></pre>
+
+<p class="my-md">Разбери живой пример: на кнопку с текстом <code>Click me</code> добавляется и удаляется слушатель события другими двумя кнопками. При кликах по кнопкам в консоль разработчика выводятся сообщения.</p>
+
+<div class="codepen-container">
+  <iframe title="Метод removeEventListener" src="https://codepen.io/goit-academy/embed/vYxrWpw?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-dom-remove-event-listener-quiz]
+
+[NEXT]
+
+<h3>Объект события</h3>
+
+<p class="my-md">Для обработки события недостаточно знать, что событие произошло. Разработчику часто нужны детали: элемент, на котором произошло событие, текущее значение текстового поля, встроенные методы события и другая информация.</p>
+
+<p class="my-md">Каждое событие — это объект, который содержит информацию о деталях события и автоматически передается первым аргументом в обработчик. Все события происходят от базового класса <code>Event</code>.</p>
+
+<pre><code class="language-javascript">const handleClick = event =&gt; {
+  console.log(event);
+};
+
+button.addEventListener("click", handleClick);</code></pre>
+
+<p class="my-md">Параметр <code>event</code> — это объект события, который автоматически передается первым аргументом во время вызова колбек-функции. Его можно назвать как угодно, но чаще всего используют имена <code>e</code>, <code>evt</code> или <code>event</code>.</p>
+
+<p class="my-md">Некоторые свойства объекта события:</p>
+
+<ul class="list-disc">
+  <li><code>event.type</code> — тип события</li>
+  <li><code>event.currentTarget</code> — элемент, на котором выполняется обработчик события</li>
+</ul>
+
+<p class="my-md">Открой живой пример и посмотри на объект события в консоли разработчика при клике.</p>
+
+<div class="codepen-container">
+  <iframe title="Объект события" src="https://codepen.io/goit-academy/embed/MWpXraG?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-dom-event-object-quiz]
+
+[NEXT]
+
+<h3>События клавиатуры</h3>
+
+<p class="my-md">Есть два основных события клавиатуры:</p>
+
+<ol>
+  <li><code>keydown</code> — событие, которое происходит при нажатии клавиши</li>
+  <li><code>keyup</code> — событие, которое происходит, когда клавишу отпустили</li>
+</ol>
+
+<p class="my-md">В отличие от других событий, события клавиатуры обычно обрабатываются на документе, а не на конкретном элементе. Объекты событий клавиатуры происходят от базового класса <code>KeyboardEvent</code>.</p>
+
+<pre><code class="language-javascript">document.addEventListener("keydown", event =&gt; {
+  console.log("Keydown: ", event);
+});
+
+document.addEventListener("keyup", event =&gt; {
+  console.log("Keyup: ", event);
+});</code></pre>
+
+<p class="my-md">События <code>keydown</code> и <code>keyup</code> срабатывают при нажатии любой клавиши, включая служебные клавиши, например <code>Ctrl</code>, <code>Shift</code>, <code>Alt</code> или <code>Escape</code>.</p>
+
+<p class="my-md">На практике чаще обрабатывают событие <code>keydown</code>, потому что оно происходит быстрее, чем <code>keyup</code>, и пользователь раньше видит результат нажатия.</p>
+
+[QUIZ: js-dom-keydown-practice-quiz]
+
+[NEXT]
+
+<h3>Свойства <code>key</code> и <code>code</code></h3>
+
+<p class="my-md">Свойство объекта события <code>key</code> возвращает символ, сгенерированный нажатием клавиши на клавиатуре. Оно учитывает состояние клавиш-модификаторов, например <code>Shift</code>, и текущую раскладку клавиатуры.</p>
+
+<p class="my-md">Свойство объекта события <code>code</code> возвращает код физической клавиши на клавиатуре и не зависит от языка и состояния клавиш-модификаторов.</p>
+
+<pre><code class="language-javascript">document.addEventListener("keydown", event =&gt; {
+  console.log("key: ", event.key);
+  console.log("code: ", event.code);
+});</code></pre>
+
+<p class="my-md">Код в живом примере создает простой журнал событий для <code>keydown</code> и <code>keyup</code>. Кликни мышью по окну с примером, чтобы на него попал фокус. После этого нажимай клавиши на клавиатуре и смотри результат обработки.</p>
+
+<div class="codepen-container">
+  <iframe title="Свойства key и code" src="https://codepen.io/goit-academy/embed/ZEeRxaJ?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
 `,
         },
       ],

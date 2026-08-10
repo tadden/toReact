@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useMemo } from "react";
 import { Course, Module } from "@/types";
 import { useProgress } from "@/lib/context/ProgressContext";
 import { useAuth } from "@/lib/context/AuthContext";
+import { useCourseView } from "@/lib/context/CourseViewContext";
 import styles from "./Course.module.scss";
 import {
   ArrowRight,
@@ -57,7 +58,78 @@ const getTitleFromContent = (
   return `Раздел ${index + 1}`;
 };
 
-import { useCourseView } from "@/lib/context/CourseViewContext";
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+
+const findLineCommentStart = (line: string) => {
+  let inSingle = false;
+  let inDouble = false;
+  let inTemplate = false;
+  let escaped = false;
+
+  for (let i = 0; i < line.length - 1; i += 1) {
+    const char = line[i];
+    const nextChar = line[i + 1];
+
+    if (escaped) {
+      escaped = false;
+      continue;
+    }
+
+    if (char === "\\") {
+      escaped = true;
+      continue;
+    }
+
+    if (!inDouble && !inTemplate && char === "'") {
+      inSingle = !inSingle;
+      continue;
+    }
+
+    if (!inSingle && !inTemplate && char === '"') {
+      inDouble = !inDouble;
+      continue;
+    }
+
+    if (!inSingle && !inDouble && char === "`") {
+      inTemplate = !inTemplate;
+      continue;
+    }
+
+    if (
+      !inSingle &&
+      !inDouble &&
+      !inTemplate &&
+      char === "/" &&
+      nextChar === "/"
+    ) {
+      return i;
+    }
+  }
+
+  return -1;
+};
+
+const highlightCodeComments = (code: string) =>
+  code
+    .split("\n")
+    .map((line) => {
+      const commentStart = findLineCommentStart(line);
+
+      if (commentStart === -1) {
+        return escapeHtml(line);
+      }
+
+      const beforeComment = line.slice(0, commentStart);
+      const comment = line.slice(commentStart);
+
+      return `${escapeHtml(beforeComment)}<span class="code-comment">${escapeHtml(comment)}</span>`;
+    })
+    .join("\n");
 
 export function ModuleContent({
   course,
@@ -194,38 +266,16 @@ export function ModuleContent({
     if (activeTab === "theory" && currentTopic && contentRef.current) {
       const preElements = contentRef.current.querySelectorAll("pre");
       preElements.forEach((pre) => {
-        // Check if button already exists
+        const code = pre.querySelector("code");
+        if (code && !code.dataset.commentsHighlighted) {
+          code.innerHTML = highlightCodeComments(code.textContent || "");
+          code.dataset.commentsHighlighted = "true";
+        }
+
         if (pre.querySelector(".copy-button")) return;
 
         const button = document.createElement("button");
-        button.className = styles["copy-button"] || "copy-button";
-        // Actually, since I defined .copy-button nested in .theoryContent in SCSS module,
-        // it might be hashed if I don't use :global.
-        // However, standard SCSS modules won't hash nested classes if they are just used as selectors?
-        // No, they are hashed.
-        // Let's rely on the fact that I just added .copy-button inside .theoryContent.
-        // Accessing styles['copy-button'] might not work if it's nested structure not top level export.
-        // I should have defined .copyButton as a top level class in SCSS or used :global(.copy-button).
-        // Let's assume standard class="copy-button" for now and I'll fallback to fixing SCSS if it's hashed.
-        // Update: In the SCSS update, I wrote .copy-button nested.
-        // To be safe, I will stick to a simpler approach:
-        // I will use inline styles for the button or a specific global class.
-        // But for now, let's try to just give it a class and see.
-        // Actually, I can just use the styles I defined if I passed them correctly.
-        // But wait, the SCSS I added was:
-        // .theoryContent { ... pre { ... .copy-button { ... } } }
-        // This 'nested' .copy-button is NOT exposed as a key in `styles` object typically unless configured.
-        // It is better to use `button.className = "copy-button"` and ensure SCSS targets `pre :global(.copy-button)` or just `pre .copy-button` is enough if the hash is on the parent?
-        // No, CSS Modules hashes everything.
-        // The safest bet is to inline the styles in JS or use a specific top-level class.
-        // Let's Retcon the SCSS first? No, I already applied it.
-        // I will use "copy-button" class and hope the SCSS `pre .copy-button` works.
-        // Wait, if `.theoryContent` is hashed to `.theoryContent_hash`, then CSS is `.theoryContent_hash pre .copy-button_hash`.
-        // So `class="copy-button"` won't match `.copy-button_hash`.
-        // I should have used `:global(.copy-button)` in the SCSS.
-        // Let's assume I will fix the SCSS in the next step if this fails, or I just use inline styles for the button in JS to be 100% sure.
-        // User wants "ability to copy".
-        // Let's use simple inline styles for the button to guarantee it works without fighting CSS modules.
+        button.className = "copy-button";
 
         button.innerText = "Copy";
         button.style.position = "absolute";
@@ -257,11 +307,11 @@ export function ModuleContent({
           }
         });
 
-        pre.style.position = "relative"; // Ensure relative
+        pre.style.position = "relative";
         pre.appendChild(button);
       });
     }
-  }, [activeTab, currentTopic]);
+  }, [activeTab, currentTopic, visiblePageIndex]);
 
   const handleComplete = (
     updates?: Partial<import("@/types").StudentProgress>,
