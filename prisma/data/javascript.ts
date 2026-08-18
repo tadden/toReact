@@ -7137,7 +7137,222 @@ console.log(editor.posts); // ["post-1", "post-2"]</code></pre>
       order: 5,
       videoUrl: null,
       items: [],
-      resources: [],
+      resources: [
+        {
+          type: "video",
+          title: "Модуль 6. Занятие 1. DOM",
+          url: "https://www.youtube.com/watch?v=w9gWey_cFgo",
+        },
+        {
+          type: "video",
+          title: "Модуль 6. Занятие 2. События",
+          url: "https://www.youtube.com/watch?v=iAAtYwGp_II",
+        },
+      ],
+      homework: {
+        id: "js-dom-events-hw",
+        title: "Домашнее задание: DOM. События",
+        description: `<h2 style="margin-bottom: 1.5rem;">Домашнее задание №6</h2>
+
+<ul class="list-disc">
+  <li>Создай репозиторий <code>goit-js-hw-06</code>.</li>
+  <li>Прочитай каждое задание и выполни его в редакторе кода.</li>
+  <li>Задания должны быть выполнены точно по техническому заданию. Изменять исходный HTML заданий запрещено.</li>
+  <li>В консоли не должно быть ошибок и предупреждений при открытии живой страницы задания.</li>
+  <li>Убедись, что код отформатирован с помощью <code>Prettier</code>, а в консоли нет ошибок и предупреждений.</li>
+  <li>Сдай домашнее задание на проверку.</li>
+</ul>
+
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит две ссылки: на исходные файлы и рабочую страницу на <code>GitHub Pages</code>.</p>
+
+<p><a href="https://downgit.github.io/#/home?url=https:%2F%2Fgithub.com%2Fgoitacademy%2Fjavascript-homework%2Ftree%2Fmain%2Fv3%2F07%2Fsrc" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">Скачай стартовые файлы</a> с готовой разметкой и подключенными файлами скриптов для каждого задания. Скопируй их себе в проект.</p>
+
+<p>Обрати внимание, что стартовые файлы находятся в папке <code>src</code>. Для создания живой страницы на GitHub Pages важно, чтобы файл <code>index.html</code> был в корне проекта, то есть без дополнительных вложенных папок. Поэтому перенеси себе в проект только содержимое папки <code>src</code>, а сама папка <code>src</code> тебе не нужна.</p>
+
+<div class="attention-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p>ℹ️ Для стилизации разметки заданий используй этот <a href="https://www.figma.com/design/m8k9NQV7qZrtYDCvxfD68B/HW-JavaScript?node-id=0-1&amp;p=f&amp;t=Ay3q1cHN9OXh5PKN-0" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">макет</a>.</p>
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Задание 1</h2>
+
+<p>HTML содержит список категорий <code>ul#categories</code>.</p>
+
+<pre><code class="language-html">&lt;ul id="categories"&gt;
+  &lt;li class="item"&gt;
+    &lt;h2&gt;Animals&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Cat&lt;/li&gt;
+      &lt;li&gt;Hamster&lt;/li&gt;
+      &lt;li&gt;Horse&lt;/li&gt;
+      &lt;li&gt;Parrot&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item"&gt;
+    &lt;h2&gt;Products&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;Bread&lt;/li&gt;
+      &lt;li&gt;Parsley&lt;/li&gt;
+      &lt;li&gt;Cheese&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li class="item"&gt;
+    &lt;h2&gt;Technologies&lt;/h2&gt;
+    &lt;ul&gt;
+      &lt;li&gt;HTML&lt;/li&gt;
+      &lt;li&gt;CSS&lt;/li&gt;
+      &lt;li&gt;JavaScript&lt;/li&gt;
+      &lt;li&gt;React&lt;/li&gt;
+      &lt;li&gt;Node.js&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+
+<p>С использованием свойств и методов DOM-элементов напиши скрипт, который:</p>
+
+<ol>
+  <li>посчитает и выведет в консоль количество категорий в <code>ul#categories</code>, то есть элементов <code>li.item</code>;</li>
+  <li>для каждого элемента <code>li.item</code> в списке <code>ul#categories</code> найдет и выведет в консоль текст заголовка элемента и количество элементов в категории.</li>
+</ol>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Количество категорий, их названия и количество элементов получены с помощью свойств и методов DOM-элементов.</li>
+  <li>Данные по каждой категории получены и выведены в консоль в цикле или методом <code>forEach()</code>.</li>
+  <li>В консоли выводятся сообщения в формате: <code>Number of categories: 3</code>, <code>Category: Animals</code>, <code>Elements: 4</code>.</li>
+</ul>
+
+<div class="image-container">
+  <img src="/images/javascript/module6homework.png" alt="Ожидаемый вывод в консоль для задания 1" class="img-responsive" style="max-width: 760px; margin: 2rem auto; display: block;" />
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Задание 2</h2>
+
+<p>Напиши скрипт для создания галереи изображений на основе массива данных. HTML содержит список <code>ul.gallery</code>.</p>
+
+<pre><code class="language-html">&lt;ul class="gallery"&gt;&lt;/ul&gt;</code></pre>
+
+<p>Используй массив объектов <code>images</code> для создания элементов <code>img</code>, вложенных в <code>li</code>. Ты можешь создать и добавить HTML-элементы с помощью <code>document.createElement()</code> и <code>elem.append()</code> или шаблонных строк и <code>elem.insertAdjacentHTML()</code>.</p>
+
+<ul class="list-disc">
+  <li>Все элементы галереи должны добавляться в DOM за одну операцию добавления.</li>
+  <li>Добавь минимальное оформление галереи флексбоксами через CSS-классы.</li>
+</ul>
+
+<pre><code class="language-javascript">const images = [
+  {
+    url: "https://images.pexels.com/photos/140134/pexels-photo-140134.jpeg?dpr=2&amp;h=750&amp;w=1260",
+    alt: "White and Black Long Fur Cat",
+  },
+  {
+    url: "https://images.pexels.com/photos/213399/pexels-photo-213399.jpeg?dpr=2&amp;h=750&amp;w=1260",
+    alt: "Orange and White Koi Fish Near Yellow Koi Fish",
+  },
+  {
+    url: "https://images.pexels.com/photos/219943/pexels-photo-219943.jpeg?dpr=2&amp;h=750&amp;w=1260",
+    alt: "Group of Horses Running",
+  },
+  {
+    url: "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg",
+    alt: "Alpine Spring Meadows",
+  },
+  {
+    url: "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg",
+    alt: "Nature Landscape",
+  },
+  {
+    url: "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
+    alt: "Lighthouse Coast Sea",
+  },
+];</code></pre>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Создана и добавлена в DOM галерея из шести изображений.</li>
+  <li>Галерея добавлена в список <code>ul.gallery</code> и состоит из шести элементов <code>li</code>, в которые вложены элементы <code>img</code>.</li>
+  <li>Для создания элементов <code>img</code> использованы данные из массива объектов <code>images</code>.</li>
+  <li>Все элементы галереи добавлены в DOM за одну операцию добавления.</li>
+  <li>Есть минимальное оформление галереи флексбоксами через CSS-классы.</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задание 3</h2>
+
+<p>Напиши скрипт, который во время набора текста в инпуте <code>input#name-input</code> подставляет его текущее значение в <code>span#name-output</code> как имя для приветствия.</p>
+
+<p>Обязательно очищай значение в инпуте от пробелов по краям. Если инпут пустой или содержит только пробелы, вместо имени в спан должен подставляться текст <code>"Anonymous"</code>.</p>
+
+<pre><code class="language-html">&lt;input type="text" id="name-input" placeholder="Please enter your name" /&gt;
+&lt;h1&gt;Hello, &lt;span id="name-output"&gt;Anonymous&lt;/span&gt;!&lt;/h1&gt;</code></pre>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>На элементе <code>input#name-input</code> прослушивается событие <code>input</code>.</li>
+  <li>При наборе текста текущее значение инпута подставляется в <code>span#name-output</code> как имя для приветствия.</li>
+  <li>Значение в инпуте очищается от пробелов по краям.</li>
+  <li>Если инпут пустой или содержит только пробелы, вместо имени подставляется строка <code>"Anonymous"</code>.</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задание 4</h2>
+
+<p>Напиши скрипт управления формой логина.</p>
+
+<pre><code class="language-html">&lt;form class="login-form"&gt;
+  &lt;label&gt;
+    Email
+    &lt;input type="email" name="email" /&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    Password
+    &lt;input type="password" name="password" /&gt;
+  &lt;/label&gt;
+  &lt;button type="submit"&gt;Log in&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+<ol>
+  <li>Отправка формы <code>form.login-form</code> должна происходить по событию <code>submit</code>.</li>
+  <li>Во время отправки формы страница не должна перезагружаться.</li>
+  <li>Если при сабмите формы есть незаполненные поля, выводи <code>alert</code> с предупреждением <code>"All form fields must be filled in"</code>. Не добавляй инпутам атрибут <code>required</code>, валидация должна выполняться через JS.</li>
+  <li>Если пользователь заполнил все поля и отправил форму, собери значения полей в объект с двумя свойствами. Ключи — имена инпутов, значения — соответствующие значения, очищенные от пробелов по краям. Для доступа к элементам формы используй свойство <code>elements</code>.</li>
+  <li>При сабмите формы выведи объект с введенными данными в консоль и очисти значения полей формы методом <code>reset</code>.</li>
+</ol>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Прослушивается событие <code>submit</code>.</li>
+  <li>Во время отправки формы страница не перезагружается.</li>
+  <li>Если есть незаполненные поля, выводится <code>alert</code>.</li>
+  <li>При сабмите в консоль выводится объект с двумя свойствами, где ключи — имена инпутов, а значения — очищенные от пробелов значения.</li>
+  <li>После сабмита элементы формы очищаются.</li>
+</ul>
+
+<h2 style="margin-bottom: 1.5rem;">Задание 5</h2>
+
+<p>Напиши скрипт, который изменяет цвет фона элемента <code>body</code> через инлайн-стиль по клику на <code>button.change-color</code> и задает это значение цвета текстовым содержимым для <code>span.color</code>.</p>
+
+<pre><code class="language-html">&lt;div class="widget"&gt;
+  &lt;p&gt;Background color: &lt;span class="color"&gt;-&lt;/span&gt;&lt;/p&gt;
+  &lt;button type="button" class="change-color"&gt;Change color&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+<p>Для генерации случайного цвета используй функцию <code>getRandomHexColor()</code>.</p>
+
+<pre><code class="language-javascript">function getRandomHexColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16).padStart(6, "0");
+}</code></pre>
+
+<p>Обрати внимание, что функция <code>getRandomHexColor()</code> возвращает цвет в hex-формате, а цвет фона на <code>body</code> будет в формате rgb. Это нормально и не требует правок.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>Фон на <code>body</code> задается только после клика на <code>button.change-color</code>.</li>
+  <li>При каждом клике на <code>button.change-color</code> фон <code>body</code> закрашивается новым случайным цветом.</li>
+  <li>На <code>body</code> и <code>span.color</code> отображается значение одного и того же цвета.</li>
+</ul>`,
+      },
       topics: [
         {
           id: "js-document-object-model",
@@ -7827,6 +8042,171 @@ document.addEventListener("keyup", event =&gt; {
 <div class="codepen-container">
   <iframe title="Свойства key и code" src="https://codepen.io/goit-academy/embed/ZEeRxaJ?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
 </div>
+`,
+        },
+        {
+          id: "js-dom-form-events",
+          title: "События элементов форм",
+          order: 4,
+          content: `
+<h3>Событие <code>submit</code></h3>
+
+<p class="my-md">Отправка формы происходит:</p>
+
+<ul class="list-disc">
+  <li>при клике на кнопку с атрибутом <code>type="submit"</code></li>
+  <li>при нажатии клавиши <code>Enter</code>, когда пользователь находится в любом текстовом поле формы</li>
+</ul>
+
+<p class="my-md">Событие <code>submit</code> происходит непосредственно на форме, то есть на теге <code>form</code>. Поэтому обработчик события нужно устанавливать именно на форму.</p>
+
+<pre><code class="language-javascript">const form = document.querySelector("form");
+
+form.addEventListener("submit", event =&gt; {
+  // ...
+});</code></pre>
+
+<p class="my-md">Некоторые события вызывают действие браузера по умолчанию. Например, клик по ссылке запускает переход на новый адрес, который указан в атрибуте <code>href</code>, а отправка формы перезагружает страницу.</p>
+
+<p class="my-md">Чаще всего такое поведение нежелательно, поэтому его нужно отменить. Для отмены действия браузера по умолчанию используется метод <code>preventDefault()</code> объекта события.</p>
+
+<pre><code class="language-javascript">const form = document.querySelector("form");
+
+form.addEventListener("submit", event =&gt; {
+  event.preventDefault();
+});</code></pre>
+
+<p class="my-md">Событие <code>submit</code> можно использовать для валидации формы перед отправкой. Объект события содержит полезные свойства, связанные с элементами формы.</p>
+
+<div class="codepen-container">
+  <iframe title="Событие submit" src="https://codepen.io/goit-academy/embed/oNZydVL?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<p class="my-md">Свойство <code>elements</code> DOM-элемента формы содержит объект со ссылками на все ее элементы, у которых есть атрибут <code>name</code>. Поэтому значения полей формы можно получить через <code>event.target.elements.login.value</code> и <code>event.target.elements.password.value</code>.</p>
+
+[QUIZ: js-dom-submit-prevent-default-quiz]
+
+[NEXT]
+
+<h3>Событие <code>change</code></h3>
+
+<p class="my-md"><strong>Событие <code>change</code></strong> происходит после изменения элемента формы.</p>
+
+<p class="my-md">Для текстовых полей или <code>textarea</code> событие произойдет не при вводе каждого символа, а после потери фокуса. Это не всегда удобно: пользователь набирает текст, но событие еще не происходит. Как только фокус пропадает, срабатывает <code>change</code>.</p>
+
+<p class="my-md">Для других элементов, например <code>select</code>, чекбоксов и радиокнопок, событие <code>change</code> срабатывает сразу во время выбора значения.</p>
+
+<p class="my-md">Обрати внимание на полезные свойства при работе с элементом <code>select</code>. Значение выбранного пункта хранится в свойствах <code>value</code>, <code>selectedIndex</code> и <code>options</code>.</p>
+
+<div class="codepen-container">
+  <iframe title="Событие change" src="https://codepen.io/goit-academy/embed/gOmKKvj?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-dom-change-text-input-quiz]
+
+[NEXT]
+
+<h3>Событие <code>input</code></h3>
+
+<p class="my-md">Событие <code>input</code> происходит только на текстовых полях и <code>textarea</code>. Оно срабатывает каждый раз при изменении значения элемента, не ожидая потери фокуса.</p>
+
+<p class="my-md">На практике <code>input</code> — главное событие для работы с текстовыми полями формы, потому что оно позволяет реагировать на ввод сразу.</p>
+
+<div class="codepen-container">
+  <iframe title="Событие input" src="https://codepen.io/goit-academy/embed/jOBKpNP?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<p class="my-md">Сравним события <code>input</code> и <code>change</code> на текстовых полях и <code>textarea</code>.</p>
+
+<p class="my-md">Событие <code>input</code> происходит при каждом изменении значения: при вводе или удалении символов. Оно не зависит от потери фокуса.</p>
+
+<p class="my-md">Событие <code>change</code> происходит после потери фокуса, если значение элемента изменилось.</p>
+
+[QUIZ: js-dom-input-frequency-quiz]
+
+[NEXT]
+
+<h3>События <code>focus</code> и <code>blur</code></h3>
+
+<p class="my-md">Элемент получает фокус при клике мышью или переходе к нему клавишей <code>Tab</code>. Момент получения и потери фокуса часто используют для автозаполнения, отслеживания изменений или проверки введенных данных.</p>
+
+<ul class="list-disc">
+  <li>событие <code>focus</code> происходит при фокусировке на элементе</li>
+  <li>событие <code>blur</code> происходит при потере фокуса, например когда пользователь кликает в другом месте экрана</li>
+</ul>
+
+<p class="my-md">Активировать или снять фокус можно программно. Для этого вызывают методы <code>focus()</code> и <code>blur()</code> на нужном элементе.</p>
+
+<p class="my-md">Рассмотрим, как события <code>focus</code> и <code>blur</code> работают в живом примере.</p>
+
+<div class="codepen-container">
+  <iframe title="События focus и blur" src="https://codepen.io/goit-academy/embed/JjWZBdM?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<p class="my-md">Фокус может быть только на одном элементе страницы за один раз. Текущий элемент, который находится в фокусе, доступен как <code>document.activeElement</code>.</p>
+
+<p class="my-md">Большинство элементов не могут получить фокус. Например, если кликнуть по <code>div</code>, фокусировка на нем не произойдет, потому что это не интерактивный элемент.</p>
+
+[QUIZ: js-dom-blur-event-quiz]
+`,
+        },
+        {
+          id: "js-dom-summary",
+          title: "Итоговая памятка",
+          slug: "js-dom-summary",
+          order: 5,
+          content: `
+<h3>Итоговая памятка</h3>
+
+<p class="my-md">Вспомним и подытожим основные методы и свойства DOM-элементов, с которыми будем работать дальше.</p>
+
+<h4>Поиск DOM-элементов</h4>
+
+<ul class="list-disc">
+  <li><code>element.querySelector(selector)</code> — возвращает первый элемент, который соответствует указанному CSS-селектору внутри элемента <code>element</code>.</li>
+  <li><code>element.querySelectorAll(selector)</code> — возвращает все элементы, которые соответствуют указанному CSS-селектору внутри элемента <code>element</code>.</li>
+</ul>
+
+<h4>Свойства DOM-элемента</h4>
+
+<ul class="list-disc">
+  <li><code>element.textContent</code> — содержит текстовое содержимое элемента <code>element</code>, игнорируя все HTML-теги внутри.</li>
+  <li><code>element.innerHTML</code> — содержит HTML-содержимое элемента <code>element</code>.</li>
+  <li><code>element.style</code> — объект, содержащий встроенные стили элемента <code>element</code>, которые можно динамически изменять из JavaScript.</li>
+</ul>
+
+<h4>CSS-классы на DOM-элементах</h4>
+
+<ul class="list-disc">
+  <li><code>element.classList.contains(className)</code> — проверяет, есть ли указанный класс <code>className</code> на элементе <code>element</code>.</li>
+  <li><code>element.classList.add(className)</code> — добавляет класс <code>className</code> в список классов элемента <code>element</code>.</li>
+  <li><code>element.classList.remove(className)</code> — удаляет класс <code>className</code> из списка классов элемента <code>element</code>.</li>
+  <li><code>element.classList.toggle(className)</code> — добавляет класс <code>className</code>, если его нет, или удаляет, если он уже есть на элементе <code>element</code>.</li>
+  <li><code>element.classList.replace(oldClassName, newClassName)</code> — заменяет класс <code>oldClassName</code> на <code>newClassName</code> в списке классов элемента <code>element</code>.</li>
+</ul>
+
+<h4>Создание и удаление DOM-элементов</h4>
+
+<ul class="list-disc">
+  <li><code>document.createElement(tagName)</code> — создает новый HTML-элемент с именем тега <code>tagName</code>.</li>
+  <li><code>element.append(el)</code> — добавляет содержимое или элемент в конец списка дочерних элементов <code>element</code>.</li>
+  <li><code>element.prepend(el)</code> — добавляет содержимое или элемент в начало списка дочерних элементов <code>element</code>.</li>
+  <li><code>element.remove()</code> — удаляет DOM-элемент из DOM-дерева.</li>
+  <li><code>element.insertAdjacentHTML(position, string)</code> — добавляет указанную HTML-строку после, перед, внутрь или рядом с указанным элементом.</li>
+</ul>
+
+<h4>События</h4>
+
+<ul class="list-disc">
+  <li><code>element.addEventListener(event, handler)</code> — добавляет обработчик события <code>handler</code> для события <code>event</code> на элементе <code>element</code>.</li>
+  <li><code>element.removeEventListener(event, handler)</code> — удаляет обработчик события <code>handler</code> для события <code>event</code> на элементе <code>element</code>.</li>
+  <li><code>keydown</code> — событие, которое происходит при нажатии клавиши на клавиатуре.</li>
+  <li><code>submit</code> — событие, которое происходит при отправке формы.</li>
+  <li><code>change</code> — событие, которое происходит при изменении значения элемента формы.</li>
+  <li><code>input</code> — событие, которое происходит при вводе данных в текстовое поле.</li>
+  <li><code>focus</code> — событие, которое происходит, когда элемент получает фокус.</li>
+  <li><code>blur</code> — событие, которое происходит, когда элемент теряет фокус.</li>
+</ul>
 `,
         },
       ],

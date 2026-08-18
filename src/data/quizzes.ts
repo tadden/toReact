@@ -1361,4 +1361,50 @@ h1, h2, h3 {
     successMessage:
       "Верно! keydown срабатывает при нажатии клавиши, поэтому результат можно обработать раньше.",
   },
+  "js-dom-submit-prevent-default-quiz": {
+    id: "js-dom-submit-prevent-default-quiz",
+    question:
+      "Как можно отменить действие браузера по умолчанию при обработке события submit?",
+    options: [
+      "Установить свойство event.preventSubmit в true.",
+      "Вызвать метод event.preventDefault() в обработчике события.",
+      "Невозможно отменить действие браузера по умолчанию.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Метод event.preventDefault() отменяет действие браузера по умолчанию.",
+  },
+  "js-dom-change-text-input-quiz": {
+    id: "js-dom-change-text-input-quiz",
+    question: "Когда происходит событие change для текстового поля?",
+    options: [
+      "Во время ввода каждого нового символа.",
+      "Когда элемент теряет фокус после изменения значения.",
+      "Когда элемент получает фокус.",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Для текстовых полей и textarea событие change происходит после изменения значения и потери фокуса.",
+  },
+  "js-dom-input-frequency-quiz": {
+    id: "js-dom-input-frequency-quiz",
+    question:
+      "Если пользователь вводит текст в текстовое поле, какое событие будет срабатывать чаще всего?",
+    options: ["click", "input", "change", "submit"],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! input происходит при каждом изменении значения текстового поля.",
+  },
+  "js-dom-blur-event-quiz": {
+    id: "js-dom-blur-event-quiz",
+    question: "Когда происходит событие blur?",
+    options: [
+      "Когда элемент получает фокус.",
+      "Во время ввода в текстовое поле.",
+      "Когда элемент теряет фокус.",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! blur происходит, когда элемент теряет фокус.",
+  },
 };
