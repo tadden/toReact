@@ -42,6 +42,7 @@ async function main() {
     { name: "Roman", email: "romanramkovich@gmail.com", id: "user_roman" },
     { name: "Dima", email: "venediktov9797@gmail.com", id: "user_dima" },
     { name: "Dima", email: "dimach31989@gmail.com", id: "user_dima_ch" },
+    { name: "Kirill", email: "timonin064@gmail.com", id: "user_kirill" },
     { name: "Vadim", email: "vadimka.ramkovich@gmail.com", id: "user_vadim" },
     { name: "Olga", email: "olga@toreact.com", id: "user_olga" },
     {
