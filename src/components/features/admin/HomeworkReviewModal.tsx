@@ -54,6 +54,21 @@ export function HomeworkReviewModal({
             <div>{module.title}</div>
           </div>
 
+          {module.homework?.description && (
+            <div className={styles.section}>
+              <label>Текст Домашнего Задания</label>
+              <details className={styles.homeworkDetails}>
+                <summary>Открыть задание</summary>
+                <div
+                  className={styles.homeworkContent}
+                  dangerouslySetInnerHTML={{
+                    __html: module.homework.description,
+                  }}
+                />
+              </details>
+            </div>
+          )}
+
           <div className={styles.section}>
             <label>Ссылка на Решение</label>
             {submissionLink ? (
