@@ -88,6 +88,34 @@ button {
   font-family: inherit;
 }
 
+pre code {
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-name {
+    color: #d879ff !important;
+  }
+
+  .hljs-string,
+  .hljs-attr {
+    color: #9ece6a !important;
+  }
+
+  .hljs-number,
+  .hljs-literal {
+    color: #f6c177 !important;
+  }
+
+  .hljs-title,
+  .hljs-built_in {
+    color: #7dcfff !important;
+  }
+
+  .hljs-comment {
+    color: #94a3b8 !important;
+    font-style: italic;
+  }
+}
+
 .challenge-code-block {
   background-color: #1e1e1e;
   border-radius: 0.5rem;

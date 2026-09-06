@@ -8211,5 +8211,1145 @@ form.addEventListener("submit", event =&gt; {
         },
       ],
     },
+    {
+      slug: "module-7-event-delegation",
+      title: "Модуль 7. Делегирование событий",
+      description: "Распространение событий и основы делегирования.",
+      order: 6,
+      videoUrl: null,
+      items: [],
+      resources: [
+        {
+          type: "video",
+          title: "Модуль 7. Занятие 1. Делегирование событий",
+          url: "https://www.youtube.com/watch?v=vnSnT-Uo8JI",
+        },
+        {
+          type: "video",
+          title: "Модуль 7. Занятие 2. Библиотеки",
+          url: "https://www.youtube.com/watch?v=nkkTOpXPt70",
+        },
+      ],
+      homework: {
+        id: "js-event-delegation-hw",
+        title: "Домашнее задание: Делегирование событий и библиотеки",
+        description: `<p>Две трети курса JavaScript уже пройдено. Так держать!</p>
+
+<p>Давай на минутку остановимся и разберемся, какие важные темы были разобраны в модуле 7.</p>
+
+<p><strong>После изучения теоретических материалов ты:</strong></p>
+
+<ul class="list-disc">
+  <li>знаешь этапы жизненного цикла события и понимаешь, что такое всплытие событий;</li>
+  <li>умеешь определять, где произошло событие, и останавливать всплытие;</li>
+  <li>знаешь, как использовать паттерн делегирования событий;</li>
+  <li>знаешь основные характеристики библиотек и умеешь их подключать;</li>
+  <li>знаешь, что такое деструктуризация;</li>
+  <li>умеешь применять паттерн «Объект параметров»;</li>
+  <li>умеешь деструктуризировать объекты и массивы.</li>
+</ul>
+
+<p>Самое время использовать эти знания на практике.</p>
+
+<div class="info-highlight">
+  <p>После изменений, которые ты вносишь в своем репозитории, подожди 5 минут перед отправкой работы на проверку. GitHub Pages нужно время, чтобы обновить версию рабочей страницы.</p>
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Домашнее задание №7</h2>
+
+<ul class="list-disc">
+  <li>Создай репозиторий <code>goit-js-hw-07</code>.</li>
+  <li>Задания выполняй в файлах <code>gallery.js</code> и <code>index.html</code>.</li>
+</ul>
+
+<div class="attention-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p>Обрати внимание! Имена файлов и папок, а также их структура вложенности, должны соответствовать указанной схеме. В другом случае работа не будет принята.</p>
+</div>
+
+<pre><code class="language-text">GOIT-JS-HW-07
+├── css
+│   └── styles.css
+├── js
+│   └── gallery.js
+└── index.html</code></pre>
+
+<ul class="list-disc">
+  <li>Прочитай задания и выполни их в редакторе кода.</li>
+  <li>Убедись, что код отформатирован с помощью <code>Prettier</code>, а в консоли нет ошибок и предупреждений.</li>
+  <li>Сдай домашнее задание на проверку.</li>
+</ul>
+
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит две ссылки: на исходные файлы и рабочую страницу на <code>GitHub Pages</code>.</p>
+
+<div class="attention-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;">
+  <p>Для стилизации разметки заданий используй <a href="https://www.figma.com/file/m8k9NQV7qZrtYDCvxfD68B/%D0%94%D0%97-JavaScript?type=design&amp;node-id=3-941&amp;mode=design" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">этот макет</a>.</p>
+</div>
+
+<h2 style="margin-bottom: 1.5rem;">Задание — Галерея изображений</h2>
+
+<p>Создай галерею с возможностью клика по ее элементам и просмотра полноразмерного изображения в модальном окне. Посмотри демонстрацию работы галереи.</p>
+
+<video src="https://goitlmsstorage.b-cdn.net/e0b86240-86a6-4c1e-956d-07c9c076466a127711719-4e293f5b-fbaa-4851-8671-fc841963d961.mp4" preload="auto" controls controlslist="nodownload" style="width: 100%; height: auto;"></video>
+
+<p>Создание галереи — комплексная задача, которую лучше разбить на несколько простых подзадач. Такой процесс называется декомпозицией задачи.</p>
+
+<h3>1. Разметка галереи</h3>
+
+<p>Начни с того, что создай тег, в который будут добавляться элементы галереи. В HTML-коде должен быть только пустой ненумерованный список с классом <code>gallery</code>.</p>
+
+<pre><code class="language-html">&lt;ul class="gallery"&gt;&lt;/ul&gt;</code></pre>
+
+<h3>2. Массив изображений</h3>
+
+<p>Для создания элементов галереи понадобятся данные. Добавь массив объектов <code>images</code> в свой JavaScript-файл. Каждый объект описывает один элемент галереи.</p>
+
+<ul class="list-disc">
+  <li><code>preview</code> — ссылка на маленькую версию изображения для карточки галереи;</li>
+  <li><code>original</code> — ссылка на большую версию изображения для модального окна;</li>
+  <li><code>description</code> — текстовое описание изображения для атрибута <code>alt</code> и подписи изображения.</li>
+</ul>
+
+<pre><code class="language-javascript">const images = [
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/14/16/43/rchids-4202820_1280.jpg",
+    description: "Hokkaido Flower",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/14/22/05/container-4203677_1280.jpg",
+    description: "Container Haulage Freight",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/09/47/beach-4206785_1280.jpg",
+    description: "Aerial Beach View",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2016/11/18/16/19/flowers-1835619_1280.jpg",
+    description: "Flower Blooms",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2018/09/13/10/36/mountains-3674334_1280.jpg",
+    description: "Alpine Mountains",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/23/04/landscape-4208571_1280.jpg",
+    description: "Mountain Lake Sailing",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/17/09/27/the-alps-4209272_1280.jpg",
+    description: "Alpine Spring Meadows",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/16/21/10/landscape-4208255_1280.jpg",
+    description: "Nature Landscape",
+  },
+  {
+    preview:
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_340.jpg",
+    original:
+      "https://cdn.pixabay.com/photo/2019/05/17/04/35/lighthouse-4208843_1280.jpg",
+    description: "Lighthouse Coast Sea",
+  },
+];</code></pre>
+
+<h3>3. Разметка элементов галереи</h3>
+
+<p>У тебя есть контейнер, в который можно добавить элементы галереи, и данные, по которым их можно создать. Самое время наполнить галерею разметкой.</p>
+
+<p>Используй массив объектов <code>images</code> и HTML-шаблон элемента галереи. Создай в JavaScript-коде разметку элементов, после чего добавь всю разметку внутрь <code>ul.gallery</code>. Не добавляй другие HTML-теги, кроме тех, что есть в шаблоне.</p>
+
+<pre><code class="language-html">&lt;li class="gallery-item"&gt;
+  &lt;a class="gallery-link" href="large-image.jpg"&gt;
+    &lt;img
+      class="gallery-image"
+      src="small-image.jpg"
+      data-source="large-image.jpg"
+      alt="Image description"
+    /&gt;
+  &lt;/a&gt;
+&lt;/li&gt;</code></pre>
+
+<ul class="list-disc">
+  <li>В атрибуте <code>src</code> тега <code>img</code> укажи ссылку на маленькую версию изображения.</li>
+  <li>Для атрибута <code>alt</code> используй описание изображения.</li>
+  <li>Ссылка на большое изображение должна храниться в дата-атрибуте <code>source</code> элемента <code>img</code>, а в атрибуте <code>href</code> ссылки.</li>
+  <li>Клик по ссылке не должен скачивать изображение на компьютер пользователя. Запрети это поведение по умолчанию.</li>
+</ul>
+
+<h3>4. Стили</h3>
+
+<p>Добавь стилизацию галереи согласно макету.</p>
+
+<h3>5. Делегирование</h3>
+
+<p>Добавь прослушивание клика по элементам галереи и получение ссылки на большое изображение при клике. Для этого используй прием делегирования на <code>ul.gallery</code>.</p>
+
+<p>При клике на элемент галереи выводи в консоль ссылку на большое изображение, которая хранится как значение атрибута <code>data-source</code> элемента <code>img</code>.</p>
+
+<h3>6. Подключение библиотеки</h3>
+
+<p>Библиотека <a href="https://basiclightbox.electerious.com/" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">basicLightbox</a> предоставляет готовое модальное окно, которое подходит для этой задачи.</p>
+
+<p>Используй <a href="https://www.jsdelivr.com/package/npm/basiclightbox?path=dist" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">CDN-сервис jsDelivr</a> и добавь в HTML-файл ссылки на минифицированные <code>.min</code> JS- и CSS-файлы библиотеки.</p>
+
+<h3>7. Модальное окно</h3>
+
+<p>Допиши код так, чтобы при клике по элементу галереи открывалось модальное окно подключенной библиотеки. Чтобы разобраться, как инициализировать модальное окно и как его использовать, ознакомься с <a href="https://github.com/electerious/basicLightbox?tab=readme-ov-file#contents" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">документацией</a> и <a href="https://basiclightbox.electerious.com/" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">примерами</a>.</p>
+
+<h3>8. Большое изображение</h3>
+
+<p>Используй свой код получения ссылки на большое изображение из атрибута <code>data-source</code>, чтобы заменить значение атрибута <code>src</code> элемента <code>img</code> в модальном окне перед открытием.</p>
+
+<p>Используй готовую разметку модального окна с изображением из примеров библиотеки <a href="https://github.com/electerious/basicLightbox/tree/master" target="_blank" rel="noreferrer" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;">basicLightbox</a>.</p>
+
+<h4>На что будет обращать внимание ментор при проверке:</h4>
+
+<ul class="list-disc">
+  <li>На странице есть галерея изображений, созданная из массива данных <code>images</code>.</li>
+  <li>Галерея изображений стилизована согласно макету.</li>
+  <li>Данные для галереи созданы динамически в JS.</li>
+  <li>Для прослушивания клика по элементам галереи используется делегирование.</li>
+  <li>При клике между элементами галереи ничего не происходит.</li>
+  <li>Подключена библиотека <code>basicLightbox</code>.</li>
+  <li>При клике по элементу галереи открывается модальное окно с увеличенной версией изображения, по которому кликнули.</li>
+</ul>`,
+      },
+      topics: [
+        {
+          id: "js-event-delegation",
+          title: "Делегирование событий",
+          order: 0,
+          content: `
+<h3>Распространение событий</h3>
+
+<p class="my-md"><strong>Распространение событий</strong> (event propagation) — это термин, который описывает жизненный цикл события. У него есть три этапа:</p>
+
+<ol>
+  <li>Захват (capture phase).</li>
+  <li>Таргетинг (target phase).</li>
+  <li>Всплытие (bubble phase).</li>
+</ol>
+
+<p class="my-md">На практике чаще всего используют только фазу всплытия.</p>
+
+<div class="image-container">
+  <img src="/images/bubbling.png" alt="Фазы распространения события: захват, таргетинг и всплытие" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Давайте рассмотрим подробнее эти фазы во время наступления события.</p>
+
+<ul class="list-disc">
+  <li><strong>Capturing phase (захват)</strong> — событие начинается на <code>window</code> и погружается сверху вниз до наименьшего целевого элемента, на котором произошло событие. На схеме событие — это клик, и захват заканчивается на элементе <code>button</code>.</li>
+  <li><strong>Target phase (таргетинг)</strong> — событие дошло до целевого элемента. Этот этап содержит сообщение элемента о том, что действие произошло именно на нем.</li>
+  <li><strong>Bubbling phase (всплытие)</strong> — финальная фаза, на которой событие всплывает от целевого элемента через всех его предков до <code>window</code>.</li>
+</ul>
+
+<p class="my-md">Распространение событий часто ошибочно используют как синоним стадии всплытия, но это только часть всего процесса. Каждый раз, когда происходит событие, оно проходит все три фазы распространения.</p>
+
+[QUIZ: js-event-propagation-order-quiz]
+
+[NEXT]
+
+<h3>Всплытие событий</h3>
+
+<p class="my-md">Теперь сосредоточимся на фазе всплытия события, потому что на практике разработчик чаще всего работает именно с ней.</p>
+
+<p class="my-md">Во время события обработчики сначала срабатывают на самом вложенном элементе. Затем событие поднимается выше и выше по цепочке вложенности: от целевого элемента через его родителей до <code>window</code>. Этот процесс называется <strong>всплытием события</strong> (event bubbling).</p>
+
+<div class="image-container">
+  <img src="/images/event-bubbling.png" alt="Схема всплытия события от вложенного элемента к родительскому" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Рассмотрим пример с тремя вложенными тегами <code>div</code> и обработчиками клика на каждом из них.</p>
+
+<pre><code class="language-html">&lt;div id="parent"&gt;
+    Parent
+    &lt;div id="child"&gt;
+        Child
+        &lt;div id="descendant"&gt;Descendant&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+<p class="my-md">Всплытие гарантирует, что клик по <code>#descendant</code> вызовет обработчики клика в таком порядке:</p>
+
+<ul class="list-disc">
+  <li>сначала на самом <code>#descendant</code>;</li>
+  <li>потом на элементе <code>#child</code>;</li>
+  <li>затем на элементе <code>#parent</code>;</li>
+  <li>и дальше вверх по цепочке предков до <code>window</code>.</li>
+</ul>
+
+<p class="my-md">Поэтому, если в примере кликнуть на <code>#descendant</code>, сообщения через <code>console.log</code> последовательно выведутся для <code>descendant</code>, <code>child</code> и <code>parent</code>.</p>
+
+<p class="my-md">Посмотри, как это происходит в живом примере.</p>
+
+<div class="codepen-container">
+  <iframe title="Всплытие событий" src="https://codepen.io/goit-academy/embed/QWpBwaa?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-event-bubbling-start-quiz]
+
+[NEXT]
+
+<h3>Целевой элемент</h3>
+
+<p class="my-md">Независимо от того, где мы поймали событие во время всплытия, всегда можно узнать, где именно оно произошло.</p>
+
+<p class="my-md">Элемент, на котором произошло событие, называется <strong>целевым</strong>, или исходным. Это самый глубокий элемент, с которого начинается всплытие. Он доступен как <code>event.target</code>.</p>
+
+<ul class="list-disc">
+  <li><code>event.target</code> — ссылка на исходный элемент, на котором произошло событие. В процессе всплытия она не меняется.</li>
+  <li><code>event.currentTarget</code> — ссылка на текущий элемент, к которому привязан обработчик события и до которого дошло всплытие.</li>
+</ul>
+
+<p class="my-md">Если обработчик зарегистрирован на элементе <code>Parent</code>, он сможет перехватить клики на дочерних элементах <code>Child</code> и <code>Descendant</code>. Поэтому важно различать элемент, где событие фактически произошло (<code>event.target</code>), и элемент, на котором сработал обработчик (<code>event.currentTarget</code>).</p>
+
+<p class="my-md">Открой консоль в примере и покликай по разным областям. Обрати внимание, что <code>event.target</code> всегда указывает на самый глубокий элемент, по которому был клик, а <code>event.currentTarget</code> не меняется.</p>
+
+<div class="codepen-container">
+  <iframe title="Целевой элемент события" src="https://codepen.io/goit-academy/embed/JjWBoqd?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-event-target-element-quiz]
+
+[NEXT]
+
+<h3>Остановка всплытия</h3>
+
+<p class="my-md">Обычно событие всплывает вверх до элемента <code>window</code>, вызывая все обработчики на своем пути.</p>
+
+<p class="my-md">Иногда один элемент может иметь несколько обработчиков на одно и то же событие. Например, событие произошло на элементе <code>Descendant</code>, а затем всплывает к <code>Child</code> и <code>Parent</code>.</p>
+
+<p class="my-md">Любой промежуточный обработчик может остановить всплытие события с помощью методов объекта события:</p>
+
+<ul class="list-disc">
+  <li><code>event.stopPropagation()</code></li>
+  <li><code>event.stopImmediatePropagation()</code></li>
+</ul>
+
+<p class="my-md">Разберем разницу между этими методами в живом примере.</p>
+
+<div class="codepen-container">
+  <iframe title="Остановка всплытия" src="https://codepen.io/goit-academy/embed/gOmjpwo?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+<p class="my-md"><code>event.stopPropagation()</code> останавливает всплытие события в DOM-дереве. Это значит, что родительские элементы уже не смогут обработать это событие. При этом другие обработчики на том же самом элементе продолжат выполняться.</p>
+
+<p class="my-md"><code>event.stopImmediatePropagation()</code> тоже останавливает всплытие события, но дополнительно прекращает выполнение остальных обработчиков этого же события на текущем элементе, даже если они были зарегистрированы раньше.</p>
+
+<div class="info-highlight">
+  <p>Не останавливай всплытие без необходимости. Например, веб-аналитика может использовать всплытие, чтобы отслеживать действия пользователя на странице. Если остановить всплытие события, сбор такой информации может перестать работать.</p>
+</div>
+
+[NEXT]
+
+<h3>Делегирование событий</h3>
+
+<p class="my-md">Всплытие позволяет использовать один из самых полезных приемов — делегирование событий.</p>
+
+<p class="my-md">Представим, что есть группа однотипных элементов и клики по ним нужно обрабатывать одинаково. Можно добавить обработчик на каждый элемент отдельно, но это неудобно, если элементов много.</p>
+
+<p class="my-md"><strong>Делегирование событий</strong> (event delegation) — это прием, при котором один обработчик добавляют на общего предка группы элементов.</p>
+
+<p class="my-md">Без делегирования каждому элементу нужен свой слушатель события, даже если все они вызывают одну и ту же функцию.</p>
+
+<div class="image-container">
+  <img src="/images/div-bubbling.png" alt="Несколько кнопок с отдельными слушателями событий" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Благодаря всплытию можно добавить один слушатель на общего предка и обрабатывать клики по всем дочерним элементам в одном месте.</p>
+
+<div class="image-container">
+  <img src="/images/div-bubbling2.png" alt="Один слушатель событий на общем родителе" class="img-responsive img-rounded" />
+</div>
+
+<div class="info-highlight">
+  <p>Делегирование работает в три шага: определить общего предка, зарегистрировать на нем обработчик события и использовать <code>event.target</code>, чтобы понять, по какому дочернему элементу произошел клик.</p>
+</div>
+
+<p class="my-md">В коде это выглядит так:</p>
+
+<pre><code class="language-javascript">const box = document.querySelector(".box");
+
+box.addEventListener("click", function (event) {
+  console.log(event.target); // Элемент, на котором произошел клик
+});</code></pre>
+
+<p class="my-md">Такой подход упрощает инициализацию слушателей однотипных элементов. Можно добавлять, удалять или изменять элементы, не добавляя обработчик вручную на каждый из них.</p>
+
+<p class="my-md">Разбери живой пример: кликай по кнопкам и по пустому месту внутри <code>div.box</code>, а затем смотри результат в консоли.</p>
+
+<div class="codepen-container">
+  <iframe title="Делегирование событий" src="https://codepen.io/goit-academy/embed/eYbNEPE?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[NEXT]
+
+<h3>Проверка целевого элемента события</h3>
+
+<p class="my-md">Представим задачу: нужно создать палитру цветов. Пользователь кликает по цвету, а на странице отображается выбранное значение.</p>
+
+<div class="image-container">
+  <img src="/images/color-bubbling.png" alt="Палитра цветов с выбранным цветом" class="img-responsive img-rounded" />
+</div>
+
+<pre><code class="language-html">&lt;p class="output"&gt;Selected color: -&lt;/p&gt;
+&lt;div class="color-palette"&gt;&lt;/div&gt;</code></pre>
+
+<p class="my-md">Каждый клик по элементу палитры — это событие, которое меняет цвет и текст заголовка. Элементов может быть много, поэтому вместо обработчика на каждой кнопке повесим один слушатель на общего предка <code>div.color-palette</code>.</p>
+
+<pre><code class="language-javascript">const colorPalette = document.querySelector(".color-palette");
+
+colorPalette.addEventListener("click", selectColor);
+
+function selectColor(event) {
+  console.log(event.target);
+  const selectedColor = event.target.dataset.color;
+}</code></pre>
+
+<p class="my-md">В обработчике клика используем <code>event.target</code>, чтобы получить элемент, по которому кликнули, и связанный с ним цвет. Цвет хранится в атрибуте <code>data-color</code>.</p>
+
+<p class="my-md">При делегировании обязательно проверяй целевой элемент события. Иначе можно обработать клик по неподходящему элементу, например между кнопками палитры.</p>
+
+<p class="my-md">Для проверки типа элемента используем свойство <code>nodeName</code>.</p>
+
+<pre><code class="language-javascript">function selectColor(event) {
+  if (event.target.nodeName !== "BUTTON") {
+    return; // Пользователь кликнул не по кнопке
+  }
+
+  const selectedColor = event.target.dataset.color;
+}</code></pre>
+
+<p class="my-md">Разбери полный живой пример создания палитры цветов.</p>
+
+<div class="codepen-container">
+  <iframe title="Проверка целевого элемента события" src="https://codepen.io/goit-academy/embed/GRWBodN?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+
+[QUIZ: js-event-target-check-quiz]
+`,
+        },
+        {
+          id: "js-libraries",
+          title: "Библиотеки",
+          order: 1,
+          content: `
+<p class="my-md"><strong>Библиотеки</strong> — это набор заранее написанных функций, методов и классов, который предоставляет готовые инструменты для решения конкретных задач. Библиотеки создаются для упрощения разработки: они дают возможность использовать готовые решения, не писать код с нуля и быстрее двигаться в проекте.</p>
+
+<p class="my-md">Основные характеристики библиотек:</p>
+
+<ol class="list-decimal">
+  <li><strong>Многоразовое использование.</strong> Библиотеки можно подключать в разные проекты и применять один и тот же код повторно.</li>
+  <li><strong>Готовый функционал.</strong> В библиотеке уже есть функции для типичных задач: работы с данными, датами, строками, изображениями, анимацией и многим другим.</li>
+  <li><strong>Ускорение разработки.</strong> Вместо того чтобы реализовывать все самостоятельно, разработчик использует готовые и проверенные решения.</li>
+  <li><strong>Документация и поддержка.</strong> Хорошие библиотеки обычно имеют документацию, примеры использования и регулярные обновления.</li>
+</ol>
+
+<p class="my-md">Примеры популярных библиотек в JavaScript:</p>
+
+<ul class="list-disc">
+  <li><strong>Chart.js</strong> — библиотека для создания интерактивных графиков и диаграмм.</li>
+  <li><strong>Lodash</strong> — библиотека для работы с массивами, объектами, строками и другими структурами данных.</li>
+</ul>
+
+<p class="my-md">Важно выбирать библиотеки, которые подходят задаче проекта, имеют документацию и активно поддерживаются.</p>
+
+[QUIZ: js-library-definition-quiz]
+
+[NEXT]
+
+<h3>CDN</h3>
+
+<p class="my-md"><strong>CDN</strong> (Content Delivery Network) — это географически распределенная сеть серверов, которая быстро доставляет пользователю контент: стили, скрипты, изображения и другие ресурсы.</p>
+
+<p class="my-md">Серверы CDN находятся в разных частях мира. Когда пользователь открывает сайт, браузер получает файл с ближайшего доступного сервера, поэтому контент загружается быстрее.</p>
+
+<div class="image-container">
+  <img src="/images/map-library.png" alt="Карта сети CDN" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Основная цель CDN — повысить скорость и доступность сайта, уменьшив задержку при загрузке файлов.</p>
+
+<p class="my-md">Преимущества CDN:</p>
+
+<ol class="list-decimal">
+  <li><strong>Быстрая загрузка.</strong> Файлы загружаются с сервера, который находится ближе к пользователю.</li>
+  <li><strong>Распределение нагрузки.</strong> CDN помогает распределить запросы между разными серверами.</li>
+  <li><strong>Повышение доступности.</strong> Если один сервер недоступен, браузер может получить файл с другого сервера CDN.</li>
+  <li><strong>Снижение нагрузки на основной сервер.</strong> Часть файлов отдается через CDN, а не с сервера проекта.</li>
+</ol>
+
+[NEXT]
+
+<h3>Подключение библиотеки</h3>
+
+<p class="my-md">Чтобы использовать библиотеку в проекте, ее нужно подключить. Один из простых способов — добавить ссылку на файл библиотеки через CDN.</p>
+
+<p class="my-md">Для примера подключим библиотеку <a href="https://lodash.com/" target="_blank" rel="noopener noreferrer">Lodash</a> через CDN. Подключение JavaScript-библиотеки через CDN состоит из нескольких шагов.</p>
+
+<p class="my-md"><strong>Шаг 1.</strong> Открой сайт CDN-сервиса <a href="https://www.jsdelivr.com/" target="_blank" rel="noopener noreferrer">jsDelivr</a> и найди нужную библиотеку.</p>
+
+<div class="image-container">
+  <img src="/images/connetc-library.png" alt="Поиск библиотеки Lodash на jsDelivr" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md"><strong>Шаг 2.</strong> Выбери библиотеку из списка результатов и перейди на страницу с информацией о ней.</p>
+
+<div class="image-container">
+  <img src="/images/connect-library2.png" alt="Страница библиотеки Lodash на jsDelivr" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md"><strong>Шаг 3.</strong> Скопируй HTML-код тега <code>script</code> и добавь его в HTML-файл перед подключением основного скрипта проекта.</p>
+
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;!-- head tags --&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;!-- HTML markup --&gt;
+
+    &lt;!-- Lodash library script file --&gt;
+    &lt;script
+      async
+      src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"
+    &gt;&lt;/script&gt;
+    &lt;!-- Your script file --&gt;
+    &lt;script defer src="path/to/script.js"&gt;&lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+<ul class="list-disc">
+  <li>Скрипт библиотеки нужно подключать до основного файла скрипта.</li>
+  <li>Для библиотеки добавляют атрибут <code>async</code>, чтобы она не блокировала загрузку страницы.</li>
+</ul>
+
+<p class="my-md">После подключения библиотека добавляет свой объект в <code>window</code>. У Lodash это символ нижнего подчеркивания <code>_</code>.</p>
+
+<pre><code class="language-javascript">console.log(_); // Весь объект библиотеки Lodash</code></pre>
+
+<p class="my-md">Для проверки используем методы <code>sum</code> и <code>shuffle</code>:</p>
+
+<ul class="list-disc">
+  <li><code>sum</code> — вычисляет сумму значений в массиве.</li>
+  <li><code>shuffle</code> — возвращает новый массив с перемешанными значениями.</li>
+</ul>
+
+<pre><code class="language-javascript">console.log(_.sum([4, 2, 8, 6])); // 20
+console.log(_.sum([5, 10])); // 15
+
+console.log(_.shuffle([1, 2, 3, 4])); // [4, 1, 3, 2]
+console.log(_.shuffle([1, 2, 3, 4])); // [3, 2, 1, 4]</code></pre>
+
+<div class="info-highlight">
+  <p>Способ подключения и использования библиотек может отличаться. Всегда смотри документацию конкретной библиотеки.</p>
+</div>
+
+[NEXT]
+
+<h3>Как читать документацию библиотеки</h3>
+
+<p class="my-md">Представь, что ты создаешь сайт поиска изображений. Нужно, чтобы при клике на маленькое изображение открывалось модальное окно с этим изображением в большом размере. Такую логику можно написать самостоятельно, но часто быстрее подключить готовое решение из библиотеки.</p>
+
+<p class="my-md">Пример такой библиотеки — <strong>basicLightbox</strong>.</p>
+
+<p class="my-md">Документацию библиотеки можно найти:</p>
+
+<ul class="list-disc">
+  <li>на официальном сайте библиотеки: <a href="https://basiclightbox.electerious.com/" target="_blank" rel="noopener noreferrer">basiclightbox.electerious.com</a>;</li>
+  <li>в репозитории на GitHub: <a href="https://github.com/electerious/basicLightbox" target="_blank" rel="noopener noreferrer">github.com/electerious/basicLightbox</a>.</li>
+</ul>
+
+<div class="info-highlight">
+  <p>Дизайн, структура и интерфейс документации у разных библиотек могут отличаться, но обычно в ней есть инструкция по установке, примеры использования, список возможностей и доступные настройки.</p>
+</div>
+
+[NEXT]
+
+<h3>Установка и подключение библиотеки</h3>
+
+<p class="my-md">В документации большинства библиотек инструкции по установке и подключению находятся в разделах <strong>Get Started</strong>, <strong>Quick Start</strong>, <strong>Installation</strong> или <strong>Setup</strong>.</p>
+
+<p class="my-md">Например, у <strong>basicLightbox</strong> этот раздел называется <strong>Setup</strong>. В нем описано, как установить библиотеку с помощью пакетного менеджера или подключить ее файлами стилей и скрипта.</p>
+
+<div class="image-container">
+  <img src="/images/library3.png" alt="Раздел Setup в документации basicLightbox" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Если библиотеку нужно подключить через <strong>CDN</strong>, на странице CDN-сервиса можно получить готовые теги подключения скрипта и стилей, которые достаточно добавить в HTML.</p>
+
+<div class="image-container">
+  <img src="/images/library4.png" alt="Теги подключения basicLightbox на jsDelivr" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Иногда сервис показывает только путь к файлу. В таком случае готовый тег можно скопировать с помощью кнопки рядом с нужным файлом.</p>
+
+<div class="image-container">
+  <img src="/images/library5.png" alt="Копирование тега подключения на cdnjs" class="img-responsive img-rounded" />
+</div>
+
+[NEXT]
+
+<h3>Использование</h3>
+
+<p class="my-md">После подключения библиотеки важно понять, как ее использовать. Библиотеки обычно имеют документацию с примерами кода, которые можно адаптировать под задачи проекта.</p>
+
+<p class="my-md">В документации такие разделы часто называются <strong>Usage</strong>, <strong>Examples</strong>, <strong>API</strong> или <strong>Demo</strong>.</p>
+
+<p class="my-md">В официальной документации <a href="https://basiclightbox.electerious.com/" target="_blank" rel="noopener noreferrer">basicLightbox</a> в разделе <a href="https://github.com/electerious/basicLightbox#api" target="_blank" rel="noopener noreferrer">API</a> описано, как работает библиотека и какие параметры принимают ее методы.</p>
+
+<div class="image-container">
+  <img src="/images/library6.png" alt="Раздел API библиотеки basicLightbox" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Например, метод <code>create()</code> создает новый экземпляр <strong>basicLightbox</strong>. Он ожидает два параметра:</p>
+
+<ul class="list-disc">
+  <li>контент модального окна — обязательный параметр, DOM-элемент или строка;</li>
+  <li>объект настроек — необязательный параметр.</li>
+</ul>
+
+<p class="my-md">Результат вызова <code>create()</code> нужно сохранить в переменную, чтобы потом управлять созданным экземпляром.</p>
+
+<pre><code class="language-javascript">const instance = basicLightbox.create(
+  "&lt;h1&gt;Not closable&lt;/h1&gt;" +
+    "&lt;p&gt;It's not possible to close this lightbox with a click.&lt;/p&gt;",
+  {
+    closable: false,
+  },
+);</code></pre>
+
+<p class="my-md">У экземпляра <code>instance</code> в документации есть отдельный раздел <strong>Instance API</strong>, где описаны доступные методы.</p>
+
+<div class="image-container">
+  <img src="/images/library7.png" alt="Раздел Instance API библиотеки basicLightbox" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Например, вызов <code>instance.show()</code> показывает модальное окно, а <code>instance.close()</code> скрывает его.</p>
+
+[NEXT]
+
+<h3>Особенности и дополнительные настройки</h3>
+
+<p class="my-md">Важный раздел документации любой библиотеки — описание особенностей и дополнительных настроек. Он может называться <strong>Options</strong>, <strong>Advanced Settings</strong>, <strong>Configuration Options</strong>, <strong>Advanced Usage</strong> или <strong>Advanced Configuration</strong>.</p>
+
+<p class="my-md">В библиотеке <strong>basicLightbox</strong> раздел <a href="https://github.com/electerious/basicLightbox#options" target="_blank" rel="noopener noreferrer">Options</a> описывает объект настроек, который можно передать при создании экземпляра через метод <code>create()</code>.</p>
+
+<div class="image-container">
+  <img src="/images/library8.png" alt="Раздел Options библиотеки basicLightbox" class="img-responsive img-rounded" />
+</div>
+
+<p class="my-md">Например, опция <code>className</code> позволяет добавить дополнительные классы к основному контейнеру модального окна. Так можно настроить внешний вид окна под дизайн проекта без изменения основных стилей библиотеки.</p>
+
+<p class="my-md">Опция <code>onShow</code> принимает функцию, которая выполнится при открытии модального окна. Это удобно, когда нужно запустить дополнительную логику, например добавить слушатель события.</p>
+
+<p class="my-md">Чем лучше ты ориентируешься в документации, тем легче находить нужные возможности библиотеки и адаптировать примеры под задачи своего проекта.</p>
+`,
+        },
+        {
+          id: "js-destructuring",
+          title: "Деструктуризация",
+          order: 2,
+          content: `
+<h4>Зачем нужна деструктуризация?</h4>
+
+<p class="my-md"><strong>Деструктуризация</strong> (destructuring) — это особый синтаксис, который позволяет быстро извлекать значения из структур данных, например объектов и массивов, и присваивать их переменным.</p>
+
+<p class="my-md">Без деструктуризации обращение к свойствам объекта выглядит так:</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacob",
+  age: 32,
+};
+
+console.log(user.name); // Jacob
+console.log(user.age); // 32</code></pre>
+
+<p class="my-md">С деструктуризацией те же значения можно получить короче:</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacob",
+  age: 32,
+};
+
+const { name, age } = user;
+
+console.log(name); // Jacob
+console.log(age); // 32</code></pre>
+
+<h4>Деструктуризация объектов</h4>
+
+<p class="my-md">Сложные данные часто представлены объектами. Если много раз обращаться к свойствам через имя объекта, код становится шумным.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const accessType = book.isPublic ? "public" : "private";
+const message =
+  "Book " + book.title + " by author " + book.author +
+  " with rating " + book.rating + " is in " + accessType + " access!";</code></pre>
+
+<p class="my-md">Деструктуризация позволяет распаковать значения свойств объекта в локальные переменные.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const { title, author, isPublic, rating } = book;
+
+const accessType = isPublic ? "public" : "private";
+const message =
+  "Book " + title + " by author " + author +
+  " with rating " + rating + " is in " + accessType + " access!";</code></pre>
+
+<p class="my-md">После ключевого слова <code>const</code> или <code>let</code> ставим фигурные скобки, как при объявлении объекта. Внутри указываем имена переменных, которым будут присвоены значения одноименных свойств объекта.</p>
+
+<ul class="list-disc">
+  <li>Деструктуризация находится слева от оператора присваивания.</li>
+  <li>Переменные внутри фигурных скобок получают значения одноименных свойств объекта.</li>
+  <li>Порядок объявления переменных в фигурных скобках не важен.</li>
+</ul>
+
+[QUIZ: js-destructuring-object-syntax-quiz]
+
+[NEXT]
+
+<h3>Деструктуризация несуществующих свойств</h3>
+
+<p class="my-md">Если имя переменной и имя свойства совпадают, то значение свойства присваивается переменной. А что будет, если такого свойства в объекте нет?</p>
+
+<p class="my-md">Если в объекте нет свойства с указанным именем, переменной будет присвоено <code>undefined</code>.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const { title, bookTitle, coverImage, bookRating } = book;
+
+console.log(title); // The Last Kingdom
+console.log(bookTitle); // undefined
+console.log(coverImage); // undefined
+console.log(bookRating); // undefined</code></pre>
+
+<p class="my-md">Чтобы избежать <code>undefined</code>, можно задать значение по умолчанию. Оно будет использовано только тогда, когда в объекте нет свойства с таким именем.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+};
+
+const {
+  title,
+  author,
+  coverImage = "https://via.placeholder.com/640/480",
+} = book;
+
+console.log(title); // The Last Kingdom
+console.log(author); // Bernard Cornwell
+console.log(coverImage); // https://via.placeholder.com/640/480</code></pre>
+
+[QUIZ: js-destructuring-missing-property-quiz]
+
+[NEXT]
+
+<h3>Переименование переменной</h3>
+
+<p class="my-md">При деструктуризации можно переименовать переменную, в которую попадет значение свойства. Для этого используется двоеточие <code>:</code>.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  author: "Bernard Cornwell",
+  genres: ["historical prose", "adventure"],
+  isPublic: true,
+  rating: 8.38,
+};
+
+const {
+  title,
+  author: bookAuthor,
+  isPublic,
+  rating: bookRating,
+} = book;
+
+console.log(title); // The Last Kingdom
+console.log(bookAuthor); // Bernard Cornwell
+console.log(isPublic); // true
+console.log(bookRating); // 8.38</code></pre>
+
+<p class="my-md">Слева от двоеточия пишем имя свойства, из которого нужно получить значение, а справа — новое имя переменной.</p>
+
+[QUIZ: js-destructuring-rename-quiz]
+
+<h3>Значения по умолчанию</h3>
+
+<p class="my-md">При переименовании переменной тоже можно задать значение по умолчанию. Для этого после нового имени переменной ставим знак <code>=</code>.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Last Kingdom",
+  coverImage:
+    "https://images-na.ssl-images-amazon.com/images/I/51b5YG6YlrL.jpg",
+};
+
+const {
+  title,
+  coverImage: bookCoverImage =
+    "https://via.placeholder.com/640/480",
+} = book;
+
+console.log(title); // The Last Kingdom
+console.log(bookCoverImage); // https://images-na.ssl-images-amazon.com/images/I/51b5YG6YlrL.jpg</code></pre>
+
+<p class="my-md">Если свойство существует в объекте, переменная получит его значение. Если свойства нет, будет использовано значение по умолчанию.</p>
+
+<pre><code class="language-javascript">const book = {
+  title: "The Dream of a Ridiculous Man",
+};
+
+const {
+  title,
+  coverImage: bookCoverImage =
+    "https://via.placeholder.com/640/480",
+} = book;
+
+console.log(title); // The Dream of a Ridiculous Man
+console.log(bookCoverImage); // https://via.placeholder.com/640/480</code></pre>
+
+[NEXT]
+
+<h3>Деструктуризация в циклах</h3>
+
+<p class="my-md">Во время перебора массива объектов циклом <code>for...of</code> часто приходится много раз обращаться к свойствам каждого объекта.</p>
+
+<pre><code class="language-javascript">const books = [
+  {
+    title: "The Last Kingdom",
+    author: "Bernard Cornwell",
+    rating: 8.38,
+  },
+  {
+    title: "Beside Still Waters",
+    author: "Robert Sheckley",
+    rating: 8.51,
+  },
+];
+
+for (const book of books) {
+  console.log(book.title);
+  console.log(book.author);
+  console.log(book.rating);
+}</code></pre>
+
+<p class="my-md">Код можно сократить, если деструктуризировать свойства объекта прямо в теле цикла.</p>
+
+<pre><code class="language-javascript">for (const book of books) {
+  const { title, author, rating } = book;
+
+  console.log(title);
+  console.log(author);
+  console.log(rating);
+}</code></pre>
+
+<p class="my-md">Если свойств немного, деструктуризацию можно выполнить прямо в месте объявления переменной цикла.</p>
+
+<pre><code class="language-javascript">for (const { title, author, rating } of books) {
+  console.log(title);
+  console.log(author);
+  console.log(rating);
+}</code></pre>
+
+<h3>Деструктуризация параметров</h3>
+
+<p class="my-md">Если в функцию передают объект, его свойства можно деструктуризировать внутри тела функции или сразу в списке параметров.</p>
+
+<pre><code class="language-javascript">function printUserInfo(user) {
+  console.log(
+    "Name: " + user.name + ", Age: " + user.age + ", Hobby: " + user.hobby,
+  );
+}
+
+printUserInfo({
+  name: "Alice",
+  age: 25,
+  hobby: "dancing",
+}); // Name: Alice, Age: 25, Hobby: dancing</code></pre>
+
+<pre><code class="language-javascript">function printUserInfo(user) {
+  const { name, age, hobby } = user;
+
+  console.log("Name: " + name + ", Age: " + age + ", Hobby: " + hobby);
+}</code></pre>
+
+<pre><code class="language-javascript">function printUserInfo({ name, age, hobby }) {
+  console.log("Name: " + name + ", Age: " + age + ", Hobby: " + hobby);
+}</code></pre>
+
+[NEXT]
+
+<h3>Паттерн «Объект параметров»</h3>
+
+<p class="my-md">Если функция принимает больше двух-трех параметров, легко запутаться в их порядке при вызове.</p>
+
+<pre><code class="language-javascript">function doStuffWithBook(title, pages, downloads, rating, isPublic) {
+  console.log(title);
+  console.log(pages);
+}
+
+doStuffWithBook("The Last Kingdom", 736, 10283, 8.38, true);</code></pre>
+
+<p class="my-md">Паттерн <strong>«Объект параметров»</strong> помогает решить эту проблему: вместо набора отдельных аргументов передаем один объект с именованными свойствами.</p>
+
+<pre><code class="language-javascript">function doStuffWithBook(book) {
+  console.log(book.title);
+  console.log(book.pages);
+}</code></pre>
+
+<pre><code class="language-javascript">doStuffWithBook({
+  title: "The Last Kingdom",
+  pages: 736,
+  downloads: 10283,
+  rating: 8.38,
+  isPublic: true,
+});</code></pre>
+
+<p class="my-md">Такой объект можно деструктуризировать внутри функции или прямо в ее сигнатуре.</p>
+
+<pre><code class="language-javascript">function doStuffWithBook(book) {
+  const { title, pages, downloads, rating, isPublic } = book;
+
+  console.log(title);
+  console.log(pages);
+}</code></pre>
+
+<pre><code class="language-javascript">function doStuffWithBook({ title, pages, downloads, rating, isPublic }) {
+  console.log(title);
+  console.log(pages);
+}</code></pre>
+
+[NEXT]
+
+<h3>Глубокая деструктуризация</h3>
+
+<p class="my-md">Часто данные представлены объектами с несколькими уровнями вложенности. Для таких случаев используется глубокая деструктуризация.</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacques Gluke",
+  tag: "jgluke",
+  stats: {
+    followers: 5603,
+    views: 4827,
+    likes: 1308,
+  },
+};</code></pre>
+
+<p class="my-md">Сначала можно получить весь вложенный объект <code>stats</code> как отдельную переменную.</p>
+
+<pre><code class="language-javascript">const { name, tag, stats } = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(stats); // { followers: 5603, views: 4827, likes: 1308 }</code></pre>
+
+<p class="my-md">Чтобы получить отдельные свойства вложенного объекта, после имени свойства ставим двоеточие и снова используем фигурные скобки.</p>
+
+<pre><code class="language-javascript">const {
+  name,
+  tag,
+  stats: { followers, views, likes },
+} = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(followers); // 5603
+console.log(views); // 4827
+console.log(likes); // 1308</code></pre>
+
+<p class="my-md">При глубокой деструктуризации можно сочетать переименование переменных и значения по умолчанию.</p>
+
+<pre><code class="language-javascript">const {
+  name,
+  tag,
+  stats: {
+    followers = 0,
+    views: userViews = 0,
+    likes: userLikes = 0,
+  },
+} = user;
+
+console.log(name); // Jacques Gluke
+console.log(tag); // jgluke
+console.log(followers); // 5603
+console.log(userViews); // 4827
+console.log(userLikes); // 1308</code></pre>
+`,
+        },
+        {
+          id: "js-array-destructuring",
+          title: "Деструктуризация массивов",
+          order: 3,
+          content: `
+<h3>Синтаксис</h3>
+
+<p class="my-md">Деструктурированное присваивание можно использовать не только для объектов, но и для массивов. Синтаксис похожий, но есть несколько особенностей.</p>
+
+<ul class="list-disc">
+  <li>Вместо фигурных скобок <code>{}</code> используются квадратные <code>[]</code>.</li>
+  <li>Переменным, указанным в квадратных скобках, последовательно присваиваются значения элементов массива.</li>
+</ul>
+
+<p class="my-md">Например, есть массив чисел. Из него нужно получить значения каждой составляющей цвета в отдельные переменные.</p>
+
+<pre><code class="language-javascript">const color = [200, 255, 100];
+const [red, green, blue] = color;
+
+console.log("rgb(" + red + ", " + green + ", " + blue + ")");
+// "rgb(200, 255, 100)"</code></pre>
+
+<p class="my-md">После ключевого слова <code>const</code> или <code>let</code> ставим квадратные скобки, как при объявлении массива. Внутри скобок через запятую указываем имена переменных, в которые будут помещены значения соответствующих элементов массива.</p>
+
+<p class="my-md">В результате такого кода будут созданы три переменные, и значения попадут в них по порядку: от первого элемента массива к последнему.</p>
+
+[QUIZ: js-array-destructuring-syntax-quiz]
+
+[NEXT]
+
+<h3>Значения по умолчанию</h3>
+
+<p class="my-md">Если переменных объявлено больше, чем элементов массива, лишним переменным будет присвоено <code>undefined</code>. Чтобы избежать этого, можно указать значения по умолчанию.</p>
+
+<p class="my-md">Синтаксис такой же, как в объектах: после имени переменной ставим <code>=</code> и значение по умолчанию.</p>
+
+<pre><code class="language-javascript">const color = [200, 100, 255];
+const [red, green, blue, alfa = 0.3] = color;
+
+console.log(
+  "rgba(" + red + ", " + green + ", " + blue + ", " + alfa + ")",
+);
+// "rgba(200, 100, 255, 0.3)"</code></pre>
+
+[QUIZ: js-array-destructuring-default-quiz]
+
+[NEXT]
+
+<h3>Частичная деструктуризация</h3>
+
+<p class="my-md">Иногда из массива нужно деструктуризировать только первые элементы, а остальные сохранить в одну переменную в виде массива.</p>
+
+<p class="my-md">Для этого после нужных переменных используется операция <code>...rest</code>.</p>
+
+<pre><code class="language-javascript">const color = [200, 255, 100];
+
+const [red, ...otherColors] = color;
+
+console.log(red); // 200
+console.log(otherColors); // [255, 100]</code></pre>
+
+<p class="my-md">Оригинальный массив при этом не изменяется, а в переменной <code>otherColors</code> появляется новый массив с копиями оставшихся значений.</p>
+
+<p class="my-md">С объектами это тоже работает. Можно деструктуризировать часть свойств в отдельные переменные, а остальные собрать в новый объект.</p>
+
+<pre><code class="language-javascript">const user = {
+  name: "Jacob",
+  age: 32,
+  email: "j.cob@mail.com",
+  isOnline: true,
+};
+
+const { name, isOnline, ...otherProps } = user;
+
+console.log(name); // "Jacob"
+console.log(isOnline); // true
+console.log(otherProps); // { age: 32, email: "j.cob@mail.com" }</code></pre>
+
+<p class="my-md">Оригинальный объект при этом не изменяется, а в переменной <code>otherProps</code> появляется новый объект с копиями собранных свойств.</p>
+
+[NEXT]
+
+<h3>Пропуск значений</h3>
+
+<p class="my-md">В отличие от именованных свойств объекта, элементы массива — это набор индексированных значений. Если нужно деструктуризировать, например, только третий элемент, первые два можно пропустить.</p>
+
+<p class="my-md">Для этого в деструктуризации оставляют пустые места между запятыми там, где находятся значения, которые нужно пропустить.</p>
+
+<pre><code class="language-javascript">const rgb = [200, 100, 255];
+
+const [, , blue] = rgb;
+
+console.log("Blue: " + blue); // "Blue: 255"</code></pre>
+
+<p class="my-md">На практике пропуск значений в массивах используют редко, но знать, что так можно делать, полезно.</p>
+
+<h3>Деструктуризация параметров</h3>
+
+<p class="my-md">При передаче массива в функцию можно деструктуризировать его элементы прямо в списке параметров.</p>
+
+<p class="my-md">Без деструктуризации:</p>
+
+<pre><code class="language-javascript">function printFruits(fruits) {
+  console.log(fruits[0], fruits[1], fruits[2]);
+}
+
+printFruits(["apple", "banana", "orange"]);
+// "apple banana orange"</code></pre>
+
+<p class="my-md">С деструктуризацией в месте объявления параметров:</p>
+
+<pre><code class="language-javascript">function printFruits([firstFruit, secondFruit, thirdFruit]) {
+  console.log(firstFruit, secondFruit, thirdFruit);
+}
+
+printFruits(["apple", "banana", "orange"]);
+// "apple banana orange"</code></pre>
+
+<h3>Преимущества деструктуризации</h3>
+
+<p class="my-md">Подведем итог. Деструктуризация делает работу с объектами и массивами короче и понятнее.</p>
+
+<ol>
+  <li><strong>Удобное извлечение значений из объектов и массивов:</strong> можно сразу получить нужные данные без повторяющихся обращений по имени свойства или индексу.</li>
+  <li><strong>Короткий и читаемый код:</strong> переменные создаются рядом с местом, где берутся значения.</li>
+  <li><strong>Параметры функций:</strong> можно явно показать, какие данные функция использует.</li>
+  <li><strong>Работа с функциями, которые возвращают объекты:</strong> результат можно сразу деструктуризировать и взять только нужные значения.</li>
+</ol>
+`,
+        },
+      ],
+    },
   ],
 };

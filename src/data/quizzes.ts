@@ -1407,4 +1407,129 @@ h1, h2, h3 {
     successMessage:
       "Верно! blur происходит, когда элемент теряет фокус.",
   },
+  "js-event-propagation-order-quiz": {
+    id: "js-event-propagation-order-quiz",
+    question: "В каком порядке событие проходит фазы во время распространения?",
+    options: [
+      "Таргетинг > Захват > Всплытие",
+      "Захват > Таргетинг > Всплытие",
+      "Распространение > Таргетинг > Захват",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Сначала происходит захват, затем таргетинг и после этого всплытие.",
+  },
+  "js-event-bubbling-start-quiz": {
+    id: "js-event-bubbling-start-quiz",
+    question: "От какого элемента начинается всплытие события?",
+    options: [
+      "От самого верхнего элемента в иерархии",
+      "От элемента, на котором произошло событие",
+      "От ближайшего предка элемента, на котором произошло событие",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Всплытие начинается от элемента, на котором произошло событие, и поднимается вверх по иерархии.",
+  },
+  "js-event-target-element-quiz": {
+    id: "js-event-target-element-quiz",
+    question: "Что такое целевой элемент?",
+    options: [
+      "Элемент, на котором сработал обработчик события",
+      "Элемент, на котором произошло событие",
+      "Элемент, до которого всплыло событие",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Целевой элемент — это элемент, на котором произошло событие.",
+  },
+  "js-event-target-check-quiz": {
+    id: "js-event-target-check-quiz",
+    question: "Зачем проверять целевой элемент события при делегировании?",
+    options: [
+      "Чтобы исключить обработку событий для неподходящих типов элементов",
+      "Такую проверку не нужно делать",
+      "Чтобы остановить всплытие события",
+    ],
+    correctAnswer: 0,
+    successMessage:
+      "Верно! Целевой элемент проверяют, чтобы обработчик не срабатывал для неподходящих элементов.",
+  },
+  "js-library-definition-quiz": {
+    id: "js-library-definition-quiz",
+    question: "Что такое библиотека?",
+    options: [
+      "Код, который нужно написать самостоятельно для каждого проекта",
+      "Набор заранее написанного кода, готового к использованию в проекте",
+      "Любой файл скрипта проекта",
+    ],
+    correctAnswer: 1,
+    successMessage:
+      "Верно! Библиотека — это набор готового кода, который можно использовать в проекте.",
+  },
+  "js-destructuring-object-syntax-quiz": {
+    id: "js-destructuring-object-syntax-quiz",
+    question:
+      "Выбери правильный синтаксис деструктуризации объекта у переменной profile.",
+    options: [
+      "const profile = {}",
+      "const profile = ()",
+      "const {} = profile",
+      "const () = profile",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Правильный синтаксис деструктуризации объекта: const {} = profile.",
+  },
+  "js-destructuring-missing-property-quiz": {
+    id: "js-destructuring-missing-property-quiz",
+    question:
+      "Какое значение получит переменная, если при деструктуризации в объекте нет свойства с таким именем?",
+    options: ["Будет ошибка", "null", "undefined", "false"],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Если свойства нет в объекте, переменная получит undefined.",
+  },
+  "js-destructuring-rename-quiz": {
+    id: "js-destructuring-rename-quiz",
+    question:
+      "Выбери правильный синтаксис переименования переменной при деструктуризации свойства username из объекта profile.",
+    options: [
+      "const { coolName: username } = profile",
+      "const { username = coolName } = profile",
+      "const { username: coolName } = profile",
+      "const { username - coolName } = profile",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Сначала пишем имя свойства, затем через двоеточие новое имя переменной.",
+  },
+  "js-array-destructuring-syntax-quiz": {
+    id: "js-array-destructuring-syntax-quiz",
+    question:
+      "Выбери правильный синтаксис деструктуризации массива у переменной fruits.",
+    options: [
+      "const {} = fruits",
+      "const fruits = []",
+      "const [] = fruits",
+      "const fruits []",
+    ],
+    correctAnswer: 2,
+    successMessage:
+      "Верно! Для деструктуризации массива используются квадратные скобки: const [] = fruits.",
+  },
+  "js-array-destructuring-default-quiz": {
+    id: "js-array-destructuring-default-quiz",
+    question:
+      'Выбери правильный синтаксис для присвоения строки "A fruit" как значения по умолчанию при деструктуризации массива fruits.',
+    options: [
+      'const ["A fruit" = firstFruit] = fruits',
+      'const [firstFruit = "A fruit"] = fruits',
+      'const [firstFruit: "A fruit"] = fruits',
+      'const [firstFruit, "A fruit"] = fruits',
+    ],
+    correctAnswer: 1,
+    successMessage:
+      'Верно! Значение по умолчанию записывается после имени переменной: const [firstFruit = "A fruit"] = fruits.',
+  },
 };

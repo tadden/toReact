@@ -198,6 +198,52 @@
         color: #94a3b8;
         font-style: italic;
       }
+
+      :global(.code-tag) {
+        color: #d879ff;
+      }
+
+      :global(.code-attr) {
+        color: #f6c177;
+      }
+
+      :global(.code-keyword) {
+        color: #d879ff;
+      }
+
+      :global(.code-number) {
+        color: #f6c177;
+      }
+
+      :global(.code-string) {
+        color: #9ece6a;
+      }
+
+      :global(.hljs-keyword),
+      :global(.hljs-selector-tag),
+      :global(.hljs-name) {
+        color: #d879ff;
+      }
+
+      :global(.hljs-string),
+      :global(.hljs-attr) {
+        color: #9ece6a;
+      }
+
+      :global(.hljs-number),
+      :global(.hljs-literal) {
+        color: #f6c177;
+      }
+
+      :global(.hljs-title),
+      :global(.hljs-built_in) {
+        color: #7dcfff;
+      }
+
+      :global(.hljs-comment) {
+        color: #94a3b8;
+        font-style: italic;
+      }
     }
 
     .copy-button {
@@ -259,6 +305,57 @@
       font-family: monospace;
       color: rgb(240, 113, 120);
       font-size: 0.9em;
+
+      :global(.code-comment) {
+        color: #94a3b8;
+        font-style: italic;
+      }
+
+      :global(.code-tag) {
+        color: #d879ff;
+      }
+
+      :global(.code-attr) {
+        color: #f6c177;
+      }
+
+      :global(.code-keyword) {
+        color: #d879ff;
+      }
+
+      :global(.code-number) {
+        color: #f6c177;
+      }
+
+      :global(.code-string) {
+        color: #9ece6a;
+      }
+
+      :global(.hljs-keyword),
+      :global(.hljs-selector-tag),
+      :global(.hljs-name) {
+        color: #d879ff;
+      }
+
+      :global(.hljs-string),
+      :global(.hljs-attr) {
+        color: #9ece6a;
+      }
+
+      :global(.hljs-number),
+      :global(.hljs-literal) {
+        color: #f6c177;
+      }
+
+      :global(.hljs-title),
+      :global(.hljs-built_in) {
+        color: #7dcfff;
+      }
+
+      :global(.hljs-comment) {
+        color: #94a3b8;
+        font-style: italic;
+      }
     }
   }
 }

@@ -19,6 +19,9 @@ import {
   AlertCircle,
 } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import hljs from "highlight.js/lib/core";
+import javascript from "highlight.js/lib/languages/javascript";
+import xml from "highlight.js/lib/languages/xml";
 
 interface ModuleContentProps {
   course: Course;
@@ -34,6 +37,35 @@ import { quizzes } from "@/data/quizzes";
 import { CodeChallenge } from "./CodeChallenge";
 import { InteractiveHomework } from "./InteractiveHomework";
 import { challenges } from "@/data/challenges";
+
+hljs.registerLanguage("javascript", javascript);
+hljs.registerLanguage("html", xml);
+
+const CODE_HIGHLIGHT_VERSION = "highlight-js-v1";
+
+const decodeCodeEntities = (value: string) =>
+  value
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, '"');
+
+const highlightCodeBlocksInHtml = (html: string) =>
+  html.replace(
+    /<pre><code([^>]*)>([\s\S]*?)<\/code><\/pre>/g,
+    (_, attrs: string, code: string) => {
+      const codeText = decodeCodeEntities(code);
+      const isHtmlCode =
+        attrs.includes("language-html") || codeText.trim().startsWith("<");
+      const language = isHtmlCode ? "html" : "javascript";
+      const highlightedCode = hljs.highlight(codeText, {
+        language,
+        ignoreIllegals: true,
+      }).value;
+
+      return `<pre><code${attrs} data-highlighted="${CODE_HIGHLIGHT_VERSION}">${highlightedCode}</code></pre>`;
+    },
+  );
 
 // Helper to extract first header or provide fallback based on content type
 const getTitleFromContent = (
@@ -57,79 +89,6 @@ const getTitleFromContent = (
 
   return `Раздел ${index + 1}`;
 };
-
-const escapeHtml = (value: string) =>
-  value
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;");
-
-const findLineCommentStart = (line: string) => {
-  let inSingle = false;
-  let inDouble = false;
-  let inTemplate = false;
-  let escaped = false;
-
-  for (let i = 0; i < line.length - 1; i += 1) {
-    const char = line[i];
-    const nextChar = line[i + 1];
-
-    if (escaped) {
-      escaped = false;
-      continue;
-    }
-
-    if (char === "\\") {
-      escaped = true;
-      continue;
-    }
-
-    if (!inDouble && !inTemplate && char === "'") {
-      inSingle = !inSingle;
-      continue;
-    }
-
-    if (!inSingle && !inTemplate && char === '"') {
-      inDouble = !inDouble;
-      continue;
-    }
-
-    if (!inSingle && !inDouble && char === "`") {
-      inTemplate = !inTemplate;
-      continue;
-    }
-
-    if (
-      !inSingle &&
-      !inDouble &&
-      !inTemplate &&
-      char === "/" &&
-      nextChar === "/"
-    ) {
-      return i;
-    }
-  }
-
-  return -1;
-};
-
-const highlightCodeComments = (code: string) =>
-  code
-    .split("\n")
-    .map((line) => {
-      const commentStart = findLineCommentStart(line);
-
-      if (commentStart === -1) {
-        return escapeHtml(line);
-      }
-
-      const beforeComment = line.slice(0, commentStart);
-      const comment = line.slice(commentStart);
-
-      return `${escapeHtml(beforeComment)}<span class="code-comment">${escapeHtml(comment)}</span>`;
-    })
-    .join("\n");
 
 export function ModuleContent({
   course,
@@ -267,9 +226,18 @@ export function ModuleContent({
       const preElements = contentRef.current.querySelectorAll("pre");
       preElements.forEach((pre) => {
         const code = pre.querySelector("code");
-        if (code && !code.dataset.commentsHighlighted) {
-          code.innerHTML = highlightCodeComments(code.textContent || "");
-          code.dataset.commentsHighlighted = "true";
+        if (code && code.dataset.highlighted !== CODE_HIGHLIGHT_VERSION) {
+          const codeText = code.textContent || "";
+          const isHtmlCode =
+            code.classList.contains("language-html") ||
+            codeText.trim().startsWith("<");
+          const language = isHtmlCode ? "html" : "javascript";
+
+          code.innerHTML = hljs.highlight(codeText, {
+            language,
+            ignoreIllegals: true,
+          }).value;
+          code.dataset.highlighted = CODE_HIGHLIGHT_VERSION;
         }
 
         if (pre.querySelector(".copy-button")) return;
@@ -434,7 +402,11 @@ export function ModuleContent({
                       className="fade-in-content"
                       style={{ scrollMarginTop: "6rem" }}
                     >
-                      <div dangerouslySetInnerHTML={{ __html: page.text }} />
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: highlightCodeBlocksInHtml(page.text),
+                        }}
+                      />
                       {page.quizId && quizzes[page.quizId] && (
                         <Quiz
                           data={quizzes[page.quizId]}
@@ -853,7 +825,9 @@ export function ModuleContent({
                       lineHeight: "1.6",
                     }}
                     dangerouslySetInnerHTML={{
-                      __html: module.homework?.description || "",
+                      __html: highlightCodeBlocksInHtml(
+                        module.homework?.description || "",
+                      ),
                     }}
                   />
 
