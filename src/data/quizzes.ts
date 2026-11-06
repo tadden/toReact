@@ -1532,4 +1532,422 @@ h1, h2, h3 {
     successMessage:
       'Верно! Значение по умолчанию записывается после имени переменной: const [firstFruit = "A fruit"] = fruits.',
   },
+  "js-json-validity-quiz": {
+    "id": "js-json-validity-quiz",
+    "question": "Является ли код из примера выше валидным JSON?",
+    "options": [
+      "Да",
+      "Нет"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! Ключи JSON должны быть в двойных кавычках, а после последнего свойства объекта не должно быть запятой."
+  },
+  "js-json-stringify-method-quiz": {
+    "id": "js-json-stringify-method-quiz",
+    "question": "Какой метод преобразует данные в формат JSON?",
+    "options": [
+      "JSON.convert()",
+      "JSON.toString()",
+      "JSON.stringify()"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! Метод JSON.stringify() преобразует данные в JSON."
+  },
+  "js-json-stringify-number-quiz": {
+    "id": "js-json-stringify-number-quiz",
+    "question": "Каким будет результат вызова JSON.stringify(32)?",
+    "options": [
+      "Число 32",
+      "Строка \"32\"",
+      "undefined"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! JSON.stringify(32) возвращает строку \"32\", а не число."
+  },
+  "js-json-stringify-boolean-quiz": {
+    "id": "js-json-stringify-boolean-quiz",
+    "question": "Каким будет результат вызова JSON.stringify(true)?",
+    "options": [
+      "1",
+      "Строка \"true\"",
+      "Булево значение true"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! JSON.stringify(true) преобразует булево значение в строку \"true\"."
+  },
+  "js-json-methods-quiz": {
+    "id": "js-json-methods-quiz",
+    "question": "Что произойдёт с методами объекта при преобразовании его в JSON?",
+    "options": [
+      "Они будут проигнорированы",
+      "Возникнет ошибка преобразования",
+      "Они преобразуются в строку"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! Методы объекта игнорируются при преобразовании в JSON."
+  },
+  "js-json-parse-method-quiz": {
+    "id": "js-json-parse-method-quiz",
+    "question": "Какой метод разбирает данные из JSON?",
+    "options": [
+      "JSON.toParse",
+      "JSON.stringify",
+      "JSON.parse"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! JSON.parse() преобразует строку с JSON в значение JavaScript."
+  },
+  "js-json-try-catch-purpose-quiz": {
+    "id": "js-json-try-catch-purpose-quiz",
+    "question": "Зачем использовать try...catch при парсинге JSON?",
+    "options": [
+      "Чтобы правильно преобразовать данные из формата JSON",
+      "Чтобы при ошибке парсинга скрипт продолжил работу",
+      "Чтобы можно было распарсить любой тип данных"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! try...catch позволяет перехватить и обработать ошибку парсинга, чтобы выполнение скрипта продолжилось."
+  },
+  "js-json-catch-execution-quiz": {
+    "id": "js-json-catch-execution-quiz",
+    "question": "Когда выполняется блок catch?",
+    "options": [
+      "Всегда после завершения кода в блоке try",
+      "Только если в блоке try нет ошибки",
+      "Только если в блоке try возникла ошибка"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! Блок catch выполняется, когда в блоке try возникает ошибка."
+  },
+  "js-storage-definition-quiz": {
+    "id": "js-storage-definition-quiz",
+    "question": "Что такое localStorage в контексте веб-разработки?",
+    "options": [
+      "Библиотека для асинхронной загрузки ресурсов",
+      "Специальный класс для работы с локальными файлами",
+      "Механизм хранения данных в браузере клиента"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! localStorage позволяет сохранять данные в локальном хранилище браузера."
+  },
+  "js-storage-reload-quiz": {
+    "id": "js-storage-reload-quiz",
+    "question": "Сохраняет ли localStorage данные при перезагрузке страницы?",
+    "options": [
+      "Да",
+      "Нет"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! Перезагрузка страницы не удаляет данные localStorage. Они могут быть удалены кодом приложения или при очистке данных сайта."
+  },
+  "js-storage-isolation-quiz": {
+    "id": "js-storage-isolation-quiz",
+    "question": "Будут ли данные localStorage одного сайта доступны другому сайту с другим источником?",
+    "options": [
+      "Да, данные доступны на всех сайтах",
+      "Нет, данные доступны только страницам того же источника"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! Локальное хранилище изолировано по источнику: протоколу, домену и порту."
+  },
+  "js-storage-set-arguments-quiz": {
+    "id": "js-storage-set-arguments-quiz",
+    "question": "Какие аргументы принимает localStorage.setItem()?",
+    "options": [
+      "Индекс и значение для хранения",
+      "Ключ и значение для хранения",
+      "Только значение"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! setItem(key, value) принимает ключ и сохраняемое значение."
+  },
+  "js-storage-set-action-quiz": {
+    "id": "js-storage-set-action-quiz",
+    "question": "Что делает localStorage.setItem(key, value)?",
+    "options": [
+      "Получает значение по ключу из localStorage",
+      "Устанавливает значение для ключа в localStorage",
+      "Удаляет ключ и его значение из localStorage"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! Метод создаёт запись или обновляет значение существующего ключа."
+  },
+  "js-storage-overwrite-quiz": {
+    "id": "js-storage-overwrite-quiz",
+    "question": "Что произойдёт при вызове localStorage.setItem(\"userData\", \"new_data\"), если ключ \"userData\" уже существует?",
+    "options": [
+      "Значение ключа обновится на \"new_data\"",
+      "Ничего: прежнее значение сохранится",
+      "Возникнет ошибка записи из-за существующего ключа"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! setItem() перезаписывает значение, если такой ключ уже существует."
+  },
+  "js-storage-value-type-quiz": {
+    "id": "js-storage-value-type-quiz",
+    "question": "В каком виде localStorage хранит значения?",
+    "options": [
+      "Только в виде объектов",
+      "В виде строк",
+      "В виде любых типов без преобразования"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! Значения localStorage — строки. Для объектов и массивов используют сериализацию в JSON."
+  },
+  "js-storage-serialize-quiz": {
+    "id": "js-storage-serialize-quiz",
+    "question": "Что нужно сделать с объектом или массивом перед сохранением в localStorage, чтобы затем восстановить его структуру?",
+    "options": [
+      "Преобразовать в объект",
+      "Преобразовать в строку с помощью JSON.stringify()",
+      "Добавить метод toString"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! JSON.stringify() сериализует данные в строку, а JSON.parse() позволяет восстановить их при чтении."
+  },
+  "js-storage-get-method-quiz": {
+    "id": "js-storage-get-method-quiz",
+    "question": "Как получить значение из localStorage по ключу \"username\"?",
+    "options": [
+      "localStorage.access(\"username\")",
+      "localStorage.getData(\"username\")",
+      "localStorage.getItem(\"username\")"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! getItem() читает сохранённую строку по указанному ключу."
+  },
+  "js-storage-missing-key-quiz": {
+    "id": "js-storage-missing-key-quiz",
+    "question": "Что возвращает localStorage.getItem(\"key\"), если ключа \"key\" нет в хранилище?",
+    "options": [
+      "null",
+      "undefined",
+      "false"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! Если записи с таким ключом нет, getItem() возвращает null."
+  },
+  "js-storage-get-type-quiz": {
+    "id": "js-storage-get-type-quiz",
+    "question": "Какой тип вернёт localStorage.getItem(\"age\"), если ранее под ключом \"age\" сохранили число 25?",
+    "options": [
+      "Строка (string)",
+      "Число (number)",
+      "Булево значение (boolean)"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! В хранилище записывается строка \"25\", и getItem() возвращает строку."
+  },
+  "js-storage-remove-argument-quiz": {
+    "id": "js-storage-remove-argument-quiz",
+    "question": "Какой аргумент принимает localStorage.removeItem()?",
+    "options": [
+      "Индекс удаляемого значения",
+      "Ключ удаляемой записи",
+      "Значение удаляемой записи"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! removeItem(key) удаляет запись по ключу."
+  },
+  "js-storage-clear-quiz": {
+    "id": "js-storage-clear-quiz",
+    "question": "Как удалить все записи localStorage текущего источника?",
+    "options": [
+      "Вызвать localStorage.clear()",
+      "Вызвать localStorage.removeAll()",
+      "Присвоить всем ключам и значениям null"
+    ],
+    "correctAnswer": 0,
+    "successMessage": "Верно! clear() удаляет все записи. Присваивание null не удаляет ключ: оно сохраняет строку \"null\"."
+  },
+  "js-storage-session-data-quiz": {
+    "id": "js-storage-session-data-quiz",
+    "question": "Какие данные можно сохранять в sessionStorage, используя JSON.stringify() для преобразования сложных значений?",
+    "options": [
+      "Только исходные строковые значения",
+      "Только числа",
+      "Разные JSON-совместимые данные, включая объекты и массивы, в виде строк"
+    ],
+    "correctAnswer": 2,
+    "successMessage": "Верно! sessionStorage хранит строки. Объекты и массивы сначала сериализуют через JSON.stringify(), а после чтения восстанавливают через JSON.parse()."
+  },
+  "js-storage-session-set-quiz": {
+    "id": "js-storage-session-set-quiz",
+    "question": "Какой метод сохраняет значение в sessionStorage?",
+    "options": [
+      "sessionStorage.storeValue(\"key\", value)",
+      "sessionStorage.setItem(\"key\", value)",
+      "sessionStorage.saveItem(\"key\", value)"
+    ],
+    "correctAnswer": 1,
+    "successMessage": "Верно! Для записи используется sessionStorage.setItem(key, value)."
+  },
+  "js-tools-install-dependencies-quiz": {
+  "id": "js-tools-install-dependencies-quiz",
+  "question": "Какая команда npm установит все зависимости проекта?",
+  "options": [
+    "npm install",
+    "npm init",
+    "npm download"
+  ],
+  "correctAnswer": 0,
+  "successMessage": "Совершенно верно! Команда npm install установит все зависимости проекта, указанные в файле package.json."
+},
+  "js-tools-node-modules-quiz": {
+  "id": "js-tools-node-modules-quiz",
+  "question": "В какую папку добавляются зависимости проекта?",
+  "options": [
+    "app",
+    "node_modules",
+    "public"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Правильно! Зависимости проекта добавляются в папку node_modules."
+},
+  "js-tools-scripts-field-quiz": {
+  "id": "js-tools-scripts-field-quiz",
+  "question": "В каком поле файла package.json хранятся npm-скрипты проекта?",
+  "options": [
+    "aliases",
+    "commands",
+    "scripts"
+  ],
+  "correctAnswer": 2,
+  "successMessage": "Абсолютно точно! В файле package.json npm-скрипты проекта хранятся в поле scripts."
+},
+  "js-tools-run-script-quiz": {
+  "id": "js-tools-run-script-quiz",
+  "question": "Как запустить скрипт с именем doStuff из package.json?",
+  "options": [
+    "npm doStuff",
+    "npm run doStuff",
+    "npm exec doStuff"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Правильно! Для запуска скриптов используется npm-команда run и имя запускаемого скрипта. Следовательно, правильный ответ — npm run doStuff."
+},
+  "js-tools-install-package-quiz": {
+  "id": "js-tools-install-package-quiz",
+  "question": "Какая npm-команда выполняет установку пакета myPackage в проект?",
+  "options": [
+    "npm install myPackage",
+    "npm add myPackage",
+    "npm download myPackage"
+  ],
+  "correctAnswer": 0,
+  "successMessage": "Всё правильно! Для установки пакета myPackage в проект используется команда npm install [package-name] или её короткий псевдоним npm i [package-name]."
+},
+  "js-tools-package-json-update-quiz": {
+  "id": "js-tools-package-json-update-quiz",
+  "question": "Нужно ли что-то менять в файле package.json после установки нового пакета?",
+  "options": [
+    "Да, записи о зависимостях не добавляются автоматически",
+    "Нет, записи о зависимостях добавляются автоматически"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Правильно! Зачем менять, если всё это делается автоматически!"
+},
+  "js-tools-remove-package-quiz": {
+  "id": "js-tools-remove-package-quiz",
+  "question": "Какая npm-команда выполняет удаление пакета myPackage в проекте?",
+  "options": [
+    "npm delete myPackage",
+    "npm uninstall myPackage",
+    "npm kill myPackage"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Ты прав! Удаление пакета myPackage в проекте выполняет команда npm uninstall myPackage."
+},
+  "js-tools-dev-dependency-quiz": {
+  "id": "js-tools-dev-dependency-quiz",
+  "question": "Какая команда добавит пакет myDep как зависимость разработки?",
+  "options": [
+    "npm i myDep --save",
+    "npm i myDep --save-dev",
+    "npm i myDep --dev"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Именно так! Правильная команда для добавления пакета myDep как зависимости разработки — это npm i myDep --save-dev."
+},
+  "js-modularity-module-quiz": {
+  "id": "js-modularity-module-quiz",
+  "question": "Что такое модуль?",
+  "options": [
+    "Любой файл настроек проекта",
+    "Любой JavaScript-файл проекта",
+    "Только файлы зависимостей проекта"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Именно так! Модуль в JavaScript — это любой JavaScript-файл проекта, который содержит определённый код и может быть импортирован и использован в других JavaScript-файлах."
+},
+  "js-modularity-default-export-quiz": {
+  "id": "js-modularity-default-export-quiz",
+  "question": "Выбери правильный синтаксис экспорта по умолчанию для переменной username",
+  "options": [
+    "export username default",
+    "username export default",
+    "default export username",
+    "export default username"
+  ],
+  "correctAnswer": 3,
+  "successMessage": "Абсолютно точно! Операция экспорта по умолчанию реализована конструкцией export default, а далее значение, которое экспортируется."
+},
+  "js-modularity-default-import-quiz": {
+  "id": "js-modularity-default-import-quiz",
+  "question": "Выбери правильный синтаксис импорта по умолчанию",
+  "options": [
+    "from \"...\" import anyName",
+    "import anyName from \"...\"",
+    "import { anyName } from \"...\"",
+    "import anyName"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Отлично! Правильный синтаксис импорта по умолчанию — это import anyName from \"...\""
+},
+  "js-modularity-named-export-quiz": {
+  "id": "js-modularity-named-export-quiz",
+  "question": "Выбери правильный синтаксис именованного экспорта переменной username",
+  "options": [
+    "export default username",
+    "export const username = \"Mango\"",
+    "username export"
+  ],
+  "correctAnswer": 1,
+  "successMessage": "Отлично! В отличие от экспорта по умолчанию (export default username), именованный экспорт не имеет слова default и может быть уже при объявлении переменной, то есть вот так — export const username = \"Mango\"."
+},
+  "js-modularity-named-import-quiz": {
+  "id": "js-modularity-named-import-quiz",
+  "question": "Выбери правильный синтаксис именованного импорта переменной username",
+  "options": [
+    "import { username } from \"...\"",
+    "import { anyName } from \"...\"",
+    "import username from \"...\""
+  ],
+  "correctAnswer": 0,
+  "successMessage": "Правильно! Синтаксис именованного импорта переменной username — это import { username } from \"...\", где имя переменной в фигурных скобках."
+},
+  "js-modularity-rename-quiz": {
+  "id": "js-modularity-rename-quiz",
+  "question": "Выбери правильный синтаксис импорта переменной A под именем B?",
+  "options": [
+    "import B from \"...\"",
+    "import { A to B } from \"...\"",
+    "import { A as B } from \"...\"",
+    "import A as B from \"...\""
+  ],
+  "correctAnswer": 2,
+  "successMessage": "Всё правильно! import { A as B } from \"...\" — это правильный синтаксис переименования переменной A в переменную B во время импорта."
+},
+  "js-modularity-namespace-quiz": {
+  "id": "js-modularity-namespace-quiz",
+  "question": "Выбери синтаксис импорта пространства имён всех экспортов модуля в объект с именем everything",
+  "options": [
+    "import everything as * from \"...\"",
+    "import everything from \"...\"",
+    "import * as everything from \"...\"",
+    "import * from \"...\""
+  ],
+  "correctAnswer": 2,
+  "successMessage": "Именно так! Выглядит длинновато, но ты всё правильно помнишь."
+},
 };

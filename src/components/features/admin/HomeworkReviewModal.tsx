@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useLayoutEffect, useRef, useState } from "react";
 import { Module, User } from "@/types";
 import styles from "./HomeworkReviewModal.module.scss";
 
@@ -28,6 +28,15 @@ export function HomeworkReviewModal({
   onReject,
 }: HomeworkReviewModalProps) {
   const [comment, setComment] = useState("");
+  const commentId = useId();
+  const commentRef = useRef<HTMLTextAreaElement>(null);
+
+  useLayoutEffect(() => {
+    const field = commentRef.current;
+    if (!field || !isOpen) return;
+    field.style.height = "auto";
+    field.style.height = `${Math.min(field.scrollHeight + 2, 480)}px`;
+  }, [comment, isOpen]);
 
   if (!isOpen) return null;
 
@@ -104,14 +113,25 @@ export function HomeworkReviewModal({
             </div>
           </div>
 
-          <div className={styles.section}>
-            <label>Комментарий Ментора</label>
+          <div className={styles.commentSection}>
+            <label htmlFor={commentId}>Комментарий ментора</label>
+            <p id={`${commentId}-hint`} className={styles.commentHint}>
+              Отметьте, что получилось, и перечислите необходимые исправления.
+              Разделяйте мысли абзацами — так студенту будет проще прочитать отзыв.
+            </p>
             <textarea
+              id={commentId}
+              ref={commentRef}
+              aria-describedby={`${commentId}-hint`}
               className={styles.textarea}
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="Напишите отзыв студенту..."
+              placeholder={"Что получилось хорошо…\n\nЧто нужно исправить:\n1. …\n2. …"}
             />
+            <div className={styles.commentFooter}>
+              <span>Студент увидит отзыв после принятия или возврата работы.</span>
+              <span>{comment.length.toLocaleString("ru-RU")} симв.</span>
+            </div>
           </div>
 
           <div className={styles.actions}>

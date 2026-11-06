@@ -963,7 +963,7 @@ export function ModuleContent({
                         >
                           <CheckCircle size={18} /> Отзыв Ментора
                         </h4>
-                        <p style={{ margin: 0, color: "#bbf7d0" }}>
+                        <p style={{ margin: 0, color: "#bbf7d0", whiteSpace: "pre-wrap", overflowWrap: "anywhere", lineHeight: 1.75 }}>
                           {progress.adminComments}
                         </p>
                       </div>
@@ -990,7 +990,7 @@ export function ModuleContent({
                       >
                         <AlertTriangle size={18} /> Требуются Исправления
                       </h4>
-                      <p style={{ margin: 0, color: "#fca5a5" }}>
+                      <p style={{ margin: 0, color: "#fecaca", whiteSpace: "pre-wrap", overflowWrap: "anywhere", lineHeight: 1.75 }}>
                         {progress.adminComments ||
                           "Администратор запросил изменения."}
                       </p>

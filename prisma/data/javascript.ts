@@ -9351,5 +9351,1062 @@ printFruits(["apple", "banana", "orange"]);
         },
       ],
     },
+    {
+      slug: "module-8-code-modularity-vite",
+      title: "Модуль 8. Модульность кода и сборщик Vite",
+      description: "Формат JSON, модульность кода и сборщик Vite.",
+      order: 7,
+      videoUrl: null,
+      resources: [],
+      homework: {
+        id: "js-code-modularity-hw",
+        title: "Домашнее задание: Модульность кода и Vite",
+        description: `<h2 style="margin-bottom: 1.5rem;">Домашнее задание №8</h2>
+<ul class="list-disc">
+<li>Создай репозиторий <code>goit-js-hw-08</code>.</li>
+<li>Собери проект с помощью <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://vitejs.dev/" target="_blank" rel="noreferrer">Vite</a>. Мы подготовили для тебя <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://github.com/goitacademy/vanilla-app-template" target="_blank" rel="noreferrer">готовую сборку</a> со всеми дополнительными настройками проекта, обязательно используй её.</li>
+<li>Прочитай задание и выполни его в редакторе кода.</li>
+<li>Убедись, что код отформатирован с помощью <code>Prettier</code>, а в консоли отсутствуют ошибки и предупреждения при открытии живой страницы задания.</li>
+<li>Сдай домашнее задание на проверку.</li>
+</ul>
+<p><strong>Формат сдачи:</strong> Домашняя работа содержит две ссылки: на исходные файлы и рабочую страницу на <code>GitHub Pages</code>.</p>
+<div class="attention-block" style="background-color: rgba(0, 150, 255, 0.1); padding: 10px; border-left: 5px solid #0096FF;"><p>Для стилизации разметки твоих заданий используй этот <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.figma.com/file/m8k9NQV7qZrtYDCvxfD68B/%D0%94%D0%97-JavaScript?type=design&amp;node-id=3-969&amp;mode=design" target="_blank" rel="noreferrer">макет</a>.</p></div>
+<p>Возьми <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://github.com/goitacademy/vanilla-app-template" target="_blank" rel="noreferrer">шаблон проекта</a>, удали лишние файлы <code>html</code> и <code>js</code>, которые были созданы для примера, и добавь новые для выполнения заданий этой домашней работы. Пусть структура папок и файлов проекта в папке <code>src</code> выглядит следующим образом.</p>
+<img src="/images/javascript/module8-homework-structure.png" alt="Структура папок и файлов проекта: 1-gallery.html, 2-form.html и соответствующие JavaScript-файлы в src/js" class="img-responsive" style="max-width: 760px; margin: 2rem auto; display: block;" loading="lazy" />
+<p>Пример подключения html-файлов к <code>index.html</code>:</p>
+<pre><code class="language-html">&lt;ul&gt;
+  &lt;li&gt;
+    &lt;a href="./1-gallery.html"&gt;Gallery&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;a href="./2-form.html"&gt;Form&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;</code></pre>
+<h2 style="margin-bottom: 1.5rem;">Задание 1 — Галерея изображений</h2>
+<p>Выполняй это задание в файлах <code>1-gallery.html</code> и <code>1-gallery.js</code>.</p>
+<p>В предыдущем домашнем задании ты самостоятельно создал галерею изображений, используя делегирование событий, и добавил через CDN библиотеку модального окна для отображения полноразмерной версии изображения.</p>
+<p><strong>Создание галерей</strong> — это повседневная задача разработчика, но писать их вручную каждый раз слишком трудоёмко. Для этого существуют библиотеки, которые реализуют всю логику работы галереи.</p>
+<p>Сделай такую же галерею, но используя библиотеку <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.npmjs.com/package/simplelightbox" target="_blank" rel="noreferrer">SimpleLightbox</a>, которая полностью возьмёт на себя обработку кликов по изображениям, открытие и закрытие модального окна, а также перелистывание изображений с помощью клавиатуры.</p>
+<p>Посмотри демовидео работы галереи.</p>
+<video src="/images/javascript/module8-homework-gallery.mp4" preload="metadata" controls style="width: 100%; height: auto;" aria-label="Демонстрация работы галереи SimpleLightbox"></video>
+<p>Обрати внимание на следующие детали:</p>
+<ul class="list-disc">
+<li>Тебе больше не нужно вручную устанавливать делегирование событий, поскольку библиотека <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.npmjs.com/package/simplelightbox" target="_blank" rel="noreferrer">SimpleLightbox</a> автоматически отслеживает клики по карточкам галереи. Нет необходимости добавлять слушатели событий для элементов галереи.</li>
+<li>Отдельная библиотека BasicLightbox для создания модальных окон больше не нужна, поскольку функционал открытия модального окна встроен в библиотеку <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.npmjs.com/package/simplelightbox" target="_blank" rel="noreferrer">SimpleLightbox</a>.</li>
+<li>Для установки библиотек теперь не нужно добавлять CDN-ссылки в <code>index.html</code>. Вместо этого мы устанавливаем библиотеки через <code>npm</code> в терминале.</li>
+</ul>
+<p>Выполняй это задание в файлах <code>1-gallery.html</code> и <code>1-gallery.js</code>. Разбей его на несколько подзадач:</p>
+<p>Используй код из прошлого домашнего задания и выполни его рефакторинг. Не нужно писать всё с нуля. Например, создание элементов галереи будет таким же. А вот код делегирования и открытия модального окна нужно удалить.</p>
+<p>Необходимо немного изменить разметку карточки галереи, используй этот шаблон.</p>
+<pre><code class="language-html">&lt;li class="gallery-item"&gt;
+  &lt;a class="gallery-link" href="large-image.jpg"&gt;
+    &lt;img
+      class="gallery-image"
+      src="small-image.jpg"
+      alt="Image description"
+    /&gt;
+  &lt;/a&gt;
+&lt;/li&gt;</code></pre>
+<p>Добавь библиотеку <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.npmjs.com/package/simplelightbox" target="_blank" rel="noreferrer">SimpleLightbox</a> как зависимость проекта, используя <code>npm</code>.</p>
+<p>Для того чтобы подключить CSS-код библиотеки в проект, необходимо добавить ещё один импорт, кроме того, который описан в документации.</p>
+<pre><code class="language-javascript">// Описан в документации
+import SimpleLightbox from "simplelightbox";
+// Дополнительный импорт стилей
+import "simplelightbox/dist/simple-lightbox.min.css";</code></pre>
+<p>Следующий шаг — это инициализация библиотеки после создания и добавления элементов галереи в <code>ul.gallery</code>. Для этого ознакомься с документацией <a class="link-accent" style="color: #93c5fd; text-decoration: underline; text-underline-offset: 3px;" href="https://www.npmjs.com/package/simplelightbox" target="_blank" rel="noreferrer">SimpleLightbox</a> — прежде всего с секциями «Usage» и «Markup».</p>
+<p>После этого посмотри в документации секцию «Options» и добавь отображение подписей к изображениям из атрибута <code>alt</code>. Пусть подпись будет снизу и появляется через 250 миллисекунд после открытия модального окна.</p>
+<h3>На что будет обращать внимание ментор при проверке:</h3>
+<ul class="list-disc">
+<li>На живой странице отображается галерея изображений из массива данных <code>images</code></li>
+<li>Галерея изображений стилизована согласно макету</li>
+<li>Данные для галереи созданы динамически в JS</li>
+<li>Отсутствуют собственные слушатели</li>
+<li>Подключена библиотека SimpleLightbox с использованием <code>npm</code></li>
+<li>Экземпляр библиотеки инициализирован после добавления элементов галереи в DOM и вне любых функций</li>
+<li>При клике по элементу галереи открывается модальное окно подключённой библиотеки, в котором содержится увеличенная версия изображения, по которому кликнули. Весь базовый функционал библиотеки работает</li>
+<li>Через 250 миллисекунд после открытия модального окна содержимое атрибута <code>alt</code> появляется снизу как подпись к изображению</li>
+</ul>
+<h2 style="margin-bottom: 1.5rem;">Задание 2 — Форма обратной связи</h2>
+<p>Выполняй это задание в файлах <code>2-form.html</code> и <code>2-form.js</code>.</p>
+<p>Добавь в HTML разметку формы. В JS напиши скрипт, который будет сохранять значения полей в локальное хранилище, когда пользователь что-то печатает.</p>
+<pre><code class="language-html">&lt;form class="feedback-form" autocomplete="off"&gt;
+  &lt;label&gt;
+    Email
+    &lt;input type="email" name="email" autofocus /&gt;
+  &lt;/label&gt;
+  &lt;label&gt;
+    Message
+    &lt;textarea name="message" rows="8"&gt;&lt;/textarea&gt;
+  &lt;/label&gt;
+  &lt;button type="submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p>Выполняй это задание в файлах <code>2-form.html</code> и <code>2-form.js</code>. Разбей его на несколько подзадач:</p>
+<ol>
+<li>Объяви вне любых функций объект <code>formData</code> с полями <code>email</code> и <code>message</code>, которые изначально имеют пустые строки в качестве значений: <code>{ email: "", message: "" }</code>.</li>
+<li>Используй метод делегирования для отслеживания изменений в форме через событие <code>input</code>. Сохраняй актуальные данные из полей <code>email</code> и <code>message</code> в <code>formData</code> и записывай этот объект в локальное хранилище. Используй ключ <code>"feedback-form-state"</code> для хранения данных в хранилище.</li>
+<li>При загрузке страницы проверь, есть ли данные в локальном хранилище. Если да, используй их для заполнения формы и объекта <code>formData</code>. Если нет, оставь поля формы пустыми.</li>
+<li>Перед отправкой формы убедись, что оба поля формы заполнены. Если любое из полей (свойств объекта formData) пустое, показывай уведомление с текстом «Fill please all fields». Если все поля заполнены, выведи в консоль объект <code>formData</code> с актуальными значениями, очисти локальное хранилище, объект <code>formData</code> и поля формы.</li>
+</ol>
+<h3>На что будет обращать внимание ментор при проверке:</h3>
+<ul class="list-disc">
+<li>На живой странице отображается форма с двумя элементами формы и кнопкой типа <code>submit</code></li>
+<li>Форма стилизована согласно макету</li>
+<li>На форме прослушиваются события <code>input</code> и <code>submit</code></li>
+<li>При вводе данных в любой элемент формы они записываются в локальное хранилище под ключом <code>"feedback-form-state"</code>, сохранённые данные не содержат пробелы по краям</li>
+<li>Ввод данных в одно поле формы не удаляет данные в хранилище для другого</li>
+<li>При обновлении страницы данные из локального хранилища подставляются в элементы формы, в полях формы отсутствуют <code>undefined</code></li>
+<li>При сабмите формы есть проверка, чтобы оба элемента формы были заполнены</li>
+<li>Во время сабмита формы, если оба элемента формы заполнены, выводится в консоль объект с полями <code>email</code>, <code>message</code> и их текущими значениями, а также очищаются хранилище и поля формы</li>
+<li>Если после сабмита формы ввести в любой элемент формы данные, то в локальном хранилище не появляются данные от предыдущего сабмита</li>
+</ul>
+<h3>Краткая инструкция к домашнему заданию</h3>
+<ol>
+<li>Создай репозиторий <code>goit-js-hw-08</code> на основе указанного выше шаблона Vite и склонируй его на компьютер.</li>
+<li>В папке проекта выполни <code>npm install</code>, затем <code>npm run dev</code>. Создай страницы галереи и формы, подключи их скрипты и добавь ссылки на страницы в <code>index.html</code>.</li>
+<li>Выполни оба задания по условиям выше и оформи страницы по макету. Проверь работу галереи, сохранение данных формы после перезагрузки и очистку данных после отправки.</li>
+<li>Отформатируй код с помощью Prettier, проверь отсутствие ошибок в консоли и выполни <code>npm run build</code>.</li>
+<li>Отправь изменения в GitHub, опубликуй проект на GitHub Pages по инструкции шаблона и проверь обе страницы по опубликованному адресу. На проверку отправь две ссылки: на репозиторий и на работающий сайт.</li>
+</ol>
+`,
+      },
+      topics: [
+        {
+          id: "js-json-format",
+          title: "Формат JSON",
+          order: 0,
+          content: `
+<h3>Стандарт JSON</h3>
+
+<p class="my-md"><strong>JSON (JavaScript Object Notation)</strong> — современный текстовый формат хранения и передачи структурированных данных. Именно в этом формате данные будут приходить с сервера и отправляться на сервер, храниться в локальном хранилище и так далее.</p>
+
+<p class="my-md">Привычный синтаксис JSON, похожий на объект, очень удобен. Но JSON — это не объект, а его текстовое представление. Рассмотрим пример JSON-файла.</p>
+
+<pre><code class="language-json">{
+  "name": "Josh",
+  "weight": 175,
+  "age": 30,
+  "eyecolor": "brown",
+  "isHappy": true,
+  "cars": ["Chevy", "Honda"],
+  "favoriteBook": {
+    "title": "The Last Kingdom",
+    "author": "Bernard Cornwell",
+    "rating": 8.38
+  }
+}</code></pre>
+
+<p class="my-md">Синтаксис похож на объект, за исключением следующих особенностей:</p>
+
+<ul class="list-disc">
+  <li>Ключи — всегда строки, обязательно в двойных кавычках.</li>
+  <li>Строковые значения — также обязательно в двойных кавычках.</li>
+  <li>Числа могут быть целыми или дробными, с десятичной точкой или без неё, включая отрицательные.</li>
+  <li>Числа и булевы значения <code>true</code> и <code>false</code> записываются так же, как в JavaScript.</li>
+  <li>В JSON нет запятой после последнего свойства объекта.</li>
+  <li>Значением свойства может быть специальное значение <code>null</code>, но не <code>undefined</code>.</li>
+  <li>Функции нельзя хранить в JSON, поскольку JSON предназначен только для данных, а не для методов их обработки.</li>
+</ul>
+
+[NEXT]
+
+<h3>Проверка валидности JSON</h3>
+
+<p class="my-md">Прочитай пример кода и определи, соответствует ли он правилам JSON.</p>
+
+<pre><code class="language-javascript">{
+  username: "Jacob",
+  age: 32,
+}</code></pre>
+
+[QUIZ: js-json-validity-quiz]
+
+[NEXT]
+
+<h3>Преобразование в JSON</h3>
+
+<p class="my-md">JavaScript и JSON удобно использовать вместе благодаря методам встроенного объекта <code>JSON</code>. Они преобразуют значения JavaScript в JSON и обратно.</p>
+
+<p class="my-md">Метод <code>JSON.stringify(value)</code> принимает значение и преобразует его в JSON. Значением может быть число, строка, булево значение, <code>null</code>, массив или объект.</p>
+
+<p class="my-md">Обычная строка JavaScript не обязательно является валидным JSON. При преобразовании строки <code>JSON.stringify()</code> добавляет необходимые двойные кавычки и экранирует специальные символы. Если строка уже содержит готовый JSON, повторная сериализация для передачи этих данных не нужна.</p>
+
+<pre><code class="language-javascript">const dog = {
+  name: "Mango",
+  age: 3,
+  isGoodBoy: true,
+};
+
+const json = JSON.stringify(dog);
+console.log(json); // '{"name":"Mango","age":3,"isGoodBoy":true}'</code></pre>
+
+<p class="my-md">Результат этого вызова <code>JSON.stringify()</code> — валидный JSON в виде строки. Его можно сохранить в веб-хранилище, базу данных или передать по сети на сервер.</p>
+
+[QUIZ: js-json-stringify-method-quiz]
+
+[QUIZ: js-json-stringify-number-quiz]
+
+[QUIZ: js-json-stringify-boolean-quiz]
+
+[NEXT]
+
+<h3>Преобразование функций</h3>
+
+<p class="my-md">Не все объекты JavaScript можно преобразовать в JSON без потерь. Например, методы объекта при преобразовании игнорируются и не попадают в JSON.</p>
+
+<pre><code class="language-javascript">const dog = {
+  name: "Mango",
+  age: 3,
+  isGoodBoy: true,
+  bark() {
+    console.log("Гав!");
+  },
+};
+
+const json = JSON.stringify(dog);
+console.log(json); // '{"name":"Mango","age":3,"isGoodBoy":true}'</code></pre>
+
+<p class="my-md">При попытке преобразовать отдельную функцию в JSON результатом будет <code>undefined</code>.</p>
+
+<pre><code class="language-javascript">const json = JSON.stringify(() => console.log("Неловкая ситуация"));
+console.log(json); // undefined</code></pre>
+
+[QUIZ: js-json-methods-quiz]
+
+[NEXT]
+
+<h3>Парсинг из JSON</h3>
+
+<p class="my-md">Чтобы получить из JSON значение JavaScript, его необходимо разобрать, или распарсить (<code>parse</code>). Это операция, обратная преобразованию значения JavaScript в JSON с помощью <code>JSON.stringify(value)</code>.</p>
+
+<p class="my-md">Метод <code>JSON.parse(value)</code> принимает строку с JSON и преобразует её в данные JavaScript.</p>
+
+<pre><code class="language-javascript">console.log(JSON.parse("5")); // 5
+console.log(JSON.parse("false")); // false
+console.log(JSON.parse("null")); // null</code></pre>
+
+<p class="my-md">Если JSON описывает сложный тип данных, например объект, результатом будет обычный объект JavaScript. С ним можно работать привычным образом.</p>
+
+<pre><code class="language-javascript">const json = '{"name":"Mango","age":3,"isGoodBoy":true}';
+
+const dog = JSON.parse(json);
+console.log(dog); // { name: "Mango", age: 3, isGoodBoy: true }
+console.log(dog.name); // "Mango"</code></pre>
+
+[QUIZ: js-json-parse-method-quiz]
+
+[NEXT]
+
+<h3>Обработка ошибок</h3>
+
+<p class="my-md">Если передать методу <code>JSON.parse()</code> невалидный JSON, он выбросит ошибку. Если её не обработать, выполнение текущего скрипта прервётся и код после места ошибки не выполнится.</p>
+
+<p class="my-md">Например, произвольный текст без JSON-кавычек не является валидным JSON.</p>
+
+<pre><code class="language-javascript">const data = JSON.parse("Неловкая ситуация");
+console.log("❌ Это сообщение не появится в консоли");</code></pre>
+
+<p class="my-md">Строковое значение в JSON должно быть заключено в двойные кавычки внутри передаваемой строки: <code>JSON.parse('&quot;Привет&quot;')</code> вернёт строку <code>"Привет"</code>.</p>
+
+<p class="my-md">Ошибка возникнет и при попытке разобрать некорректный JSON с сервера. В следующем примере у ключа <code>username</code> отсутствуют двойные кавычки.</p>
+
+<pre><code class="language-javascript">const data = JSON.parse('{username: "Mango"}'); // Ошибка
+console.log("❌ Это сообщение не появится в консоли");</code></pre>
+
+[NEXT]
+
+<h3>Решение: try...catch</h3>
+
+<p class="my-md">Конструкция <code>try...catch</code> позволяет перехватывать и обрабатывать ошибки выполнения скрипта.</p>
+
+<pre><code class="language-javascript">try {
+  // Код, который может вызвать ошибку во время выполнения
+} catch (error) {
+  // Обработка ошибки
+}</code></pre>
+
+<ol>
+  <li>Сначала выполняется код внутри блока <code>try</code>.</li>
+  <li>Если ошибок нет, блок <code>catch</code> пропускается и выполнение продолжается дальше.</li>
+  <li>Если в блоке <code>try</code> возникает ошибка, его выполнение прерывается и управление переходит в блок <code>catch</code>.</li>
+</ol>
+
+<p class="my-md">С помощью <code>try...catch</code> можно обработать исключение так, чтобы код за пределами этой конструкции продолжил работать даже при ошибке парсинга.</p>
+
+<pre><code class="language-javascript">try {
+  const data = JSON.parse("Неловкая ситуация");
+} catch (error) {
+  console.log(error.name); // "SyntaxError"
+  console.log(error.message); // Сообщение о невалидном JSON
+}
+
+console.log("✅ Всё в порядке: ошибка парсинга обработана в try...catch");</code></pre>
+
+<p class="my-md">Переменная <code>error</code> — объект ошибки с информацией о том, что произошло. Текст сообщения может различаться в зависимости от среды выполнения. У объекта есть несколько полезных свойств:</p>
+
+<ul class="list-disc">
+  <li><code>name</code> — тип ошибки. При ошибке парсинга JSON это <code>SyntaxError</code>.</li>
+  <li><code>message</code> — сообщение с подробностями ошибки.</li>
+  <li><code>stack</code> — стек вызовов функций на момент ошибки. Используется для отладки.</li>
+</ul>
+
+[QUIZ: js-json-try-catch-purpose-quiz]
+
+[QUIZ: js-json-catch-execution-quiz]
+
+[NEXT]
+
+<h3>Подробнее об ошибках</h3>
+
+<p class="my-md">Код JavaScript выполняется не сразу. Сначала движок должен прочитать его и проверить, можно ли его выполнить.</p>
+
+<p class="my-md"><strong>Фаза разбора и подготовки к выполнению</strong> — этап, на котором проверяется синтаксис исходного кода. Сам код ещё не выполняется. Если обнаружена синтаксическая ошибка, выполнение этого скрипта не начнётся.</p>
+
+<p class="my-md"><strong>Фаза выполнения (runtime)</strong> — этап, на котором выполняются инструкции, вызываются функции, вычисляются выражения и ищутся идентификаторы в соответствующих областях видимости.</p>
+
+<p class="my-md">На этом этапе могут возникнуть ошибки, связанные с обращением к необъявленным переменным, недопустимыми операциями со значениями и другими действиями, результат которых становится известен только во время выполнения. Отсутствие таких ошибок ещё не гарантирует, что программа решает задачу правильно.</p>
+
+<p class="my-md">Рассмотри следующий пример с намеренной синтаксической ошибкой.</p>
+
+<pre><code class="language-javascript">console.log("Это сообщение не появится в консоли");
+
+cos value = 5;</code></pre>
+
+<p class="my-md">Вместо <code>const</code> для объявления переменной <code>value</code> написано <code>cos</code>. Ошибка будет обнаружена при разборе исходного кода, поэтому выполнение скрипта даже не начнётся и первое сообщение не появится.</p>
+
+<p class="my-md">Конструкция <code>try...catch</code> перехватывает ошибки, возникающие во время выполнения. Синтаксические ошибки в самом исходном коде окружающий <code>try...catch</code> перехватить не может: скрипт должен сначала успешно пройти разбор.</p>
+
+<p class="my-md">При этом <code>SyntaxError</code> от <code>JSON.parse()</code> можно перехватить: исходный JavaScript-код синтаксически корректен, а разбор JSON происходит уже во время его выполнения.</p>
+`,
+        },
+        {
+          id: "js-web-storage",
+          title: "Веб-хранилище",
+          order: 1,
+          content: `
+<h3>Cookie</h3>
+
+<p class="my-md">Наверняка ты часто встречал на сайтах уведомление: «Этот сайт использует файлы cookie для хранения вашей информации».</p>
+
+<p class="my-md">HTTP — протокол без сохранения состояния: сам по себе он не запоминает пользователя между запросами. Чтобы узнавать пользователя и сохранять состояние, например сеанс или корзину товаров, сайты используют дополнительные механизмы хранения данных в браузере.</p>
+
+<img src="/images/javascript/web-storage-cookies.jpg" alt="Cookie помогают восстановить корзину при следующем посещении сайта" class="img-responsive img-rounded" loading="lazy" />
+
+<p class="my-md"><strong>Cookie (куки)</strong> — небольшие фрагменты текстовых данных в виде пар «ключ — значение». Их могут устанавливать сервер и, если это разрешено настройками cookie, JavaScript на странице. Cookie могут иметь срок действия, после которого браузер удаляет их.</p>
+
+<p class="my-md">Браузер автоматически отправляет подходящие cookie с HTTP-запросами на сервер. Благодаря этому сервер может связать новый запрос с прежним сеансом пользователя и, например, восстановить его корзину при следующем посещении.</p>
+
+<p class="my-md">Cookie используются и сейчас. Их установку и чтение на сервере часто выполняют с помощью библиотек. Для хранения более объёмных данных интерфейса на стороне клиента удобнее использовать другие механизмы браузера: локальное хранилище и хранилище сеанса.</p>
+
+[NEXT]
+
+<h3>Web Storage API</h3>
+
+<p class="my-md">Cookie позволяют хранить информацию на стороне пользователя, но объём одной cookie ограничен несколькими килобайтами. По мере усложнения приложений появилась потребность сохранять в браузере больше данных.</p>
+
+<p class="my-md"><strong>Web Storage API</strong> предоставляет JavaScript-коду браузера методы для записи и чтения данных на стороне клиента. В отличие от cookie, эти данные не отправляются автоматически с каждым запросом на сервер.</p>
+
+<img src="/images/javascript/web-storage-api.jpg" alt="Хранение данных в браузере с помощью JavaScript" class="img-responsive img-rounded" loading="lazy" />
+
+<p class="my-md"><strong>Веб-хранилище</strong> помогает запоминать состояние интерфейса: светлую или тёмную тему, позицию просмотра видео, товары в корзине, открытое или закрытое боковое меню. При следующем посещении приложение может восстановить это состояние.</p>
+
+<p class="my-md">В веб-хранилище не следует записывать пароли, номера банковских карт и другую конфиденциальную информацию. JavaScript, выполняющийся на странице, может прочитать эти данные, в том числе если на страницу попал вредоносный скрипт.</p>
+
+<p class="my-md">Веб-хранилище включает два механизма:</p>
+
+<ol>
+  <li><strong>Локальное хранилище (localStorage)</strong> — общее для страниц одного источника в одном профиле браузера. Источник определяется протоколом, доменом и портом. Данные обычно сохраняются после закрытия вкладки и браузера, пока их не удалят код приложения, пользователь или браузер.</li>
+  <li><strong>Хранилище сеанса (sessionStorage)</strong> — связано с источником и конкретной вкладкой. Данные сохраняются при перезагрузке страницы, но предназначены только для текущего сеанса вкладки. Оно подходит для временных данных.</li>
+</ol>
+
+[NEXT]
+
+<h3>Инструменты разработчика</h3>
+
+<p class="my-md">Данные обоих хранилищ можно просматривать в инструментах разработчика браузера.</p>
+
+<img src="/images/javascript/web-storage-devtools.png" alt="Разделы Local Storage и Session Storage на вкладке Application" class="img-responsive img-rounded" loading="lazy" />
+
+<ol>
+  <li>Открой инструменты разработчика и перейди на вкладку <strong>Application</strong> («Приложение») в браузере на основе Chromium.</li>
+  <li>В разделе <strong>Storage</strong> («Хранилище») найди <strong>Local Storage</strong> и <strong>Session Storage</strong>.</li>
+  <li>Раскрой нужный раздел и выбери источник текущего сайта. Справа появятся сохранённые ключи и значения.</li>
+</ol>
+
+<pre><code class="language-text">Application (Приложение)
+└── Storage (Хранилище)
+    ├── Local Storage (Локальное хранилище)
+    │   └── Источник текущего сайта
+    └── Session Storage (Хранилище сеанса)
+        └── Источник текущего сайта</code></pre>
+
+<p class="my-md">По мере выполнения следующих примеров наблюдай, как записи появляются и изменяются в этой панели.</p>
+
+[NEXT]
+
+<h3>Локальное хранилище</h3>
+
+<p class="my-md">В <code>localStorage</code> данные хранятся под строковыми ключами. Значения тоже являются строками. Для объектов и массивов обычно используют текстовый формат JSON.</p>
+
+<p class="my-md">Объём локального хранилища измеряется мегабайтами, а не килобайтами, как у отдельной cookie. Доступная квота зависит от браузера и его настроек; хранилище не является безразмерным.</p>
+
+<p class="my-md">У записей нет заданного срока действия. Они сохраняются после перезагрузки страницы и обычного закрытия браузера. Удалить их можно через инструменты разработчика, настройки данных сайта или JavaScript. Данные разных источников изолированы друг от друга.</p>
+
+<p class="my-md">Доступ к локальному хранилищу можно получить через объект <code>window</code>:</p>
+
+<pre><code class="language-javascript">console.log(window.localStorage);
+// Storage {length: 0} — если хранилище пустое</code></pre>
+
+<p class="my-md">Свойство <code>length</code> показывает количество сохранённых записей. Можно обращаться к <code>localStorage</code> и без явного указания <code>window</code>:</p>
+
+<pre><code class="language-javascript">console.log(localStorage);
+// Storage {length: 0} — если хранилище пустое</code></pre>
+
+<p class="my-md">Такое хранилище удобно для настроек, к которым приложение регулярно обращается: темы оформления, состояния бокового меню, позиции просмотра видео или состава корзины. При следующем посещении эти данные помогают восстановить интерфейс.</p>
+
+[QUIZ: js-storage-definition-quiz]
+
+[QUIZ: js-storage-reload-quiz]
+
+[QUIZ: js-storage-isolation-quiz]
+
+[NEXT]
+
+<h3>Добавление данных</h3>
+
+<p class="my-md">Метод <code>setItem(key, value)</code> записывает пару «ключ — значение» в локальное хранилище.</p>
+
+<pre><code class="language-javascript">localStorage.setItem("ui-theme", "light");</code></pre>
+
+<p class="my-md">Этот вызов создаёт запись с ключом <code>"ui-theme"</code> и значением <code>"light"</code>. Если до этого хранилище было пустым, в консоли увидим одну запись:</p>
+
+<pre><code class="language-javascript">console.log(localStorage);
+// Storage {ui-theme: "light", length: 1}</code></pre>
+
+<p class="my-md">В панели <strong>Application → Local Storage</strong> также появится строка с ключом <code>ui-theme</code> и значением <code>light</code>.</p>
+
+<img src="/images/javascript/web-storage-set-item.png" alt="Запись ui-theme со значением light в локальном хранилище" class="img-responsive img-rounded" loading="lazy" />
+
+<p class="my-md">Если такой ключ уже существует, <code>setItem()</code> перезапишет его значение. Новая запись с тем же ключом не создаётся.</p>
+
+[QUIZ: js-storage-set-arguments-quiz]
+
+[QUIZ: js-storage-set-action-quiz]
+
+[QUIZ: js-storage-overwrite-quiz]
+
+[NEXT]
+
+<h3>Добавление сложных данных</h3>
+
+<p class="my-md">Для сохранения объектов и массивов используй <code>JSON.stringify()</code>. Он превращает данные в строку, которую можно записать в хранилище. Методы объектов и функции таким способом не сохраняются.</p>
+
+<pre><code class="language-javascript">const settings = {
+  theme: "dark",
+  isAuthenticated: true,
+  options: [1, 2, 3],
+};
+
+localStorage.setItem("settings", JSON.stringify(settings));</code></pre>
+
+<p class="my-md">В инструментах разработчика появится ключ <code>settings</code> со строковым значением:</p>
+
+<pre><code class="language-json">{"theme":"dark","isAuthenticated":true,"options":[1,2,3]}</code></pre>
+
+<img src="/images/javascript/web-storage-settings.png" alt="Объект settings, сохранённый как строка JSON в localStorage" class="img-responsive img-rounded" loading="lazy" />
+
+<p class="my-md">Здесь <code>isAuthenticated</code> — лишь учебное поле объекта. Запись в браузере можно изменить вручную, поэтому она не может служить доказательством авторизации или определять права доступа.</p>
+
+[QUIZ: js-storage-value-type-quiz]
+
+[QUIZ: js-storage-serialize-quiz]
+
+[NEXT]
+
+<h3>Получение данных</h3>
+
+<p class="my-md">Метод <code>getItem(key)</code> читает запись по ключу и возвращает сохранённую строку.</p>
+
+<pre><code class="language-javascript">const savedTheme = localStorage.getItem("ui-theme");
+console.log(savedTheme); // "light"</code></pre>
+
+<p class="my-md">Если записи с таким ключом нет, результатом будет <code>null</code>.</p>
+
+<pre><code class="language-javascript">const savedItem = localStorage.getItem("key-that-does-not-exist");
+console.log(savedItem); // null</code></pre>
+
+<p class="my-md">Если нужна именно строка, дополнительная обработка не требуется. Чтобы восстановить объект или массив из сохранённого JSON, используй <code>JSON.parse()</code>.</p>
+
+<pre><code class="language-javascript">const settings = {
+  theme: "dark",
+  isAuthenticated: true,
+  options: [1, 2, 3],
+};
+localStorage.setItem("settings", JSON.stringify(settings));
+
+const savedSettings = localStorage.getItem("settings");
+console.log(savedSettings); // Строка с JSON
+
+const parsedSettings = JSON.parse(savedSettings);
+console.log(parsedSettings); // Объект settings</code></pre>
+
+<p class="my-md">В переменной <code>savedSettings</code> находится строковое представление объекта, а в <code>parsedSettings</code> — объект с доступными свойствами. В этом примере запись только что создана. При чтении ранее сохранённых данных учитывай отсутствие ключа и обрабатывай ошибки парсинга через <code>try...catch</code>, как в предыдущем топике.</p>
+
+<p class="my-md">Числа и булевы значения тоже возвращаются строками. Если нужен исходный тип, его необходимо восстановить, например с помощью <code>JSON.parse()</code> для значений, записанных через <code>JSON.stringify()</code>.</p>
+
+[QUIZ: js-storage-get-method-quiz]
+
+[QUIZ: js-storage-missing-key-quiz]
+
+[QUIZ: js-storage-get-type-quiz]
+
+[NEXT]
+
+<h3>Удаление данных</h3>
+
+<p class="my-md">Метод <code>removeItem(key)</code> удаляет запись с указанным ключом. Он возвращает <code>undefined</code>.</p>
+
+<pre><code class="language-javascript">localStorage.setItem("ui-theme", "dark");
+console.log(localStorage.getItem("ui-theme")); // "dark"
+
+localStorage.removeItem("ui-theme");
+console.log(localStorage.getItem("ui-theme")); // null</code></pre>
+
+<p class="my-md">Метод <code>clear()</code> полностью очищает локальное хранилище текущего источника.</p>
+
+<pre><code class="language-javascript">localStorage.setItem("ui-theme", "light");
+localStorage.setItem("notif-level", "mute");
+
+console.log(localStorage);
+// Storage {notif-level: "mute", ui-theme: "light", length: 2}
+// Если других записей не было
+
+localStorage.clear();
+console.log(localStorage); // Storage {length: 0}</code></pre>
+
+<p class="my-md">Полная очистка удаляет и записи, созданные другими частями приложения. Обычно лучше удалять только ненужные записи по их ключам.</p>
+
+[QUIZ: js-storage-remove-argument-quiz]
+
+[QUIZ: js-storage-clear-quiz]
+
+[NEXT]
+
+<h3>Хранилище сеанса</h3>
+
+<p class="my-md"><code>sessionStorage</code> хранит данные в течение сеанса конкретной вкладки. Перезагрузка страницы их не удаляет, а завершение сеанса вкладки — удаляет. В разных вкладках хранилища независимы. При открытии страницы через другую вкладку начальное содержимое может быть скопировано, но последующие изменения остаются отдельными.</p>
+
+<p class="my-md">Методы и их назначение такие же, как у локального хранилища. Обращаемся к ним через <code>sessionStorage</code>.</p>
+
+<pre><code class="language-javascript">console.log(window.sessionStorage);
+// Storage {length: 0} — если хранилище пустое</code></pre>
+
+<p class="my-md">Запишем строку и объект, предварительно преобразованный в JSON:</p>
+
+<pre><code class="language-javascript">sessionStorage.setItem("user-id", "123");
+sessionStorage.setItem(
+  "tickets",
+  JSON.stringify({ from: "Львов", to: "Киев", quantity: 2 })
+);
+console.log(sessionStorage);
+// Storage {user-id: "123", tickets: '{"from":"Львов","to":"Киев","quantity":2}', length: 2}
+// Если других записей не было</code></pre>
+
+<p class="my-md">Прочитаем сохранённые записи по ключам:</p>
+
+<pre><code class="language-javascript">const userId = sessionStorage.getItem("user-id");
+console.log(userId); // "123"
+
+const tickets = JSON.parse(sessionStorage.getItem("tickets"));
+console.log(tickets); // { from: "Львов", to: "Киев", quantity: 2 }</code></pre>
+
+<p class="my-md">Удаление отдельной записи и полная очистка выполняются методами <code>removeItem()</code> и <code>clear()</code>.</p>
+
+<pre><code class="language-javascript">sessionStorage.removeItem("tickets");
+console.log(sessionStorage); // Storage {user-id: "123", length: 1}
+
+sessionStorage.clear();
+console.log(sessionStorage); // Storage {length: 0}</code></pre>
+
+<p class="my-md">Хранилище сеанса удобно в следующих случаях:</p>
+
+<ol>
+  <li><strong>Многоэтапные процессы:</strong> бронирование билетов на самолёт, поезд, в кино или номера в отеле. Данные предыдущих шагов можно использовать для заполнения следующих форм в той же вкладке.</li>
+  <li><strong>Блоги, рассылки и учебные сайты:</strong> можно запоминать в пределах вкладки, что посетителю уже показали предложение зарегистрироваться, чтобы не повторять его при каждом переходе между страницами.</li>
+</ol>
+
+[QUIZ: js-storage-session-data-quiz]
+
+[QUIZ: js-storage-session-set-quiz]
+
+[NEXT]
+
+<h3>Практика: форма с сообщением</h3>
+
+<p class="my-md">Создадим форму для ввода сообщения:</p>
+
+<pre><code class="language-html">&lt;form class="feedback-form"&gt;
+  &lt;textarea name="message"&gt;&lt;/textarea&gt;
+  &lt;button type="submit"&gt;Отправить отзыв&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+<p class="my-md">При отправке будем выводить значение текстового поля в консоль и очищать форму. Метод <code>preventDefault()</code> отменяет стандартную отправку формы с перезагрузкой страницы.</p>
+
+<pre><code class="language-javascript">const form = document.querySelector(".feedback-form");
+
+form.addEventListener("submit", evt => {
+  evt.preventDefault();
+  console.log(evt.target.elements.message.value);
+  form.reset();
+});</code></pre>
+
+<p class="my-md"><strong>Проблема:</strong> если пользователь введёт сообщение и перезагрузит страницу до отправки, введённый текст может потеряться. Сохраним черновик в локальном хранилище, чтобы восстанавливать его после перезагрузки.</p>
+
+[NEXT]
+
+<h3>Сохранение черновика при вводе</h3>
+
+<p class="my-md">Добавим обработчик события <code>input</code>. При каждом изменении поля будем записывать его текущее значение в <code>localStorage</code>.</p>
+
+<pre><code class="language-javascript">const form = document.querySelector(".feedback-form");
+const localStorageKey = "goit-example-message";
+
+form.addEventListener("input", evt => {
+  localStorage.setItem(localStorageKey, evt.target.value);
+});
+
+form.addEventListener("submit", evt => {
+  evt.preventDefault();
+  console.log(evt.target.elements.message.value);
+  form.reset();
+});</code></pre>
+
+<p class="my-md">Здесь используется делегирование событий: обработчик установлен на форме, событие приходит от текстового поля, а <code>evt.target</code> указывает на это поле. Его свойство <code>value</code> содержит введённый текст.</p>
+
+<p class="my-md">После отправки черновик больше не нужен. Добавим его удаление через <code>removeItem()</code>:</p>
+
+<pre><code class="language-javascript">const form = document.querySelector(".feedback-form");
+const localStorageKey = "goit-example-message";
+
+form.addEventListener("input", evt => {
+  localStorage.setItem(localStorageKey, evt.target.value);
+});
+
+form.addEventListener("submit", evt => {
+  evt.preventDefault();
+  console.log(evt.target.elements.message.value);
+  localStorage.removeItem(localStorageKey);
+  form.reset();
+});</code></pre>
+
+[NEXT]
+
+<h3>Восстановление сообщения</h3>
+
+<p class="my-md">Осталось прочитать сохранённое сообщение при загрузке страницы и установить его как начальное значение текстового поля.</p>
+
+<pre><code class="language-javascript">const form = document.querySelector(".feedback-form");
+const textarea = form.elements.message;
+const localStorageKey = "goit-example-message";
+
+textarea.value = localStorage.getItem(localStorageKey) ?? "";
+
+form.addEventListener("input", evt => {
+  localStorage.setItem(localStorageKey, evt.target.value);
+});
+
+form.addEventListener("submit", evt => {
+  evt.preventDefault();
+  console.log(evt.target.elements.message.value);
+  localStorage.removeItem(localStorageKey);
+  form.reset();
+});</code></pre>
+
+<p class="my-md">Оператор <code>??</code> подставляет пустую строку, если <code>getItem()</code> вернул <code>null</code>. Запускай этот код после появления формы в DOM, например подключив скрипт с атрибутом <code>defer</code>.</p>
+
+<p class="my-md">Введи текст и перезагрузи страницу: сообщение восстановится из хранилища. Затем отправь форму: текст выведется в консоль, поле очистится, а сохранённый черновик будет удалён. В учебном примере отправка на сервер не выполняется.</p>
+
+<div class="codepen-container">
+  <iframe title="Форма с сохранением сообщения в localStorage" src="https://codepen.io/goit-academy/embed/XWMozzv?default-tab=html%2Cresult" loading="lazy" allowfullscreen></iframe>
+</div>
+`,
+        },
+        {
+          id: "js-web-development-tools",
+          title: "Инструменты веб-разработки",
+          order: 2,
+          content: `
+<h3>Автоматизация</h3>
+<p class="my-md">Инструменты автоматизации разработки веб-проектов — это набор программных средств и скриптов, которые упрощают и оптимизируют рутинные задачи в процессе разработки веб-приложений. Они помогают автоматизировать многие аспекты разработки, уменьшая время и усилия, которые разработчики тратят на такие задачи.</p>
+<p class="my-md">Основные задачи, которые могут быть автоматизированы благодаря инструментам автоматизации разработки веб-проектов, включают следующие:</p>
+<ol>
+<li><strong>Сборка и компиляция кода:</strong> Это включает в себя объединение и минификацию JavaScript- и CSS-файлов, компиляцию препроцессоров, таких как LESS или SASS, в CSS, оптимизацию изображений и т. д.</li>
+<li><strong>Поддержка разных браузеров:</strong> Современные браузеры поддерживают разные стандарты и могут требовать разных версий кода. Инструменты автоматизации позволяют генерировать версии кода, совместимые с разными браузерами, уменьшая сложность тестирования и поддержки.</li>
+<li><strong>Линтинг (проверка на ошибки) и тестирование кода:</strong> Инструменты автоматизации могут проверять твой код на наличие ошибок, соблюдение стиля кода и выполнение тестов автоматически во время разработки.</li>
+<li><strong>Управление зависимостями и пакетами:</strong> Благодаря таким инструментам, как npm, ты можешь легко устанавливать, обновлять и удалять пакеты из своего проекта.</li>
+<li><strong>Развёртывание и производственная сборка:</strong> Инструменты автоматизации помогают создавать готовый к развёртыванию производственный код. Это облегчает развёртывание и обновление твоего приложения, позволяя быстро внедрять изменения и исправления ошибок.</li>
+<li><strong>Мониторинг и тестирование в производственной среде:</strong> Некоторые инструменты автоматизации позволяют автоматически отслеживать и анализировать работу твоего веб-приложения в реальном времени.</li>
+<li><strong>Генерация документации:</strong> С помощью инструментов ты можешь автоматически создавать документацию для своего кода, что облегчает работу команды над проектом и его документирование для пользователей.</li>
+</ol>
+<p class="my-md">Инструменты автоматизации разработки значительно улучшают качество и производительность проектов, помогая разработчикам сосредоточиться на разработке функциональности, а не на рутинных работах. Они особенно полезны в больших проектах или проектах с командной разработкой, где эффективность и сотрудничество являются ключевыми.</p>
+[NEXT]
+<h3>Сборка проекта с Vite</h3>
+<p class="my-md"><a class="link-accent" href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer">Vite (https://vitejs.dev/)</a> (французское слово, означающее «быстрый», произносится [vit], как «veet») — это инструмент сборки проекта для разработки веб-приложений на базе JavaScript. Он был создан для того, чтобы обеспечить быструю и эффективную разработку веб-проектов, а также максимально использовать возможности современных веб-стандартов.</p>
+<p class="my-md">Основные особенности Vite:</p>
+<ol>
+<li><strong>Быстрая разработка:</strong> Vite известен своей скоростью загрузки и перезагрузки, что позволяет разработчикам видеть изменения в реальном времени практически мгновенно после редактирования кода. Это делает процесс разработки более продуктивным.</li>
+<li><strong>Мгновенное создание проекта:</strong> Ты можешь создать новый проект с помощью Vite за несколько секунд благодаря готовому шаблону и быстрой установке зависимостей.</li>
+<li><strong>Широкий спектр языков и технологий:</strong> Vite поддерживает разные языки программирования (такие как JavaScript, TypeScript), CSS и несколько фреймворков, в частности Vue.js, React и Svelte. Можно выбрать то, что тебе подходит лучше всего.</li>
+<li><strong>Модульная система:</strong> Vite использует современную модульную систему ESM, что позволяет загружать модули по мере необходимости и способствует эффективному использованию ресурсов.</li>
+<li><strong>Горячая замена модулей (HMR):</strong> Vite поддерживает горячую замену модулей, что позволяет вносить изменения в код и видеть их отображение в реальном времени без перезагрузки страницы.</li>
+<li><strong>Система плагинов:</strong> Разработчик может легко расширить функциональность Vite, добавляя плагины сообщества или создавая собственные.</li>
+<li><strong>Встроенная поддержка CSS и препроцессоров CSS:</strong> Vite автоматически обрабатывает CSS и позволяет использовать разные препроцессоры, такие как SASS или LESS.</li>
+</ol>
+<p class="my-md">Vite становится всё более популярным среди фронтенд-разработчиков благодаря своей скорости и простоте использования. Он позволяет разрабатывать эффективные и модульные веб-приложения, сосредоточившись на том, что важно, — функциональности.</p>
+[NEXT]
+<h3>Node.js</h3>
+<p class="my-md">Для того чтобы использовать современные инструменты веб-разработки, необходимо установить в операционную систему твоего компьютера <strong>Node.js</strong> — лёгкую и эффективную среду выполнения JavaScript вне браузера.</p>
+<p class="my-md">Изначально Node.js создавался как серверное окружение для приложений, но разработчики начали использовать его для создания инструментов, которые помогают автоматизировать выполнение локальных задач. В результате новая экосистема инструментов, возникшая вокруг Node.js, привела к трансформации процесса фронтенд-разработки.</p>
+<p class="my-md">Чтобы установить последнюю стабильную версию (LTS):</p>
+<ul><li>Перейди на <a href="https://nodejs.org/en/" target="_blank" rel="noopener noreferrer">официальную страницу</a> и скачай LTS-установщик для своей версии операционной системы: Windows, MacOS и Linux.</li></ul>
+<img src="/images/javascript/web-tools-node-lts.png" alt="Выбор LTS-версии Node.js" class="img-responsive img-rounded" loading="lazy" />
+<ul><li>Начиная установку, обязательно поставь галочку рядом с <strong>Automatically install the necessary tools.</strong></li></ul>
+<p class="my-md">Если предыдущий этап был пропущен, пользователям Windows инструменты нужно установить через консоль вручную. Для этого запусти Powershell от имени администратора и установи инструменты в терминале командой</p>
+<p class="my-md"><em>npm install --global --production windows-build-tools</em></p>
+<img src="/images/javascript/web-tools-node-install.png" alt="Установка необходимых инструментов Node.js" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Следуй дальнейшим указаниям, которые предложит система, для загрузки установщика.</p>
+<p class="my-md">На момент установки номер версии может отличаться, ведь Node.js постоянно обновляется, главное — взять текущую LTS-версию. После установки обязательно перезагрузи свой компьютер, чтобы Node.js полностью интегрировался в твою операционную систему.</p>
+<p class="my-md">Если установка прошла успешно, в терминале будет доступна команда <code>node</code>. Чтобы убедиться, что установка прошла успешно, проверь версию, запустив в консоли следующую команду и нажав <strong>Enter</strong>.</p>
+<pre><code class="language-bash">node --version</code></pre>
+<p class="my-md">В результате выполнения команды будет выведена текущая установленная версия. Твоя версия может отличаться, ведь постоянно выходят обновления.</p>
+<img src="/images/javascript/web-tools-node-version.png" alt="Результат команды node --version" class="img-responsive img-rounded" loading="lazy" />
+[NEXT]
+<h3>Пакетный менеджер NPM</h3>
+<p class="my-md">Чтобы использовать всё разнообразие инструментов Node.js, нам необходима возможность устанавливать их и управлять ими. Для этого создан <strong>NPM</strong> (node package manager) — пакетный менеджер Node.js. Он устанавливает нужные инструменты и обеспечивает удобный интерфейс для работы с ними.</p>
+<p class="my-md">Сам NPM устанавливается автоматически вместе с установкой Node.js. Если установка прошла успешно, в терминале будет доступна команда <code>npm</code>. Чтобы убедиться, что установка NPM прошла успешно, проверь версию, запустив в консоли следующую команду и нажав <strong>Enter</strong>.</p>
+<pre><code class="language-bash">npm --version</code></pre>
+<p class="my-md">В результате выполнения команды будет выведена текущая установленная версия NPM. Твоя версия может отличаться, ведь постоянно выходят обновления.</p>
+<img src="/images/javascript/web-tools-npm-version.png" alt="Результат команды npm --version" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Теперь необходимо выполнить начальную настройку и конфигурацию npm, установив имя и почту будущего автора проектов — тебя.</p>
+<p class="my-md">Чтобы установить имя, выполни в терминале следующую команду, подставь вместо <code>YOUR_NAME</code> своё имя и не потеряй кавычки.</p>
+<pre><code class="language-bash">npm config set init-author-name "YOUR_NAME"</code></pre>
+<p class="my-md">Вот как это может выглядеть.</p>
+<img src="/images/javascript/web-tools-npm-author.jpg" alt="Пример настройки имени автора" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Чтобы установить почту, выполни в терминале следующую команду, подставив вместо "YOUR_EMAIL" свою почту. Укажи почту, с которой ты регистрировался или регистрировалась на GitHub.</p>
+<pre><code class="language-bash">npm config set init-author-email "YOUR_EMAIL"</code></pre>
+<p class="my-md">Вот как это может выглядеть.</p>
+<img src="/images/javascript/web-tools-npm-email.jpg" alt="Пример настройки почты автора" class="img-responsive img-rounded" loading="lazy" />
+[NEXT]
+<h3>Инициализация проекта с Vite</h3>
+<p class="my-md">Перед созданием проекта важно перейти в папку, где вы будете хранить все проекты. Например, это может быть папка <code>projects</code>.</p>
+<h4>Шаг 1. Откройте терминал</h4>
+<ul><li><strong>Windows:</strong> PowerShell / Windows Terminal / Git Bash</li><li><strong>macOS:</strong> Terminal</li></ul>
+<h4>Шаг 2. Перейдите в папку <code>projects</code> командой <code>cd</code></h4>
+<p class="my-md">Windows (пример):</p>
+<pre><code class="language-bash">cd C:/path/to/projects</code></pre>
+<p class="my-md">macOS (пример):</p>
+<pre><code class="language-bash">cd /path/to/projects</code></pre>
+<p class="my-md">Примечания о «слешах» в путях:</p>
+<ul><li>В примерах выше использован <code>/</code> — он работает в macOS/Linux и часто работает в Windows (особенно в современных терминалах).</li><li>Если в вашем терминале Windows нужны <code>\\</code>, можно писать так: <code>cd C:\\path\\to\\projects</code>.</li></ul>
+<h4>Шаг 3. Убедитесь, что вы в правильной папке</h4>
+<p class="my-md">Чтобы увидеть, где вы сейчас находитесь:</p>
+<p class="my-md">Windows (PowerShell) и macOS:</p>
+<pre><code class="language-bash">pwd</code></pre>
+<h4>Шаг 4. Запустите создание проекта Vite</h4>
+<p class="my-md">Убедитесь, что вы находитесь <strong>внутри папки <code>projects</code></strong>, и выполните:</p>
+<pre><code class="language-bash">npm create vite@latest</code></pre>
+<p class="my-md">Иногда система запросит разрешение установить пакет <code>create-vite@latest</code> — введите <code>y</code> и нажмите <strong>Enter</strong>.</p>
+<p class="my-md">Вот как выглядит процесс создания проекта на видео.</p>
+<div class="video-container"><video class="video-responsive" controls preload="metadata" src="/images/javascript/web-tools-vite-create.mp4" aria-label="Создание проекта с Vite"></video></div>
+[NEXT]
+<h3>Файл package.json</h3>
+<p class="my-md">В результате инициализации каркаса проекта, кроме стандартных файлов для написания кода и файлов настроек, создаётся ещё один важный файл <code>package.json</code>. Он отслеживает зависимости проекта, содержит служебную информацию, позволяет писать npm-скрипты и служит инструкцией при создании нового проекта на основе уже готовых настроек.</p>
+<p class="my-md">В нашем <code>package.json</code> пока есть только сам сборщик vite как зависимость и несколько скриптов для запуска среды разработки и процесса сборки.</p>
+<pre><code class="language-json">{
+  "name": "my-vite-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.2.4"
+  }
+}</code></pre>
+<p class="my-md">Этот файл можно редактировать вручную, например для добавления скриптов. Он также будет автоматически обновляться каждый раз при добавлении или удалении пакетов из проекта.</p>
+[NEXT]
+<h3>Установка зависимостей</h3>
+<p class="my-md">Следующим шагом после инициализации проекта в терминале нам нужно перейти в папку проекта и установить его зависимости.</p>
+<p class="my-md">Для этого выполняем следующую команду, которая установит все зависимости проекта:</p>
+<pre><code class="language-bash">npm install</code></pre>
+<p class="my-md">или сокращённая версия:</p>
+<pre><code class="language-bash">npm i</code></pre>
+<p class="my-md">На видео процесс установки зависимостей проекта.</p>
+<div class="video-container"><video class="video-responsive" controls preload="metadata" src="/images/javascript/web-tools-npm-install.mp4" aria-label="Установка зависимостей проекта"></video></div>
+<p class="my-md">NPM загружает из реестра все зависимости, указанные в файле <code>package.json</code> в свойствах <code>dependencies</code> (которого у нас ещё нет) и <code>devDependencies</code>, и помещает их в папку <code>node_modules</code> в корне проекта, в которой будут находиться все зависимости.</p>
+<img src="/images/javascript/web-tools-node-modules.png" alt="Папка node_modules в проекте" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Папку <code>node_modules</code> никогда не добавляют в систему контроля версий (не загружают в репозиторий на github), у всех разработчиков она будет своя. При инициализации проекта Vite был создан файл <code>.gitignore</code>, в который добавлено правило, исключающее папку <code>node_modules</code> из перечня того, что необходимо загрузить в репозиторий на github.</p>
+<p class="my-md">Обрати внимание на созданный файл <code>package-lock.json</code> — это журнал снимков дерева зависимостей проекта. Он гарантирует, что команда разработчиков использует одинаковые версии зависимостей. NPM автоматически обновляет его при добавлении, удалении и обновлении пакетов.</p>
+[QUIZ: js-tools-install-dependencies-quiz]
+[QUIZ: js-tools-node-modules-quiz]
+[NEXT]
+<h3>Запуск сервера разработки</h3>
+<p class="my-md">В файле <code>package.json</code> в поле <code>scripts</code> находится список команд проекта, которые можно выполнить в терминале.</p>
+<pre><code class="language-json">{
+  "name": "my-vite-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^7.2.4"
+  }
+}</code></pre>
+<p class="my-md"><strong>Имя свойства</strong> (например, “dev”) — это имя команды скрипта, который будем запускать.</p>
+<p class="my-md"><strong>Значение свойства</strong> (например, "vite") — сам скрипт, который необходимо выполнить. То есть поле <code>scripts</code> содержит псевдонимы для часто используемых команд в проекте.</p>
+<p class="my-md">Для запуска скриптов используется npm-команда <code>run</code>.</p>
+<pre><code class="language-bash">npm run [script-name]</code></pre>
+<p class="my-md">Вместо <code>[script-name]</code> необходимо указать имя запускаемого скрипта из поля <code>scripts</code>.</p>
+<p class="my-md">В нашем проекте скрипт с именем <code>dev</code> запускает локальный сервер разработки. Это сервер, который запускается на твоём компьютере и позволяет разрабатывать и тестировать веб-сайты и веб-приложения на локальном устройстве, прежде чем размещать их в интернете.</p>
+<p class="my-md">Запустим локальный сервер разработки, выполнив команду:</p>
+<pre><code class="language-bash">npm run dev</code></pre>
+<p class="my-md">Теперь можно посмотреть приложение локально по адресу <a href="http://localhost:5173" target="_blank" rel="noopener noreferrer">http://localhost:5173</a>. При редактировании любого из файлов проекта изменения сразу же отображаются на экране.</p>
+<p class="my-md">В отличие от всех предыдущих команд, результатом запуска сервера будет процесс, который не завершается самостоятельно, пока сервер запущен. То есть это процесс, который занимает терминал и не даёт возможности вводить другие команды.</p>
+<div class="video-container"><video class="video-responsive" controls preload="metadata" src="/images/javascript/web-tools-vite-dev.mp4" aria-label="Запуск сервера разработки"></video></div>
+<p class="my-md">Для того чтобы остановить сервер, то есть прервать процесс, находясь в терминале, необходимо нажать сочетание клавиш:</p>
+<ul><li><code>Ctrl + C</code> для пользователей Windows</li><li><code>Control + C</code> для пользователей MacOS и Linux</li></ul>
+[QUIZ: js-tools-scripts-field-quiz]
+[QUIZ: js-tools-run-script-quiz]
+[NEXT]
+<h3>Установка пакетов</h3>
+<p class="my-md"><strong>Зависимость (npm-пакет)</strong> — это различные утилиты и библиотеки, решающие специфическую задачу. Пакеты пишут сами разработчики и делятся ими с сообществом. Такой подход упрощает жизнь, потому что не нужно изобретать колесо, все колёса уже давно лежат на полках реестра и готовы к использованию.</p>
+<p class="my-md">NPM состоит из трёх основных компонентов:</p>
+<ul>
+<li><strong>Реестр пакетов (registry)</strong> — большая общедоступная база данных инструментов разработки (пакетов).</li>
+<li><strong>Сайт <a href="https://npmjs.com/" target="_blank" rel="noopener noreferrer">npmjs.com</a></strong> — используется для поиска и ознакомления с документацией пакетов.</li>
+<li><strong>Интерфейс командной строки (CLI)</strong> — запускается из терминала и предоставляет набор команд для работы с реестром и пакетами. Позволяет создавать скрипты для запуска в терминале.</li>
+</ul>
+<p class="my-md">Добавим в проект библиотеку <a href="https://npmjs.com/package/validator" target="_blank" rel="noopener noreferrer">validator.js</a> для валидации строк, например ввода пользователя в поля формы. На сайте <a href="https://npmjs.com/" target="_blank" rel="noopener noreferrer">npmjs.com</a> на странице любой библиотеки есть инструкция по установке и использованию.</p>
+<img src="/images/javascript/web-tools-validator-page.png" alt="Страница библиотеки validator.js на npmjs.com" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Команда <code>npm install [package-name]</code> или её короткий псевдоним <code>npm i [package-name]</code> установит библиотеку как зависимость проекта.</p>
+<p class="my-md">Выполняем команду <code>npm i validator</code> в терминале в папке проекта.</p>
+<img src="/images/javascript/web-tools-validator-install.png" alt="Установка validator в терминале" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">NPM загрузил <code>validator</code> и поместил его в <code>node_modules</code> — папку, в которой находятся все внешние зависимости.</p>
+<p class="my-md">В файле <code>package.json</code> появилась новая зависимость в поле <code>dependencies</code>. Это означает, что <code>validator</code> версии <code>13.11.0</code> был установлен как зависимость и готов к работе.</p>
+<p class="my-md">Пакеты постоянно обновляются, поэтому твоя версия может отличаться.</p>
+<pre><code class="language-json">{
+  "name": "my-vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.4.5"
+  },
+  "dependencies": {
+    "validator": "^13.11.0"
+  }
+}</code></pre>
+<p class="my-md">Чтобы получить интерфейс пакета в JavaScript-коде, необходимо импортировать его в любой JS-файл проекта, например в <code>main.js</code>, предварительно удалив из него весь код, который там был.</p>
+<pre><code class="language-javascript">// В файле main.js
+import validator from "validator";
+
+console.log(
+  "Is mango@mail.com a valid email?: ",
+  validator.isEmail("mango@mail.com")
+); // Is mango@mail.com a valid email?: true
+
+console.log(
+  "Is Mangodogmail.com a valid email?: ",
+  validator.isEmail("Mangodogmail.com")
+); // Is mango@mail.com a valid email?: false</code></pre>
+<p class="my-md">Результатом импорта библиотеки <code>validator.js</code> будет объект с методами. Мы подробно разберём синтаксис импорта немного позже.</p>
+<p class="my-md">Запустив сервер разработки командой <code>npm run dev</code>, в браузере в консоли мы увидим сообщения о результате валидации почты.</p>
+<img src="/images/javascript/web-tools-validator-result.png" alt="Результат валидации почты в консоли браузера" class="img-responsive img-rounded" loading="lazy" />
+[QUIZ: js-tools-install-package-quiz]
+[QUIZ: js-tools-package-json-update-quiz]
+[NEXT]
+<h3>Удаление пакетов</h3>
+<p class="my-md">Предположим, что мы решили перестать использовать в проекте библиотеку validator.js.</p>
+<p class="my-md">Кроме того, что мы удалим код, использующий библиотеку, необходимо удалить её как зависимость проекта.</p>
+<p class="my-md">Мы можем удалить любую зависимость командой <code>npm uninstall [package-name]</code> или её коротким псевдонимом <code>npm r [package-name]</code>.</p>
+<img src="/images/javascript/web-tools-validator-remove.png" alt="Удаление validator в терминале" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Так же, как и в случае добавления зависимости, после её удаления автоматически изменяется файл <code>package.json</code>.</p>
+<pre><code class="language-json">{
+  "name": "my-vite-project",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^4.4.5"
+  }
+}</code></pre>
+[QUIZ: js-tools-remove-package-quiz]
+[NEXT]
+<h3>Типы зависимостей</h3>
+<p class="my-md">Представь торт. Для его приготовления шефу прежде всего нужны продукты, ведь именно они войдут в состав торта. Также понадобятся специальные инструменты, скажем миксер, миска для теста, лопатки и т. д. А ещё на кухне есть столы и печи, холодильники, то есть те вещи, которые используются для приготовления любого блюда, — это общие инструменты, которые есть на кухне.</p>
+<p class="my-md">Так же и с зависимостями проекта: некоторые будут использованы в конечном продукте, другие необходимы только на стадии разработки.</p>
+<p class="my-md">Именно для этого команды <code>npm install</code> и <code>npm uninstall</code> имеют два флага.</p>
+<ul>
+<li><code>--save</code> — указывает, что добавляется зависимость, которая войдёт в конечный продукт. Пакет будет установлен локально, в папку <code>node_modules</code>, и будет добавлена запись в поле <code>dependencies</code> в <code>package.json</code>.</li>
+<li><code>--save-dev</code> — указывает, что добавляется зависимость разработки, которая не войдёт в конечный продукт. Пакет будет установлен локально, в папку <code>node_modules</code>, и будет добавлена запись в поле <code>devDependencies</code> в <code>package.json</code>.</li>
+</ul>
+<p class="my-md">Если не выбирать флаг, по умолчанию будет использован <code>--save</code>.</p>
+<blockquote><p>Удаляя пакет, необходимо указывать правильный флаг, такой же, как и для установки.</p></blockquote>
+[QUIZ: js-tools-dev-dependency-quiz]
+`,
+        },
+        {
+          id: "js-code-modularity",
+          title: "Модульность кода",
+          order: 3,
+          content: `
+<h3>Модульность кода</h3>
+<p class="my-md">Концепция модулей как способа организации кода существовала давно. С увеличением проекта и его кодовой базы её стараются разбить на файлы, в каждом из которых описывается отдельный функционал. Модульный код помогает в организации, обслуживании, тестировании и, самое главное, управлении зависимостями.</p>
+<img src="/images/javascript/code-modularity-overview.jpg" alt="Организация кода с помощью модулей" class="img-responsive img-rounded" loading="lazy" />
+<p class="my-md">Важнейшие преимущества модулей:</p>
+<ul>
+<li><strong>Поддержка</strong> — хорошо разработанный модуль призван максимально уменьшить зависимость от других частей кода. Использование модулей позволяет расширять функционал приложения с минимальным риском нарушить его работу в целом. Обновление одного модуля намного проще, если модуль самодостаточен.</li>
+<li><strong>Пространство имён</strong> — переменные, не входящие в область видимости функции, являются глобальными. Вследствие этого, как правило, происходит загрязнение пространства имён, где совершенно не связанный код разделяет глобальные переменные. Модули позволяют избежать загрязнения пространства имён, создавая отдельную область видимости для переменных.</li>
+<li><strong>Повторное использование</strong> — все разработчики копировали готовый код в новые проекты, изменяя его под специфику проекта. Но это огромная трата времени. Намного лучше, когда есть модуль, который можно повторно использовать снова и снова, без необходимости знать что-либо об окружении, в котором он используется.</li>
+</ul>
+[NEXT]
+<h3>ECMAScript-модули</h3>
+<p class="my-md"><strong>ECMAScript Modules (ESM)</strong> — современный стандарт системы модулей JavaScript, который отвечает за организацию и унифицированный подход к импорту и экспорту данных между разными файлами в проекте.</p>
+<p class="my-md"><strong>Модуль</strong> — это JavaScript-файл с фрагментом кода, который можно использовать много раз. Модуль экспортирует определённые объекты, сделав их доступными для других модулей.</p>
+<p class="my-md">В примере ниже файл <code>makeMessage.js</code> объявляет и экспортирует функцию для создания сообщения по имени пользователя.</p>
+<pre><code class="language-javascript">export default function makeMessage(username) {
+  return \`Welcome, \${username}!\`;
+}</code></pre>
+<p class="my-md">Функцию, которую экспортирует модуль <code>makeMessage.js</code>, можно использовать в любом другом файле проекта, например, в <code>index.js</code>.</p>
+<pre><code class="language-javascript">import makeMessage from "./makeMessage";
+
+console.log(makeMessage("Jacob")); // "Welcom, Jacob!"</code></pre>
+<p class="my-md">Каждый JavaScript-файл хранит код в уникальном контексте модуля, импортирует необходимые ему зависимости и экспортирует всё, что другие модули могут импортировать. Далее мы подробно рассмотрим синтаксис экспорта/импорта.</p>
+<blockquote><p>Со временем ECMAScript Modules (ESM) будет полностью поддерживаться браузерами нативно, без необходимости дополнительных инструментов. Однако на данный момент браузерная поддержка ещё не полностью реализована, поэтому ESM часто используется совместно с инструментами для сборки модулей, такими как Vite, который позволяет это делать без дополнительной конфигурации.</p></blockquote>
+[QUIZ: js-modularity-module-quiz]
+[NEXT]
+<h3>Экспорт и импорт по умолчанию</h3>
+<p class="my-md">Основная идея заключается в том, что в одном модуле может быть только один экспорт по умолчанию (default export). Это значение считается «главным» значением модуля, когда его импортируют в другие части кода.</p>
+<p class="my-md">Операция экспорта по умолчанию реализована конструкцией <code>export default</code>.</p>
+<pre><code class="language-javascript">export default exportedValue</code></pre>
+<p class="my-md">Где:</p>
+<ul><li><code>export default</code> — ключевая фраза для экспорта;</li><li><code>exportedValue</code> — значение, которое экспортируется.</li></ul>
+<p class="my-md">Вот так выглядит синтаксис для экспорта значения по умолчанию.</p>
+<pre><code class="language-javascript">const makeMessage = username => {
+  return \`Welcome, \${username}!\`;
+};
+
+export default makeMessage;</code></pre>
+<p class="my-md">Операция импорта по умолчанию реализована конструкцией <code>import</code>.</p>
+<pre><code class="language-javascript">import name from "..."</code></pre>
+<p class="my-md">Где:</p>
+<ul><li><code>import</code> и <code>from</code> — ключевые фразы для импорта;</li><li><code>name</code> — локальная переменная, в которую импортируется значение;</li><li><code>"..."</code> — относительный путь к файлу модуля в виде строки.</li></ul>
+<p class="my-md">В любом другом файле проекта можно импортировать значение по умолчанию.</p>
+<pre><code class="language-javascript">import makeMessage from "./makeMessage";
+
+console.log(makeMessage("Jacob")); // "Welcom, Jacob!"</code></pre>
+<p class="my-md">Обрати внимание, что имя, с которым импортируется значение по умолчанию, может быть выбрано произвольным образом.</p>
+<p class="my-md">Использование экспорта по умолчанию удобно, когда тебе нужно экспортировать одно главное значение из модуля, например, основную функцию или объект.</p>
+[QUIZ: js-modularity-default-export-quiz]
+[QUIZ: js-modularity-default-import-quiz]
+[NEXT]
+<h3>Именованные экспорт и импорт</h3>
+<p class="my-md"><strong>Именованный экспорт (named export)</strong> — это способ экспортирования одного или нескольких значений из модуля под конкретными именами.</p>
+<p class="my-md">С помощью именованного экспорта можно получить доступ к любому значению: переменной, функции или объекту и т. д. под определённым именем. Позже эти значения можно импортировать в другом файле с помощью этого же имени.</p>
+<p class="my-md">Операция именованного экспорта реализована конструкцией с <code>export</code>.</p>
+<pre><code class="language-javascript">export exportedValue</code></pre>
+<p class="my-md">Где:</p>
+<ul><li><code>export</code> — ключевое слово для экспорта;</li><li><code>exportedValue</code> — значение, которое экспортируется.</li></ul>
+<p class="my-md">Вот так выглядит синтаксис для именованного экспорта.</p>
+<pre><code class="language-javascript">export const makeMessage = username => {
+  return \`Welcome, \${username}!\`;
+};
+
+export const levels = ["easy", "medium", "hard"];</code></pre>
+<blockquote><p>Обрати внимание! Количество именованных экспортов в одном модуле не ограничено, в отличие от экспорта по умолчанию, который может быть только один.</p></blockquote>
+<p class="my-md">Операция именованного импорта реализована конструкцией с <code>import</code>.</p>
+<pre><code class="language-javascript">import { name } from "..."</code></pre>
+<p class="my-md">Где:</p>
+<ul><li><code>import</code> — указывает на суть операции;</li><li><code>from</code> — на путь к модулю с импортируемой сущностью;</li><li><code>name</code> — имя переменной, которое должно совпадать с именем экспорта в модуле;</li><li><code>"..."</code> — путь к файлу модуля в виде строки.</li></ul>
+<p class="my-md">В любом другом файле проекта можно импортировать конкретные элементы из другого файла (модуля), используя их имена в конструкции именованного импорта.</p>
+<pre><code class="language-javascript">import { makeMessage, levels } from "./makeMessage";
+
+console.log(makeMessage("Jacob")); // "Welcom, Jacob!"
+console.log(levels); // ["easy", "medium", "hard"]</code></pre>
+<p class="my-md">Обрати внимание, что при импорте мы указываем конкретные имена, которые были использованы при экспорте. Это позволяет точно указать, какие значения мы хотим импортировать из модуля.</p>
+<blockquote><p>Именованный импорт используется, когда модуль содержит много экспортированных значений и нужно выбрать только некоторые. Он работает только с именованным экспортом и не может импортировать значение, экспортированное по умолчанию.</p></blockquote>
+[QUIZ: js-modularity-named-export-quiz]
+[QUIZ: js-modularity-named-import-quiz]
+[NEXT]
+<h3>Переименование</h3>
+<p class="my-md"><strong>Rename export</strong> — это техника, которая позволяет импортировать именованные экспортированные переменные, функции и т. д. из одного модуля в другой, изменяя им имя во время импорта.</p>
+<p class="my-md">Чтобы задать новое имя во время импорта из другого модуля, используется ключевое слово <code>as</code>.</p>
+<pre><code class="language-javascript">import { name as newName } from '...'</code></pre>
+<p class="my-md">Например:</p>
+<pre><code class="language-javascript">// Модуль myModule.js
+export const original = "Hello, World!";
+
+// Твой текущий модуль, например app.js
+import { original as renamed } from './myModule.js';
+
+console.log(renamed); // "Hello, World!"</code></pre>
+<p class="my-md">В этом примере мы импортируем переменную <code>original</code> из другого модуля как <code>renamed</code> в нашем текущем модуле. Теперь мы можем использовать <code>renamed</code> в нашем коде, и она будет ссылаться на значение, которое экспортируется из <code>original</code>.</p>
+<blockquote><p><strong>Когда использовать переименование?</strong><br />В библиотеках или в других модулях имена могут быть длинными, достаточно общими или конфликтовать с именами переменных в твоём текущем модуле. В этих случаях целесообразно использовать переименование для удобства и избежания конфликтов.</p></blockquote>
+[QUIZ: js-modularity-rename-quiz]
+[NEXT]
+<h3>Импорт пространства имён</h3>
+<p class="my-md"><strong>Импорт пространства имён (namespace import)</strong> — это техника импортирования всего содержимого модуля как объекта с именем, представляющим пространство имён этого модуля. Это означает, что все именованные экспорты из модуля становятся свойствами этого объекта. Это удобно, когда нужно импортировать много разных функций, переменных или классов из модуля, не выбирая их по одному.</p>
+<p class="my-md">Например:</p>
+<pre><code class="language-javascript">// Модуль user.js
+export const name = "Mango";
+export const age = 26;
+export const email = "mango@mail.com";
+
+// Твой текущий модуль
+import * as user from './myModule.js';
+
+console.log(user.name); // "Mango"
+console.log(user.age); // 26
+console.log(user.email); // "mango@mail.com"</code></pre>
+<p class="my-md">В этом примере мы импортируем все именованные экспорты из модуля <code>user.js</code> как объект <code>user</code>. Все именованные экспорты становятся свойствами этого объекта. В результате мы можем обращаться к ним через точку.</p>
+<blockquote><p>Импорт пространства имён позволяет избежать конфликтов имён между импортируемыми объектами и именами в твоём текущем модуле. Это особенно полезно, когда ты работаешь с библиотеками или модулями, где есть много именованных экспортов.</p></blockquote>
+[QUIZ: js-modularity-namespace-quiz]
+[NEXT]
+<h3>Импорт локальных изображений</h3>
+<p class="my-md">В проектах, которые собираются с помощью бандлера (например, <strong>Vite</strong>), изображения <strong>не используются напрямую через относительные пути</strong>, как в обычном HTML.</p>
+<p class="my-md">Бандлер:</p>
+<ul><li>анализирует весь код проекта;</li><li>объединяет файлы;</li><li>оптимизирует ресурсы;</li><li>сам формирует конечные пути к изображениям в сборке.</li></ul>
+<p class="my-md">Поэтому <strong>локальные изображения нужно импортировать как модули</strong>.</p>
+<h4>Как бандлер работает с локальными изображениями</h4>
+<p class="my-md">Если изображение находится внутри проекта (например, в папке <code>src</code>), мы:</p>
+<ol><li>Импортируем изображение в JavaScript-файл</li><li>Получаем переменную, которая содержит <strong>корректный путь</strong>, сформированный бандлером</li><li>Используем эту переменную как <code>src</code> для изображения</li></ol>
+<p class="my-md">Пример импорта:</p>
+<pre><code class="language-javascript">import catImage from './images/cat.jpg';</code></pre>
+<p class="my-md">В этом случае:</p>
+<ul><li><code>catImage</code> — это <strong>строка с готовым путём к файлу</strong>;</li><li>этот путь формируется бандлером автоматически;</li><li>нам не нужно вручную рассчитывать относительные пути.</li></ul>
+<p class="my-md">Далее видео, которое демонстрирует работу бандлера с локальными изображениями.</p>
+<div class="video-container"><video class="video-responsive" controls preload="metadata" src="/images/javascript/code-modularity-local-images.mp4" aria-label="Работа бандлера с локальными изображениями"></video></div>
+<p class="my-md">Такой подход позволяет:</p>
+<ul><li>избегать ошибок с путями к файлам;</li><li>корректно работать со сборкой и деплоем;</li><li>использовать изображения в <strong>динамическом коде</strong> (через JavaScript);</li><li>передавать изображения как <code>src</code> в компоненты, переменные, конфигурации и т. д.</li></ul>
+`,
+        },
+      ],
+    },
   ],
 };
